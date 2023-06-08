@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%- include('./partials/style.ejs') %>
+</head>
+
+<body>
+
+    <div class="login-wrapper-cst">
+
+
+        <div class="login-box">
+
+
+            <div class="text-center bg-white">
+                <!-- <span class="login-logo"> <img src="/img/final-logo-1.png" width="100%"></span> -->
+            </div>
+            <div class="loginContainer text-center animated fadeInDown">
+                <div>
+                    <h3>ARCHIVE MATTER</h3>
+                    <p>Good to see you again</p>
+                    <div class="login-tab">
+                        <form id="loginForm" class="m-t" role="form">
+                            <div class="form-group">
+                                <label class="col-sm-6 col-form-label">Email ID &nbsp;&nbsp;
+                                    <a href="#" data-toggle="popover" title="Popover Header" data-trigger="focus"></a>
+                                </label>
+                            </div>
+                            <i class="fa-solid fa-user"></i>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="e.g.john@gmail.com"
+                                    required="">
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-6 col-form-label">Password &nbsp;&nbsp;
+                                    <a href="#" data-toggle="popover" title="Popover Header" data-trigger="focus">
+                                    </a>
+                                </label>
+                            </div>
+                            <i class="fa-solid fa-unlock"></i>
+                                <input type="password" class="form-control" id="password" name="password"
+                                    placeholder="e.g.iloveatomicpeople123" required="">
+                                    <i class="fa-solid fa-eye" id="eye"></i>
+
+                            </div>
+                            <button href="#" class="btn btn-primary block full-width m-b" onclick="openLoginOtp()"
+                                id="btnlogin">Login</button>
+                            <!-- <p>Need and account? <a href="sign-up.html"> Sign up</a></p> -->
+                            <a href="" class="text-right d-block" data-toggle="modal"
+                                data-target="#forgotmodalstore">Forgot Password?</a>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <!-- otp modal start -->
+    <div class="modal fade" id="otpmodal" tabindex="-1" role="dialog" aria-labelledby="otpmodalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered forgotmodal" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h2>Good to see you again</h2>
+                    <h3 class="title">Please enter 2FA code</h3>
+                    <p class="head-text" id="otpmodaltext">Two-factor authentication (2FA) is enabled for your account.</p>
+                        <p>An otp has been sent to your registered mail id.</p>
+                    <form id="otpform">
+                        <div class="form-group row justify-content-center otp-wrap">
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="otp" placeholder="admin1@gmail.com" required="">
+                            </div>
+                        </div>
+                    <!-- </form> -->
+                    <div class="row justify-content-center mt-4">
+                        <div class="col-sm-3 col-6">
+                            <button id="verifyotp" class="btn btn-primary btn-block" onclick="verifyForgotPasswordOtp()">verify</button>
+                        </div>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- otp modal end -->
+    <!-- forgot modal start -->
+    <div class="modal fade" id="resetmodal" tabindex="-1" role="dialog" aria-labelledby="resetmodalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered forgotmodal" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h2>Good to see you again</h2>
+                    <h3 class="title">Forgot Password?</h3>
+                    <p class="head-text">Enter your email address</p>
+                    <form id="resetPasswordForm" autocomplete="off">
+                        <div class="form-group row">
+                            <div class="col-sm-6">
+                                <input type="number" id="resetPasswordOtp" class="form-control" placeholder="admin1@gmail.com"
+                                    required="" autocomplete="new-password">
+                                <!-- <a href="#" data-toggle="popover" title="Popover Header" data-trigger="focus" data-content="Should be content one special character,one Uppercase letter, Must be longer than six characters"><i class="fa fa-question-circle" aria-hidden="true"></i></a> -->
+                            </div>
+                        </div>
+                    </form>
+                    <div class="row justify-content-center mt-4">
+                        <div class="col-sm-4 col-6">
+                            <button id="sendEmailForgotPasswordBtn" class="btn btn-primary btn-block"
+                                onclick="sendEmailForgotPassword()">Send OTP</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- forgot modal end -->
+    <!-- forgot modal start -->
+    <div class="modal fade" id="successmsg" tabindex="-1" role="dialog" aria-labelledby="sucessmsgmodalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered forgotmodal" role="document">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <button type="button" class="close modal-close-btn" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h2>Good to see you again</h2>
+                    <h3 class="title">Success</h3>
+                    <img src="./img/sucs-img.png" alt="success">
+                    <p class="head-text">Your password has been successfully changed.</p>
+                    <!-- <button type="button" class="btn btn-block btn-primary" data-dismiss="modal">OK</button>  -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- forgot modal end -->
+    <!-- forgot modal start -->
+    <div class="modal fade" id="forgotmodalstore" tabindex="-1" role="dialog" aria-labelledby="forgotmodalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered forgotmodal" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h2>Good to see you again</h2>
+                    <h3 class="title">OTP</h3>
+                    <p class="head-text">Enter your email address</p>
+                    <form id="forgotPasswordForm">
+                        <div class="form-group row justify-content-center otp-wrap">
+                            <div class="col-sm-8">
+
+                                <input type="email" class="form-control w-75 mx-auto" id="emailForRecovery"
+                                    placeholder="admin@gmail.com" required="">
+                            </div>
+                            <div class="col-sm-8">
+                                <p>An OTP has been sent to XXX-XXXX.</p>
+                                <p>Please enter the OTP.</p>
+                                <input type="email" class="form-control w-75 mx-auto" id="emailForRecovery"
+                                    placeholder="Enter Otp" required="">
+                            </div>
+
+                        </div>
+                    </form>
+
+                    <div class="row justify-content-center mt-4">
+                        <div class="col-sm-4 col-6">
+                            <button id="sendEmailForgotPasswordBtn" class="btn btn-primary btn-block"
+                                onclick="verifyForgotPasswordOtp()">verify</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- forgot modal end -->
+
+    <div class="modal fade" id="changePasswordmodal" tabindex="-1" role="dialog"
+        aria-labelledby="changePasswordmodalLable" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered changemodal" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div>
+                        <h2>Good to see you again</h2>
+                        <h3 class="title">New Password</h3>
+                        <p>Please create a new password that you don't use on any other site</p>
+                        <form id="updatePassword">
+                            <div class="form-group row justify-content-center otp-wrap">
+                                <div class="col-sm-8 pb-2">
+
+                                    <input type="password" class="form-control" id="CPpassword"
+                                        placeholder="Enter Password" required="">
+                                </div>
+                                <br>
+                                <div class="col-sm-8">
+
+                                    <input type="password" class="form-control" id="CPconfirmpassword"
+                                        placeholder="Enter Confirm Password" required="">
+                                </div>
+
+                            </div>
+                            
+                            <div class="row justify-content-center mt-4">
+                                <div class="col-sm-2 col-2"></div>
+                                <div class="col-sm-5 col-4">
+                                    <button id="changePasswordBtn" class="btn btn-primary btn-block"
+                                    onclick="handleNewPassword()">Change</button>
+                                </div>
+                                <div class="col-sm-2 col-2"></div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+        <!-- Mainly scripts -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+</body>
+
+</html>
