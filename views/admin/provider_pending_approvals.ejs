@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <%- include('../partials/style.ejs') %>
+</head>
+
+<body>
+    <div id="wrapper">
+        <%- include('../partials/menu.ejs') %>
+        <!-- side bar end -->
+        <div id="page-wrapper" class="gray-bg">
+           <!-- top nav start -->
+           <%- include('../partials/header.ejs') %>
+        <!-- top nav end -->
+            <div class="wrapper wrapper-content profile-page">
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <a href="/admin/provider_management" class="back-arw"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></a>
+                        <h5><%= providerName %> Detail</h5>
+                        <div class="pull-right mb-2" id="acceptRejectSection">
+                    
+                    </div>
+                    </div>
+                    <div class="ibox-content ">  
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card-wrapper">
+                                    <form>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-lg-5 col-xl-5 col-form-label"><%= providerName %> name</label>
+                                            <div class="col-sm-7 col-lg-7 col-xl-7" >
+                                               <p id="name"> </p>
+                                            </div>
+                                        </div>                  
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-lg-5 col-xl-5 col-form-label">Designation</label>
+                                            <div class="col-sm-7 col-lg-7 col-xl-7" >
+                                                <p id="designation"></p>
+                                            </div>
+                                        </div> 
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-lg-5 col-xl-5 col-form-label">signup date</label>
+                                            <div class="col-sm-7 col-lg-7 col-xl-7" >
+                                               <p id="createdAt"></p>
+                                            </div>
+                                        </div>
+                                        <div id="rejectedDiv">
+
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- card-wrapper end -->
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card-wrapper">
+                                    <form>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-lg-5 col-xl-5 col-form-label">Organization name</label>
+                                            <div class="col-sm-7 col-lg-7 col-xl-7">
+                                               <p id="orgName"></p>
+                                            </div>
+                                        </div>                  
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-lg-5 col-xl-5 col-form-label">email id</label>
+                                            <div class="col-sm-7 col-lg-7 col-xl-7">
+                                                <p id="email"></p>
+                                            </div>
+                                        </div> 
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-lg-5 col-xl-5 col-form-label">general agreement</label>
+                                            <div class="col-sm-7 col-lg-7 col-xl-7">
+                                                <p><a href="#" onclick="generalAggrementRedire()">View</a></p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-lg-5 col-xl-5 col-form-label">DUNS number</label>
+                                            <div class="col-sm-7 col-lg-7 col-xl-7">
+                                                <p class="text-green" id="duns_number"></p>
+                                            </div>
+                                        </div>
+                            
+                                        <div id="rejectedReasonDiv">
+
+                                        </div>
+                                                                                                 
+                                    </form>
+                                </div>
+                                <!-- card-wrapper end -->
+                            </div>
+                        </div>
+					</div>
+					<!-- ibox-content end -->
+				</div>  
+				<!-- ibox end-->
+            </div>
+            <!-- wrapper end -->
+            <%- include('../partials/footer.ejs') %>
+            <!-- footer end -->
+        </div>
+        <!-- #page-wrapper end -->
+    </div>
+    <!-- #main wrapper end -->
+    
+
+    <div class="modal fade" id="acceptProvider" tabindex="-1" role="dialog"
+        aria-labelledby="updatePhoneNumberModelLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered updatePhoneNumber" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h3 class="title">Are you sure to Approve <%= providerName %> ?</h3>
+                    <form id="acceptProviderForm">
+                        <div class="form-group row justify-content-center otp-wrap">
+                            <div class="col-sm-6">
+                                <label class="col-form-label">Assign Relationship manager</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <select class="form-control" id="relationshipManagerList" name="relationshipManagerList" required>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row justify-content-center otp-wrap">
+                                <div class="col-sm-6">
+                                    <label class="col-form-label">Assign Sale manager</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <select class="form-control" id="saleManager" name="saleManager" required>
+                                    </select>
+                                </div>
+                            </div>
+                        <div class="row justify-content-center mt-4">
+                            <div class="col-sm-3 col-6">
+                                <a class="btn btn-primary btn-block" href="#" onclick="approveProvider()">Yes</a>
+                            </div>
+                            <div class="col-sm-3 col-6">
+                                <input class="btn btn-white btn-block" type="button" onclick="resetForm('acceptProviderForm')" 
+                                    aria-label="Close" value="No" data-dismiss="modal">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Mainly scripts -->
+    <%- include('../partials/script.ejs') %>
+    <script src="/js/custom/provider_pending_approvals.js"></script>
+
+</body>
+</html>

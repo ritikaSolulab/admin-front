@@ -1,0 +1,181 @@
+@media(max-width:1200px){
+    .rvenue-tools {
+        /* width: 80% !important; */
+    }   
+    h1 {
+        font-size: 22px;
+    } 
+    .ibox-content{
+        padding: 20px 10px;
+    }
+    .dashboard-row-cst .ibox-title {
+        padding: 0 10px;
+        display: inline-flex;
+        width: 100%;
+        height: 50px;
+        align-items: center;
+    }
+    .title-tabbing .nav-item.up {
+        width: 50% !important;
+    }
+    .title-tabbing .nav-item .nav-link{
+        height: 100%;
+    }
+}
+@media(max-width:991px){
+    .table-tab .nav-item {
+        width: 50%;
+    }
+    h1{
+        font-size: 22px !important;
+    }
+    .country-code .country-dropdown{
+        width: 100%;
+    }
+    .country-code .country-text{
+        width:100%;
+    }
+}
+@media(max-width:767px){
+    .fliter-wrapper {
+        margin-bottom: 20px;
+    }
+    .dataTables_wrapper{
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .ibox-content{
+        padding: 20px 15px;
+    }
+    
+    h2{
+        font-size: 20px;
+    }
+    body.body-small .navbar-top-links{
+        padding-right: 20px;
+    }
+    div.dataTables_wrapper div.dataTables_length, div.dataTables_wrapper div.dataTables_filter, div.dataTables_wrapper div.dataTables_info, div.dataTables_wrapper div.dataTables_paginate {
+        text-align: left;
+    }
+    .dataTables_wrapper .dataTables_info{
+        text-align:left !important;
+    }
+    div.table-responsive>div.dataTables_wrapper>div.row>div[class^="col-"]:last-child{
+        padding-left: 0;
+    }
+    div.dataTables_wrapper div.dataTables_paginate {
+        float: none;
+    }
+   
+}
+@media(max-width:575px){
+    .wrapper-content {
+        padding: 20px 0px 30px;
+    }
+    .daterangepicker.dropdown-menu {
+        max-width: 240px;
+    }
+    .daterange-wrapper .date-cst{
+        display: block !important;
+    }
+    .ibox-tools{
+        float: none;
+        text-align: left;
+        display: block;
+        position: relative;
+        /* padding-left: 15px; */
+        margin-top: 10px;
+        right:initial;
+        top:initial;
+    }
+    .profile-text span{
+        width: 50px;
+    }
+    .drop-notify{
+        width:210px !important;
+    }
+    .ibox-tools.btn-right{
+        position: relative;
+        text-align: left;
+        /* margin-bottom: 10px; */
+        width: 100%;
+        /* margin-left: 15px; */
+    }
+    /* .ibox-tools.btn-right .btn{
+        margin-bottom: 5px;
+        margin-left: 0;
+        width: 100%;
+    } */
+    .ibox-tools.rvenue-tools{
+        position: relative;
+        text-align: left;
+        margin-bottom: 10px;
+        width: 100%;
+        margin-left: 15px;
+    }
+  
+    .dataTables_wrapper .dataTables_length {
+        float: none;
+    }
+    .dataTables_wrapper .dataTables_length label {
+         margin-bottom: 10px;
+    }
+    .card-wrapper.roles{
+        white-space: nowrap;
+        overflow-x:auto;
+    }
+    .prof-check .list{
+        width: 25%;
+    }
+    .prof-check .list:first-child {
+        width: 30%;
+    }
+    .body-small.mini-navbar .daterange-wrapper .date-cst .form-control{
+        padding-right: 35px !important;
+        width: 195px;
+        font-size: 14px;
+        padding-left: 5px;
+    }
+    .table-tab .nav-item{
+        width: 100%;
+        flex: initial;
+    }
+    .daterange-wrapper .date-cst .form-control{
+        width:100%;
+    }
+    .ibox-title{
+        padding:15px;
+    }
+    .drop-notify a p {
+        width: 89%;
+    }
+    .table-tab > .nav-pills{
+        flex-wrap: wrap;
+    }
+}
+@media(max-width:370px){
+    .profile-text span{
+        display: none !important;
+    }
+}
+@media(max-width:350px){
+    .navbar-static-top .minimalize-styl-2{
+        margin: 8px 5px 5px 20px;
+    }
+    .navbar.navbar-static-top{
+        padding: 5px 0px
+    }
+    .nav.navbar-top-links li.dropdown{
+        display: inline-block;
+    }
+    body.body-small .navbar-top-links{
+        padding-right: 10px;
+    }
+    .navbar-top-links li a{
+        padding: 13px 7px;
+        min-height: 30px;
+    }
+    .count-info .label{
+        top: 3px;
+    }
+}

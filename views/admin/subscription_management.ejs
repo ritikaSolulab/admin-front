@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+
+	<%- include('../partials/style.ejs') %>
+</head>
+<style>
+	/* input[type=checkbox] {
+		display: block;
+	} */
+	fieldset {
+		border: 1px solid black;
+		padding: 5px;
+	}
+
+	legend {
+		padding: 5px 10px;
+		width: auto;
+		margin-left: 10px;
+	}
+
+	.switch .slider {
+		margin-left: 100px;
+		width: 45px;
+	}
+
+	.switch {
+		width: 50px;
+	}
+
+	.clearfix:after {
+		display: block;
+		content: "";
+		clear: both;
+	}
+
+	.widget.white-bg {
+		height: auto;
+	}
+
+	.meta {
+		position: relative;
+	}
+
+	.meta .dlt {
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		border-bottom-right-radius: 10px;
+	}
+
+	.meta-title {
+		padding-right: 15px;
+	}
+
+	.metacontainer {
+		/* max-height: calc(100vh - 200px); */
+		/* overflow-y: auto;
+    padding: 5px;
+    padding-left: 3px; */
+	}
+
+	.f-24 {
+		font-size: 24px;
+	}
+
+	.f-20 {
+		font-size: 20px;
+	}
+
+	.f-14 {
+		font-size: 14px;
+	}
+
+	.f-15 {
+		font-size: 15px;
+	}
+
+	.f-18 {
+		font-size: 18px;
+	}
+
+	.mt-8 {
+		margin-top: .8rem;
+	}
+
+	.nav>li.active {
+		border-left: 0px solid #ffffff;
+	}
+
+	.btn-primary {
+		font-size: 14px;
+	}
+
+	.w-250-min {
+		min-width: 250px;
+	}
+
+	.ox-auto {
+		overflow-x: auto !important;
+	}
+
+	.plan-div {}
+</style>
+<link href="/css/plugins/select2/select2.min.css" rel="stylesheet">
+
+<body>
+	<div id="wrapper">
+		<%- include('../partials/menu.ejs') %>
+
+			<!-- side bar end -->
+			<div id="page-wrapper" class="gray-bg">
+				<!-- top nav start -->
+				<%- include('../partials/header.ejs') %>
+
+					<!-- top nav end -->
+					<div class="wrapper wrapper-content profile-page">
+						<div class="ibox">
+							<div class="ibox-title">
+								<h5>Subscrption Management</h5>
+								<div class="ibox-tools">
+
+								</div>
+							</div>
+							<div class="ibox-content ">
+								<div class="table-tab">
+									<ul class="nav nav-pills mb-4 " id="pills-tab" role="tablist">
+										<li class="nav-item">
+											<a class="nav-link active" id="del-tab" data-toggle="pill" href="#pro"
+												role="tab" aria-controls="pills-home" aria-selected="true">
+												DocTrace
+											</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" id="recent-tab" data-toggle="pill" href="#pend"
+												role="tab" aria-controls="pills-home" aria-selected="true">
+												DocTrace API
+											</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" id="del-subscriptionPlan-tab" data-toggle="pill"
+												href="#del-sub" role="tab" aria-controls="pills-home"
+												aria-selected="true">
+												Deleted Subscription Plan
+											</a>
+										</li>
+									</ul>
+									<div class="tab-content" id="pills-tabContent">
+										<div class="tab-pane fade show active" id="pro" role="tabpanel"
+											aria-labelledby="del-tab">
+											<div class="w-100 text-right">
+												<a href="#!" data-target="#createSubscriptionModal" data-toggle="modal"
+													class="btn btn-primary">
+													Create New Subscription Plan
+												</a>
+											</div>
+											<div class="d-flex flex-nowrap plan-div mt-3 ox-auto"
+												id="planShowContainer">
+												<div class="col w-250-min">
+													<div>
+														<p><br><br><br></p>
+														<p class="font-bold"></p>
+														<p class="font-bold">Free Tier Plan</p>
+														<p class="font-bold">Plan Type</p>
+														<p class="font-bold">Transaction Per Month</p>
+														<p class="font-bold">Document Size</p>
+														<p class="font-bold">Validity (In Months) </p>
+														<!-- <p class="font-bold">Type Name</p> -->
+														<p class="font-bold">Price Per Transaction</p>
+														<p class="font-bold">Extra Size</p>
+														<p class="font-bold">Extra Cost</p>
+														<p class="font-bold">Plan Price</p>
+														<p class="font-bold">Role Management</p>
+														<p class="font-bold">User Management</p>
+														<p class="font-bold">Team Management</p>
+														<p class="font-bold">Reports</p>
+														<p class="font-bold">Api Analytics</p>
+														<p class="font-bold">Transaction History</p>
+														<p class="font-bold">Add Tags</p>
+														<p class="font-bold">Log Details Search</p>
+														<p class="font-bold">Advance Log Search</p>
+														<p class="font-bold">Template Auto Save</p>
+														<p class="font-bold">Total</p>
+
+
+													</div>
+												</div>
+											</div>
+
+
+										</div>
+
+
+										<div class="tab-pane " id="pend" role="tabpanel"
+											aria-labelledby="pills-home-tab">
+											<div class="table-responsive">
+
+												<table class="table table-striped table-bordered table-hover "
+													style="width:100%" id="doctraceApiTable">
+													<thead>
+														<tr>
+															<th>Plan Name</th>
+															<th>API Limit</th>
+															<th>Price</th>
+															<th>Status</th>
+														</tr>
+													</thead>
+													<tbody>
+
+													</tbody>
+												</table>
+											</div>
+										</div>
+
+
+										<div class="tab-pane fade" id="del-sub" role="tabpanel"
+											aria-labelledby="del-subscriptionPlan-tab">
+											<div class="d-flex flex-nowrap plan-div mt-3 ox-auto"
+												id="deletedPlanShowContainer">
+												<div class="col w-250-min">
+													<div>
+														<p><br><br><br></p>
+														<p class="font-bold"></p>
+														<p class="font-bold">Free Tier Plan</p>
+														<p class="font-bold">Plan Type</p>
+														<p class="font-bold">Transaction Per Month</p>
+														<p class="font-bold">Document Size</p>
+														<p class="font-bold">Validity (In Months)</p>
+														<!-- <p class="font-bold">Type Name</p> -->
+														<p class="font-bold">Price Per Transaction</p>
+														<p class="font-bold">Extra Size</p>
+														<p class="font-bold">Extra Cost</p>
+														<p class="font-bold">Plan Price</p>
+														<p class="font-bold">Role Management</p>
+														<p class="font-bold">User Management</p>
+														<p class="font-bold">Team Management</p>
+														<p class="font-bold">Reports</p>
+														<p class="font-bold">Api Analytics</p>
+														<p class="font-bold">Transaction History</p>
+														<p class="font-bold">Add Tags</p>
+														<p class="font-bold">Log Details Search</p>
+														<p class="font-bold">Advance Log Search</p>
+														<p class="font-bold">Template Auto Save</p>
+														<p class="font-bold">Total</p>
+
+
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- tab end -->
+							</div>
+							<!-- ibox-content end -->
+						</div>
+						<!-- ibox end-->
+					</div>
+					<!-- wrapper end -->
+					<%- include('../partials/footer.ejs') %>
+
+						<!-- footer end -->
+			</div>
+			<!-- #page-wrapper end -->
+	</div>
+
+	<div class="modal fade" id="createSubscriptionModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered createSubscriptionModal" role="document">
+			<div class="modal-content">
+				<div class="modal-body">
+					<button type="button" class="close modal-close-btn" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h3 class="title">Create New Subscription Plan</h3>
+
+					<form id="SubscriptionPlanCreate">
+
+						<div class="form-group row justify-content-center otp-wrap">
+							<div class="col-sm-6">
+								<label class="col-form-label">Free Tier Plan</label>
+							</div>
+							<div class="col-sm-6">
+								<input type="checkbox" id="isFree" name="isFree">
+							</div>
+						</div>
+						<div class="form-group row justify-content-center otp-wrap">
+							<div class="col-sm-6">
+								<label class="col-form-label">Select Plan Types</label>
+							</div>
+							<div class="col-sm-6">
+								<select class="form-control" id="planType" name="planType" required>
+									<option value="">Select Subscription Type</option>
+									<option value="pay_per_use">Pay Per Use Plan</option>
+									<option value="level_based">Level Based Plan</option>
+								</select>
+							</div>
+						</div>
+
+
+
+						<div class="form-group row justify-content-center otp-wrap">
+							<div class="col-sm-6">
+								<label class="col-form-label">Plan Name</label>
+							</div>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="planName" name="planName"
+									placeholder="Enter Plan Name">
+							</div>
+						</div>
+
+						<div class="form-group row justify-content-center otp-wrap">
+							<div class="col-sm-6">
+								<label class="col-form-label">Transaction per month</label>
+							</div>
+							<div class="col-sm-6">
+								<input type="number" class="form-control" id="transactionPerMonth"
+									name="transactionPerMonth" placeholder="Enter Transaction ">
+							</div>
+						</div>
+
+
+						<div class="form-group row justify-content-center otp-wrap">
+							<div class="col-sm-6">
+								<label class="col-form-label">Document Size Per Transaction</label>
+							</div>
+							<div class="col-sm-6">
+								<input type="number" class="form-control" id="docSizePerTransaction"
+									name="docSizePerTransaction" placeholder="Enter Document Size (mb)">
+							</div>
+						</div>
+
+
+						<div id="pay_par_use_plan_filed" style="display:none">
+
+							<!-- <div class="form-group row justify-content-center otp-wrap">
+								<div class="col-sm-6">
+									<label class="col-form-label">Type Name</label>
+								</div>
+								<div class="col-sm-6">
+									<input type="text" class="form-control" id="tireName" name="tireName"
+									placeholder="Enter Tier Name">
+								</div>
+							</div> -->
+
+							<div class="form-group row justify-content-center otp-wrap">
+								<div class="col-sm-6">
+									<label class="col-form-label">Price Per Transaction</label>
+								</div>
+								<div class="col-sm-6">
+									<input type="number" class="form-control" id="pricePerTransaction"
+										name="pricePerTransaction" placeholder="Enter Transaction Price ($)">
+								</div>
+							</div>
+
+							<div class="form-group row justify-content-center otp-wrap">
+								<div class="col-sm-6">
+									<label class="col-form-label">Extra Size</label>
+								</div>
+								<div class="col-sm-6">
+									<input type="number" class="form-control" id="extraSize" name="extraSize"
+										placeholder="Enter Extra Size (mb)">
+								</div>
+							</div>
+
+							<div class="form-group row justify-content-center otp-wrap">
+								<div class="col-sm-6">
+									<label class="col-form-label">Extra Cost</label>
+								</div>
+								<div class="col-sm-6">
+									<input type="number" class="form-control" id="extraCost" name="extraCost"
+										placeholder="Enter Extra Cost ($)">
+								</div>
+							</div>
+						</div>
+
+						<div id="level_based_subscription_filed" style="display:none">
+
+							<div class="form-group row justify-content-center otp-wrap">
+								<div class="col-sm-6">
+									<label class="col-form-label" id="checkForMonthDay">Month Validity</label>
+								</div>
+								<div class="col-sm-6">
+									<input type="number" class="form-control" id="planValidity" name="planValidity"
+										placeholder="Enter Validity Time">
+								</div>
+							</div>
+
+							<div class="form-group row justify-content-center otp-wrap">
+								<div class="col-sm-6">
+									<label class="col-form-label">Plan Price</label>
+								</div>
+								<div class="col-sm-6">
+									<input type="number" max=9999999999 class="form-control" id="planPrice"
+										name="planPrice" placeholder="Enter Plan Price ($)">
+								</div>
+							</div>
+						</div>
+
+
+						<fieldset>
+							<legend>Special Features</legend>
+
+							<div class="form-group row justify-content-center otp-wrap">
+								<div class="col-sm-4">
+									<label class="col-form-label">Role Management</label>
+								</div>
+								<div class="col-sm-1">
+									<input type="checkbox" id="role_management" name="role_management">
+								</div>
+								<div class="col-sm-1">
+								</div>
+								<div class="col-sm-5">
+									<input type="text" max=99999 class="form-control cost" style="display: none;"
+										id="role_management_cost" name="role_management_cost"
+										placeholder="Enter Cost ($)">
+								</div>
+
+							</div>
+
+
+							<div class="form-group row justify-content-center otp-wrap">
+								<div class="col-sm-4">
+									<label class="col-form-label">User Management</label>
+								</div>
+								<div class="col-sm-1">
+									<input type="checkbox" id="user_management" name="user_management">
+								</div>
+								<div class="col-sm-1">
+								</div>
+								<div class="col-sm-5">
+									<input type="text" max=99999 class="form-control cost" style="display: none;"
+										id="user_management_cost" name="user_management_cost"
+										placeholder="Enter Cost ($)">
+								</div>
+								<div class="col-sm-4">
+									<label class="col-form-label" id="user_management_limit_label"
+										style="display: none;">Remove User Limit</label>
+								</div>
+								<div class="col-sm-1">
+									<input type="checkbox" id="user_management_limit" style="display: none;"
+										name="user_management_limit">
+								</div>
+								<div class="col-sm-1">
+								</div>
+								<div class="col-sm-5">
+									<input type="text" max=99999 class="form-control cost" style="display: none;"
+										id="user_management_limit_number" name="user_management_limit_number"
+										placeholder="Enter User Limit">
+								</div>
+							</div>
+
+
+							<div class="form-group row justify-content-center otp-wrap">
+								<div class="col-sm-4">
+									<label class="col-form-label">Team Management</label>
+								</div>
+								<div class="col-sm-1">
+									<input type="checkbox" id="team_management" name="team_management">
+								</div>
+								<div class="col-sm-1">
+								</div>
+								<div class="col-sm-5">
+									<input type="text" max=99999 class="form-control cost" style="display: none;"
+										id="team_management_cost" name="team_management_cost"
+										placeholder="Enter Cost ($)">
+								</div>
+							</div>
+
+
+							<div class="form-group row justify-content-center otp-wrap">
+								<div class="col-sm-4">
+									<label class="col-form-label">Reports</label>
+								</div>
+								<div class="col-sm-1">
+									<input type="checkbox" id="reports" name="reports">
+								</div>
+								<div class="col-sm-1">
+								</div>
+								<div class="col-sm-5">
+									<input type="text" max=99999 class="form-control cost" style="display: none;"
+										id="reports_cost" name="reports_cost" placeholder="Enter Cost">
+								</div>
+							</div>
+
+							<div class="form-group row justify-content-center otp-wrap">
+								<div class="col-sm-4">
+									<label class="col-form-label">Api Analytics</label>
+								</div>
+								<div class="col-sm-1">
+									<input type="checkbox" id="api_analytics" name="api_analytics">
+								</div>
+								<div class="col-sm-1">
+								</div>
+								<div class="col-sm-5">
+									<input type="text" max=99999 class="form-control cost" style="display: none;"
+										id="api_analytics_cost" name="api_analytics_cost" placeholder="Enter Cost ($)">
+								</div>
+								<div class="col-sm-4">
+									<label class="col-form-label" id="api_limit_label" style="display: none;">API
+										Limit</label>
+								</div>
+								<div class="col-sm-1">
+								</div>
+								<div class="col-sm-1">
+								</div>
+								<div class="col-sm-5">
+									<input type="text" max=99999 class="form-control cost" style="display: none;"
+										id="api_analytics_limit" name="api_analytics_limit"
+										placeholder="Enter Log Limit">
+								</div>
+							</div>
+
+							<div class="form-group row justify-content-center otp-wrap">
+								<div class="col-sm-4">
+									<label class="col-form-label">Transaction History</label>
+								</div>
+								<div class="col-sm-1">
+									<input type="checkbox" id="transaction_history" name="transaction_history">
+								</div>
+								<div class="col-sm-1">
+								</div>
+								<div class="col-sm-5">
+									<input type="text" max=99999 class="form-control cost" style="display: none;"
+										id="transaction_history_cost" name="transaction_history_cost"
+										placeholder="Enter Cost ($)">
+								</div>
+							</div>
+
+							<div class="form-group row justify-content-center otp-wrap">
+								<div class="col-sm-4">
+									<label class="col-form-label">Add Tags</label>
+								</div>
+								<div class="col-sm-1">
+									<input type="checkbox" id="add_tags" name="add_tags">
+								</div>
+								<div class="col-sm-1">
+								</div>
+								<div class="col-sm-5">
+									<input type="text" max=99999 class="form-control cost" style="display: none;"
+										id="add_tags_cost" name="add_tags_cost" placeholder="Enter Cost ($)">
+								</div>
+							</div>
+
+							<div class="form-group row justify-content-center otp-wrap">
+								<div class="col-sm-4">
+									<label class="col-form-label">Log Details Search</label>
+								</div>
+								<div class="col-sm-1">
+									<input type="checkbox" id="meta_fields_search" name="meta_fields_search">
+								</div>
+								<div class="col-sm-1">
+								</div>
+								<div class="col-sm-5">
+									<input type="text" max=99999 class="form-control cost" style="display: none;"
+										id="meta_fields_search_cost" name="meta_fields_search_cost"
+										placeholder="Enter Cost ($)">
+								</div>
+							</div>
+
+							<div class="form-group row justify-content-center otp-wrap">
+								<div class="col-sm-4">
+									<label class="col-form-label">Advance Log Search</label>
+								</div>
+								<div class="col-sm-1">
+									<input type="checkbox" id="advance_tik_search" name="advance_tik_search">
+								</div>
+								<div class="col-sm-1">
+								</div>
+								<div class="col-sm-5">
+									<input type="text" max=99999 class="form-control cost" style="display: none;"
+										id="advance_tik_search_cost" name="advance_tik_search_cost"
+										placeholder="Enter Cost ($)">
+								</div>
+							</div>
+
+							<div class="form-group row justify-content-center otp-wrap">
+								<div class="col-sm-4">
+									<label class="col-form-label">Template Auto Save</label>
+								</div>
+								<div class="col-sm-1">
+									<input type="checkbox" id="template_auto_save" name="template_auto_save">
+								</div>
+								<div class="col-sm-1">
+								</div>
+								<div class="col-sm-5">
+									<input type="text" max=99999 class="form-control cost" style="display: none;"
+										id="template_auto_save_cost" name="template_auto_save_cost"
+										placeholder="Enter Cost ($)">
+								</div>
+							</div>
+
+						</fieldset>
+
+
+						<div class="row justify-content-center mt-4">
+							<div class="col-sm-3 col-6">
+								<input class="btn btn-primary btn-block" type="button" aria-label="Create"
+									value="Create" onclick="createSubscription()">
+							</div>
+						</div>
+					</form>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="modal fade" id="editSubscriptionModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered editSubscriptionModal" role="document">
+			<div class="modal-content">
+				<div class="modal-body">
+					<button type="button" class="close modal-close-btn" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h3 class="title">Edit Subscription Plan</h3>
+
+					<form id="SubscriptionPlanUpdate">
+						<div class="form-group row justify-content-center otp-wrap">
+							<div class="col-sm-6">
+								<label class="col-form-label">Select Plan Types</label>
+							</div>
+							<div class="col-sm-6">
+								<select class="form-control" id="planType_update" name="planType" required>
+									<option value="">Select Subscription Type</option>
+									<option value="pay_per_use">Pay Per Use Plan</option>
+									<option value="level_based">Level Based Plan</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="form-group row justify-content-center otp-wrap">
+							<div class="col-sm-6">
+								<label class="col-form-label">Free Tier Plan</label>
+							</div>
+							<div class="col-sm-6">
+								<input type="checkbox" id="isFree_update" name="isFree_update">
+							</div>
+						</div>
+
+
+						<div class="form-group row justify-content-center otp-wrap">
+							<div class="col-sm-6">
+								<label class="col-form-label">Plan Name</label>
+							</div>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="planName_update" name="planName"
+									placeholder="Enter Plan Name">
+							</div>
+						</div>
+
+
+						<div class="form-group row justify-content-center otp-wrap">
+							<div class="col-sm-6">
+								<label class="col-form-label">Transaction per month</label>
+							</div>
+							<div class="col-sm-6">
+								<input type="number" class="form-control" id="transactionPerMonth_update"
+									name="transactionPerMonth" placeholder="Enter Transaction ">
+							</div>
+						</div>
+
+
+						<div class="form-group row justify-content-center otp-wrap">
+							<div class="col-sm-6">
+								<label class="col-form-label">Document Size Per Transaction</label>
+							</div>
+							<div class="col-sm-6">
+								<input type="number" class="form-control" id="docSizePerTransaction_update"
+									name="docSizePerTransaction" placeholder="Enter Document Size (mb)">
+							</div>
+						</div>
+
+						<div id="pay_par_use_plan_filed_update" style="display:none">
+
+							<!-- <div class="form-group row justify-content-center otp-wrap">
+								<div class="col-sm-6">
+									<label class="col-form-label">Type Name</label>
+								</div>
+								<div class="col-sm-6">
+									<input type="text" class="form-control" id="tireName_update" name="tireName"
+									placeholder="Enter Tier Name">
+								</div>
+							</div> -->
+
+							<div class="form-group row justify-content-center otp-wrap">
+								<div class="col-sm-6">
+									<label class="col-form-label">Price Per Transaction</label>
+								</div>
+								<div class="col-sm-6">
+									<input type="number" class="form-control" id="pricePerTransaction_update"
+										name="pricePerTransaction" placeholder="Enter Transaction Price ($)">
+								</div>
+							</div>
+
+							<div class="form-group row justify-content-center otp-wrap">
+								<div class="col-sm-6">
+									<label class="col-form-label">Extra Size</label>
+								</div>
+								<div class="col-sm-6">
+									<input type="number" class="form-control" id="extraSize_update" name="extraSize"
+										placeholder="Enter Extra Size (mb)">
+								</div>
+							</div>
+
+							<div class="form-group row justify-content-center otp-wrap">
+								<div class="col-sm-6">
+									<label class="col-form-label">Extra Cost</label>
+								</div>
+								<div class="col-sm-6">
+									<input type="number" class="form-control" id="extraCost_update" name="extraCost"
+										placeholder="Enter Extra Cost ($)">
+								</div>
+							</div>
+						</div>
+
+						<div id="level_based_subscription_filed_update" style="display:none">
+
+
+							<div class="form-group row justify-content-center otp-wrap">
+								<div class="col-sm-6">
+									<label class="col-form-label" id="checkForMonthDay_update">Month Validity</label>
+								</div>
+								<div class="col-sm-6">
+									<input type="number" class="form-control" id="planValidity_update"
+										name="planValidity" placeholder="Enter Month">
+								</div>
+							</div>
+
+							<div class="form-group row justify-content-center otp-wrap">
+								<div class="col-sm-6">
+									<label class="col-form-label">Plan Price</label>
+								</div>
+								<div class="col-sm-6">
+									<input type="number" max=99999 class="form-control" id="planPrice_update"
+										name="planPrice" placeholder="Enter Plan Price ($)">
+								</div>
+							</div>
+						</div>
+
+
+						<fieldset>
+							<legend>Special Features</legend>
+
+							<div class="form-group row justify-content-center otp-wrap">
+								<div class="col-sm-4">
+									<label class="col-form-label">Role Management</label>
+								</div>
+								<div class="col-sm-1">
+									<input type="checkbox" id="role_management_update" name="role_management">
+								</div>
+								<div class="col-sm-1">
+								</div>
+								<div class="col-sm-5">
+									<input type="text" max=99999 class="form-control cost" style="display: none;"
+										id="role_management_cost_update" name="role_management_cost"
+										placeholder="Enter Cost ($)">
+								</div>
+							</div>
+
+
+							<div class="form-group row justify-content-center otp-wrap">
+								<div class="col-sm-4">
+									<label class="col-form-label">User Management</label>
+								</div>
+								<div class="col-sm-1">
+									<input type="checkbox" id="user_management_update" name="user_management">
+								</div>
+								<div class="col-sm-1">
+								</div>
+								<div class="col-sm-5">
+									<input type="text" max=99999 class="form-control cost" style="display: none;"
+										id="user_management_cost_update" name="user_management_cost"
+										placeholder="Enter Cost ($)">
+								</div>
+								<div class="col-sm-4">
+									<label class="col-form-label" id="user_management_limit_label_update"
+										style="display: none;">Remove User Linit</label>
+
+								</div>
+								<div class="col-sm-1">
+									<input type="checkbox" id="user_management_limit_update" style="display: none;"
+										name="user_management_limit_update">
+								</div>
+								<div class="col-sm-1">
+								</div>
+								<div class="col-sm-5">
+									<input type="text" max=99999 class="form-control cost" style="display: none;"
+										id="user_management_limit_number_update"
+										name="user_management_limit_number_update" placeholder="Enter User Limit">
+								</div>
+							</div>
+
+
+							<div class="form-group row justify-content-center otp-wrap">
+								<div class="col-sm-4">
+									<label class="col-form-label">Team Management</label>
+								</div>
+								<div class="col-sm-1">
+									<input type="checkbox" id="team_management_update" name="team_management">
+								</div>
+								<div class="col-sm-1">
+								</div>
+								<div class="col-sm-5">
+									<input type="text" max=99999 class="form-control cost" style="display: none;"
+										id="team_management_cost_update" name="team_management_cost"
+										placeholder="Enter Cost ($)">
+								</div>
+							</div>
+
+
+							<div class="form-group row justify-content-center otp-wrap">
+								<div class="col-sm-4">
+									<label class="col-form-label">Reports</label>
+								</div>
+								<div class="col-sm-1">
+									<input type="checkbox" id="reports_update" name="reports">
+								</div>
+								<div class="col-sm-1">
+								</div>
+								<div class="col-sm-5">
+									<input type="text" max=99999 class="form-control cost" style="display: none;"
+										id="reports_cost_update" name="reports_cost" placeholder="Enter Cost ($)">
+								</div>
+							</div>
+
+							<div class="form-group row justify-content-center otp-wrap">
+								<div class="col-sm-4">
+									<label class="col-form-label">Api Analytics</label>
+								</div>
+								<div class="col-sm-1">
+									<input type="checkbox" id="api_analytics_update" name="api_analytics">
+								</div>
+								<div class="col-sm-1">
+								</div>
+								<div class="col-sm-5">
+									<input type="text" max=99999 class="form-control cost" style="display: none;"
+										id="api_analytics_cost_update" name="api_analytics_cost"
+										placeholder="Enter Cost ($)">
+								</div>
+								<div class="col-sm-4">
+									<label class="col-form-label" id="api_analytics_limit_label_update"
+										style="display: none;">API Limit</label>
+
+								</div>
+								<div class="col-sm-1">
+								</div>
+								<div class="col-sm-1">
+								</div>
+								<div class="col-sm-5">
+									<input type="text" max=99999 class="form-control cost" style="display: none;"
+										id="api_analytics_limit_update" name="api_analytics_limit_update"
+										placeholder="Enter Log Limit">
+								</div>
+							</div>
+
+							<div class="form-group row justify-content-center otp-wrap">
+								<div class="col-sm-4">
+									<label class="col-form-label">Transaction History</label>
+								</div>
+								<div class="col-sm-1">
+									<input type="checkbox" id="transaction_history_update" name="transaction_history">
+								</div>
+								<div class="col-sm-1">
+								</div>
+								<div class="col-sm-5">
+									<input type="text" max=99999 class="form-control cost" style="display: none;"
+										id="transaction_history_cost_update" name="transaction_history_cost"
+										placeholder="Enter Cost ($)">
+								</div>
+							</div>
+
+							<div class="form-group row justify-content-center otp-wrap">
+								<div class="col-sm-4">
+									<label class="col-form-label">Add Tags</label>
+								</div>
+								<div class="col-sm-1">
+									<input type="checkbox" id="add_tags_update" name="add_tags">
+								</div>
+								<div class="col-sm-1">
+								</div>
+								<div class="col-sm-5">
+									<input type="text" max=99999 class="form-control cost" style="display: none;"
+										id="add_tags_cost_update" name="add_tags_cost" placeholder="Enter Cost ($)">
+								</div>
+							</div>
+
+							<div class="form-group row justify-content-center otp-wrap">
+								<div class="col-sm-4">
+									<label class="col-form-label">Log Details Search</label>
+								</div>
+								<div class="col-sm-1">
+									<input type="checkbox" id="meta_fields_search_update" name="meta_fields_search">
+								</div>
+								<div class="col-sm-1">
+								</div>
+								<div class="col-sm-5">
+									<input type="text" max=99999 class="form-control cost" style="display: none;"
+										id="meta_fields_search_cost_update" name="meta_fields_search_cost"
+										placeholder="Enter Cost ($)">
+								</div>
+							</div>
+
+							<div class="form-group row justify-content-center otp-wrap">
+								<div class="col-sm-4">
+									<label class="col-form-label">Advance Log Search</label>
+								</div>
+								<div class="col-sm-1">
+									<input type="checkbox" id="advance_tik_search_update" name="advance_tik_search">
+								</div>
+								<div class="col-sm-1">
+								</div>
+								<div class="col-sm-5">
+									<input type="text" max=99999 class="form-control cost" style="display: none;"
+										id="advance_tik_search_cost_update" name="advance_tik_search_cost"
+										placeholder="Enter Cost ($)">
+								</div>
+							</div>
+
+							<div class="form-group row justify-content-center otp-wrap">
+								<div class="col-sm-4">
+									<label class="col-form-label">Template Auto Save</label>
+								</div>
+								<div class="col-sm-1">
+									<input type="checkbox" id="template_auto_save_update" name="template_auto_save">
+								</div>
+								<div class="col-sm-1">
+								</div>
+								<div class="col-sm-5">
+									<input type="text" max=99999 class="form-control cost" style="display: none;"
+										id="template_auto_save_cost_update" name="template_auto_save_cost"
+										placeholder="Enter Cost ($)">
+								</div>
+							</div>
+
+						</fieldset>
+
+
+						<div class="row justify-content-center mt-4">
+							<div class="col-sm-3 col-6">
+								<input class="btn btn-primary btn-block" type="button" aria-label="Update"
+									value="Update" onclick="updateSubscription()">
+							</div>
+							<div class="col-sm-3 col-6">
+								<input class="btn btn-default btn-block" type="button" aria-label="Cancel"
+									value="Cancel" data-dismiss="modal">
+							</div>
+						</div>
+					</form>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- #main wrapper end -->
+	<!-- Mainly scripts -->
+	<%- include('../partials/script.ejs') %>
+
+		<script src="/js/plugins/select2/select2.full.min.js"></script>
+
+		<script src="/js/custom/subscription_management.js"></script>
+
+</body>
+
+</html>

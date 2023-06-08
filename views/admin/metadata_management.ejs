@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    
+    <%- include('../partials/style.ejs') %>
+    <link href="/css/stylep.css" rel="stylesheet">
+    <style>
+    .switch .slider {
+    margin-left: 100px;
+    width: 45px;
+}
+
+.switch {
+    width: 50px;
+}
+
+.clearfix:after {
+    display: block;
+    content: "";
+    clear: both;
+}
+
+.widget.white-bg {
+    height: auto;
+}
+
+.meta {
+    position: relative;
+}
+
+.meta .dlt {
+    position: absolute;
+    right: -15px;
+    bottom: -20px;
+    border-bottom-right-radius: 10px;
+}
+
+.meta-title {
+    padding-right: 15px;
+}
+
+.metacontainer {
+    /* max-height: calc(100vh - 200px); */
+    /* overflow-y: auto;
+    padding: 5px;
+    padding-left: 3px; */
+}
+.switch {
+    display: inline-block;
+    height: 22px;
+    position: relative;
+    width: 48px;
+    margin-bottom: 0;
+}
+
+.switch input {
+    display: none;
+}
+    </style>
+
+</head>
+
+<body>
+    <div id="wrapper">
+        <%- include('../partials/menu.ejs') %>
+        <!-- side bar end -->
+        <div id="page-wrapper" class="gray-bg">
+            <!-- top nav start -->
+        
+            <%- include('../partials/header.ejs') %>
+            <!-- top nav end -->
+            <div class="wrapper wrapper-content profile-page">
+                <div class="ibox ">
+                    <div class="ibox-title d-flex justify-content-between align-items-center meta-title">
+                        <h5>MetaData Management</h5>
+                        <div class="ibox-tools btn-right" id="addMetadataButton">  
+
+                            <a href="#!" class="btn btn-primary" onclick="addNewMetaFields()" ><i class="fa fa-plus"></i>&nbsp;&nbsp;Add</a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+
+                        <!-- metacontainer start -->
+                        <div class="metacontainer" id="metaContainer">
+                            
+                        </div>
+                        <!-- metacontainer end -->
+                    </div>
+                </div>
+                <!-- wrapper end -->
+                <%- include('../partials/footer.ejs') %>
+      
+                <!-- footer end -->
+            </div>
+            <!-- #page-wrapper end -->
+        </div>
+        <!-- #main wrapper end -->
+        <!-- Mainly scripts -->
+        <%- include('../partials/script.ejs') %>   
+ 
+        <script src="/js/plugins/select2/select2.full.min.js"></script>
+        <script src="/js/custom/metadata_management.js"></script>
+
+</body>
+
+</html>

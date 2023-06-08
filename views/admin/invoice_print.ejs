@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <%- include('../partials/style.ejs') %>
+
+
+</head>
+
+<body class="white-bg">
+                <div class="wrapper wrapper-content p-xl">
+                    <div class="ibox-content p-xl">
+                        <div class=" m-t">
+                            <table class="">
+                                <tbody>
+                                    <tr>
+                                        <td><strong><%= providerName %> Name:&nbsp;</strong></td>
+                                        <td>Alex Smith</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Email Address:&nbsp;</strong></td>
+                                        <td>alex@gmail.com</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Subscription Date:&nbsp;</strong></td>
+                                        <td>13-03-2020</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Validity:&nbsp;</strong></td>
+                                        <td>2 months</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Expiration Date:&nbsp;</strong></td>
+                                        <td>13-05-2020</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Auto Subscribe:&nbsp;</strong></td>
+                                        <td>Yes</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Payment Mode:&nbsp;</strong></td>
+                                        <td>Credit card</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Payment Id:&nbsp;</strong></td>
+                                        <td>4351adfd34443sfrf54</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div class="table-responsive m-t">
+                                <table class="table invoice-table">
+                                    <thead>
+                                        <tr style="background-color: #333 !important;"> 
+                                            <th  style="background-color: #333 !important;color: #fff !important;">Product Id</th>
+                                            <th  style="background-color: #333 !important;color: #fff !important;">Product Name</th>
+                                            <th  style="background-color: #333 !important;color: #fff !important;">Amount</th>
+                                            
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>123</td>
+                                            <td><div><strong>Standard plan</strong></div>
+                                            <td>$26.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>123</td>
+                                            <td><div><strong>Standard plan</strong></div>
+                                            <td>$26.00</td>
+                                        </tr>
+            
+                                        </tbody>
+                                </table>
+                            </div><!-- /table-responsive -->
+
+                            <table class="table invoice-total">
+                                <tbody>
+                                <tr>
+                                    <td><strong>Sub Total :</strong></td>
+                                    <td>$1026.00</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>TOTAL :</strong></td>
+                                    <td>$1261.98</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            
+                        </div>
+
+    </div>
+
+    <!-- Mainly scripts -->
+    <%- include('../partials/script.ejs') %> 
+
+    <script type="text/javascript">
+        window.print();
+    </script>
+
+</body>
+
+</html>

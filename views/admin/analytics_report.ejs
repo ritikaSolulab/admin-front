@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+
+    <%- include('../partials/style.ejs') %>
+        <link href="/css/plugins/select2/select2.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div id="wrapper">
+        <%- include('../partials/menu.ejs') %>
+
+            <!-- side bar end -->
+            <div id="page-wrapper" class="gray-bg">
+                <!-- top nav start -->
+                <%- include('../partials/header.ejs') %>
+
+                    <!-- top nav end -->
+                    <div class="wrapper wrapper-content profile-page">
+                        <div class="ibox ">
+                            <div class="ibox-title">
+                                <h5>Analytics & Report</h5>
+                            </div>
+                            <div class="ibox-content ">
+                                <div class="row align-items-center">
+                                    <div class="col-md-12">
+                                        <div class="table-tab">
+                                            <ul class="nav nav-pills mb-2" id="pills-tab" role="tablist">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active" id="pro-tab" data-toggle="pill"
+                                                        href="#onboard" role="tab" aria-controls="pills-home"
+                                                        aria-selected="true">
+                                                        Onboarding Reports
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" id="sub-tab" data-toggle="pill" href="#sales"
+                                                        role="tab" aria-controls="pills-home" aria-selected="true">
+                                                        Sales Reports
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" id="team-tab" data-toggle="pill" href="#issue"
+                                                        role="tab" aria-controls="pills-home" aria-selected="true">
+                                                        Issues Reports
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" id="trans-tab" data-toggle="pill" href="#cost"
+                                                        role="tab" aria-controls="pills-home" aria-selected="true">
+                                                        Cost Reports
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content report-content" id="pills-tabContent">
+                                                <div class="tab-pane fade show active" id="onboard" role="tabpanel"
+                                                    aria-labelledby="del-tab">
+
+                                                    <div class="row">
+                                                        <div class="col-md-12  mb-3 mt-3">
+                                                            <!-- date-period start -->
+                                                            <div class="pull-right daterange-wrapper">
+                                                                <div class="date-cst d-inline-block	">
+                                                                    <input type="text" placeholder="DD/MM/YYYY"
+                                                                        class="form-control " name="onBoardDateRang"
+                                                                        readonly='true' id="onBoardDateFilter">
+                                                                </div>
+                                                            </div>
+                                                            <!-- date-period end -->
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row align-items-center">
+                                                        <div class="col-lg-6">
+                                                            <div id="pro-chart"
+                                                                style="width: 100%; height: 300px; background-color: #FFFFFF;">
+                                                            </div>
+                                                            <!-- chart end -->
+                                                            <div class="row align-items-center">
+                                                                <div class="col-sm-6 ">
+                                                                    <div class="widget white-bg  text-center ">
+                                                                        <div class="">
+                                                                            <h1 class="m-xs font-bold"
+                                                                                id="totalProvider"></h1>
+                                                                            <h5 class=" no-margins">
+                                                                                Total Number of <%= providerName %>s
+                                                                            </h5>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6 ">
+                                                                    <div class="widget white-bg  text-center ">
+                                                                        <div class="">
+                                                                            <h1 class="m-xs font-bold text-green"
+                                                                                id="provideChange"></h1>
+                                                                            <h5 class=" no-margins">
+                                                                                % of change in number of <%=
+                                                                                    providerName %>s
+                                                                            </h5>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6 ">
+                                                            <div id="rec-chart"
+                                                                style="width: 100%; height: 300px; background-color: #FFFFFF;">
+                                                            </div>
+                                                            <!-- chart end -->
+                                                            <div class="row align-items-center ">
+                                                                <div class="col-sm-6 ">
+                                                                    <div class="widget white-bg  text-center ">
+                                                                        <div class="">
+                                                                            <h1 class="m-xs font-bold"
+                                                                                id="totalReceiver"></h1>
+                                                                            <h5 class=" no-margins">
+                                                                                Total Number of <%= receiverName %>s
+                                                                            </h5>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6 ">
+                                                                    <div class="widget white-bg  text-center ">
+                                                                        <div class="">
+                                                                            <h1 class="m-xs font-bold text-red"
+                                                                                id="receiverChange"></h1>
+                                                                            <h5 class=" no-margins">
+                                                                                % of change in number of <%=
+                                                                                    receiverName %>s
+                                                                            </h5>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="tab-pane " id="sales" role="tabpanel"
+                                                    aria-labelledby="pills-home-tab">
+                                                    <div class="row">
+                                                        <div class="col-md-12  mb-3 mt-3">
+                                                            <!-- date-period start -->
+                                                            <div class=" pull-right daterange-wrapper">
+                                                                <div class="date-cst d-inline-block	">
+                                                                    <input type="text" placeholder="DD/MM/YYYY"
+                                                                        class="form-control " name="subscriptionFilter"
+                                                                        readonly='true'>
+                                                                </div>
+                                                            </div>
+                                                            <!-- date-period end -->
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="row">
+                                                        <div class="col-lg-8">
+                                                            <div id="sale-chart"
+                                                                style="width: 100%; height: 300px; background-color: #FFFFFF;">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <div class="d-block mt-3 text-left mb-3">
+                                                                <label class="col-form-label">Select
+                                                                    Subscriptions</label>
+                                                                <select class="select2_demo_3 form-control"
+                                                                    id="subscriptionList"
+                                                                    data-placeholder="Select <%= providerName %>..."
+                                                                    multiple>
+                                                                    <option></option>
+
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="row align-items-center">
+                                                        <div class="col-lg-12">
+                                                            <!-- chart end -->
+                                                            <div class="row align-items-center">
+                                                                <div class="col-sm-6 ">
+                                                                    <div class="widget white-bg  text-center ">
+                                                                        <div class="">
+                                                                            <h1 class="m-xs font-bold text-green" id="subscriptionCount">47
+                                                                            </h1>
+                                                                            <h5 class=" no-margins">
+                                                                                <!-- Total Number of <%= providerName %>s
+                                                                                    Subscribed -->
+                                                                                    <%= providerName %>s
+                                                                                    Subscription Count
+                                                                            </h5>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6 ">
+                                                                    <div class="widget white-bg  text-center ">
+                                                                        <div class="">
+                                                                            <h1 class="m-xs font-bold text-red" id="expiredSubscriptionCount">60</h1>
+                                                                            <h5 class=" no-margins">
+                                                                                Total Number of Expired Subscribed
+                                                                            </h5>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                                <div class="tab-pane " id="issue" role="tabpanel"
+                                                    aria-labelledby="pills-home-tab">
+                                                    <div class="row">
+                                                        <div class="col-md-12  mb-3 mt-3">
+                                                            <!-- date-period start -->
+                                                            <div class=" pull-right daterange-wrapper">
+                                                                <div class="date-cst d-inline-block	">
+                                                                    <input type="text" placeholder="DD/MM/YYYY"
+                                                                        class="form-control " name="daterange"
+                                                                        readonly='true'>
+                                                                </div>
+                                                            </div>
+                                                            <!-- date-period end -->
+                                                        </div>
+                                                    </div>
+                                                    <div class="row align-items-center">
+                                                        <div class="col-lg-12">
+                                                            <div id="issue-chart"
+                                                                style="width: 100%; height: 300px; background-color: #FFFFFF;">
+                                                            </div>
+                                                            <!-- chart end -->
+                                                            <div class="row align-items-center">
+                                                                <div class="col-sm-3 ">
+                                                                    <div class="widget white-bg  text-center ">
+                                                                        <div class="">
+                                                                            <h1 class="m-xs font-bold">NA</h1>
+                                                                            <h5 class=" no-margins">
+                                                                                Total Number of Generated Tickets
+                                                                            </h5>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-3 ">
+                                                                    <div class="widget white-bg  text-center ">
+                                                                        <div class="">
+                                                                            <h1 class="m-xs font-bold text-green">NA
+                                                                            </h1>
+                                                                            <h5 class=" no-margins">
+                                                                                Total Number of Solved Tickets
+                                                                            </h5>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-3 ">
+                                                                    <div class="widget white-bg  text-center ">
+                                                                        <div class="">
+                                                                            <h1 class="m-xs font-bold text-red">NA</h1>
+                                                                            <h5 class=" no-margins">
+                                                                                Total Number of Remaining Tickets
+                                                                            </h5>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-3 ">
+                                                                    <div class="widget white-bg  text-center ">
+                                                                        <div class="">
+                                                                            <h1 class="m-xs font-bold text-green">NA</h1>
+                                                                            <h5 class=" no-margins">
+                                                                                Rate of solving Tickets per day
+                                                                            </h5>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane " id="cost" role="tabpanel"
+                                                    aria-labelledby="pills-home-tab">
+                                                    <div class="row">
+                                                        <div class="col-md-12  mb-3 mt-3">
+                                                            <!-- date-period start -->
+                                                            <div class="pull-right daterange-wrapper">
+                                                                <div class="date-cst d-inline-block	">
+                                                                    <input type="text" placeholder="DD/MM/YYYY"
+                                                                        class="form-control " name="costDateRangeFilter"
+                                                                        readonly='true' id='costDateRangeFilter' >
+                                                                </div>
+                                                            </div>
+                                                            <!-- date-period end -->
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-8">
+                                                            <div id="cost-chart"
+                                                                style="width: 100%; height: 300px; background-color: #FFFFFF;">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <div class="d-block mt-3 text-left mb-3">
+                                                                <label class="col-form-label">Select <%= providerName %>s</label>
+                                                                <select class="select2_demo_3 form-control"
+                                                                    data-placeholder="Select <%= providerName %>..."
+                                                                    multiple id="providerList">
+                                                                    <option value=""></option>
+                                                                 
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- row start -->
+                                                    <div class="row align-items-center ">
+                                                        <div class="col-md-6 col-lg-3">
+                                                            <div class="widget white-bg  text-center ">
+                                                                <div class="">
+                                                                    <h1 class="m-xs font-bold" id="totalNumberOfProvider"></h1>
+                                                                    <h5 class=" no-margins">
+                                                                        Total Number of <%= providerName %>s
+                                                                    </h5>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 col-lg-3">
+                                                            <div class="widget white-bg  text-center ">
+                                                                <div class="">
+                                                                    <h1 class="m-xs font-bold text-green" id="profitLoss">0</h1>
+                                                                    <h5 class=" no-margins">
+                                                                        Profit/Loss to company
+                                                                    </h5>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 col-lg-3">
+                                                            <div class="widget white-bg  text-center ">
+                                                                <div class="">
+                                                                    <h1 class="m-xs font-bold " id="totalMoneyCollected"></h1>
+                                                                    <h5 class=" no-margins">
+                                                                        Total money collected
+                                                                    </h5>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- <div class="col-md-6 col-lg-3">
+                                                            <div class="widget white-bg  text-center ">
+                                                                <div class="">
+                                                                    <h1 class="m-xs font-bold ">$1000</h1>
+                                                                    <h5 class=" no-margins">
+                                                                        Total money spent
+                                                                    </h5>
+                                                                </div>
+                                                            </div>
+                                                        </div> -->
+                                                    </div>
+                                                    <!-- row end -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- wrapper end -->
+                        <%- include('../partials/footer.ejs') %>
+
+                            <!-- footer end -->
+                    </div>
+                    <!-- #page-wrapper end -->
+            </div>
+            <!-- #main wrapper end -->
+            <!-- Mainly scripts -->
+            <%- include('../partials/script.ejs') %>
+                <!-- amchart js -->
+                <script src="/js/chart/amcharts.js"></script>
+                <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+                <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+                <!-- <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script> -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.css" integrity="sha512-C7hOmCgGzihKXzyPU/z4nv97W0d9bv4ALuuEbSf6hm93myico9qa0hv4dODThvCsqQUmKmLcJmlpRmCaApr83g==" crossorigin="anonymous" />
+                <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+                <script src="/js/chart/pie.js"></script>
+                <script src="/js/chart/piechart.js"></script>
+                <script src="/js/chart/serial.js"></script>
+                <script src="/js/chart/serial-chart.js"></script>
+                <script src="/js/plugins/select2/select2.full.min.js"></script>
+                <script src="/js/custom/analytics_report.js"></script>
+                <script>
+                    $(document).ready(function () {
+                        $(".select2_demo_3").select2({
+                            // placeholder: "Select a state",
+                            allowClear: true
+                        });
+                    });
+                </script>
+</body>
+
+</html>

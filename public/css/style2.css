@@ -1,0 +1,125 @@
+.form-control {
+    border: 1px solid #cecece !important;
+    /* border-radius: 1rem !important; */
+}
+
+body.body-small .navbar-static-top {
+    z-index: 1 !important;
+}
+
+.select2-container--default .select2-selection--multiple {
+    border-radius: 0;
+}
+
+.profile-text img {
+    max-width: 48px;
+    max-height: 48px;
+}
+
+.profile-image {
+    max-width: 100px;
+    max-height: 100px;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__clear {
+    float: none !important;
+    margin-top: 5px !important;
+    margin-right: 0px !important;
+    position: absolute;
+    right: 5px;
+}
+
+
+/* ----------------------------------------------30-july */
+
+.nav-header img {
+    height: auto;
+    width: auto;
+}
+
+.navbar-static-top {
+    background: #ffffff;
+    box-shadow: 1px 2px 3px #ddd;
+}
+
+.nav-header {
+    background: #fff !important;
+    box-shadow: 1px 2px 3px #ddd;
+}
+
+.nav>li.active>a {
+    color: #60391a;
+}
+
+.nav>li.active {
+    border-left: 4px solid #ffffff;
+    background: #ffffff;
+}
+
+.navbar-default .nav>li>a:hover,
+.navbar-default .nav>li>a:focus {
+    background: inherit;
+    color: inherit;
+}
+
+.nav-cst {
+    background-color: #fff;
+}
+
+.dropdown-toggle.count-info .label-primary {
+    background-color: #f0732e;
+    color: #fff;
+    border-radius: 50%;
+    right: 10px;
+}
+
+.dropdown.profile-element .dropdown-toggle {
+    color: #333;
+}
+
+.navbar-header .btn i {
+    color: #f0732e;
+}
+
+.navbar-header .btn,
+.btn-primary:not(:disabled):not(.disabled):active,
+.navbar-header .btn:focus,
+.navbar-header .btn:active {
+    background: #ffffff;
+    border-color: #ffffff;
+}
+
+.navbar-header .btn:hover i,
+.navbar-header .btn:focus i {
+    color: #f0732e;
+}
+
+.gray-bg,
+.bg-muted {
+    /* background-color: #ffffff; */
+}
+
+ ::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+}
+
+
+/* Track */
+
+ ::-webkit-scrollbar-track {
+    background: #fff;
+}
+
+
+/* Handle */
+
+ ::-webkit-scrollbar-thumb {
+    background: #60391a;
+}
+
+@media (max-width:767px) {
+    .profile-btn {
+        text-align: left !important;
+    }
+}

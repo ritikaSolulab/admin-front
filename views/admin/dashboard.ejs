@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%- include('../partials/style.ejs') %>
+<!-- style -->
+</head>
+
+<body>
+    <div id="wrapper">
+        <!-- side bar-->
+        <%- include('../partials/menu.ejs') %>
+        <!-- side bar end -->
+        <div id="page-wrapper" class="gray-bg">
+            <!-- Navigation -->
+            <%- include('../partials/header.ejs') %>
+            <div class="wrapper wrapper-content">
+                <div class="row mb-3">
+                    <div class="col-md-12 clearfix">
+                        <div class="pull-left mt-1">
+                            <div class="fliter-wrapper d-inline-block w-200 mr-2 text-left">
+                                <i class="fa fa-filter filter-icon" aria-hidden="true"></i>
+                                <select class="form-control-sm form-control input-s-sm" onchange="daysFilter(this.value)">
+                                    <option value="0d" >Select Days</option> 
+                                    <option value="30d">30 days</option>
+                                    <option value="90d">90 days</option>
+                                    <option value="1y">1 year</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="pull-right mt-1">
+                            <label class="font-normal d-inline">From</label>
+                            <div class="form-group text-left d-inline-block" id="data_5">
+                                <div class="input-daterange input-group" id="datepicker">
+                                    <input type="text" class="form-control-sm form-control" name="start" id="startDate" readonly='true'/>
+                                    <span class="input-group-addon">to</span>
+                                    <input type="text" class="form-control-sm form-control" name="end" id="endDate" readonly='true'/>
+                                    <button class="btn btn-primary ml-2" onclick="getFilteredCount()">Apply</button>
+                                </div>
+                            </div>                             
+                        </div>
+                    </div>  
+                   
+                </div>
+                <div class="row align-items-center">
+                    <div class="col-md-6 ">
+                        <div class="widget white-bg p-lg text-center ">
+                            <div class="">
+                                <i class="fa fa-exchange fa-4x"></i>
+                                <h1 class="m-xs" id="documentCount"></h1>
+                                <h3 class="font-bold no-margins">
+                                    Total <%= documentName %>s Exchanged
+                                </h3>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 ">
+                        <div class="widget white-bg p-lg text-center ">
+                            <div class="">
+                                <a href="/admin/provider_management"><i class="fa fa-hand-o-up fa-4x"></i></a>
+                                <h1 class="m-xs" id="providerCount"></h1>
+                                <h3 class="font-bold no-margins">
+                                    Total <%= providerName %>s on Platform
+                                </h3>                               
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 ">
+                        <div class="widget white-bg p-lg text-center ">
+                            <div class="">
+                                <a href="/admin/metadata_management"><i class="fa fa-hand-o-down fa-4x"></i></a>
+                                <h1 class="m-xs" id="metaCount"></h1>
+                                <h3 class="font-bold no-margins">
+                                    Total Metadata Fields on Platform
+                                </h3>                               
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 ">
+                        <div class="widget white-bg p-lg text-center ">
+                            <div class="">
+                                <a href="/admin/receiver_management"><i class="fa fa-hand-o-down fa-4x"></i></a>
+                                <h1 class="m-xs" id="receiverCount"></h1>
+                                <h3 class="font-bold no-margins">
+                                    Total <%= receiverName %>s on Platform
+                                </h3>                               
+                            </div>
+                        </div>
+                    </div>
+    
+                </div>
+                <!-- card-row end -->
+            
+            </div>
+            <!-- wrapper end -->
+            <%- include('../partials/footer.ejs') %>
+            <!-- footer end -->
+        </div>
+        <!-- #page-wrapper end -->
+    </div>
+    <!-- #main wrapper end -->
+    <%- include('../partials/script.ejs') %>
+    <script src="/js/moment.js"></script>
+    <script src="/js/custom/dashboard.js"></script>
+</body>
+</html>

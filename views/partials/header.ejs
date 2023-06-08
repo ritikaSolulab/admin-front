@@ -1,0 +1,93 @@
+  <!-- top nav start -->
+  <div class="row">
+    <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+    <div class="navbar-header">
+        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="javascript:void(0)"><i class="fa fa-bars"></i> </a>
+    </div>
+    <ul class="nav navbar-top-links navbar-right">                
+        <li class="dropdown">
+            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                <i class="fa fa-bell"></i>  <span  id="notification-count"></span>
+            </a>
+            <ul class="dropdown-menu dropdown-alerts drop-notify">
+                <li>
+                    <div class="text-right link-block">
+                        <a href="#!" onclick="markAllRead()" class="dropdown-item">
+                            <strong>Mark all as read</strong>
+                           
+                        </a>
+                       
+                    </div>
+                </li>
+                <div id="notification-container"></div>
+                <!-- <li>
+                    <a href="#!" class="dropdown-item clearfix">
+                        <div>
+                           <i class="fa fa-file-text" aria-hidden="true"></i>
+                            <p class="d-inline-block mb-0"> Reminder for document abc Reminder for document abc</p>
+                            <span class="float-right text-muted small d-inline-block">4 minutes ago</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="dropdown-divider"></li>
+                <li>
+                    <a href="#!" class="dropdown-item clearfix">
+                        <div>
+                           <i class="fa fa-file-text" aria-hidden="true"></i>
+                            <p class="d-inline-block mb-0"> Reminder for document abc Reminder for document abc</p>
+                            <span class="float-right text-muted small d-inline-block">4 minutes ago</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="dropdown-divider"></li>
+                <li>
+                    <a href="#!" class="dropdown-item clearfix">
+                        <div>
+                           <i class="fa fa-file-text" aria-hidden="true"></i>
+                            <p class="d-inline-block mb-0"> Reminder for document abc Reminder for document abc</p>
+                            <span class="float-right text-muted small d-inline-block">4 minutes ago</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="dropdown-divider"></li>
+                <li>
+                    <a href="#!" class="dropdown-item clearfix">
+                        <div>
+                           <i class="fa fa-file-text" aria-hidden="true"></i>
+                            <p class="d-inline-block mb-0"> Reminder for document abc Reminder for document abc</p>
+                            <span class="float-right text-muted small d-inline-block">4 minutes ago</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="dropdown-divider"></li> -->
+                <li>
+                    <div class="text-center link-block">
+                        <a href="/admin/notification" class="dropdown-item">
+                            <strong>See All Alerts</strong>
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </li>
+        
+        <!-- notification end -->
+        <li>
+            <div class="dropdown profile-element">                            
+                <a data-toggle="dropdown" class="dropdown-toggle profile-text" href="#">
+                    <img style="border-radius: 50%;" id="userSmallDP" />
+                    <span class="d-inline-block m-t-xs font-bold"><%= user.firstName %> <%= user.lastName != undefined ? user.lastName : '' %></span>
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu m-t-xs">
+                    <li><a class="dropdown-item" onclick="updateSession()" >Profile</a></li>
+                    <li><a class="dropdown-item" onclick="logout()">Logout</a></li>
+                </ul>
+            </div>
+        </li>
+        <!-- profile dropdown end -->
+    </ul>
+    
+    </nav>
+</div>
+<!-- top nav end -->

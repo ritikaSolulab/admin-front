@@ -1,0 +1,30 @@
+<div class="footer">
+    <div>
+        <strong>Copyright</strong> Archive Matter &copy; <span id="copyrightYear"></span>
+    </div>
+</div>
+
+<div class="modal fade" id="refreshSessionModal" role="dialog" data-backdrop="static" style="background-color : gray">
+
+    <div class="login-box">
+        <div class="text-center bg-white">
+            <span class="login-logo"> <img src="/img/final-logo-1.png" width="100%"></span>
+        </div>
+        <hr>
+        <div class="loginContainer text-center ">
+            <div>
+                <h1>Your Session is expired please your session</h1>
+                <hr>
+                <div class="login-tab">
+                    <a href="#" class="btn btn-primary block full-width m-b" onclick="refreshSession()">Refresh
+                        Session</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" defer>
+    const d = new Date();
+    document.getElementById("copyrightYear").innerHTML = d.getFullYear();
+</script>

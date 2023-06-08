@@ -1,0 +1,40 @@
+.switch .slider {
+    margin-left: 100px;
+    width: 45px;
+}
+
+.switch {
+    width: 50px;
+}
+
+.clearfix:after {
+    display: block;
+    content: "";
+    clear: both;
+}
+
+.widget.white-bg {
+    height: auto;
+}
+
+.meta {
+    position: relative;
+}
+
+.meta .dlt {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    border-bottom-right-radius: 10px;
+}
+
+.meta-title {
+    padding-right: 15px;
+}
+
+.metacontainer {
+    /* max-height: calc(100vh - 200px); */
+    /* overflow-y: auto;
+    padding: 5px;
+    padding-left: 3px; */
+}
