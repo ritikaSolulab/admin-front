@@ -1,11 +1,7 @@
-import { Express, Request, Response } from 'express';
-import authRouter from '../components/auth/auth.router';
-import userRouter from '../components/users/user.router';
-import request from '../helpers/request.helper';
-import tokenValidator from '../middleware/token.validator';
+import { Express } from 'express';
+import router from './admin';
 
 export default (app: Express) => {
-  app.use('/', authRouter);
-  app.use('/user', tokenValidator.tokenValidate(), userRouter);
-  app.use(request.notFound);
+  app.use('/', router);
+  //app.use(request.notFound);
 };
