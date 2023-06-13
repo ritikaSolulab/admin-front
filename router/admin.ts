@@ -21,15 +21,36 @@ router.use((req:Request, res:Response, next:NextFunction) => {
 
 router.get('/', (req,res) => {
     res.render('index')
-    // return res.send('Hi!')
 })
 
-router.get('/login', (req, res) => {
-    res.render('admin/login');
-  });
+router.get('/login', (req,res) => {
+  res.render('login');
+})
+
+router.get('/resend-OTP',(req,res) => {
+  res.render('resendOTP');
+})
+
+router.get('/send-OTP', (req,res) => {
+  res.render('sendOTP')
+})
+
+router.get('/forgot-password', (req,res) => {
+  res.render('forgotPassword')
   
-  router.get('/firstlogin', (req, res) => {
-    res.render('admin/firstLogin');
-  });
+})
+
+router.get('/new-password', (req,res) => {
+  res.render('newPassword')
+})
+
+router.get('/password-changed', (req,res) => {
+  res.render('changedPassword')
+})
+
+router.get('/dashboard', (req,res) => {
+  res.render('dashboard')
+ 
+})
 
 export default router;
