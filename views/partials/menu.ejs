@@ -52,8 +52,10 @@
               <span class="hide-menu">Royalites Management</span>
             </a>
           </li>
-          <li class="sidebar-item">
-            <a class="sidebar-link" href="ui-typography.html" aria-expanded="false">
+          <!-- <li class="sidebar-item"> -->
+            <li class="sidebar-item <%= (activeBar == 'transaction') ? 'selected' : '' %>">
+              <a class="sidebar-link <%= (activeBar == 'transaction') ? 'active' : '' %>" href="/admin/transaction" aria-expanded="false">
+            <!-- <a class="sidebar-link" href="ui-typography.html" aria-expanded="false"> -->
               <span>
                 <i class="ti ti-typography"></i>
               </span>
