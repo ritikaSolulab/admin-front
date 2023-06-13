@@ -1,7 +1,8 @@
 import { Express } from 'express';
-import router from './admin';
+import router from './auth';
+import adminRouter from './admin';
 
 export default (app: Express) => {
   app.use('/', router);
-  //app.use(request.notFound);
+  app.use('/admin', adminRouter);
 };

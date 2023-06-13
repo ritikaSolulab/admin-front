@@ -1,134 +1,109 @@
-<nav class="navbar-default navbar-static-side nav-cst" role="navigation">
-    <div class="sidebar-collapse">
-        <ul class="nav metismenu" id="side-menu">
-            <li class="nav-header">  
-            <div class="logo-web">
-                <a href="/admin/"> 
-                    <img src="/img/final-logo-1.png"></a>
-                </div>                 
-                <div class="logo-element">
-                    <a href="/admin/">
-                    <img src="/img/LogoIcon.png">
-                    </a>
-                </div>
-              
-            </li>
-            <li class="header-space <%= (activeBar == 'dashboard') ? 'active' : '' %>">
-                <a href="/admin/dashboard">
-                    <i class="fa fa-tachometer" aria-hidden="true"></i> 
-                    <span class="nav-label">Dashboard</span>
-                </a>
-            </li>
-            <li class="<%= (activeBar == 'provider_management') ? 'active' : '' %>">
-                <a href="/admin/provider_management">
-                    <i class="fa fa-hand-o-up " aria-hidden="true"></i> 
-                    <span class="nav-label"><%= providerName %> Management</span>
-                </a>
-            </li>
-            <li class="<%= (activeBar == 'receiver_management') ? 'active' : '' %>">
-                <a href="/admin/receiver_management">
-                    <i class="fa fa-hand-o-down" aria-hidden="true"></i> 
-                    <span class="nav-label"><%= receiverName %> Management</span>
-                </a>
-            </li>
-            <li class="<%= (activeBar == 'analytics_report') ? 'active' : '' %>">
-                <a href="/admin/analytics_report">
-                    <i class="fa fa-line-chart" aria-hidden="true"></i> 
-                    <span class="nav-label">Analytics & Report</span>
-                </a>
-            </li>
-            <li class="<%= (activeBar == 'payment_history') ? 'active' : '' %>">
-                <a href="/admin/payment_history">
-                    <i class="fa fa-credit-card" aria-hidden="true"></i> 
-                    <span class="nav-label">Payment History</span>
-                </a>
-            </li>
-            <li class="<%= (activeBar == 'blockchain_analytics') ? 'active' : '' %>">
-                <!-- <a href="/admin/blockchain_analytics"> -->
-                    <a href="https://blockexplorer.doctrace.com" target="_blank">
-                        <!-- <a href="/admin/blockchain_analytics"> -->
-                 
-                        <i class="fa fa-area-chart" aria-hidden="true"></i> 
-                    <span class="nav-label">Blockchain Analytics</span>
-                </a>
-            </li>
-            <li class="<%= (activeBar == 'support_management') ? 'active' : '' %>">
-                <a href="/admin/support_management">
-                    <i class="fa fa-handshake-o" aria-hidden="true"></i> 
-                    <span class="nav-label">Support Management</span>
-                </a>
-            </li>
-            <li >
-
-                
-                <a href="https://www.doctrace.com/" target="_blank">
-                    <i class="fa fa-file" aria-hidden="true"></i> 
-                    <span class="nav-label">Marketing CMS</span>
-                </a>
-            </li>
-            <li class="<%= (activeBar == 'team_management') ? 'active' : '' %>">
-                <a href="/admin/team_management">
-                    <i class="fa fa-users" aria-hidden="true"></i> 
-                    <span class="nav-label">Team Management</span>
-                </a>
-            </li>
-            <li class="<%= (activeBar == 'subscription_management') ? 'active' : '' %>">
-                <a href="/admin/subscription_management">
-                    <i class="fa fa-ticket" aria-hidden="true"></i> 
-                    <span class="nav-label">Subscription Management</span>
-                </a>
-            </li >
-            <li>
-                <a href="#!">
-                    <i class="fa fa-usd" aria-hidden="true"></i> 
-                    <span class="nav-label">Sales Management</span>
-                </a>
-            </li>
-            <li class="<%= (activeBar == 'promocode_management') ? 'active' : '' %>">
-                <a href="/admin/promocode_management">
-                    <i class="fa fa-clone" aria-hidden="true"></i> 
-                    <span class="nav-label">Promocode Management</span>
-                </a>
-            </li>
-            <li class="<%= (activeBar == 'metadata_management') ? 'active' : '' %>" id="metadataMenu">
-                <a href="/admin/metadata_management">
-                    <i class="fa fa-file-text" aria-hidden="true"></i> 
-                    <span class="nav-label">Metadata Management</span>
-                </a>
-            </li>
-            <li class="<%= (activeBar == 'contact_us') ? 'active' : '' %>">
-                <a href="/admin/contact_us">
-                    <i class="fa fa-phone" aria-hidden="true"></i> 
-                    <span class="nav-label">contact us</span>
-                </a>
-            </li>
-            <li class="<%= (activeBar == 'faq') ? 'active' : '' %>">
-                <a href="/admin/faq">
-                    <i class="fa fa-phone" aria-hidden="true"></i> 
-                    <span class="nav-label">FAQ</span>
-                </a>
-            </li>
-            <!-- <li class="<%= (activeBar == 'notify') ? 'active' : '' %>">
-                <a href="/admin/pre_notify">
-                    <i class="fa fa-bell" aria-hidden="true"></i>
-                    <span class="nav-label">Notify</span>
-                </a>
-            </li> -->
+<aside class="left-sidebar">
+    <!-- Sidebar scroll-->
+    <div >
+      <div class="brand-logo d-flex align-items-center justify-content-between">
+        <!-- <a href="index.html" class="text-nowrap logo-img">
+          <img src="../images/logos/dark-logo.svg" width="180" alt="" />
+        </a> -->
+        <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+          <i class="ti ti-x fs-8"></i>
+        </div>
+      </div>
+      <!-- Sidebar navigation-->
+      <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+        <ul id="sidebarnav">
+          <li class="sidebar-item <%= (activeBar == 'dashboard') ? 'selected' : '' %>">
+            <a class="sidebar-link <%= (activeBar == 'dashboard') ? 'active' : '' %>" href="/admin/dashboard" aria-expanded="false">
+              <span>
+                <i class="ti ti-layout-dashboard"></i>
+              </span>
+              <span class="hide-menu">Admin Dashboard</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" href="ui-buttons.html" aria-expanded="false">
+              <span>
+                <i class="ti ti-article"></i>
+              </span>
+              <span class="hide-menu">Super Admin Control</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" href="ui-alerts.html" aria-expanded="false">
+              <span>
+                <i class="ti ti-alert-circle"></i>
+              </span>
+              <span class="hide-menu">License/Membership</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" href="ui-card.html" aria-expanded="false">
+              <span>
+                <i class="ti ti-cards"></i>
+              </span>
+              <span class="hide-menu">NFT Management</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" href="ui-forms.html" aria-expanded="false">
+              <span>
+                <i class="ti ti-file-description"></i>
+              </span>
+              <span class="hide-menu">Royalites Management</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" href="ui-typography.html" aria-expanded="false">
+              <span>
+                <i class="ti ti-typography"></i>
+              </span>
+              <span class="hide-menu">Transaction Management</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" href="ui-typography.html" aria-expanded="false">
+              <span>
+                <i class="ti ti-menu-2"></i>
+              </span>
+              <span class="hide-menu">Infatuation</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" href="ui-typography.html" aria-expanded="false">
+              <span>
+                <i class="ti ti-user-plus"></i>
+              </span>
+              <span class="hide-menu">Curated</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" href="ui-typography.html" aria-expanded="false">
+              <span>
+                <i class="ti ti-list-check"></i>
+              </span>
+              <span class="hide-menu">Feature</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" href="ui-typography.html" aria-expanded="false">
+              <span>
+                <i class="ti ti-bell-ringing"></i>
+              </span>
+              <span class="hide-menu">Content Management</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" href="ui-typography.html" aria-expanded="false">
+              <span>
+                <i class="ti ti-mail"></i>
+              </span>
+              <span class="hide-menu">Support</span>
+            </a>
+          </li>
+         
         </ul>
-
+       </nav>
+      <!-- End Sidebar navigation -->
     </div>
-</nav>
-
-<script>
-    let userDetails = JSON.parse(localStorage.getItem('user'));
-   if(!userDetails.isSuperAdmin)
-   {
-       if (!userDetails.role?.metadata?.view)
-       {
-           if (!userDetails.otherResponsibilities?.metadata?.view)
-           {
-                document.getElementById('metadataMenu').style.display = 'none';
-           }
-       }
-   }
-</script>
+    <!-- End Sidebar scroll-->
+  </aside>
