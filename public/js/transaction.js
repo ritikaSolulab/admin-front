@@ -15,56 +15,56 @@ alert = function() {
 
 
 const loadProviders = () => {
-    providersTable = $('#providersTable').DataTable({
-        // serverSide: true,
-        searching: true,
-        ajax: {
-            url: `${providerApi}/approvedList`,
-            data : (data) => {
-                const value = $('#dateFilter').val();
-                if (value.split('-').length) {
-                    let query = '';
-                    query+=`startDate=${value.split('-')[0]}`;
-                    query+=`&endDate=${value.split('-')[1]}`;
-                    return query;
-                }
-            }
-        },
-        columns: [{
-            data: "firstName"
-        },
-        {
-            mRender(data, type, row, meta) {
-                console.log('type', type);
-                return type == 'sort' ?  (new Date(row.createdTime)).getTime() : row.createdTime;
-            }
-        },
-        {
-            data: "document.organization_name"
-        },
-        {
-            mRender(data, type, row, meta) {
-                if (row.isActive && !row.isRejected) {
-                    return 'Active';
-                } else {
-                    return 'De-active';
-                }
-            }
-        },
-        {
-            data : 'plan'
-        },
-        {
-            mRender(data, type, row) {
-                return `<a href="/admin/provider_details/${row._id}"><i class="fa fa-eye"></i></a>`;
+    // providersTable = $('#transactionTable').DataTable({
+    //     // serverSide: true,
+    //     searching: true,
+    //     ajax: {
+    //         url: `${providerApi}/approvedList`,
+    //         data : (data) => {
+    //             const value = $('#dateFilter').val();
+    //             if (value.split('-').length) {
+    //                 let query = '';
+    //                 query+=`startDate=${value.split('-')[0]}`;
+    //                 query+=`&endDate=${value.split('-')[1]}`;
+    //                 return query;
+    //             }
+    //         }
+    //     },
+    //     columns: [{
+    //         data: "firstName"
+    //     },
+    //     {
+    //         mRender(data, type, row, meta) {
+    //             console.log('type', type);
+    //             return type == 'sort' ?  (new Date(row.createdTime)).getTime() : row.createdTime;
+    //         }
+    //     },
+    //     {
+    //         data: "document.organization_name"
+    //     },
+    //     {
+    //         mRender(data, type, row, meta) {
+    //             if (row.isActive && !row.isRejected) {
+    //                 return 'Active';
+    //             } else {
+    //                 return 'De-active';
+    //             }
+    //         }
+    //     },
+    //     {
+    //         data : 'plan'
+    //     },
+    //     {
+    //         mRender(data, type, row) {
+    //             return `<a href="/admin/provider_details/${row._id}"><i class="fa fa-eye"></i></a>`;
 
-            },
-            orderable: false,
-            searchable: false,
-        }
-        ]
-    }
-    );
+    //         },
+    //         orderable: false,
+    //         searchable: false,
+    //     }
+    //     ]
+    // }
+    // );
     // $('#providersTable_filter input').unbind();
     // $('#providersTable_filter input').bind('keyup', function (e) {
     //     console.log('here');
@@ -78,59 +78,119 @@ const loadProviders = () => {
 
 
 const loadPendingProviders = () => {
-    providersApprovalTable = $('#providersApprovalTable').DataTable({
+    transactionTable = $('#transactionTable').DataTable({
         // serverSide: true,
         // searching: false,
-
-        ajax: {
-            url: providePendingApi,
-            data : (data) => {
-                const value = $('#dateFilter').val();
-                if (value.split('-').length) {
-                   let query = '';
-                   query+=`startDate=${value.split('-')[0]}`;
-                   query+=`&endDate=${value.split('-')[1]}`;
-                    return query;
-                }
-            }
-        },
-        columns: [{
-            mRender(data, type, row) {
-                if(row.document)
-                {
-                    return row.document.duns_number;
-                }else{
-                    return '';
-                }
-
-            }
-        },
-        {
-            data: "firstName"
-        },
-        {
-            data: "createdTime"
-        },
-        {
-            mRender(data, type, row) {
-                if(row.document)
-                {
-                    return row.document.organization_name;
-                }else{
-                    return '';
-                }
-
-            }
-        },
-        {
-            mRender(data, type, row) {
-                return `<a href="/admin/provider_pending_approvals/${row._id}"><i class="fa fa-eye"></i></a>`;
-
+        columns: [
+            { data: 'srno' },
+            { data: 'txn' },
+            { data: 'status' },
+            { data: 'seller' },
+            { data: 'buyer' },
+            { data: 'section' },
+            { data: 'items' },
+            { data: 'type' },
+            { data: 'value' },
+          
+            { data: 'payment' },
+            { data: 'date' },
+            { data: 'fees' },
+              
+        ],
+        data: [
+            {
+                srno: 1,
+                txn: '111111111',
+                status: 'success',
+                seller: '1111111111',
+                buyer: '1111111',
+                section: 'test',
+                items: 'test',
+                type: 'test',
+                value: 'test',
+                payment: 'test',
+                date: 'test',
+                fees: 'test',
             },
-            orderable: false,
-            searchable: false,
-        }
+            {
+                srno: 1,
+                txn: '111111111',
+                status: 'success',
+                seller: '1111111111',
+                buyer: '1111111',
+                section: 'test',
+                items: 'test',
+                type: 'test',
+                value: 'test',
+                payment: 'test',
+                date: 'test',
+                fees: 'test',
+            },
+            {
+                srno: 1,
+                txn: '111111111',
+                status: 'success',
+                seller: '1111111111',
+                buyer: '1111111',
+                section: 'test',
+                items: 'test',
+                type: 'test',
+                value: 'test',
+                payment: 'test',
+                date: 'test',
+                fees: 'test',
+            }
+
         ]
+        // ajax: {
+        //     url: providePendingApi,
+        //     data : (data) => {
+        //         const value = $('#dateFilter').val();
+        //         if (value.split('-').length) {
+        //            let query = '';
+        //            query+=`startDate=${value.split('-')[0]}`;
+        //            query+=`&endDate=${value.split('-')[1]}`;
+        //             return query;
+        //         }
+        //     }
+        // },
+        // columns: [{
+        //     mRender(data, type, row) {
+        //         if(row.document)
+        //         {
+        //             return row.document.duns_number;
+        //         }else{
+        //             return '';
+        //         }
+
+        //     }
+        // },
+        // {
+        //     data: "firstName"
+        // },
+        // {
+        //     data: "createdTime"
+        // },
+        // {
+        //     mRender(data, type, row) {
+        //         if(row.document)
+        //         {
+        //             return row.document.organization_name;
+        //         }else{
+        //             return '';
+        //         }
+
+        //     }
+        // },
+        // {
+        //     mRender(data, type, row) {
+        //         return `<a href="/admin/provider_pending_approvals/${row._id}"><i class="fa fa-eye"></i></a>`;
+
+        //     },
+        //     orderable: false,
+        //     searchable: false,
+        // }
+        // ]
     });
 
 }
@@ -147,8 +207,8 @@ const dateFilter = (value) => {
     const endDate = value.split('-')[1];
     if (new Date(startDate) <= new Date(endDate)) {
         console.log('correct');
-        providersTable.ajax.reload();
-        providersApprovalTable.ajax.reload();
+        // providersTable.ajax.reload();
+        // providersApprovalTable.ajax.reload();
         // getFilteredCountAjax($('#startDate').val(),$('#endDate').val());
     } else {
         swal({
