@@ -9,20 +9,7 @@
   "license": "ISC",
   "main": "server.ts",
   "scripts": {
-    "start": "npm run compile && node ./dist/server.js",
-    "build": "node ./dist/server.js",
-    "make-build": "npx tsc",
-    "lint": "eslint . --ext .ts",
-    "test": "jest --config jest.config.ts --maxWorkers=50% --detectOpenHandles --forceExit --coverage",
-    "test-debug": "jest --config jest.config.ts --silent=false --maxWorkers=50% --detectOpenHandles --forceExit --no-cache",
-    "dev": "ts-node-dev server.ts",
-    "check": "gts check",
-    "clean": "gts clean",
-    "compile": "tsc -p .",
-    "fix": "gts fix",
-    "tsc": "tsc",
-    "test:watch": "jest --watch",
-    "format": "eslint . --fix"
+    "start": "ts-node-dev server.ts"    
   },
   "dependencies": {
     "@types/bcrypt": "^5.0.0",
