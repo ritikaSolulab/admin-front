@@ -1,86 +1,7 @@
-// $("#pro table tr").on('click', function(){
-//     window.location = "/admin/provider_details";    
-// });
-// $("#pend table tr").on('click', function(){
-//     window.location = "/admin/provider_pending_approvals";    
-// });
-var providersTable;
-var providersApprovalTable;
 
-var old = alert;
-
-alert = function() {
-  console.log(new Error().stack);
-};
-
-
-const loadProviders = () => {
-    // providersTable = $('#transactionTable').DataTable({
-    //     // serverSide: true,
-    //     searching: true,
-    //     ajax: {
-    //         url: `${providerApi}/approvedList`,
-    //         data : (data) => {
-    //             const value = $('#dateFilter').val();
-    //             if (value.split('-').length) {
-    //                 let query = '';
-    //                 query+=`startDate=${value.split('-')[0]}`;
-    //                 query+=`&endDate=${value.split('-')[1]}`;
-    //                 return query;
-    //             }
-    //         }
-    //     },
-    //     columns: [{
-    //         data: "firstName"
-    //     },
-    //     {
-    //         mRender(data, type, row, meta) {
-    //             console.log('type', type);
-    //             return type == 'sort' ?  (new Date(row.createdTime)).getTime() : row.createdTime;
-    //         }
-    //     },
-    //     {
-    //         data: "document.organization_name"
-    //     },
-    //     {
-    //         mRender(data, type, row, meta) {
-    //             if (row.isActive && !row.isRejected) {
-    //                 return 'Active';
-    //             } else {
-    //                 return 'De-active';
-    //             }
-    //         }
-    //     },
-    //     {
-    //         data : 'plan'
-    //     },
-    //     {
-    //         mRender(data, type, row) {
-    //             return `<a href="/admin/provider_details/${row._id}"><i class="fa fa-eye"></i></a>`;
-
-    //         },
-    //         orderable: false,
-    //         searchable: false,
-    //     }
-    //     ]
-    // }
-    // );
-    // $('#providersTable_filter input').unbind();
-    // $('#providersTable_filter input').bind('keyup', function (e) {
-    //     console.log('here');
-    //     console.log(this.value);
-    //     if (e.keyCode == 13) {
-    //         providersTable.search(this.value).draw();
-    //     }
-    // });
-    
-}
-
-
-const loadPendingProviders = () => {
-    transactionTable = $('#transactionTable').DataTable({
-        // serverSide: true,
-        // searching: false,
+const users = () => {
+    userTable = $('#userTable').DataTable({
+        
         columns: [
             { data: 'srno' },
             { data: 'name' },
@@ -97,7 +18,7 @@ const loadPendingProviders = () => {
                 email_address: 'xyz@gmail.com',
                 created_by: 'xyz',
                 role: 'super admin',
-                action: 'test',
+                action: `<i class="fa fa-edit"></i> <i class="fa fa-eye"></i> <i class="fa fa-trash"></i>`,
             },
             {
                 srno: 1,
@@ -105,7 +26,7 @@ const loadPendingProviders = () => {
                 email_address: 'xyz@gmail.com',
                 created_by: 'xyz',
                 role: 'super admin',
-                action: 'test',
+                action: `<i class="fa fa-edit"></i> <i class="fa fa-eye"></i> <i class="fa fa-trash"></i>`,
             },
             {
                 srno: 1,
@@ -113,7 +34,48 @@ const loadPendingProviders = () => {
                 email_address: 'xyz@gmail.com',
                 created_by: 'xyz',
                 role: 'super admin',
-                action: 'test',
+                action: `<i class="fa fa-edit"></i> <i class="fa fa-eye"></i> <i class="fa fa-trash"></i>`,
+            }
+
+        ]
+    });
+    
+}
+
+
+const roles = () => {
+    roleTable = $('#roleTable').DataTable({
+        // serverSide: true,
+        // searching: false,
+        columns: [
+            { data: 'srno' },
+            { data: 'name' },
+            { data: 'created_by' },
+            { data: 'role' },
+            { data: 'action' },
+              
+        ],
+        data: [
+            {
+                srno: 1,
+                name: 'XYZ',
+                created_by: 'xyz',
+                role: 'super admin',
+                action: `<i class="fa fa-edit"></i> <i class="fa fa-eye"></i> <i class="fa fa-trash"></i>`,
+            },
+            {
+                srno: 1,
+                name: 'XYZ',
+                created_by: 'xyz',
+                role: 'super admin',
+                action: `<i class="fa fa-edit"></i> <i class="fa fa-eye"></i> <i class="fa fa-trash"></i>`,
+            },
+            {
+                srno: 1,
+                name: 'XYZ',
+                created_by: 'xyz',
+                role: 'super admin',
+                action: `<i class="fa fa-edit"></i> <i class="fa fa-eye"></i> <i class="fa fa-trash"></i>`,
             }
 
         ]
@@ -172,8 +134,8 @@ const loadPendingProviders = () => {
 
 $(document).ready(function () {
 
-    loadProviders();
-    loadPendingProviders();
+    users();
+    roles();
 });
 
 const dateFilter = (value) => {

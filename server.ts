@@ -11,11 +11,11 @@ import path from 'path';
 const app = express();
 
 //view engine setup
-app.set('views', path.join(__dirname, '../', 'views'));
-// app.set('views', './views');
+// app.set('views', path.join(__dirname, '../', 'views'));
+app.set('views', './views');
 app.set('view engine', 'ejs');
 
-app.use(express.static(__dirname + '../../public'));
+app.use(express.static(__dirname + '/public'));
 app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
