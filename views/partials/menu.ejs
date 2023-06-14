@@ -20,32 +20,32 @@
               <span class="hide-menu">Admin Dashboard</span>
             </a>
           </li>
-          <li class="sidebar-item">
-            <a class="sidebar-link" href="ui-buttons.html" aria-expanded="false">
+            <li class="sidebar-item <%= (activeBar == 'userManagement') ? 'selected' : '' %>">
+              <a class="sidebar-link <%= (activeBar == 'userManagement') ? 'active' : '' %>" href="/admin/userManagement" aria-expanded="false">
               <span>
                 <i class="ti ti-article"></i>
               </span>
               <span class="hide-menu">Super Admin Control</span>
             </a>
           </li>
-          <li class="sidebar-item">
-            <a class="sidebar-link" href="ui-alerts.html" aria-expanded="false">
+          <li class="sidebar-item <%= (activeBar == 'license') ? 'selected' : '' %>">
+            <a class="sidebar-link <%= (activeBar == 'license') ? 'active' : '' %>" href="/admin/license" aria-expanded="false">
               <span>
                 <i class="ti ti-alert-circle"></i>
               </span>
               <span class="hide-menu">License/Membership</span>
             </a>
           </li>
-          <li class="sidebar-item">
-            <a class="sidebar-link" href="ui-card.html" aria-expanded="false">
+          <li class="sidebar-item <%= (activeBar == 'nft') ? 'selected' : '' %>">
+            <a class="sidebar-link <%= (activeBar == 'nft') ? 'active' : '' %>" href="/admin/nft" aria-expanded="false">
               <span>
                 <i class="ti ti-cards"></i>
               </span>
               <span class="hide-menu">NFT Management</span>
             </a>
           </li>
-          <li class="sidebar-item">
-            <a class="sidebar-link" href="ui-forms.html" aria-expanded="false">
+            <li class="sidebar-item <%= (activeBar == 'royaltiesManagement') ? 'selected' : '' %>">
+              <a class="sidebar-link <%= (activeBar == 'royaltiesManagement') ? 'active' : '' %>" href="/admin/royaltiesManagement" aria-expanded="false">
               <span>
                 <i class="ti ti-file-description"></i>
               </span>
@@ -86,8 +86,9 @@
               <span class="hide-menu">Feature</span>
             </a>
           </li>
-          <li class="sidebar-item">
-            <a class="sidebar-link" href="ui-typography.html" aria-expanded="false">
+            <li class="sidebar-item <%= (activeBar == 'cms') ? 'selected' : '' %>">
+              <a class="sidebar-link <%= (activeBar == 'cms') ? 'active' : '' %>" href="/admin/cms" aria-expanded="false">
+            <!-- <a class="sidebar-link" href="ui-typography.html" aria-expanded="false"> -->
               <span>
                 <i class="ti ti-bell-ringing"></i>
               </span>
