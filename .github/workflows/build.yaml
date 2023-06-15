@@ -18,13 +18,13 @@ jobs:
           echo "${{ secrets.ENV_FILE }}" > .env
       
       - name: Copy .env file to EC2 instance
-        uses: appleboy/ssh-action@master
+        uses: easingthemes/ssh-deploy@v2.1.5
         with:
           host: 50.19.207.153
           username: ubuntu
           key: ${{ secrets.EC2_PRIVATE_KEY }}
-          source: .env
-          target: /home/ubuntu/.env
+          local_path: .env
+          remote_path: /home/ubuntu/.env
 
       - name: SSH into EC2 instance
         uses: appleboy/ssh-action@master
