@@ -18,7 +18,7 @@ jobs:
           echo "${{ secrets.ENV_FILE }}" > .env
       
       - name: Copy .env file to EC2 instance
-        uses: appleboy/scp-action@v1
+        uses: appleboy/ssh-action@master
         with:
           host: 50.19.207.153
           username: ubuntu
