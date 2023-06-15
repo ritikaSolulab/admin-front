@@ -34,5 +34,6 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           script: |
+            cd archive-matter-admin-front
             sudo docker build -t archive-matter-admin-front .
             sudo docker run -d --env-file .env -p 80:3000 archive-matter-admin-front
