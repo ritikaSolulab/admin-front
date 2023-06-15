@@ -7,14 +7,23 @@ import config from './config/config';
 import cookieParser from 'cookie-parser';
 import routers from './router/index';
 import { info } from './config/logger';
+import session  from 'express-session';
 import path from 'path';
 const app = express();
 
-//view engine setup
-// app.set('views', path.join(__dirname, '../', 'views'));
 app.set('views', './views');
 app.set('view engine', 'ejs');
 
+app.use(
+  session({
+    secret: 'asd!ajsfkjuih12h3u1h',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      maxAge: 24 * 60 * 60 * 365 * 1000
+    }
+  }),
+);
 app.use(express.static(__dirname + '/public'));
 app.use(cors());
 app.use(express.json());

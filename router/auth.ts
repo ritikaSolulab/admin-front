@@ -1,23 +1,25 @@
 import express,{Request,Response,NextFunction} from 'express'
 const router = express.Router();
 
-// router.use((req:Request, res:Response, next:NextFunction) => {
-//   //if (req.session.user === undefined) {
-//     if (req.originalUrl.includes('/admin')) {
-//       res.redirect('/');
-//     } else {
-//       return next();
-//     }
-//   //} else {
-//     if (!req.originalUrl.includes('/admin')) {
-//       res.redirect('/admin');
-//     } else {
-//       return next();
-//     }
-//   }
-// //}
 
-// );
+
+router.use((req, res, next) => {
+  if (req.session?.user === undefined) {
+    if (req.originalUrl.includes('/admin')) {
+      res.redirect('/');
+    } else {
+      return next();
+    }
+  } else {
+    if (!req.originalUrl.includes('/admin')) {
+      res.redirect('/admin');
+    } else {
+      return next();
+    }
+  }
+}
+
+);
 
 router.get('/', (req,res) => {
     res.render('index')
@@ -48,6 +50,12 @@ router.get('/password-changed', (req,res) => {
   res.render('changedPassword')
 })
 
-
+router.post('/create-session', (req, res) => {
+  if(req.session) {
+    req.session.user = req.body.user;
+    req.session.token = req.body.token;  
+  }
+  res.redirect('/admin');
+});
 
 export default router;
