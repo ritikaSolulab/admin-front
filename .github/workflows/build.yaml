@@ -27,7 +27,7 @@ jobs:
           source: .env
           target: /home/ubuntu/.env
           script: |
-            # Install Docker and other necessary dependencies on the EC2 instance
+            # Install Docker and other dependencies on the EC2 instance
             sudo systemctl start docker
             sudo systemctl enable docker
 
