@@ -16,17 +16,7 @@ jobs:
       - name: Create .env file
         run: |
           echo "${{ secrets.ENV_FILE }}" > .env
-      
-      - name: SSH into EC2 instance and create .env file
-        uses: appleboy/ssh-action@master
-        with:
-          host: 50.19.207.153
-          username: ubuntu
-          key: ${{ secrets.EC2_PRIVATE_KEY }}
-          script: |
-            echo "${{ secrets.ENV_FILE }}" > /home/ubuntu/.env
-            
-            
+         
       - name: SSH into EC2 instance
         uses: appleboy/ssh-action@master
         with:
@@ -34,6 +24,7 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           script: |
-            cd archive-matter-admin-front
+            echo "${{ secrets.ENV_FILE }}" > /home/ubuntu/.env
+            cd /home/ubuntu
             sudo docker build -t archive-matter-admin-front .
             sudo docker run -d --env-file .env -p 80:3000 archive-matter-admin-front
