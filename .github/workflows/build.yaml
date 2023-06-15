@@ -17,21 +17,28 @@ jobs:
         run: |
           echo "${{ secrets.ENV_FILE }}" > .env
       
+      - name: Copy .env file to EC2 instance
+        uses: appleboy/scp-action@v1
+        with:
+          host: 50.19.207.153
+          username: ubuntu
+          key: ${{ secrets.EC2_PRIVATE_KEY }}
+          source: .env
+          target: /home/ubuntu/.env
+
       - name: SSH into EC2 instance
         uses: appleboy/ssh-action@master
         with:
           host: 50.19.207.153
           username: ubuntu
-          key: ${{ secrets.EC2_PRIVATE_KEY }
-          # source: .env
-          # target: /home/ubuntu/.env
+          key: ${{ secrets.EC2_PRIVATE_KEY }}
           script: |
             # Install Docker and other dependencies on the EC2 instance
-            sudo systemctl start docker
-            sudo systemctl enable docker
+            sudo apt-get update
+            sudo apt-get install -y docker.io
 
             # Build the Docker image on the EC2 instance
             docker build -t archive-matter-admin-front .
 
             # Run the Docker container on the EC2 instance
-            docker run -d --env-file .env -p 80:80 archive-matter-admin-front
+            docker run -d --env-file .env -p 80:3000 archive-matter-admin-front
