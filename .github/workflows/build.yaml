@@ -3,7 +3,7 @@ name: Build and Run Docker Image on EC2
 on:
   push:
     branches:
-      - main
+      - development
 
 jobs:
   build-and-run:
@@ -13,18 +13,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: <AWS_REGION>
-
-      - name: Fetch .env file from AWS Secrets Manager
-        id: get-secret
+      - name: Create .env file
         run: |
-          secret_value=$(aws secretsmanager get-secret-value --secret-id <SECRET_ID> --query 'SecretString' --output text)
-          echo "::set-env name=ENV_FILE::$secret_value"
+          echo "${{ secrets.ENV_FILE }}" > .env
 
       - name: SSH into EC2 instance
         uses: appleboy/ssh-action@master
@@ -35,12 +26,12 @@ jobs:
           script: |
             # Install Docker and other necessary dependencies on the EC2 instance
             sudo yum update -y
-            sudo amazon-linux-extras install docker -y
+            sudo apt-get install docker.io -y
             sudo systemctl start docker
             sudo systemctl enable docker
 
             # Build the Docker image on the EC2 instance
-            docker build -t your-image-name .
+            docker build -t archive-matter-admin-front .
 
             # Run the Docker container on the EC2 instance
-            docker run -d --env-file <(echo -n $ENV_FILE | base64 -d) -p 80:80 your-image-name
+            docker run -d --env-file .env -p 80:80 archive-matter-admin-front
