@@ -24,7 +24,8 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           script: |
-            echo "$ENV_FILE" > /home/ubuntu/.env
+            echo "${{ secrets.ENV_FILE }}" > /home/ubuntu/.env
+            
 #       - name: SSH into EC2 instance
 #         uses: appleboy/ssh-action@master
 #         with:
