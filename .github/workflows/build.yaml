@@ -18,7 +18,7 @@ jobs:
           echo "${{ secrets.ENV_FILE }}" > .env
       
       - name: Copy .env file to EC2 instance
-        run: scp -o StrictHostKeyChecking=no -i ${{ secrets.EC2_PRIVATE_KEY }} .env ubuntu@50.19.207.153:/home/ubuntu/.env
+        run: scp -o StrictHostKeyChecking=no -i "${{ secrets.EC2_PRIVATE_KEY }}" .env ubuntu@50.19.207.153:/home/ubuntu/.env
 
       - name: SSH into EC2 instance
         uses: appleboy/ssh-action@master
