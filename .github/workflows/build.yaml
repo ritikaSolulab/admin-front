@@ -32,4 +32,7 @@ jobs:
             cd /home/ubuntu/repository
             echo "${{ secrets.ENV_FILE }}" > .env
             sudo docker build -t archive-matter-admin-front .
-            sudo docker run -d --env-file .env -p 3000:3000 archive-matter-admin-front
+            sudo docker stop archive-matter-admin-front-container || true
+            sudo docker rm  archive-matter-admin-front-container || true
+            sudo docker run -d --env-file .env --name archive-matter-admin-front-container -p 3000:3000 archive-matter-admin-front
+            sudo docker system prune -a -f
