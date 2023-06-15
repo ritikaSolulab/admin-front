@@ -16,15 +16,6 @@ jobs:
       - name: Create .env file
         run: |
           echo "${{ secrets.ENV_FILE }}" > .env
-
-      - name: copy .env file to instance
-        uses: appleboy/ssh-action@master
-        with:
-          host: 50.19.207.153
-          username: ubuntu
-          key: ${{ secrets.EC2_PRIVATE_KEY }
-          source: .env
-          target: /home/ubuntu/.env
       
       - name: SSH into EC2 instance
         uses: appleboy/ssh-action@master
@@ -32,8 +23,8 @@ jobs:
           host: 50.19.207.153
           username: ubuntu
           key: ${{ secrets.EC2_PRIVATE_KEY }
-          source: .env
-          target: /home/ubuntu/.env
+          # source: .env
+          # target: /home/ubuntu/.env
           script: |
             # Install Docker and other dependencies on the EC2 instance
             sudo systemctl start docker
