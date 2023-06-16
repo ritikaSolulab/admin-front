@@ -53,95 +53,96 @@
                     <div class="container-fluid">
                         <!--  Row 1 -->
                         <div class="row">
-                            <div style="display: flex;">
-                                <div><button style="width: 512px;" onclick="toggleForm('nftMarket')">NFT Market</button></div>
-                                <div><button style="width: 512px;" onclick="toggleForm('nftLicensing')">NFT Licensing</button></div>
-                            </div>
-
-                        </div>
-                        <div style="display: flex;">
-                            <div class="tab-pane fade show active" id="pro" role="tabpanel" aria-labelledby="del-tab">
-                                <!-- <div class="table-responsive"> -->
-                                <div class="row float-right">
-                                    <div class="col-lg-12">
-                                    <div class="card overflow-hidden">
-                                    <div class="card-body p-4">
-                                        <h5 class="card-title mb-9 fw-semibold">Total No of NFT's of Market</h5>
-                                        <div class="row align-items-center">
-                                            <h4 class="fw-semibold mb-3">1000</h4>
-                                            <div class="d-flex align-items-center mb-3">
-                                            </div>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    </div>
+                            <nav>
+                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                    <button class="nav-link active" id="nav-market-tab" data-bs-toggle="tab"
+                                        data-bs-target="#nav-market" type="button" role="tab" aria-controls="nav-home"
+                                        aria-selected="true">NFT Market</button>
+                                    <button class="nav-link" id="nav-license-tab" data-bs-toggle="tab"
+                                        data-bs-target="#nav-license" type="button" role="tab"
+                                        aria-controls="nav-profile" aria-selected="false">NFT Licensing</button>
                                 </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="row float-left">
-                                    <div class="col-lg-12">
-                                        <div class="card overflow-hidden">
+                            </nav>
+                            <hr>
+                            <div class="tab-pane fade show active" id="nav-market" role="tabpanel"
+                                aria-labelledby="nav-market-tab">
+                                <div class="row p-4">
+                                    <div class="tab-pane fade show active" id="pro" role="tabpanel" aria-labelledby="del-tab">
+                                        <!-- <div class="table-responsive"> -->
+                                        <div class="row float-right">
+                                            <div class="col-lg-3">
+                                            <div class="card overflow-hidden">
                                             <div class="card-body p-4">
-                                                <h5 class="card-title mb-9 fw-semibold">Total Sales in $</h5>
+                                                <h5 class="card-title mb-9 fw-semibold">Total No of NFT's of Market</h5>
                                                 <div class="row align-items-center">
                                                     <h4 class="fw-semibold mb-3">1000</h4>
                                                     <div class="d-flex align-items-center mb-3">
                                                     </div>
-
                                                 </div>
+                                                </div>
+                                            </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <!-- <div style="display: flex;"> -->
-                                <div class="col-lg-6 d-flex align-items-strech">
-                                    <div class="card w-100">
-                                        <div class="card-body">
-                                            <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
-                                                <div class="mb-3 mb-sm-0">
-                                                    <h5 class="card-title fw-semibold">Total NFT Sales and Royalties in $</h5>
-                                                    <!-- <div>
-                                                        <select class="form-select">
-                                                            <option value="1">NFT's Created</option>
-                                                            <option value="2">NFT's Sold</option>
-                                                            <option value="3">NFT's Licensed</option>
-                                                        </select>
-                                                    </div> -->
-                                                </div>
-                                                <div>
-                                                    <select class="form-select">
-                                                        <option value="1">March 2023</option>
-                                                        <option value="2">April 2023</option>
-                                                        <option value="3">May 2023</option>
-                                                        <option value="4">June 2023</option>
-                                                    </select>
-                                                </div>
-                                                
-                                            </div>
-                                            <div id="chart"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                </div>
-                            <!-- </div> -->
-                            <div class="col-lg-3">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="card overflow-hidden">
-                                            <div class="card-body p-4">
-                                                <h5 class="card-title mb-9 fw-semibold">Total Royalites in $</h5>
-                                                <div class="row align-items-center">
-                                                    <h4 class="fw-semibold mb-3">1000</h4>
-                                                    <div class="d-flex align-items-center mb-3">
+                                    <div class="col-lg-3">
+                                        <div class="row float-left">
+                                            <div class="col-lg-12">
+                                                <div class="card overflow-hidden">
+                                                    <div class="card-body p-4">
+                                                        <h5 class="card-title mb-9 fw-semibold">Total Sales in $</h5>
+                                                        <div class="row align-items-center">
+                                                            <h4 class="fw-semibold mb-3">1000</h4>
+                                                            <div class="d-flex align-items-center mb-3">
+                                                            </div>
+        
+                                                        </div>
                                                     </div>
-    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div class="col-lg-6 d-flex align-items-strech">
+                                            <div class="card w-100">
+                                                <div class="card-body">
+                                                    <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
+                                                        <div class="mb-3 mb-sm-0">
+                                                            <h5 class="card-title fw-semibold">Total NFT Sales and Royalties in $</h5>
+                                                        </div>
+                                                        <div>
+                                                            <select class="form-select">
+                                                                <option value="1">March 2023</option>
+                                                                <option value="2">April 2023</option>
+                                                                <option value="3">May 2023</option>
+                                                                <option value="4">June 2023</option>
+                                                            </select>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <div id="chart"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    <!-- </div> -->
+                                    <div class="col-lg-3">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="card overflow-hidden">
+                                                    <div class="card-body p-4">
+                                                        <h5 class="card-title mb-9 fw-semibold">Total Royalites in $</h5>
+                                                        <div class="row align-items-center">
+                                                            <h4 class="fw-semibold mb-3">1000</h4>
+                                                            <div class="d-flex align-items-center mb-3">
+                                                            </div>
+            
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            
                             
                         </div>
                         </div>
