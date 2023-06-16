@@ -3,8 +3,9 @@ const router = express.Router();
 
 
 
-router.use((req, res, next) => {
+router.use((req: Request, res, next) => {
   if (req.session?.user === undefined) {
+
     if (req.originalUrl.includes('/admin')) {
       res.redirect('/');
     } else {
@@ -22,11 +23,11 @@ router.use((req, res, next) => {
 );
 
 router.get('/', (req,res) => {
-    res.render('index')
+    res.render('index', {layout: 'auth/login'})
 })
 
 router.get('/login', (req,res) => {
-  res.render('login');
+  res.render('auth/login', {layout: 'auth/login'});
 })
 
 router.get('/resend-OTP',(req,res) => {
@@ -38,7 +39,7 @@ router.get('/send-OTP', (req,res) => {
 })
 
 router.get('/forgot-password', (req,res) => {
-  res.render('forgotPassword')
+  res.render('auth/forgotPassword', { layout: 'auth/forgotPassword'})
   
 })
 
