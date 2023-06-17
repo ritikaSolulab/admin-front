@@ -8,7 +8,7 @@ class config {
   REDIS!: any;
   gmail?: any;
   constructor() {
-    this.port = Number(process.env.PORT) || 5000;
+    this.port = Number(process.env.PORT) || 3000;
     this.host = process.env.HOST || 'localhost';
     this.JWT_SECRET = process.env.JWT_SECRET || 'secret';
     this.dbConnection = config.getDbConnectionUrl() || '';
@@ -34,7 +34,7 @@ class config {
   static getDbConnectionUrl() {
     const url = process.env.DBCONNECT_URL || 'mongodb://127.0.0.1:27017/';
     if (process.env.NODE_ENV === 'test') {
-      return `${url}test-development`;
+      return `${url}archive-matter`;
     }
     return `${url}${process.env.DBNAME}`;
   }

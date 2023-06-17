@@ -9,8 +9,10 @@ import routers from './router/index';
 import { info } from './config/logger';
 import session  from 'express-session';
 import path from 'path';
+import expressEjsLayouts from 'express-ejs-layouts'
 const app = express();
 
+app.use(expressEjsLayouts)
 app.set('views', './views');
 app.set('view engine', 'ejs');
 

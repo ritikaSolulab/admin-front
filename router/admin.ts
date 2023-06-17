@@ -4,36 +4,51 @@ import express,{Request,Response,NextFunction} from 'express'
 const router = express.Router();
 
 router.get('/', (req,res) => {
-    res.render('admin/dashboard', {activeBar: 'dashboard'})   
+    res.render('dashboard/index', {activeBar: 'dashboard'})   
 })
 
 
 router.get('/dashboard', (req,res) => {
-    res.render('admin/dashboard', {activeBar: 'dashboard'})   
+    res.render('dashboard/index', {activeBar: 'dashboard'})   
 })
 
 router.get('/transaction', (req,res) => {
-    res.render('admin/transaction', {activeBar: 'transaction'})
+    res.render('transaction-management/index', {activeBar: 'transaction'})
 })
 
-router.get('/userManagement', (req,res) => {
-    res.render('admin/userManagement', {activeBar: 'userManagement'})
+router.get('/super-admin-controls', (req,res) => {
+    res.render('sub-admin-management/index', {activeBar: 'adminManagement'})
 })
 
 router.get('/cms', (req,res) => {
-    res.render('admin/cms', {activeBar: 'cms'})
+    res.render('content-management/index', {activeBar: 'cms'})
 })
 
 router.get('/royaltiesManagement', (req,res) => {
-    res.render('admin/royaltiesManagement', {activeBar: 'royaltiesManagement'})
+    res.render('royalty-management/index', {activeBar: 'royaltiesManagement'})
 })
 
 router.get('/nft', (req,res) => {
-    res.render('admin/nft', {activeBar: 'nft'})
+    res.render('nft-management/index', {activeBar: 'nft'})
 })
 
 router.get('/license', (req,res) => {
-    res.render('admin/license', {activeBar: 'license'})
+    res.render('membership-management/index', {activeBar: 'license'})
+})
+router.get('/feature', (req,res) => {
+    res.render('feature/index', {activeBar: 'feature'})
+})
+router.get('/infatuation', (req,res) => {
+    res.render('infatuation/index', {activeBar: 'infatuation'})
+})
+router.get('/curated', (req,res) => {
+    res.render('curated/index', {activeBar: 'curated'})
+})
+router.get('/support', (req,res) => {
+    res.render('support-management/index', {activeBar: 'support'})
+})
+router.get('/userManagement', (req,res) => {
+    res.render('user-management/index', {activeBar: 'userManagement'})
 })
 
 export default router;

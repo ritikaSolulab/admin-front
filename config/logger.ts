@@ -1,33 +1,33 @@
-const log = require('log-to-file');
-import moment from 'moment';
-import fs from 'fs';
+import winston from 'winston';
 
-const errorDir = 'logs';
-class logger {
-  constructor() {}
-  static today = () => {
-    return moment().format('YYYY-MM-DD');
-  };
-  static customLog = (message: string, defaultLog: string) => {
-    const date = this.today();
-    const logDir = errorDir + '/' + defaultLog;
-
-    if (!fs.existsSync(logDir)) {
-      fs.mkdirSync(logDir, {
-        recursive: true,
-      });
-    }
-    const errorDirPath = logDir + '/' + defaultLog + '-' + date + '.log';
-    log(message, errorDirPath);
-    console.log(message);
-    return;
-  };
-}
-
-export const info = (message: string) => logger.customLog(message, 'info');
-export const redis = (message: string) => logger.customLog(message, 'redis');
-export const error = (message: string) => logger.customLog(message, 'error');
-export const debug = (message: string) => logger.customLog(message, 'debug');
-export const cron = (message: string) => logger.customLog(message, 'cron');
-export const webhook = (message: string) =>
-  logger.customLog(message, 'webhook');
+const timezoned = () => {
+  return new Date().toLocaleString()
+};
+export const Logger = winston.createLogger({
+  format: winston.format.combine(
+    winston.format.errors({ stack: true }),
+    winston.format.label({ label: '[LOGGER]' }),
+    winston.format.timestamp({ format: timezoned }),
+    winston.format.printf(log => ` ${log.label}  ${log.timestamp}  ${log.level} : ${log.message} ${log.stack ?? ''}`)
+  ),
+  transports: [
+    new winston.transports.Console({
+      format: winston.format.combine(
+        winston.format.colorize({ all: true })
+      ),
+      level: 'info' 
+    }),
+    new winston.transports.File({
+      filename: './logs/error.log', level: 'error',
+      maxsize: 1000000,
+      maxFiles: 20,
+      tailable: true,
+      zippedArchive: true
+    }),
+  ]
+});
+export const info =(msg: string) => Logger.info(msg);
+export const error = (msg: string) => Logger.error(msg);
+export const debug = (msg: string) => Logger.debug(msg);
+export const cron = (msg: string) => Logger.info(msg);
+export const webhook = (msg: string) => Logger.info(msg);
