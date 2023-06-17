@@ -4,7 +4,7 @@ $(function () {
   // =====================================
   // Profit
   // =====================================
-  var chart = {
+  const chart = {
     series: [
       { name: "Earnings this month:", data: [355, 390, 300, 350, 390, 180, 355, 390] },
       { name: "Expense this month:", data: [280, 250, 325, 215, 250, 310, 280, 250] },
@@ -100,7 +100,7 @@ $(function () {
 
 
   };
-  var chart1 = {
+  const chart1 = {
     series: [
       { name: "Earnings this month:", data: [355, 390, 300, 350, 390, 180, 355, 390] },
       { name: "Expense this month:", data: [280, 250, 325, 215, 250, 310, 280, 250] },
@@ -196,16 +196,12 @@ $(function () {
 
 
   };
-  var chart = new ApexCharts(document.querySelector("#chart"), chart);
-  var chart1 = new ApexCharts(document.querySelector("#chart1"), chart1);
-  chart.render();
-  chart1.render();
 
 
   // =====================================
   // Breakup
   // =====================================
-  var breakup = {
+  const breakup = {
     color: "#adb5bd",
     series: [38, 40, 25],
     labels: ["2022", "2021", "2020"],
@@ -252,16 +248,10 @@ $(function () {
       fillSeriesColor: false,
     },
   };
-
-  var chart = new ApexCharts(document.querySelector("#breakup"), breakup);
-  chart.render();
-
-
-
   // =====================================
   // Earning
   // =====================================
-  var earning = {
+  const earning = {
     chart: {
       id: "sparkline3",
       type: "area",
@@ -305,4 +295,23 @@ $(function () {
     },
   };
   new ApexCharts(document.querySelector("#earning"), earning).render();
+
+  /** Render Charts */
+const chartOrigin = document.querySelector('#chart')
+const _chartOrigin = document.querySelector('#chart1')
+const breakupChart = document.querySelector('#breakup')
+
+if(chartOrigin){
+  const renderChart = new ApexCharts(document.querySelector("#chart"), chart);
+  renderChart.render();
+}
+if(_chartOrigin){
+  const renderChart = new ApexCharts(document.querySelector("#chart1"), chart1);
+  renderChart.render();
+}
+if(breakupChart){
+  const renderChart = new ApexCharts(document.querySelector("#breakup"), breakup);
+  renderChart.render();
+}
 })
+
