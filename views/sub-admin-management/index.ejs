@@ -79,7 +79,7 @@
             aaSorting: [[3, 'desc']],
             responsive: true,
             ajax: {
-                url:  `${config.SERVER_URL}${config.URLS.USER_LIST}`,
+                url:  `${config.SERVER_URL}${config.URLS.ADMIN_LIST}`,
                 type: "GET",
                 contentType: 'application/json',
                 datatype: "json",
@@ -122,10 +122,14 @@
                  _Class = "fa fa-user-times disable-user"
               }
               let text = `<div class='action-btn'>
-                          <a href="user/${row._id}">
+                          <a data-toggle="modal" data-target = "${modal}" data-id="${data}" data-status = "${row.isActive}">
                           <i data-toggle="tooltip" data-placement="top" title="View" class="fa fa-eye" aria-hidden="true"></i></a>
                           <a data-toggle="modal" data-target = "${modal}" data-id="${data}" data-status = "${row.isActive}">
                           <i data-toggle="tooltip" data-placement="top" title=${title} class="${_Class}" aria-hidden="true"></i></a>
+                          <a data-toggle="modal" data-target = "${modal}" data-id="${data}" data-status = "${row.isActive}">
+                          <i data-toggle="tooltip" data-placement="top" title=Edit class="fa fa-pencil" aria-hidden="true"></i></a>
+                          <a data-toggle="modal" data-target = "${modal}" data-id="${data}" data-status = "${row.isActive}">
+                          <i data-toggle="tooltip" data-placement="top" title=Delete class="fa fa-trash" aria-hidden="true"></i></a>
                           </div>`
               return text
             }
