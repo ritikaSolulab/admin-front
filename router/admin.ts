@@ -9,7 +9,6 @@ router.get('/', (req,res) => {
 
 
 router.get('/dashboard', (req,res) => {
-    console.log(req.session)
     res.render('dashboard/index', {activeBar: 'dashboard'})   
 })
 
