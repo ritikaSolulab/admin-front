@@ -10,7 +10,9 @@ const config = {
         ADMIN_LIST: 'admin/list',
         LOGOUT: '/logout',
         ROLE_LIST: 'admin/role.list',
-        CREATE_ROLE: 'admin/role.create'
+        EDIT_ADMIN: 'admin/update',
+        DELETE_ADMIN: 'admin/update-status',
+        DELETE_ROLE: 'admin/role.delete',
 
     }
 }
