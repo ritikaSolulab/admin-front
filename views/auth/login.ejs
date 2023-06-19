@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <%- include('../partials/style')%>
+    <%- include('../partials/style')%>
 </head>
 
 <body>
@@ -19,32 +19,45 @@
                             <div class="col-md-8 col-lg-6 col-xxl-3">
                                 <div class="card mb-0" style="background-color: white;">
                                     <div class="card-body">
-                                        <a href="/" class="text-nowrap logo-img text-center d-block py-3 w-100">
+                                        <a href="/" class="text-nowrap logo-img text-center d-block  w-100">
                                             <img src="/images/LOGO.svg" width="180" alt="">
                                         </a>
-                                        <p class="text-center">Good to see you again!</p>
-                                        <form id="loginForm">
-                                            <div class="mb-3">
-                                                <label for="email" class="form-label">Email</label>
-                                                <input type="email" class="form-control" id="email" name="email"
-                                                    aria-describedby="emailHelp" placeholder="Enter your email"
-                                                    required>
-                                            </div>
-                                            <div class="mb-4">
-                                                <label for="password" class="form-label">Password</label>
-                                                <input type="password" class="form-control" id="password"
-                                                    name="password" placeholder="*************" required>
-                                            </div>
-                                            <div class="d-flex align-items-center justify-content-between mb-4">
-                                            </div>
-                                            <a class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2"
-                                                onclick="login()">Log In</a>
+                                        <h6 class="text-center pb-4 " style="margin-top:-10px">Good to see you again!
+                                            </h4>
+                                            <form id="loginForm">
+                                                <div class="mb-3">
+                                                    <label for="username" class="form-label">Username</label>
+                                                    <div class="input-group mb-3">
+                                                        <icon class="input-group-text fa fa-user"></icon>
+                                                        <input type="email" class="form-control" id="email" name="email"
+                                                            aria-describedby="emailHelp" placeholder="Enter your email"
+                                                            required>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-4">
+                                                    <label for="password" class="form-label">Password</label>
+                                                    <div class="input-group mb-3">
+                                                        <icon class="input-group-text fa fa-lock"></icon>
+                                                        <input type="password" class="form-control" id="password"
+                                                            name="password" placeholder="*************" required>
+                                                        <div class="input-group-text">
+                                                            <span toggle="#password-field"
+                                                                class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                                                        </div>
 
-                                            <div class="d-flex align-items-center justify-content-center">
-                                                <a href="/forgot-password" class="text-primary fw-bold">Forgot
-                                                    Password ?</a>
-                                            </div>
-                                        </form>
+                                                    </div>
+
+                                                </div>
+                                                <div class="d-flex align-items-center justify-content-between mb-4">
+                                                </div>
+                                                <a class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2"
+                                                    onclick="login()">Log In</a>
+
+                                                <div class="d-flex align-items-center justify-content-center">
+                                                    <u><a href="/forgot-password" class="text-primary fw-bold">Forgot
+                                                        Password ?</a></u>
+                                                </div>
+                                            </form>
                                     </div>
                                 </div>
                             </div>
@@ -75,7 +88,8 @@
                                     </div>
                                     <div class="mb-3">
                                         <input type="text" class="form-control" id="otp" name="otp"
-                                        oninput="this.value=this.value.replace(/[^0-9]/g,'')"  placeholder="Enter 2FA Code" aria-describedby="otp">
+                                            oninput="this.value=this.value.replace(/[^0-9]/g,'')"
+                                            placeholder="Enter 2FA Code" aria-describedby="otp">
                                     </div>
                                     <button type="button" id="2FA_Verify_Btn" onclick="login()"
                                         class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Verify</button>
@@ -92,6 +106,16 @@
     <!-- Mainly scripts -->
     <%- include('../partials/script') %>
         <script>
+            $(".toggle-password").click(function () {
+
+                $(this).toggleClass("fa-eye fa-eye-slash");
+                var input = $('#password');
+                if (input.attr("type") == "password") {
+                    input.attr("type", "text");
+                } else {
+                    input.attr("type", "password");
+                }
+            });
             /** Validate 2FA Form
              * Method to Enable and Disable Verify button
             */
@@ -106,7 +130,7 @@
                     }
                 })
 
-		    })
+            })
             let secretCode
             const login = async () => {
                 const loginForm = $('#loginForm');
@@ -149,10 +173,10 @@
                             localStorage.setItem('token', JSON.stringify(response?.data?.data?.token));
                             localStorage.setItem('user', JSON.stringify(response?.data?.data?.user));
                             axios({
-                                method:'POST',
+                                method: 'POST',
                                 url: '/create-session',
                                 dataType: 'application/json',
-                                data: {...loginData, token: response?.data?.data?.token, user: response?.data?.data?.user}
+                                data: { ...loginData, token: response?.data?.data?.token, user: response?.data?.data?.user }
                             });
                             window.location.href = '/admin'
                         }
@@ -162,7 +186,7 @@
                             $('#loginModel').attr('style', 'display: none');
                             $('#2FAModel').attr('style', 'display: block');
                         } else {
-                            ToastMsg(message, 'Error')                        
+                            ToastMsg(message, 'Error')
                         }
                     })
                 }
