@@ -8,7 +8,9 @@ const config = {
         RESET_PASS: 'admin/reset-password',
         USER_LIST: 'admin/user.list',
         ADMIN_LIST: 'admin/list',
-        LOGOUT: '/logout'
+        LOGOUT: '/logout',
+        ROLE_LIST: 'admin/role.list',
+        CREATE_ROLE: 'admin/role.create'
 
     }
 }
