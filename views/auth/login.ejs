@@ -22,7 +22,7 @@
                                         <a href="/" class="text-nowrap logo-img text-center d-block py-3 w-100">
                                             <img src="/images/LOGO.svg" width="180" alt="">
                                         </a>
-                                        <p class="text-center">Good to see you again</p>
+                                        <h4 class="text-center">Good to see you again!</h4>
                                         <form id="loginForm">
                                             <div class="mb-3">
                                                 <label for="email" class="form-label">Email</label>
@@ -74,11 +74,11 @@
                                             account.</p>
                                     </div>
                                     <div class="mb-3">
-                                        <input type="number" class="form-control" id="otp" name="otp"
-                                            placeholder="please enter otp to login" aria-describedby="otp">
+                                        <input type="text" class="form-control" id="otp" name="otp"
+                                        oninput="this.value=this.value.replace(/[^0-9]/g,'')"  placeholder="Enter 2FA Code" aria-describedby="otp">
                                     </div>
-                                    <a onclick="login()"
-                                        class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">verify</a>
+                                    <button type="button" id="2FA_Verify_Btn" onclick="login()"
+                                        class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Verify</button>
                                 </form>
                             </div>
                         </div>
@@ -88,46 +88,25 @@
         </div>
     </div>
 
-    <div class="page-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
-        data-sidebar-position="fixed" data-header-position="fixed" id="resetPasswordModel" style="display: none;">
-        <div
-            class="position-relative overflow-hidden radial-gradient min-vh-100 d-flex align-items-center justify-content-center">
-            <div class="d-flex align-items-center justify-content-center w-100">
-                <div class="row justify-content-center w-100">
-                    <div class="col-md-8 col-lg-6 col-xxl-3">
-                        <div class="card mb-0">
-                            <div class="card-body">
-                                <a href="/new-password" class="text-nowrap logo-img text-center d-block py-3 w-100">
-                                    <img src="/images/logos/dark-logo.svg" width="180" alt="">
-                                </a>
-                                <p class="text-center">Good to see you again</p>
-                                <form>
-                                    <div class="mb-3">
-                                        <h3 class="text-center">New Password</h3>
-                                        <p class="text-center">Please create a new password that you don't use on any
-                                            other site</p>
-                                        <input type="password" class="form-control" id="exampleInputPassword1"
-                                            aria-describedby="passwordHelp" placeholder="Create new password">
-                                    </div>
-                                    <div class="mb-4">
-                                        <input type="password" class="form-control" id="exampleInputPassword1"
-                                            aria-describedby="passwordHelp" placeholder="Confirm new password">
-                                    </div>
-                                    <div class="d-flex align-items-center justify-content-center">
-                                        <a onclick="redirectToPasswordChanged()" class="text-primary fw-bold">Change</a>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Mainly scripts -->
-    <%- include('../partials/script.ejs') %>
+    <%- include('../partials/script') %>
         <script>
+            /** Validate 2FA Form
+             * Method to Enable and Disable Verify button
+            */
+            $('#2FA_Verify_Btn').attr('disabled', true)
+            $(() => {
+                $('#otp').keyup(() => {
+                    if ($('#otp').val() !== '') {
+                        $('#2FA_Verify_Btn').attr('disabled', false)
+                    }
+                    else {
+                        $('#2FA_Verify_Btn').attr('disabled', true)
+                    }
+                })
+
+		    })
             let secretCode
             const login = async () => {
                 const loginForm = $('#loginForm');
@@ -158,7 +137,6 @@
                         data: loginData,
                         url: `${config.SERVER_URL}${config.URLS.LOGIN_URL}`
                     }).then(response => {
-                        console.log(response);
                         const { data: { data: { secret } } } = response;
                         if (secret?.qr) {
                             secretCode = response.data.data.secret;
@@ -168,7 +146,6 @@
                         $('#2FAModel').attr('style', 'display: block');
 
                         if (response?.data?.data?.token) {
-                          console.log(response?.data?.data?.user)
                             localStorage.setItem('token', JSON.stringify(response?.data?.data?.token));
                             localStorage.setItem('user', JSON.stringify(response?.data?.data?.user));
                             axios({
@@ -185,15 +162,7 @@
                             $('#loginModel').attr('style', 'display: none');
                             $('#2FAModel').attr('style', 'display: block');
                         } else {
-                            Toastify({
-                                text: message,
-                                close: true,
-                                style: {
-                                    background: "RED",
-                                },
-                                duration: 3000
-                            }).showToast();
-                        
+                            ToastMsg(message, 'Error')                        
                         }
                     })
                 }
