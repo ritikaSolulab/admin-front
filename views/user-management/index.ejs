@@ -59,6 +59,10 @@
 
         </div>
     </div>
+    
+    
+
+
     <%- include('../partials/datatable-script')%>
     <script type="text/javascript">
         $(document).ready(()=>{
@@ -131,7 +135,7 @@
               let text = `<div class='action-btn'>
                           <a href="user/${row._id}">
                           <i data-toggle="tooltip" data-placement="top" title="View" class="fa fa-eye" aria-hidden="true"></i></a>
-                          <a data-toggle="modal" data-target = "${modal}" data-id="${data}" data-status = "${row.isActive}">
+                          <a data-bs-toggle="modal" data-bs-target="#Update_Modal" data-id="${row._id}" data-name="${row.name}" data-roleid="${row.roleId}" data-email = "${row.email}">
                           <i data-toggle="tooltip" data-placement="top" title=${title} class="${_Class}" aria-hidden="true"></i></a>
                           <a data-toggle="modal" data-target = "${modal}" data-id="${data}" data-status = "${row.isActive}">
                           <i data-toggle="tooltip" data-placement="top" title=Edit class="fa fa-pencil" aria-hidden="true"></i></a>
@@ -142,4 +146,6 @@
             ]
         })
     }
+
+      
     </script>
