@@ -1,3 +1,6 @@
+/** Retreive the user auth token */
+const token = localStorage.getItem('user')
+const user = JSON.parse(token)
 /** Toastr Configuration and method */
 const ToastMsg = (msg, type) => {
     const _type = type.charAt(0).toLowerCase() + type.slice(1)
