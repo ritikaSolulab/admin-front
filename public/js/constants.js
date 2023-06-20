@@ -11,7 +11,8 @@ const config = {
         LOGOUT: '/logout',
         ROLE_LIST: 'admin/role.list',
         EDIT_ADMIN: 'admin/update',
-        DELETE_ADMIN: 'admin/update-status'
+        DELETE_ADMIN: 'admin/update-status',
+        DELETE_ROLE: 'admin/role.delete',
 
     }
 }

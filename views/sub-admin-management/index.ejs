@@ -40,7 +40,7 @@
                         <button type="button" class="btn btn-primary m-1">Create Role</button>
                     </div>
                     <div class="row">
-                        <table class="table table-striped table-bordered table-hover visible" id="roleTable">
+                        <table class="table table-striped table-bordered table-hover visible" id="roleTable" style="width: 100%;">
                             <thead>
                                 <tr>
                                     <th>Sr No</th>
@@ -164,6 +164,50 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="View_Role_Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div style="background-color: white;" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Role Details</h5>
+                
+                </div>
+                <div class="modal-body">
+                    <form id="Edit_Form">
+                        <div class="mb-3">
+
+                            <label for="text" class="form-label">Role Name</label>
+                            <input disabled name="name" type="text" class="form-control" id="RoleInputView" aria-describedby="name">
+                        </div>
+                        <div class="mb-3">
+
+                            <label for="text" class="form-label">Permissions</label>
+                            <input disabled name="email" type="email" class="form-control" id="EmailInputView"
+                                aria-describedby="name">
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="Delete_Role_Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div style="background-color: white;" class="modal-content">
+                <div class="modal-body text-center">
+                   
+                    <h3 id="RoleDeleteModalText" class="title"></h3>
+                    <img src="images/backgrounds/rocket.png" alt="success">
+                    <p class="head-text" id="successMessageBox"></p>
+                    <button id="DeleteRoleBtn" type="button" class="btn btn-block btn-primary">Delete</button> 
+                    <button type="button" class="btn btn-block btn-primary" data-bs-dismiss="modal">Cancel</button> 
+                </div>
+            </div>
+    </div>
     <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="Delete_Confirm_Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -211,6 +255,7 @@
                 ToastMsg(err?.response?.data?.message, 'Error')
             })
         loadTable()
+        role()
     })
 
     const loadTable = () => {
@@ -282,6 +327,71 @@
             ]
         })
 
+    }
+
+    
+    const role = () => {
+            $('#roleTable').DataTable({
+            destroy: true,
+            search: true,
+            processing: true,
+            filter: true,
+            orderMulti: false,
+            serverSide: true,
+            columnDefs: [{ 'orderable': false, 'targets': 0 }], 
+            aaSorting: [[3, 'desc']],
+            responsive: true,
+            ajax: {
+                url:  `${config.SERVER_URL}${config.URLS.ROLE_LIST}`,
+                type: "GET",
+                contentType: 'application/json',
+                datatype: "json",
+                headers:{
+                    authorization: `Bearer ${user.token}`
+                }
+            },
+            columns:[
+                {
+                    orderable: false, targets: -1,
+                        render: function (data, type, row, meta) {
+                            return meta.row + meta.settings._iDisplayStart + 1;
+                        }
+                },
+                { data: 'roleName' },
+                { data: 'createdBy'},
+                {
+                    render: (data, type, row, meta)=>{
+                        return 10
+                    }
+                },
+                {
+            data: '_id', orderable: false, targets: -1,
+            render: (data, type, row, meta) => {
+              let title = ""
+              let modal = ""
+              let _Class = ""
+              if(row.isActive){
+                 title = "Active"
+                 modal = "#Deactivate_Modal"
+                 _Class = "fa fa-user enabled-user"
+              } else{
+                 title = "Inactive"
+                 modal = "#Reactivate_Modal"
+                 _Class = "fa fa-user-times disable-user"
+              }
+              let text = `<div class='action-btn'>
+                          <a data-bs-toggle="modal" data-bs-target = "#View_Role_Modal" data-rolename="${row.roleName}" data-permissions = "${row.permissions}">
+                          <i data-toggle="tooltip" data-placement="top" title="View" class="fa fa-eye" aria-hidden="true"></i></a>
+                          <a data-toggle="modal" data-target = "${modal}" data-id="${data}" data-status = "${row.isActive}">
+                          <i data-toggle="tooltip" data-placement="top" title=Edit class="fa fa-pencil" aria-hidden="true"></i></a>
+                          <a data-bs-toggle="modal" data-bs-target = "#Delete_Role_Modal" data-id="${row._id}">
+                          <i data-toggle="tooltip" data-placement="top" title=Delete class="fa fa-trash" aria-hidden="true"></i></a>
+                          </div>`
+              return text
+            }
+         }
+            ]
+        })
     }
 
     let roleId
@@ -378,4 +488,85 @@
         })
        
     })
+
+
+    // edit role
+    $('#Edit_Modal').on('show.bs.modal', (e) => {
+        const btn = $(e.relatedTarget)
+        const roleName = btn.data('rolename')
+        let roleId = btn.data('roleid')
+        $('#RoleInput').val(roleName)
+        $(`#RoleList`).val(roleId)
+        $('#RoleList').on('change', function () {
+            roleId = this.value
+        })
+
+        /** Update the role Details*/
+        $('#UpdateDetails').off().on('click', async function () {
+            const requestParams = {
+                roleName,
+                roleId
+            }
+            await axios({
+                url: `${config.SERVER_URL}${config.URLS.EDIT_ADMIN}`,
+                method: 'PATCH',
+                data: requestParams,
+                headers: {
+                    authorization: `Bearer ${user.token}`
+                }
+            })
+                .then((response) => {
+                    ToastMsg(response?.data?.message, 'Success')
+                    $('#Edit_Modal').modal('hide')
+                    $('#Edit_Success_Modal').modal('hide')
+                })
+                .catch((err) => {
+                    const { response: { data: { message } } } = err
+                    ToastMsg(message, 'Error')
+                })
+        })
+
+
+    })
+
+     /** View role Details*/
+
+     $('#View_Role_Modal').on('show.bs.modal', (e) => {
+        const btn = $(e.relatedTarget)
+        const roleName = btn.data('rolename')
+        let permissions = btn.data('permissions')
+        console.log(JSON.stringify(permissions))
+        $('#RoleInputView').val(roleName)
+        $(`#RoleListView`).val(roleId)
+    })
+
+
+        $('#Delete_Role_Modal').on('show.bs.modal', (e) => {
+        const btn = $(e.relatedTarget)
+        const roleId = btn.data('id')
+        $('#RoleDeleteModalText').text(`Are you sure you want to delete ${name} role?`)
+
+        $('#DeleteRoleBtn').off().on('click', async function(){
+            $('#DeleteRoleBtn').text('Please wait..')
+            await axios({
+                url: `${config.SERVER_URL}${config.URLS.DELETE_ROLE}/${roleId}`,
+                method: 'PATCH',
+                headers: {
+                    authorization: `Bearer ${user.token}`
+                }
+            })
+            .then((resp)=>{
+                $('#DeleteRoleBtn').text('Delete')
+                $('#Delete_Role_Modal').modal('hide')
+                ToastMsg(resp?.data?.message, 'Success')
+                role()
+            })
+            .catch((err)=>{
+                const { response: { data: { message } } } = err
+                    ToastMsg(message, 'Error')
+            })
+        })
+       
+    })
+
 </script>
