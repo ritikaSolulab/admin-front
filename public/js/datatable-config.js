@@ -1,7 +1,8 @@
 const initiateDatatable = (
     tableId,
     ajaxConfig,
-    columns
+    columns,
+    sorting=3
 ) => {
     return $(`#${tableId}`).DataTable({
         destroy: true,
@@ -11,7 +12,7 @@ const initiateDatatable = (
         orderMulti: false,
         serverSide: true,
         columnDefs: [{ 'orderable': false, 'targets': 0 }], // hide sort icon on header of first column
-        aaSorting: [[3, 'desc']],
+        aaSorting: [[sorting, 'desc']],
         responsive: true,
         ajax: {
             url: ajaxConfig.url,
