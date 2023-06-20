@@ -9,7 +9,7 @@ $(document).ready( async () => {
         url: `${config.SERVER_URL}${config.URLS.ROLE_LIST}`,
         method: 'GET',
         headers: {
-            authorization: `Bearer ${user.token}`
+            authorization: `Bearer ${token}`
         }
     })
     .then((resp) => {
@@ -91,7 +91,7 @@ const roleColumns = [
     },
     {
         render: (data, type, row, meta) => {
-            return row?.roleCount.length || 0
+            return row?.roleCount.length > 0 ? row?.roleCount[0]?.string : 0
         }
     },
     {
@@ -152,7 +152,7 @@ $('#Edit_Modal').on('show.bs.modal', (e) => {
             method: 'PATCH',
             data: requestParams,
             headers: {
-                authorization: `Bearer ${user.token}`
+                authorization: `Bearer ${token}`
             }
         })
         .then((response) => {
@@ -199,7 +199,7 @@ $('#Delete_Confirm_Modal').on('show.bs.modal', (e) => {
             method: 'PATCH',
             data: requestParams,
             headers: {
-                authorization: `Bearer ${user.token}`
+                authorization: `Bearer ${token}`
             }
         })
         .then((resp)=>{
@@ -238,7 +238,7 @@ $('#Edit_Role_Modal').on('show.bs.modal', (e) => {
             method: 'PATCH',
             data: requestParams,
             headers: {
-                authorization: `Bearer ${user.token}`
+                authorization: `Bearer ${token}`
             }
         })
             .then((response) => {
@@ -340,7 +340,7 @@ $('#Delete_Role_Modal').on('show.bs.modal', (e) => {
             url: `${config.SERVER_URL}${config.URLS.DELETE_ROLE}/${roleId}`,
             method: 'PATCH',
             headers: {
-                authorization: `Bearer ${user.token}`
+                authorization: `Bearer ${token}`
             }
         })
         .then((resp)=>{

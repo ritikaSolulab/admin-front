@@ -1,6 +1,7 @@
 /** Retreive the user auth token */
-const token = localStorage.getItem('user')
-const user = JSON.parse(token)
+const _token = localStorage.getItem('token')
+const token = JSON.parse(_token)
+
 /** Toastr Configuration and method */
 const ToastMsg = (msg, type) => {
     const _type = type.charAt(0).toLowerCase() + type.slice(1)
@@ -56,7 +57,7 @@ const axiosConfig = (
         method,
         data,
         headers:{
-            authorization: `Bearer ${user.token}`,
+            authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'
         }
     }
