@@ -20,7 +20,7 @@ const initiateDatatable = (
             contentType: 'application/json',
             datatype: "json",
             headers: {
-                authorization: `Bearer ${user.token}`
+                authorization: `Bearer ${token}`
             }
         },
         columns
