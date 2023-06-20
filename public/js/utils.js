@@ -45,3 +45,20 @@ const Logout = async() => {
     //     ToastMsg(message, 'Error')
     // })
 }
+
+const axiosConfig = (
+    url,
+    method,
+    data
+)=>{
+    const _obj = {
+        url,
+        method,
+        data,
+        headers:{
+            authorization: `Bearer ${user.token}`,
+            'Content-Type': 'application/json'
+        }
+    }
+    return _obj
+}

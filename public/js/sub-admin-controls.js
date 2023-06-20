@@ -1,5 +1,4 @@
-
-
+let roleId
 $(document).ready( async () => {
     /** Inititate the Datatable 
      *  Fetch the Role list and bind it to the select tag option
@@ -21,7 +20,14 @@ $(document).ready( async () => {
                 id: item._id,
                 class: 'form-control'
             }));
+            $('#RoleListCreate').append($('<option>', {
+                value: item._id,
+                text: item.roleName,
+                id: item._id,
+                class: 'form-control'
+            }));
         });
+        roleId = resp?.data?.data[0]?._id
     })
     .catch((err) => {
         ToastMsg(err?.response?.data?.message, 'Error')
@@ -118,8 +124,6 @@ const roleColumns = [
 
 const loadAdminTable = () => initiateDatatable('userTable', adminTableConfig, adminColumns)
 const loadRoleTable = () => initiateDatatable('roleTable', roleTableConfig, roleColumns)
-
-let roleId
 
 $(document).ready(async () => { 
 /** Edit Admin Method*/
@@ -252,12 +256,74 @@ $('#Edit_Role_Modal').on('show.bs.modal', (e) => {
 
 /** View role Details*/
 $('#View_Role_Modal').on('show.bs.modal', (e) => {
+    $(".ViewRoleDet").attr('disabled', true)
     const btn = $(e.relatedTarget)
     const roleName = btn.data('rolename')
     let permissions = btn.data('permissions')
     console.log(permissions)
     $('#RoleInputView').val(roleName)
-    $(`#RoleListView`).val(roleId)
+    for(const e of permissions){
+        if(e.permissionName === 'admin_management'){
+            if(e.create) $('#adminMngCreate').attr('checked', true)
+            if(e.update) $('#adminMngEdit').attr('checked', true)
+            if(e.view) $('#adminMngView').attr('checked', true)            
+        }
+        if(e.permissionName === 'user_management'){
+            if(e.create) $('#userMngCreate').attr('checked', true)
+            if(e.update) $('#userMngEdit').attr('checked', true)
+            if(e.view) $('#userMngView').attr('checked', true)            
+        }
+        if(e.permissionName === 'collector_management'){
+            if(e.create) $('#collectorMngCreate').attr('checked', true)
+            if(e.update) $('#collectorMngEdit').attr('checked', true)
+            if(e.view) $('#collectorMngView').attr('checked', true)            
+        }
+        if(e.permissionName === 'license_management'){
+            if(e.create) $('#licenseMngCreate').attr('checked', true)
+            if(e.update) $('#licenseMngEdit').attr('checked', true)
+            if(e.view) $('#licenseMngView').attr('checked', true)            
+        }
+        if(e.permissionName === 'nft_management'){
+            if(e.create) $('#nftMngCreate').attr('checked', true)
+            if(e.update) $('#nftMngEdit').attr('checked', true)
+            if(e.view) $('nftnMngView').attr('checked', true)            
+        }
+        if(e.permissionName === 'royalties_management'){
+            if(e.create) $('#royaltiesMngCreate').attr('checked', true)
+            if(e.update) $('#royaltiesMngEdit').attr('checked', true)
+            if(e.view) $('#royaltiesMngView').attr('checked', true)            
+        }
+        if(e.permissionName === 'transaction_management'){
+            if(e.create) $('#transactionMngCreate').attr('checked', true)
+            if(e.update) $('#transactionMngEdit').attr('checked', true)
+            if(e.view) $('#transactionMngView').attr('checked', true)            
+        }
+        if(e.permissionName === 'infactuation'){
+            if(e.create) $('#infactuationMngCreate').attr('checked', true)
+            if(e.update) $('#infactuationMngEdit').attr('checked', true)
+            if(e.view) $('#infactuationMngView').attr('checked', true)            
+        }
+        if(e.permissionName === 'curated'){
+            if(e.create) $('#curatedMngCreate').attr('checked', true)
+            if(e.update) $('#curatedMngEdit').attr('checked', true)
+            if(e.view) $('#curatedMngView').attr('checked', true)            
+        }
+        if(e.permissionName === 'content_management'){
+            if(e.create) $('#contentMngCreate').attr('checked', true)
+            if(e.update) $('#contentMngEdit').attr('checked', true)
+            if(e.view) $('#contentMngView').attr('checked', true)            
+        }
+        if(e.permissionName === 'feature'){
+            if(e.create) $('#featureMngCreate').attr('checked', true)
+            if(e.update) $('#featureMngEdit').attr('checked', true)
+            if(e.view) $('#featureMngView').attr('checked', true)            
+        }
+        if(e.permissionName === 'role_management'){
+            if(e.create) $('#roleMngCreate').attr('checked', true)
+            if(e.update) $('#roleMngEdit').attr('checked', true)
+            if(e.view) $('#roleMngView').attr('checked', true)            
+        }
+    }
 })
 /** View role Details Ends*/
 
@@ -290,4 +356,34 @@ $('#Delete_Role_Modal').on('show.bs.modal', (e) => {
     })
 })
 /** Delete role Method Ends*/
+
+/** Create Admin Method */
+$('#Create_Modal').on('show.bs.modal', function(){    
+    $('#CreateAdminBtn').off().on('click', async function(){
+        const name = $('#AdminNameInput').val().trim()
+        const email = $('#AdminEmailInput').val().trim()
+        $('#RoleListCreate').on('change', function(){
+            roleId = this.value
+        })
+        const requestParams = {
+            name,
+            email,
+            roleId
+        }
+        await axios(axiosConfig(`${config.SERVER_URL}${config.URLS.CREATE_ADMIN}`,'POST',requestParams))
+            .then((resp)=>{
+                loadAdminTable()
+                $('#Create_Modal').modal('hide')
+                $('#Create_Success_Modal').modal('show')
+                ToastMsg(resp?.data?.message, 'Success')
+            })
+            .catch((e)=>{
+                ToastMsg(e?.response?.data?.message, 'Error')
+            })
+    })
+})
+$('#Create_Modal').on('hidden.bs.modal', function(){
+    $('#Create_Form').trigger('reset')
+})
+
 })

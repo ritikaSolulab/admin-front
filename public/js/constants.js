@@ -13,6 +13,7 @@ const config = {
         EDIT_ADMIN: 'admin/update',
         DELETE_ADMIN: 'admin/update-status',
         DELETE_ROLE: 'admin/role.delete',
+        CREATE_ADMIN: 'admin/create'
 
     }
 }
