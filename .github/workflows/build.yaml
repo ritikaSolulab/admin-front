@@ -31,9 +31,9 @@ jobs:
           script: |
             cd /home/ubuntu/repository
             echo "SERVER_URL=http://50.19.128.91:3000/ \n 
-            PORT:5000" > .env
+            PORT:3000" > .env
             sudo docker build -t archive-matter-admin-front .
             sudo docker stop archive-matter-admin-front-container || true
             sudo docker rm  archive-matter-admin-front-container || true
             sudo docker run -d --env-file .env --name archive-matter-admin-front-container -p 80:3000 archive-matter-admin-front
-            sudo docker system prune -a -f
+            #sudo docker system prune -a -f
