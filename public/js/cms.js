@@ -1,72 +1,114 @@
-var providersTable;
-var providersApprovalTable;
-
-var old = alert;
-
-alert = function() {
-  console.log(new Error().stack);
-};
-
-const terms = () => {
-        terms_of_service = $('#terms_of_service').summernote({
-            height: 300, // Set the height of the editor
-            toolbar: [
-            // Customize the toolbar buttons if needed
-            ['style', ['style']],
-            ['font', ['bold', 'italic', 'underline', 'clear']],
-            ['para', ['ul', 'ol', 'paragraph']],
-            ['insert', ['link', 'picture', 'video']],
-            ['view', ['fullscreen', 'codeview']]
-            ]
-    });
+let cmsId;
+function editTermsCms(){
+    $('#termsOfService').summernote('enable');
 }
-const privacy = () => {
-    privacyTable = $('#privacyTable').summernote({
-        height: 300, // Set the height of the editor
-        toolbar: [
-        // Customize the toolbar buttons if needed
-        ['style', ['style']],
-        ['font', ['bold', 'italic', 'underline', 'clear']],
-        ['para', ['ul', 'ol', 'paragraph']],
-        ['insert', ['link', 'picture', 'video']],
-        ['view', ['fullscreen', 'codeview']]
-        ]
-    });
+function editPrivacyCms(){
+    $('#privacyPolicy').summernote('enable');
 }
-const about = () => {
-    aboutUss = $('#aboutUss').summernote({
-        height: 300, // Set the height of the editor
-        toolbar: [
-        // Customize the toolbar buttons if needed
-        ['style', ['style']],
-        ['font', ['bold', 'italic', 'underline', 'clear']],
-        ['para', ['ul', 'ol', 'paragraph']],
-        ['insert', ['link', 'picture', 'video']],
-        ['view', ['fullscreen', 'codeview']]
-        ]
-    });
+function editAboutCms(){
+    $('#aboutUs').summernote('enable');
 }
 
-
-$(document).ready(function () {
-
-    terms();
-    // about();
-    privacy();
+$(document).ready(async () => {
+    try {
+        function isSummernoteEnabled() {
+            var $editor = $('#summernote');
+            return !$editor.attr('disabled');
+        }
+        const resp = await axios(axiosConfig(`${config.SERVER_URL}${config.URLS.GET_CMS}`, 'get'));
+        console.log(resp.data.data)
+        for (const e of resp.data.data) {
+            let cmsId;
+            if (e.cmsType == 'privacy-policy') {
+                $('#privacy-btn').val(e._id)
+                console.log('p',isSummernoteEnabled())
+                cmsId = e._id;
+                console.log('hi', cmsId);
+                $('#privacyPolicy').summernote('code', e.description);
+            } else if (e.cmsType == 'terms-of-service') {
+                $('#terms-btn').val(e._id)
+                console.log('t',isSummernoteEnabled())
+                cmsId = e._id;
+                console.log('h', cmsId);
+                $('#termsOfService').summernote('code', e.description);
+            } else {
+                $('#about-btn').val(e._id)
+                console.log('a',isSummernoteEnabled())
+                cmsId = e._id;
+                console.log('l',cmsId);
+                $('#aboutUs').summernote('code', e.description);
+            }
+        }
+    } catch (err) {
+        console.log(err);
+        ToastMsg(message, 'Error');
+    }
 });
 
-const dateFilter = (value) => {
-    console.log(value);
-    const startDate = value.split('-')[0];
-    const endDate = value.split('-')[1];
-    if (new Date(startDate) <= new Date(endDate)) {
-        console.log('correct');
-    } else {
-        swal({
-            text: 'please select correct date'
-        });
-    }
+async function updateTermsCms(){
+    var termsDesc = $('#termsOfService').summernote('code')
+    const cmsId = $('#terms-btn').val()
+    const termsObj = {description:termsDesc, cmsId}
+        await axios({
+            url: `${config.SERVER_URL}${config.URLS.UPDATE_CMS}`,
+            method: 'PATCH',
+            data: termsObj,
+            headers: {
+                authorization: `Bearer ${token}`
+            }
+        })
+        .then((response) => {
+            ToastMsg(response?.data?.message, 'Success')
+            $('#Edit_Modal').modal('hide')
+            $('#Edit_Success_Modal').modal('show')
+        })
+        .catch((err) => {
+            const { response: { data: { message } } } = err
+            ToastMsg(message, 'Error')
+        })  
+}
+async function updatePrivacyCms(){
+    var privacyDesc = $('#privacyPolicy').summernote('code')
+    const cmsId = $('#privacy-btn').val()
+    const privacyObj = {description:privacyDesc, cmsId}
+        await axios({
+            url: `${config.SERVER_URL}${config.URLS.UPDATE_CMS}`,
+            method: 'PATCH',
+            data: privacyObj,
+            headers: {
+                authorization: `Bearer ${token}`
+            }
+        })
+        .then((response) => {
+            ToastMsg(response?.data?.message, 'Success')
+            $('#Edit_Modal').modal('hide')
+            $('#Edit_Success_Modal').modal('show')
+        })
+        .catch((err) => {
+            const { response: { data: { message } } } = err
+            ToastMsg(message, 'Error')
+        })  
 }
 
-
-
+async function updateAboutCms(){
+    var aboutDesc = $('#aboutUs').summernote('code')
+    const cmsId = $('#about-btn').val()
+    const aboutObj = {description:aboutDesc, cmsId}
+        await axios({
+            url: `${config.SERVER_URL}${config.URLS.UPDATE_CMS}`,
+            method: 'PATCH',
+            data: aboutObj,
+            headers: {
+                authorization: `Bearer ${token}`
+            }
+        })
+        .then((response) => {
+            ToastMsg(response?.data?.message, 'Success')
+            $('#Edit_Modal').modal('hide')
+            $('#Edit_Success_Modal').modal('show')
+        })
+        .catch((err) => {
+            const { response: { data: { message } } } = err
+            ToastMsg(message, 'Error')
+        })  
+}

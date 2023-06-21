@@ -9,11 +9,15 @@ const config = {
         USER_LIST: 'admin/user.list',
         ADMIN_LIST: 'admin/list',
         LOGOUT: '/logout',
-        ROLE_LIST: 'admin/role.list',
         EDIT_ADMIN: 'admin/update',
         DELETE_ADMIN: 'admin/update-status',
+        CREATE_ADMIN: 'admin/create',
+        EDIT_ROLE: 'admin/role.update',
+        CREATE_ROLE: 'admin/role.create',
+        ROLE_LIST: 'admin/role.list',
         DELETE_ROLE: 'admin/role.delete',
-        CREATE_ADMIN: 'admin/create'
+        UPDATE_CMS: 'cms/update.cms',
+        GET_CMS: 'cms/get.cms'
 
     }
 }
