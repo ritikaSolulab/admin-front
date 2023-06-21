@@ -16,7 +16,7 @@ jobs:
       - name: Copy repository to EC2 instance
         uses: appleboy/scp-action@master
         with:
-          host: 50.19.207.153
+          host: 44.212.226.111
           username: ubuntu
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           source: .
@@ -25,12 +25,13 @@ jobs:
       - name: SSH into EC2 instance
         uses: appleboy/ssh-action@master
         with:
-          host: 50.19.207.153
+          host: 44.212.226.111
           username: ubuntu
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           script: |
             cd /home/ubuntu/repository
-            echo "${{ secrets.ENV_FILE }}" > .env
+            echo "SERVER_URL=http://50.19.128.91:3000/ \n 
+            PORT:5000" > .env
             sudo docker build -t archive-matter-admin-front .
             sudo docker stop archive-matter-admin-front-container || true
             sudo docker rm  archive-matter-admin-front-container || true
