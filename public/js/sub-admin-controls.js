@@ -131,8 +131,10 @@ $('#Edit_Modal').on('show.bs.modal', (e) => {
     const btn = $(e.relatedTarget)
     const name = btn.data('name')
     const email = btn.data('email')
+    console.log(email)
     let roleId = btn.data('roleid')
     const userId = btn.data('id')
+    console.log(userId)
     $('#NameInput').val(name)
     $('#EmailInput').val(email)
     $(`#RoleList`).val(roleId)
@@ -550,3 +552,4 @@ $('#Create_Role_Modal').on('show.bs.modal', (e) => {
 $('#Create_Role_Modal').on('hidden.bs.modal', function(){
     $('#Create_Role_Form').trigger('reset')
 })
+

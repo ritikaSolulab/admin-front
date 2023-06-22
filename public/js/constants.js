@@ -17,7 +17,8 @@ const config = {
         ROLE_LIST: 'admin/role.list',
         DELETE_ROLE: 'admin/role.delete',
         UPDATE_CMS: 'cms/update.cms',
-        GET_CMS: 'cms/get.cms'
+        GET_CMS: 'cms/get.cms',
+        // BLOCK_ADMIN: 'admin/user.update-status',
 
     }
 }
