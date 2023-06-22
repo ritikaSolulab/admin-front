@@ -5,19 +5,14 @@
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                     <button class="nav-link active" id="nav-user-tab" data-bs-toggle="tab" data-bs-target="#nav-user"
-                        type="button" role="tab" aria-controls="nav-home" aria-selected="true">User Management</button>
+                        type="button" role="tab" aria-controls="nav-home" aria-selected="true">Creator</button>
                     <button class="nav-link" id="nav-role-tab" data-bs-toggle="tab" data-bs-target="#nav-role"
-                        type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Role
-                        Management</button>
+                        type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Collector</button>
                 </div>
             </nav>
             <hr>
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-user" role="tabpanel" aria-labelledby="nav-user-tab">
-                    <div class="container-fluid">
-                        <button data-bs-toggle="modal" data-bs-target="#Create_Modal" type="button"
-                            class="btn btn-primary m-1">Create Admin</button>
-                    </div>
                     <div class="row">
                         <table class="table table-responsive table-striped table-bordered table-hover visible"
                             id="userTable" style="width: 100%;">
@@ -25,10 +20,10 @@
                                 <tr>
                                     <th>Sr No</th>
                                     <th>Name</th>
-                                    <th>Email address</th>
-                                    <th>Created By</th>
-                                    <th>Role</th>
-                                    <th>Action</th>
+                                    <th>Email</th>
+                                    <th>Wallet address</th>
+                                    <th>Kyc Status</th>
+                                    <th>Date of Onboarding</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -38,19 +33,17 @@
                 </div>
 
                 <div class="tab-pane fade" id="nav-role" role="tabpanel" aria-labelledby="nav-role-tab">
-                    <div class="container-fluid">
-                        <button data-bs-toggle="modal" data-bs-target="#Create_Role_Modal" type="button" class="btn btn-primary m-1">Create Role</button>
-                    </div>
                     <div class="row">
                         <table class="table table-striped table-bordered table-hover visible" id="roleTable"
                             style="width: 100%;">
                             <thead>
                                 <tr>
                                     <th>Sr No</th>
-                                    <th>Role name</th>
-                                    <th>Created By</th>
-                                    <th>Total Users</th>
-                                    <th>Action</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Wallet address</th>
+                                    <th>Kyc Status</th>
+                                    <th>Date of Onboarding</th>
                                 </tr>
                             </thead>
                         </table>
@@ -174,159 +167,17 @@
                         </div>
                         <div class="mb-3">
 
-                            <label for="text" class="form-label" id="PermissionsList">Permissions</label>
-                            
-                        </div>
-                        <div class="row m-t-md m-b-sm">
-                            <div class="col-sm-6"> <label>Admin Management</label></div>
-                            <div class="col-sm-6">
-                                <div class="text-right switchnew">
-                                    <input class="EditRoleDet" type="checkbox" id="adminCreate"> Create
-                                    &nbsp;&nbsp; &nbsp;
-                                    <input class="EditRoleDet" type="checkbox" id="adminEdit"> Edit &nbsp; &nbsp;
-                                    &nbsp;
-                                    <input class="EditRoleDet" type="checkbox" id="adminView"> View
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row m-t-md m-b-sm">
-                            <div class="col-sm-6"> <label>User Management</label></div>
-                            <div class="col-sm-6">
-                                <div class="text-right switchnew">
-                                    <input class="EditRoleDet" type="checkbox" id="userCreate"> Create
-                                    &nbsp;&nbsp; &nbsp;
-                                    <input class="EditRoleDet" type="checkbox" id="userEdit"> Edit &nbsp; &nbsp;
-                                    &nbsp;
-                                    <input class="EditRoleDet" type="checkbox" id="userView"> View
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row m-t-md m-b-sm">
-                            <div class="col-sm-6"> <label>Role Management</label></div>
-                            <div class="col-sm-6">
-                                <div class="text-right switchnew">
-                                    <input class="EditRoleDet" type="checkbox" id="roleCreate"> Create
-                                    &nbsp;&nbsp; &nbsp;
-                                    <input class="EditRoleDet" type="checkbox" id="roleEdit"> Edit &nbsp; &nbsp;
-                                    &nbsp;
-                                    <input class="EditRoleDet" type="checkbox" id="roleView"> View
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row m-t-md m-b-sm">
-                            <div class="col-sm-6"> <label>Collector Management</label></div>
-                            <div class="col-sm-6">
-                                <div class="text-right switchnew">
-                                    <input class="EditRoleDet" type="checkbox" id="collectorCreate"> Create
-                                    &nbsp;&nbsp; &nbsp;
-                                    <input class="EditRoleDet" type="checkbox" id="collectorEdit"> Edit &nbsp;
-                                    &nbsp; &nbsp;
-                                    <input class="EditRoleDet" type="checkbox" id="collectorView"> View
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row m-t-md m-b-sm">
-                            <div class="col-sm-6"> <label>License/Member Management</label></div>
-                            <div class="col-sm-6">
-                                <div class="text-right switchnew">
-                                    <input class="EditRoleDet" type="checkbox" id="licenseCreate"> Create
-                                    &nbsp;&nbsp; &nbsp;
-                                    <input class="EditRoleDet" type="checkbox" id="licenseEdit"> Edit &nbsp;
-                                    &nbsp; &nbsp;
-                                    <input class="EditRoleDet" type="checkbox" id="licenseView"> View
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row m-t-md m-b-sm">
-                            <div class="col-sm-6"> <label>NFT Management</label></div>
-                            <div class="col-sm-6">
-                                <div class="text-right switchnew">
-                                    <input class="EditRoleDet" type="checkbox" id="nftCreate"> Create
-                                    &nbsp;&nbsp; &nbsp;
-                                    <input class="EditRoleDet" type="checkbox" id="nftEdit"> Edit &nbsp; &nbsp;
-                                    &nbsp;
-                                    <input class="EditRoleDet" type="checkbox" id="nftView"> View
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row m-t-md m-b-sm">
-                            <div class="col-sm-6"> <label>Royalties Management</label></div>
-                            <div class="col-sm-6">
-                                <div class="text-right switchnew">
-                                    <input class="EditRoleDet" type="checkbox" id="royaltiesCreate"> Create
-                                    &nbsp;&nbsp; &nbsp;
-                                    <input class="EditRoleDet" type="checkbox" id="royaltiesEdit"> Edit &nbsp;
-                                    &nbsp; &nbsp;
-                                    <input class="EditRoleDet" type="checkbox" id="royaltiesView"> View
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row m-t-md m-b-sm">
-                            <div class="col-sm-6"> <label>Transaction Management</label></div>
-                            <div class="col-sm-6">
-                                <div class="text-right switchnew">
-                                    <input class="EditRoleDet" type="checkbox" id="transactionCreate"> Create
-                                    &nbsp;&nbsp; &nbsp;
-                                    <input class="EditRoleDet" type="checkbox" id="transactionEdit"> Edit &nbsp;
-                                    &nbsp; &nbsp;
-                                    <input class="EditRoleDet" type="checkbox" id="transactionView"> View
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row m-t-md m-b-sm">
-                            <div class="col-sm-6"> <label>Infatuation</label></div>
-                            <div class="col-sm-6">
-                                <div class="text-right switchnew">
-                                    <input class="EditRoleDet" type="checkbox" id="infactuationCreate"> Create
-                                    &nbsp;&nbsp; &nbsp;
-                                    <input class="EditRoleDet" type="checkbox" id="infactuationEdit"> Edit &nbsp;
-                                    &nbsp; &nbsp;
-                                    <input class="EditRoleDet" type="checkbox" id="infactuationView"> View
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row m-t-md m-b-sm">
-                            <div class="col-sm-6"> <label>Curated</label></div>
-                            <div class="col-sm-6">
-                                <div class="text-right switchnew">
-                                    <input class="EditRoleDet" type="checkbox" id="curatedCreate"> Create
-                                    &nbsp;&nbsp; &nbsp;
-                                    <input class="EditRoleDet" type="checkbox" id="curatedEdit"> Edit &nbsp;
-                                    &nbsp; &nbsp;
-                                    <input class="EditRoleDet" type="checkbox" id="curatedView"> View
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row m-t-md m-b-sm">
-                            <div class="col-sm-6"> <label>CMS</label></div>
-                            <div class="col-sm-6">
-                                <div class="text-right switchnew">
-                                    <input class="EditRoleDet" type="checkbox" id="contentCreate"> Create
-                                    &nbsp;&nbsp; &nbsp;
-                                    <input class="EditRoleDet" type="checkbox" id="contentEdit"> Edit &nbsp;
-                                    &nbsp; &nbsp;
-                                    <input class="EditRoleDet" type="checkbox" id="contentView"> View
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row m-t-md m-b-sm">
-                            <div class="col-sm-6"> <label>Feature</label></div>
-                            <div class="col-sm-6">
-                                <div class="text-right switchnew">
-                                    <input class="EditRoleDet" type="checkbox" id="featureCreate"> Create
-                                    &nbsp;&nbsp; &nbsp;
-                                    <input class="EditRoleDet" type="checkbox" id="featureEdit"> Edit &nbsp;
-                                    &nbsp; &nbsp;
-                                    <input class="EditRoleDet" type="checkbox" id="featureView"> View
-                                </div>
-                            </div>
+                            <label for="text" class="form-label">Permissions</label>
+                            <select class="form-control" id="PermissionsList">
+
+                            </select>
                         </div>
 
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button id="UpdateRoleDetails" type="button" class="btn btn-primary">Update</button>
+                    <button id="UpdateDetails" type="button" class="btn btn-primary">Update</button>
                 </div>
             </div>
         </div>
@@ -640,153 +491,9 @@
                         <div class="mb-3">
 
                             <label for="text" class="form-label">Permissions</label>
-                            <!-- <input name="name" type="text" class="form-control" id="PermissionsInput" -->
-                                <!-- aria-describedby="name"> -->
-                            <!-- <select class="form-control" id="PermissionsListCreate"> -->
-                                <div class="row m-t-md m-b-sm">
-                                    <div class="col-sm-6"> <label>Admin Management</label></div>
-                                    <div class="col-sm-6">
-                                        <div class="text-right switchnew">
-                                            <input class="CreateRoleDet" type="checkbox" id="adminMngCreate"> Create
-                                            &nbsp;&nbsp; &nbsp;
-                                            <input class="CreateRoleDet" type="checkbox" id="adminMngEdit"> Edit &nbsp; &nbsp;
-                                            &nbsp;
-                                            <input class="CreateRoleDet" type="checkbox" id="adminMngView"> View
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row m-t-md m-b-sm">
-                                    <div class="col-sm-6"> <label>User Management</label></div>
-                                    <div class="col-sm-6">
-                                        <div class="text-right switchnew">
-                                            <input class="CreateRoleDet" type="checkbox" id="userMngCreate"> Create
-                                            &nbsp;&nbsp; &nbsp;
-                                            <input class="CreateRoleDet" type="checkbox" id="userMngEdit"> Edit &nbsp; &nbsp;
-                                            &nbsp;
-                                            <input class="CreateRoleDet" type="checkbox" id="userMngView"> View
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row m-t-md m-b-sm">
-                                    <div class="col-sm-6"> <label>Role Management</label></div>
-                                    <div class="col-sm-6">
-                                        <div class="text-right switchnew">
-                                            <input class="CreateRoleDet" type="checkbox" id="roleMngCreate"> Create
-                                            &nbsp;&nbsp; &nbsp;
-                                            <input class="CreateRoleDet" type="checkbox" id="roleMngEdit"> Edit &nbsp; &nbsp;
-                                            &nbsp;
-                                            <input class="CreateRoleDet" type="checkbox" id="roleMngView"> View
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row m-t-md m-b-sm">
-                                    <div class="col-sm-6"> <label>Collector Management</label></div>
-                                    <div class="col-sm-6">
-                                        <div class="text-right switchnew">
-                                            <input class="CreateRoleDet" type="checkbox" id="collectorMngCreate"> Create
-                                            &nbsp;&nbsp; &nbsp;
-                                            <input class="CreateRoleDet" type="checkbox" id="collectorMngEdit"> Edit &nbsp;
-                                            &nbsp; &nbsp;
-                                            <input class="CreateRoleDet" type="checkbox" id="collectorMngView"> View
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row m-t-md m-b-sm">
-                                    <div class="col-sm-6"> <label>License/Member Management</label></div>
-                                    <div class="col-sm-6">
-                                        <div class="text-right switchnew">
-                                            <input class="CreateRoleDet" type="checkbox" id="licenseMngCreate"> Create
-                                            &nbsp;&nbsp; &nbsp;
-                                            <input class="CreateRoleDet" type="checkbox" id="licenseMngEdit"> Edit &nbsp;
-                                            &nbsp; &nbsp;
-                                            <input class="CreateRoleDet" type="checkbox" id="licenseMngView"> View
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row m-t-md m-b-sm">
-                                    <div class="col-sm-6"> <label>NFT Management</label></div>
-                                    <div class="col-sm-6">
-                                        <div class="text-right switchnew">
-                                            <input class="CreateRoleDet" type="checkbox" id="nftMngCreate"> Create
-                                            &nbsp;&nbsp; &nbsp;
-                                            <input class="CreateRoleDet" type="checkbox" id="nftMngEdit"> Edit &nbsp; &nbsp;
-                                            &nbsp;
-                                            <input class="CreateRoleDet" type="checkbox" id="nftMngView"> View
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row m-t-md m-b-sm">
-                                    <div class="col-sm-6"> <label>Royalties Management</label></div>
-                                    <div class="col-sm-6">
-                                        <div class="text-right switchnew">
-                                            <input class="CreateRoleDet" type="checkbox" id="royaltiesMngCreate"> Create
-                                            &nbsp;&nbsp; &nbsp;
-                                            <input class="CreateRoleDet" type="checkbox" id="royaltiesMngEdit"> Edit &nbsp;
-                                            &nbsp; &nbsp;
-                                            <input class="CreateRoleDet" type="checkbox" id="royaltiesMngView"> View
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row m-t-md m-b-sm">
-                                    <div class="col-sm-6"> <label>Transaction Management</label></div>
-                                    <div class="col-sm-6">
-                                        <div class="text-right switchnew">
-                                            <input class="CreateRoleDet" type="checkbox" id="transactionMngCreate"> Create
-                                            &nbsp;&nbsp; &nbsp;
-                                            <input class="CreateRoleDet" type="checkbox" id="transactionMngEdit"> Edit &nbsp;
-                                            &nbsp; &nbsp;
-                                            <input class="CreateRoleDet" type="checkbox" id="transactionMngView"> View
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row m-t-md m-b-sm">
-                                    <div class="col-sm-6"> <label>Infatuation</label></div>
-                                    <div class="col-sm-6">
-                                        <div class="text-right switchnew">
-                                            <input class="CreateRoleDet" type="checkbox" id="infactuationMngCreate"> Create
-                                            &nbsp;&nbsp; &nbsp;
-                                            <input class="CreateRoleDet" type="checkbox" id="infactuationMngEdit"> Edit &nbsp;
-                                            &nbsp; &nbsp;
-                                            <input class="CreateRoleDet" type="checkbox" id="infactuationMngView"> View
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row m-t-md m-b-sm">
-                                    <div class="col-sm-6"> <label>Curated</label></div>
-                                    <div class="col-sm-6">
-                                        <div class="text-right switchnew">
-                                            <input class="CreateRoleDet" type="checkbox" id="curatedMngCreate"> Create
-                                            &nbsp;&nbsp; &nbsp;
-                                            <input class="CreateRoleDet" type="checkbox" id="curatedMngEdit"> Edit &nbsp;
-                                            &nbsp; &nbsp;
-                                            <input class="CreateRoleDet" type="checkbox" id="curatedMngView"> View
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row m-t-md m-b-sm">
-                                    <div class="col-sm-6"> <label>CMS</label></div>
-                                    <div class="col-sm-6">
-                                        <div class="text-right switchnew">
-                                            <input class="CreateRoleDet" type="checkbox" id="contentMngCreate"> Create
-                                            &nbsp;&nbsp; &nbsp;
-                                            <input class="CreateRoleDet" type="checkbox" id="contentMngEdit"> Edit &nbsp;
-                                            &nbsp; &nbsp;
-                                            <input class="CreateRoleDet" type="checkbox" id="contentMngView"> View
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row m-t-md m-b-sm">
-                                    <div class="col-sm-6"> <label>Feature</label></div>
-                                    <div class="col-sm-6">
-                                        <div class="text-right switchnew">
-                                            <input class="CreateRoleDet" type="checkbox" id="featureMngCreate"> Create
-                                            &nbsp;&nbsp; &nbsp;
-                                            <input class="CreateRoleDet" type="checkbox" id="featureMngEdit"> Edit &nbsp;
-                                            &nbsp; &nbsp;
-                                            <input class="CreateRoleDet" type="checkbox" id="featureMngView"> View
-                                        </div>
-                                    </div>
-                                </div>
+                            <select class="form-control" id="PermissionsListCreate">
+
+                            </select>
                         </div>
 
                     </form>
@@ -828,4 +535,4 @@
     </div>
     <!--Modal Ends -->
     <%- include('../partials/datatable-script')%>
-        <script src="js/sub-admin-controls.js"></script>
+    <script src="js/collector-management.js"></script>

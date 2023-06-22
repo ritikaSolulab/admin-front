@@ -36,6 +36,14 @@
             <span class="hide-menu">User Management</span>
           </a>
         </li>
+        <li class="sidebar-item <%= (activeBar == 'collectorManagement') ? 'selected' : '' %>">
+          <a class="sidebar-link <%= (activeBar == 'collectorManagement') ? 'active' : '' %>" href="/admin/collectorManagement" aria-expanded="false">
+          <span>
+            <i class="ti ti-article"></i>
+          </span>
+          <span class="hide-menu">Creator/Collection</span>
+        </a>
+      </li>
         <li class="sidebar-item <%= (activeBar == 'license') ? 'selected' : '' %>">
           <a class="sidebar-link <%= (activeBar == 'license') ? 'active' : '' %>" href="/admin/license" aria-expanded="false">
             <span>

@@ -50,5 +50,8 @@ router.get('/support', (req,res) => {
 router.get('/userManagement', (req,res) => {
     res.render('user-management/index', {activeBar: 'userManagement'})
 })
+router.get('/collectorManagement', (req,res) => {
+    res.render('collector-management/index', {activeBar: 'collectorManagement'})
+})
 
 export default router;
