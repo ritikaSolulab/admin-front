@@ -61,6 +61,14 @@ const adminColumns = [
             }
         },
         {
+            render: (data, type, row, meta) => {
+                let text = `<div class="form-check form-switch">
+                    <input name="blockAdmin" type="checkbox" class="form-check-input" id="blockToggle" value="${row._id}">
+                </div>`
+                return text
+            }
+        },
+        {
             data: '_id', orderable: false, targets: -1,
             render: (data, type, row, meta) => {
                 let text = `<div class='action-btn'>
@@ -68,12 +76,13 @@ const adminColumns = [
                     <i data-toggle="tooltip" data-placement="top" title="View" class="fa fa-eye" aria-hidden="true"></i></a>                         
                     <a data-bs-toggle="modal" data-bs-target="#Edit_Modal" data-id="${row._id}" data-name="${row.name}" data-roleid="${row.roleId}" data-email = "${row.email}">
                     <i data-toggle="tooltip" data-placement="top" title=Edit class="fa fa-pencil" aria-hidden="true"></i></a>
-                    <a data-bs-toggle="modal" data-bs-target = "#Delete_Confirm_Modal" data-name="${row.name}" data-id="${row._id}" data-status = "${row.isActive}">
+                    <a data-bs-toggle="modal" data-bs-target = "#Delete_Confirm_Modal" data-name="${row.name}" data-id="${row._id}" data-status = "${row.isDeleted}">
                     <i data-toggle="tooltip" data-placement="top" title='Delete' class="fa fa-trash" aria-hidden="true"></i></a>
                     </div>`
                 return text
             }
-        }
+        },
+        
 ]
 
 const roleColumns = [
@@ -100,7 +109,7 @@ const roleColumns = [
             let title = ""
             let modal = ""
             let _Class = ""
-            if (row.isActive) {
+            if (row.isDeleted) {
                 title = "Active"
                 modal = "#Deactivate_Modal"
                 _Class = "fa fa-user enabled-user"
@@ -194,7 +203,7 @@ $('#Delete_Confirm_Modal').on('show.bs.modal', (e) => {
         $('#DeleteAdminBtn').text('Please wait..')
         const requestParams = {
             userId,
-            status: false
+            status: true
         }
         await axios({
             url: `${config.SERVER_URL}${config.URLS.DELETE_ADMIN}`,

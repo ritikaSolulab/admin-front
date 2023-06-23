@@ -10,7 +10,7 @@ const config = {
         ADMIN_LIST: 'admin/list',
         LOGOUT: '/logout',
         EDIT_ADMIN: 'admin/update',
-        DELETE_ADMIN: 'admin/update-status',
+        DELETE_ADMIN: 'admin/delete-admin',
         CREATE_ADMIN: 'admin/create',
         EDIT_ROLE: 'admin/role.update',
         CREATE_ROLE: 'admin/role.create',
@@ -18,7 +18,7 @@ const config = {
         DELETE_ROLE: 'admin/role.delete',
         UPDATE_CMS: 'cms/update.cms',
         GET_CMS: 'cms/get.cms',
-        // BLOCK_ADMIN: 'admin/user.update-status',
+        BLOCK_ADMIN: 'admin/update-status',
 
     }
 }

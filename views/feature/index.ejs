@@ -1,3 +1,4 @@
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <%-include('./style')%>
     <div class="card-body">
         <div class="row">
@@ -57,36 +58,50 @@
                     <form id="Edit_Form">
                         <div class="mb-3">
                             <label for="text" class="form-label">Enter Details</label>
-                            <input name="name" type="text" class="form-control border border-dark" id="" aria-describedby="name" placeholder="Name">
+                            <input name="name" type="text" class="form-control border border-dark" id=""
+                                aria-describedby="name" placeholder="Name">
                             <div class="input-group col-12 mt-3">
-                                <input name="name" type="text" class="form-control border border-dark" id="" aria-describedby="name" placeholder="Sub Text">
+                                <input name="name" type="text" class="form-control border border-dark" id=""
+                                    aria-describedby="name" placeholder="Sub Text">
                             </div>
                         </div>
                         <div class="mb-3">
                             <div class="form-group">
                                 <label for="imageUpload" class="form-label">Add Banner Image or Videos</label>
                                 <div class="border border-dark p-4 text-center" style="width:70%">
-                                  <p class="mb-0">Banner Image</p>
-                                  <p class="mb-0">(Recomended size 15uuX5uu px)</p>
-                                  <p class="mb-0">Formats-JPG,MP4,PNG,GIF-1u MB Max size</p>
+                                    <p class="mb-0">Banner Image</p>
+                                    <p class="mb-0">(Recomended size 15uuX5uu px)</p>
+                                    <p class="mb-0">Formats-JPG,MP4,PNG,GIF-1u MB Max size</p>
                                 </div>
                                 <input type="file" class="form-control-file d-none" id="imageUpload">
-                              </div>
-                              <i class="fa fa-solid fa-plus"></i>
+                            </div>
+                            <i class="fa fa-solid fa-plus"></i>
                         </div>
-                        <div class="mb-3">
-                            <!-- <input for="text" class="form-label" placeholder="Add profile links">Profile Links</label> -->
-                            <!-- <select class="form-control" id="" placeholder="Add profile links">
-                            </select> -->
-                            <!-- <i class="fa fa-fw fa-eye"></i> -->
-                            <label class="form-label">Profile Links</label>
-                            <input type="text" 
-                                    class="form-control border border-dark"
-                                    style="width: 50%; display: inline;"
-                                    placeholder="Add Profile Links"
-                                    name="uname" required> 
+
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-user" role="tabpanel"
+                                aria-labelledby="nav-user-tab">
+
+                                <div class="row p-4">
+                                    <div class="panel-body">
+                                        <div class="h-200">
+                                            <textarea class="border border-dark p-3 mb-2 bg-light text-dark"
+                                                id="termsOfService"
+                                                placeholder="html editor, Manage quotes, paragraphes and images here"></textarea>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="mb-3">
+                                    <label class="form-label">Profile Links</label>
+                                    <input type="text" class="form-control border border-dark"
+                                        style="width: 50%; display: inline;" placeholder="Add Profile Links"
+                                        name="uname" required>
                                     <i class="fa fa-solid fa-plus"></i>
-                        </div>
+                                </div>
 
                     </form>
                 </div>
@@ -110,10 +125,10 @@
                         <div class="mb-3">
                             <!-- NameInputView -->
                             <label for="text" class="form-label">Details</label>
-                            <input disabled name="name" type="text" class="form-control" id=""
-                                aria-describedby="name">
+                            <input disabled name="name" type="text" class="form-control" id="" aria-describedby="name">
                             <div class="input-group col-12 mt-3">
-                                <input disabled name="name" type="text" class="form-control" id="" aria-describedby="name">
+                                <input disabled name="name" type="text" class="form-control" id=""
+                                    aria-describedby="name">
                             </div>
                         </div>
                         <div class="mb-3">
@@ -148,31 +163,31 @@
                         <div class="mb-3">
 
                             <label for="text" class="form-label">Enter Details</label>
-                            <input name="name" type="text" class="form-control border border-dark" id="" aria-describedby="name" placeholder="Name">
+                            <input name="name" type="text" class="form-control border border-dark" id=""
+                                aria-describedby="name" placeholder="Name">
                             <div class="input-group col-12 mt-3">
-                                <input name="name" type="text" class="form-control border border-dark" id="" aria-describedby="name" placeholder="Sub Text">
+                                <input name="name" type="text" class="form-control border border-dark" id=""
+                                    aria-describedby="name" placeholder="Sub Text">
                             </div>
                         </div>
                         <div class="mb-3">
                             <div class="form-group">
                                 <label for="imageUpload" class="form-label">Add Banner Image or Videos</label>
                                 <div class="border border-dark p-4 text-center" style="width:70%">
-                                  <p class="mb-0">Banner Image</p>
-                                  <p class="mb-0">(Recomended size 15uuX5uu px)</p>
-                                  <p class="mb-0">Formats-JPG,MP4,PNG,GIF-1u MB Max size</p>
+                                    <p class="mb-0">Banner Image</p>
+                                    <p class="mb-0">(Recomended size 15uuX5uu px)</p>
+                                    <p class="mb-0">Formats-JPG,MP4,PNG,GIF-1u MB Max size</p>
                                 </div>
                                 <input type="file" class="form-control-file d-none" id="imageUpload">
-                              </div>
-                              <i class="fa fa-solid fa-plus"></i>
+                            </div>
+                            <i class="fa fa-solid fa-plus"></i>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Profile Links</label>
-                            <input type="text" 
-                                    class="form-control border border-dark"
-                                    style="width: 50%; display: inline;"
-                                    placeholder="Add Profile Links"
-                                    name="uname" required> 
-                                    <i class="fa fa-solid fa-plus"></i>
+                            <input type="text" class="form-control border border-dark"
+                                style="width: 50%; display: inline;" placeholder="Add Profile Links" name="uname"
+                                required>
+                            <i class="fa fa-solid fa-plus"></i>
                         </div>
                     </form>
                 </div>
