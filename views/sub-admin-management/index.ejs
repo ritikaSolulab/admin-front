@@ -28,8 +28,8 @@
                                     <th>Email address</th>
                                     <th>Created By</th>
                                     <th>Role</th>
-                                    <th>Action</th>
                                     <th>Block & Unblock</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -52,7 +52,6 @@
                                     <th>Created By</th>
                                     <th>Total Users</th>
                                     <th>Action</th>
-                                    <th>Block & Unblock</th>
                                 </tr>
                             </thead>
                         </table>
@@ -589,9 +588,6 @@
             <div style="background-color: white;" class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Create Admin</h5>
-                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button> -->
                 </div>
                 <div class="modal-body">
                     <form id="Create_Form">
@@ -642,9 +638,6 @@
                         <div class="mb-3">
 
                             <label for="text" class="form-label">Permissions</label>
-                            <!-- <input name="name" type="text" class="form-control" id="PermissionsInput" -->
-                                <!-- aria-describedby="name"> -->
-                            <!-- <select class="form-control" id="PermissionsListCreate"> -->
                                 <div class="row m-t-md m-b-sm">
                                     <div class="col-sm-6"> <label>Admin Management</label></div>
                                     <div class="col-sm-6">
@@ -832,5 +825,39 @@
     <!--Modal Ends -->
     <%- include('../partials/datatable-script')%>
         <script src="js/sub-admin-controls.js"></script>
-
-        
+        <script>
+            let status;
+            $(document).on("change", "input[name='blockAdmin']", function () {
+            alert(this.value);
+            if (this.checked) {
+                status = true
+                blockUser(this.value)
+            }else{
+                status=false
+                blockUser(this.value)
+            }
+        });
+            async function blockUser(userId){
+                const requestParams = {
+                    userId,
+                    status
+                }
+                    await axios({
+                        url: `${config.SERVER_URL}${config.URLS.BLOCK_ADMIN}`,
+                        method: 'PATCH',
+                        data: requestParams,
+                        headers: {
+                            authorization: `Bearer ${token}`
+                        }
+                    })
+                    .then((response) => {
+                        ToastMsg(response?.data?.message, 'Success')
+                        console.log('User blocked successfully', response);
+                    })
+                    .catch((err) => {
+                        const { response: { data: { message } } } = err
+                        ToastMsg(message, 'Error')
+                    })  
+            }
+        </script>
+          
