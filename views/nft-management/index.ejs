@@ -1,32 +1,112 @@
-<div class="row">
-    <div class="tab-pane fade show active" id="pro" role="tabpanel" aria-labelledby="del-tab">
-        <div class="table-responsive">
-            <div class="row float-right" >
-            <div class="col-md-6">
-                
-            </div>
-            <div class="col-md-6">                     
+<%#-include('. /style')%>
+    <div class="card-body">
+        <div class="row">
+
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <button class="nav-link active" id="nav-user-tab" data-bs-toggle="tab" data-bs-target="#nav-user"
+                        type="button" role="tab" aria-controls="nav-home" aria-selected="true">Collection</button>
+                    <button class="nav-link" id="nav-role-tab" data-bs-toggle="tab" data-bs-target="#nav-role"
+                        type="button" role="tab" aria-controls="nav-profile" aria-selected="false">NFTs</button>
+                </div>
+            </nav>
+            <hr>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-user" role="tabpanel" aria-labelledby="nav-user-tab">
+                    <div class="row">
+                        <table class="table table-responsive table-striped table-bordered table-hover visible"
+                            id="collectionTable" style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th>Sr No</th>
+                                    <th>Collection</th>
+                                    <th>Creator</th>
+                                    <th>Owner</th>
+                                    <th>Date of Listing</th>
+                                    <th>Floor Price($)</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="nav-role" role="tabpanel" aria-labelledby="nav-role-tab">
+                    <div class="row">
+                        <table class="table table-striped table-bordered table-hover visible" id="nftTable"
+                            style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th>Sr No</th>
+                                    <th>NFT name</th>
+                                    <th>Creator</th>
+                                    <th>Owner</th>
+                                    <th>Collection Name</th>
+                                    <th>Date of Listing</th>
+                                    <th>Price($)</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
             </div>
 
         </div>
-            <table class="table table-striped table-bordered table-hover "
-                id="transactionTable">
-                <thead>
-                    <tr>
-                        <th>Sr No</th>
-                        <th>NFT Name</th>
-                        <th>Creator</th>
-                        <th>Owner</th>
-                        <th>Collection Name</th>
-                        <th>Price($)</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                </tbody>
-            </table>
-        </div>
-
     </div>
-</div>
+
+    <!-- Modals -->
+    
+    <!--Modal Ends -->
+<%- include('../partials/datatable-script')%>
+<script>
+    $(document).ready(()=>{
+        loadTable()
+    })
+    const collectionTableConfig = {
+        url:`${config.SERVER_URL}${config.URLS.COLLECTION_LIST}`,
+        type: 'GET'
+    }
+    const columns = [
+        {
+            orderable: false, targets: -1,
+            render: function (data, type, row, meta) {
+                return meta.row + meta.settings._iDisplayStart + 1;
+            }
+        },
+        { data: 'title'},
+        {
+            render:(data, type, row, meta) => {
+                return row?.creatorDoc ? row.creatorDoc?.name : ''
+            }
+        },
+        {
+            render:(data, type, row, meta) => {
+                return row?.ownerDoc ? row.ownerDoc?.name : ''
+            }
+        },
+        {
+            render:(data, type, row, meta) => {
+                return row?.releaseDate ? new Date(row?.releaseDate).toLocaleDateString() : 'NA'
+            }
+        },
+        {
+            render:(data, type, row, meta) => {
+                return row?.avgSellingPrice ? row?.avgSellingPrice : 'NA'
+            }
+        },
+        {
+            render:(data, type, row, meta) => {
+                return `<div class='action-btn'>
+                    <a href="admin/infatuation?collection=${row._id}">
+                    <i data-toggle="tooltip" data-placement="top" title="View" class="fa fa-eye" aria-hidden="true"></i></a>                         
+                    <a href="admin/curatedBy?collection=${row._id}">
+                    <i data-toggle="tooltip" data-placement="top" title=Edit class="fa fa-pencil" aria-hidden="true"></i></a>
+                    </div>`
+            }
+        },
+    ]
+    const loadTable = () => initiateDatatable('collectionTable', collectionTableConfig, columns)
+</script>

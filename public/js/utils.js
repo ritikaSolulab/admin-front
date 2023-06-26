@@ -41,7 +41,7 @@ const Logout = async() => {
 const axiosConfig = (
     url,
     method,
-    data
+    data = {}
 )=>{
     const _obj = {
         url,
