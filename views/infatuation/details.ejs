@@ -65,16 +65,18 @@
             await axios(axiosConfig(`${config.SERVER_URL}${config.URLS.COLLECTION_DETAILS}/${collectionId}`, 'GET'))
                 .then((response) => {
                     const { data: { data } } = response
-                    $('.skeleton').text(`You are infatuating ${data?.title} ${data?.createdBy?.name}`)
+                    $('.skeleton').text(`You are Infatuating ${data?.title} ${data?.createdBy?.name}`)
                     $('.skeleton').removeClass('skeleton')
                 })
-                .catch((err) => ToastMsg(err?.response.data?.message, 'Error'))
+                .catch((err) =>  {
+                    window.location.reload()
+                    ToastMsg(err?.response.data?.message, 'Error')
+                })
         }
         $('#Infactuation_1').summernote({
             height: '200px',
             width: '700px',
-        })
-        
+        })        
 
         const uploadImage = async (file, editor, welEditable) => {
             let data = new FormData();
