@@ -1,5 +1,5 @@
 const config = {
-    // SERVER_URL: 'http://50.19.128.91/',
+    // SERVER_URL: 'http://localhost:3000/',
     SERVER_URL: 'http://localhost:3000/',
     URLS: {
         LOGIN_URL: 'admin/login',
@@ -9,7 +9,7 @@ const config = {
         RESET_PASS: 'admin/reset-password',
         USER_LIST: 'admin/user.list',
         ADMIN_LIST: 'admin/list',
-        LOGOUT: '/logout',
+        LOGOUT: '/destroy-session',
         EDIT_ADMIN: 'admin/update',
         DELETE_ADMIN: 'admin/delete-admin',
         CREATE_ADMIN: 'admin/create',

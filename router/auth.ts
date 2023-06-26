@@ -1,7 +1,14 @@
 import express,{Request,Response,NextFunction} from 'express'
 const router = express.Router();
 
-
+router.post('/destroy-session', (req, res) => {
+  if(req.session) {
+    req.session.destroy(()=> {
+    })
+    console.log(req.session);
+    res.redirect('/');
+  }
+});
 
 router.use((req: Request, res, next) => {
   if (req.session?.user === undefined) {
@@ -58,5 +65,6 @@ router.post('/create-session', (req, res) => {
   }
   res.redirect('/admin');
 });
+
 
 export default router;

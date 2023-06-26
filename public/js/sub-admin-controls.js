@@ -118,14 +118,15 @@ const roleColumns = [
                 modal = "#Reactivate_Modal"
                 _Class = "fa fa-user-times disable-user"
             }
+            console.log(row?.roleCount.length);
             let text = `<div class='action-btn'>
                     <a data-bs-toggle="modal" data-bs-target = "#View_Role_Modal" data-rolename="${row.roleName}" data-permissions = '${JSON.stringify(row.permissions)}'>
                     <i data-toggle="tooltip" data-placement="top" title="View" class="fa fa-eye" aria-hidden="true"></i></a>
                     <a data-bs-toggle="modal" data-bs-target = "#Edit_Role_Modal" data-id="${row._id}" data-rolename = "${row.roleName}" data-roleid="${row.roleId}" data-permissions='${row.permissions}'>
-                    <i data-toggle="tooltip" data-placement="top" title=Edit class="fa fa-pencil" aria-hidden="true"></i></a>
-                    <a data-bs-toggle="modal" data-bs-target = "#Delete_Role_Modal" data-id="${row._id}" data-rolname="${row.roleName}">
-                    <i data-toggle="tooltip" data-placement="top" title=Delete class="fa fa-trash" aria-hidden="true"></i></a>
-                    </div>`
+                    <i data-toggle="tooltip" data-placement="top" title=Edit class="fa fa-pencil" aria-hidden="true"></i></a>`
+                text += row?.roleCount.length == 0 ? `<a data-bs-toggle="modal" data-bs-target = "#Delete_Role_Modal" data-id="${row._id}" data-rolname="${row.roleName}">
+                <i data-toggle="tooltip" data-placement="top" title=Delete class="fa fa-trash" aria-hidden="true"></i></a>` : ``
+                text += `</div>`
             return text
         }
     }
@@ -411,7 +412,8 @@ $('#View_Role_Modal').on('show.bs.modal', (e) => {
         if(e.permissionName === 'admin_management'){
             if(e.create) $('#adminMngCreate').attr('checked', true)
             if(e.update) $('#adminMngEdit').attr('checked', true)
-            if(e.view) $('#adminMngView').attr('checked', true)            
+            if(e.view) $('#adminMngView').attr('checked', true)
+            if(e.remove) $('#adminMngView').attr('checked', true)
         }
         if(e.permissionName === 'user_management'){
             if(e.create) $('#userMngCreate').attr('checked', true)
@@ -471,7 +473,9 @@ $('#View_Role_Modal').on('show.bs.modal', (e) => {
     }
 })
 /** View role Details Ends*/
-
+$('#View_Role_Modal').on('hidden.bs.modal', function(){
+    $('#View_Role_Modal_Form').trigger('reset');
+})
 /** Delete role Method*/
 $('#Delete_Role_Modal').on('show.bs.modal', (e) => {
     const btn = $(e.relatedTarget)
@@ -527,6 +531,7 @@ $('#Create_Modal').on('show.bs.modal', function(){
             })
     })
 })
+
 $('#Create_Modal').on('hidden.bs.modal', function(){
     $('#Create_Form').trigger('reset')
 })
@@ -540,9 +545,59 @@ $('#Create_Role_Modal').on('show.bs.modal', (e) => {
         const btn = $(e.relatedTarget)
         $(".CreateRoleDet").attr('enabled', true)
         const roleName = $('#RoleNameInput').val().trim()
-        let permissions = btn.data('permissions')
-        console.log(permissions)
-
+        console.log(btn);
+        // let permissions = btn.data('permissions')
+        // console.log(permissions)
+        let permissions= [];
+        const permissionIdList = ['adminMng_Create', 'adminMng_Edit', 'adminMng_View',
+        'adminMng_Delete', 
+        'userMng_Create', 'userMng_Edit', 'userMng_View', 'userMng_Delete', 'roleMng_Create', 'roleMng_Edit',
+        'roleMng_View', 'roleMng_Delete', 'collectorMng_Create', 'collectorMng_Edit', 'collectorMng_View', 
+        'collectorMng_Delete',
+        'licenseMng_Create' , 'licenseMng_Edit', 'licenseMng_View' , 'licenseMng_Delete', 'nftMng_Create', 
+        'nftMng_Edit', 'nftMng_View',  'nftMng_Delete', 'royaltiesMng_Create', 'royaltiesMng_Edit', 'royaltiesMng_View', 
+        'royaltiesMng_Delete',
+        'transactionMng_Create', 'transactionMng_Edit', 'transactionMng_View', 'transactionMng_Delete',
+        'infactuationMng_Create', 'infactuationMng_Edit', 'infactuationMng_View', 'infactuationMng_Delete',
+        'curatedMng_Create', 'curatedMng_Edit', 'curatedMng_View', 'curatedMng_Delete', 
+        'contentMng_Create', 'contentMng_Edit' , 'contentMng_Delete',
+        'contentMng_View', 'featureMng_Create', 'featureMng_Edit', 'featureMng_View', 'featureMng_Delete']
+        const permissonsObj = {
+            'adminMng': 'admin_management', 
+            'userMng': 'user_management', 
+            'roleMng': 'role_management', 
+            'collectorMng': 'collector_management', 
+            'licenseMng': 'license_management',
+            'nftMng': 'nft_management', 
+            'royaltiesMng': 'royalties_management', 
+            'transactionMng': 'transaction_management', 
+            'infactuationMng': 'infatuation', 
+            'curatedMng': 'curated', 
+            'contentMng': 'content_management', 
+            'featureMng': 'feature'
+        };
+        const calculatedPermissionObj = {}
+        permissionIdList.forEach(permisson => {
+            const permissionSplit = permisson.split('_');
+            console.log()
+            const permissionId = permissionCond(permissionSplit[1]);
+            if(!calculatedPermissionObj[`${permissonsObj[`${permissionSplit[0]}`]}`]) {
+                calculatedPermissionObj[`${permissonsObj[`${permissionSplit[0]}`]}`] = {}
+            }
+            if ( $(`#${permisson}`).prop('checked') == true ) {
+                console.log($(`#${permisson}`).prop('checked'));
+                
+                calculatedPermissionObj[`${permissonsObj[`${permissionSplit[0]}`]}`][`${permissionId}`] = true;
+            } else {
+                calculatedPermissionObj[`${permissonsObj[`${permissionSplit[0]}`]}`][`${permissionId}`] = false;
+            }
+        })
+        console.log(calculatedPermissionObj);
+        const keyList = Object.keys(calculatedPermissionObj);
+        keyList.forEach(eachKey => {
+            console.log('eachKey', eachKey);
+            permissions.push({ permissionName: eachKey, ...calculatedPermissionObj[`${eachKey}`] })
+        });
         const requestParams = {
             roleName,
             permissions,
@@ -563,3 +618,14 @@ $('#Create_Role_Modal').on('hidden.bs.modal', function(){
     $('#Create_Role_Form').trigger('reset')
 })
 
+function permissionCond(cond) {
+    if (cond == 'Create') {
+        return 'create'
+    } else if (cond == 'Edit') {
+        return 'update'
+    } else if (cond == 'View') {
+        return 'view'
+    } else if (cond == 'Delete') {
+        return 'remove'
+    }
+}
