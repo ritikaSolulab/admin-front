@@ -1,5 +1,4 @@
 const config = {
-    // SERVER_URL: 'http://localhost:3000/',
     SERVER_URL: 'http://localhost:3000/',
     URLS: {
         LOGIN_URL: 'admin/login',
@@ -17,8 +16,8 @@ const config = {
         CREATE_ROLE: 'admin/role.create',
         ROLE_LIST: 'admin/role.list',
         DELETE_ROLE: 'admin/role.delete',
-        UPDATE_CMS: 'cms/update.cms',
-        GET_CMS: 'cms/get.cms',
+        UPDATE_CMS: 'admin/cms',
+        GET_CMS: 'admin/cms',
         BLOCK_ADMIN: 'admin/update-status',
         COLLECTION_LIST:'admin/collection-list',
         COLLECTION_DETAILS: 'admin/collection-details',
