@@ -197,7 +197,8 @@ $('#View_Modal').on('show.bs.modal', (e) => {
 $('#Delete_Confirm_Modal').on('show.bs.modal', (e) => {
     const btn = $(e.relatedTarget)
     const userId = btn.data('id')
-    $('#AdminDeleteModalText').text(`Are you sure you want to delete ${name} admin?`)
+    const name = btn.data('name')
+    $('#AdminDeleteModalText').text(`Are you sure you want to delete admin ${name}?`)
 
     $('#DeleteAdminBtn').off().on('click', async function(){
         $('#DeleteAdminBtn').text('Please wait..')

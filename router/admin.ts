@@ -39,6 +39,8 @@ router.get('/feature', (req,res) => {
     res.render('feature/index', {activeBar: 'feature'})
 })
 router.get('/infatuation', (req,res) => {
+    const { collection } = req.query
+    collection ? res.render('infatuation/details', {activeBar: 'infatuation', collection }):
     res.render('infatuation/index', {activeBar: 'infatuation'})
 })
 router.get('/curated', (req,res) => {
@@ -53,5 +55,6 @@ router.get('/userManagement', (req,res) => {
 router.get('/collectorManagement', (req,res) => {
     res.render('collector-management/index', {activeBar: 'collectorManagement'})
 })
+
 
 export default router;

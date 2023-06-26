@@ -1,0 +1,63 @@
+<style>
+    .note-editor {
+        margin-left: 20%;
+        margin-top: 20px;
+    }
+
+    ._button {
+        margin-left: 50%;
+    }
+
+    .profileLnk {
+        margin-left: 122px;
+    }
+</style>
+<div class="card-body">
+    <div class="row">
+        <div class="col col-6">
+            <h3>You are Infactuating Maria Actor</h3>
+        </div>
+        <div id="Infactuation_1"></div>
+        <div id="Infactuation_2"></div>
+        <div class="row g-4 align-items-center">
+            <div class="col-auto profileLnk">
+                <label for="profileLinks" class="col-form-label">Profile Links</label>
+            </div>
+            <div class="col col-4">
+                <input type="text" id="ProfileLinkInput" placeholder="Add Profile Link" class="form-control"
+                    aria-labelledby="profileHelpInline">
+            </div>
+
+
+            <div class="col-auto">
+                <div class="btn-group" role="group" aria-label="Third group">
+                    <button type="button" class="btn btn-primary">+</button>
+                </div>
+
+            </div>
+            <div class="">
+
+                <button type="button" class="btn btn-primary _button">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    
+    $(document).ready(() => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const collectionId = urlParams.get('collection');
+        if(collectionId){
+            axois(axiosConfig(`${config.SERVER_URL}${config.COLLECTION_DETAILS}`))
+        }
+        $('#Infactuation_1').summernote({
+            height: '130px',
+            width: '700px',
+        })
+        $('#Infactuation_2').summernote({
+            height: '130px',
+            width: '700px',
+        })
+
+    })
+</script>
