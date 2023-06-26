@@ -20,7 +20,9 @@ const config = {
         UPDATE_CMS: 'cms/update.cms',
         GET_CMS: 'cms/get.cms',
         BLOCK_ADMIN: 'admin/update-status',
-        COLLECTION_LIST:'admin/collection-list'
+        COLLECTION_LIST:'admin/collection-list',
+        COLLECTION_DETAILS: 'admin/collection-details',
+        UPLOAD_IMAGE: 'collection/upload.collection-image'
 
     }
 }
