@@ -37,9 +37,6 @@ const adminTableConfig = {
     url: `${config.SERVER_URL}${config.URLS.ADMIN_LIST}`,
     type: 'GET',
 }
-// setInterval( function () {
-//     adminTableConfig.ajax.reload( null, false ); // user paging is not reset on reload
-// }, 30000 );
 const roleTableConfig = {
     url: `${config.SERVER_URL}${config.URLS.ROLE_LIST}`,
     type: 'GET',
