@@ -1,4 +1,4 @@
-name: Build and Run Docker Image on EC2
+name: Build 
 
 on:
   push:
