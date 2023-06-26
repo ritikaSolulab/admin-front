@@ -918,7 +918,6 @@
         <script>
             let status;
             $(document).on("change", "input[name='blockAdmin']", function () {
-            alert(this.value);
             if (this.checked) {
                 status = true
                 blockUser(this.value)

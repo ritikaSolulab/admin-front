@@ -488,6 +488,7 @@ $('#Delete_Role_Modal').on('show.bs.modal', (e) => {
             }
         })
         .then((resp)=>{
+            loadRoleTable();
             $('#DeleteRoleBtn').text('Delete')
             $('#Delete_Role_Modal').modal('hide')
             ToastMsg(resp?.data?.message, 'Success')
