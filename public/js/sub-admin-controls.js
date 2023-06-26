@@ -37,6 +37,9 @@ const adminTableConfig = {
     url: `${config.SERVER_URL}${config.URLS.ADMIN_LIST}`,
     type: 'GET',
 }
+// setInterval( function () {
+//     adminTableConfig.ajax.reload( null, false ); // user paging is not reset on reload
+// }, 30000 );
 const roleTableConfig = {
     url: `${config.SERVER_URL}${config.URLS.ROLE_LIST}`,
     type: 'GET',
@@ -72,11 +75,11 @@ const adminColumns = [
             data: '_id', orderable: false, targets: -1,
             render: (data, type, row, meta) => {
                 let text = `<div class='action-btn'>
-                    <a data-bs-toggle="modal" data-bs-target="#View_Modal" data-id="${row._id}" data-name="${row.name}" data-roleid="${row?.roleDetails?.roleName}" data-email = "${row.email}">
+                    <a data-bs-toggle="modal" data-bs-target="#View_Modal" data-id="${row._id}" data-name="${row.name}" data-roleid="${row?.roleDetails?.roleName}" data-email = "${row.email}" style="margin-right: 10px; cursor:pointer">
                     <i data-toggle="tooltip" data-placement="top" title="View" class="fa fa-eye" aria-hidden="true"></i></a>                         
-                    <a data-bs-toggle="modal" data-bs-target="#Edit_Modal" data-id="${row._id}" data-name="${row.name}" data-roleid="${row.roleId}" data-email = "${row.email}">
+                    <a data-bs-toggle="modal" data-bs-target="#Edit_Modal" data-id="${row._id}" data-name="${row.name}" data-roleid="${row.roleId}" data-email = "${row.email}"  style="margin-right: 10px; cursor:pointer">
                     <i data-toggle="tooltip" data-placement="top" title=Edit class="fa fa-pencil" aria-hidden="true"></i></a>
-                    <a data-bs-toggle="modal" data-bs-target = "#Delete_Confirm_Modal" data-name="${row.name}" data-id="${row._id}" data-status = "${row.isDeleted}">
+                    <a data-bs-toggle="modal" data-bs-target = "#Delete_Confirm_Modal" data-name="${row.name}" data-id="${row._id}" data-status = "${row.isDeleted}"  style="margin-right: 10px; cursor:pointer">
                     <i data-toggle="tooltip" data-placement="top" title='Delete' class="fa fa-trash" aria-hidden="true"></i></a>
                     </div>`
                 return text
@@ -119,11 +122,11 @@ const roleColumns = [
                 _Class = "fa fa-user-times disable-user"
             }
             let text = `<div class='action-btn'>
-                    <a data-bs-toggle="modal" data-bs-target = "#View_Role_Modal" data-rolename="${row.roleName}" data-permissions = '${JSON.stringify(row.permissions)}'>
+                    <a data-bs-toggle="modal" data-bs-target = "#View_Role_Modal" data-rolename="${row.roleName}" data-permissions = '${JSON.stringify(row.permissions)}'  style="margin-right: 10px; cursor:pointer">
                     <i data-toggle="tooltip" data-placement="top" title="View" class="fa fa-eye" aria-hidden="true"></i></a>
-                    <a data-bs-toggle="modal" data-bs-target = "#Edit_Role_Modal" data-id="${row._id}" data-rolename = "${row.roleName}" data-roleid="${row.roleId}" data-permissions='${JSON.stringify(row.permissions)}'>
+                    <a data-bs-toggle="modal" data-bs-target = "#Edit_Role_Modal" data-id="${row._id}" data-rolename = "${row.roleName}" data-roleid="${row.roleId}" data-permissions='${JSON.stringify(row.permissions)}'  style="margin-right: 10px; cursor:pointer">
                     <i data-toggle="tooltip" data-placement="top" title=Edit class="fa fa-pencil" aria-hidden="true"></i></a>`
-                text += row?.roleCount.length == 0 ? `<a data-bs-toggle="modal" data-bs-target = "#Delete_Role_Modal" data-id="${row._id}" data-rolename="${row.roleName}">
+                text += row?.roleCount.length == 0 ? `<a data-bs-toggle="modal" data-bs-target = "#Delete_Role_Modal" data-id="${row._id}" data-rolename="${row.roleName}"  style="margin-right: 10px; cursor:pointer">
                 <i data-toggle="tooltip" data-placement="top" title=Delete class="fa fa-trash" aria-hidden="true"></i></a>` : ``
                 text += `</div>`
             return text
@@ -165,7 +168,7 @@ $('#Edit_Modal').on('show.bs.modal', (e) => {
             }
         })
         .then((response) => {
-            loadAdminTable
+            loadAdminTable()
             ToastMsg(response?.data?.message, 'Success')
             $('#Edit_Modal').modal('hide')
             $('#Edit_Success_Modal').modal('show')
@@ -397,62 +400,73 @@ $('#View_Role_Modal').on('show.bs.modal', (e) => {
             if(e.create) $('#adminMngCreate').attr('checked', true)
             if(e.update) $('#adminMngEdit').attr('checked', true)
             if(e.view) $('#adminMngView').attr('checked', true)
-            if(e.remove) $('#adminMngView').attr('checked', true)
+            if(e.remove) $('#adminMngDelete').attr('checked', true)
         }
         if(e.permissionName === 'user_management'){
             if(e.create) $('#userMngCreate').attr('checked', true)
             if(e.update) $('#userMngEdit').attr('checked', true)
-            if(e.view) $('#userMngView').attr('checked', true)            
+            if(e.view) $('#userMngView').attr('checked', true) 
+            if(e.remove) $('#userMngDelete').attr('checked', true)            
         }
         if(e.permissionName === 'collector_management'){
             if(e.create) $('#collectorMngCreate').attr('checked', true)
             if(e.update) $('#collectorMngEdit').attr('checked', true)
-            if(e.view) $('#collectorMngView').attr('checked', true)            
+            if(e.view) $('#collectorMngView').attr('checked', true)
+            if(e.remove) $('#collectorMngDelete').attr('checked', true)            
         }
         if(e.permissionName === 'license_management'){
             if(e.create) $('#licenseMngCreate').attr('checked', true)
             if(e.update) $('#licenseMngEdit').attr('checked', true)
-            if(e.view) $('#licenseMngView').attr('checked', true)            
+            if(e.view) $('#licenseMngView').attr('checked', true)
+            if(e.remove) $('#licenseMngDelete').attr('checked', true)            
         }
         if(e.permissionName === 'nft_management'){
             if(e.create) $('#nftMngCreate').attr('checked', true)
             if(e.update) $('#nftMngEdit').attr('checked', true)
-            if(e.view) $('nftnMngView').attr('checked', true)            
+            if(e.view) $('nftnMngView').attr('checked', true)
+            if(e.remove) $('nftMngDelete').attr('checked', true)            
         }
         if(e.permissionName === 'royalties_management'){
             if(e.create) $('#royaltiesMngCreate').attr('checked', true)
             if(e.update) $('#royaltiesMngEdit').attr('checked', true)
-            if(e.view) $('#royaltiesMngView').attr('checked', true)            
+            if(e.view) $('#royaltiesMngView').attr('checked', true)
+            if(e.remove) $('#royaltiesMngDelete').attr('checked', true)            
         }
         if(e.permissionName === 'transaction_management'){
             if(e.create) $('#transactionMngCreate').attr('checked', true)
             if(e.update) $('#transactionMngEdit').attr('checked', true)
-            if(e.view) $('#transactionMngView').attr('checked', true)            
+            if(e.view) $('#transactionMngView').attr('checked', true)
+            if(e.remove) $('#transactionMngDelete').attr('checked', true)            
         }
         if(e.permissionName === 'infactuation'){
             if(e.create) $('#infactuationMngCreate').attr('checked', true)
             if(e.update) $('#infactuationMngEdit').attr('checked', true)
-            if(e.view) $('#infactuationMngView').attr('checked', true)            
+            if(e.view) $('#infactuationMngView').attr('checked', true)
+            if(e.remove) $('#infactuationMngDelete').attr('checked', true)            
         }
         if(e.permissionName === 'curated'){
             if(e.create) $('#curatedMngCreate').attr('checked', true)
             if(e.update) $('#curatedMngEdit').attr('checked', true)
-            if(e.view) $('#curatedMngView').attr('checked', true)            
+            if(e.view) $('#curatedMngView').attr('checked', true) 
+            if(e.remove) $('#curatedMngDelete').attr('checked', true)            
         }
         if(e.permissionName === 'content_management'){
             if(e.create) $('#contentMngCreate').attr('checked', true)
             if(e.update) $('#contentMngEdit').attr('checked', true)
-            if(e.view) $('#contentMngView').attr('checked', true)            
+            if(e.view) $('#contentMngView').attr('checked', true)
+            if(e.remove) $('#contentMngDelete').attr('checked', true)            
         }
         if(e.permissionName === 'feature'){
             if(e.create) $('#featureMngCreate').attr('checked', true)
             if(e.update) $('#featureMngEdit').attr('checked', true)
-            if(e.view) $('#featureMngView').attr('checked', true)            
+            if(e.view) $('#featureMngView').attr('checked', true)
+            if(e.remove) $('#featureMngDelete').attr('checked', true)            
         }
         if(e.permissionName === 'role_management'){
             if(e.create) $('#roleMngCreate').attr('checked', true)
             if(e.update) $('#roleMngEdit').attr('checked', true)
-            if(e.view) $('#roleMngView').attr('checked', true)            
+            if(e.view) $('#roleMngView').attr('checked', true)
+            if(e.remove) $('#roleMngDelete').attr('checked', true)            
         }
     }
 })
@@ -488,6 +502,7 @@ $('#Delete_Role_Modal').on('show.bs.modal', (e) => {
         })
     })
 })
+
 /** Delete role Method Ends*/
 
 /** Create Admin Method */
