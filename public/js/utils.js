@@ -27,24 +27,15 @@ return maskid
 const Logout = async() => {
     localStorage.clear()
     $.ajax({
-        type: 'get',
+        method: 'POST',
         url:`${window.location.origin}${config.URLS.LOGOUT}`,
         contentType: 'application/json',
         success: ((data)=>{
-            console.log(data)
+            localStorage.setItem('token', null);
+            localStorage.setItem('user', null);
         })
     })
-    // await axios({
-    //     method: 'GET',
-    //     // dataType: 'application/json',
-    //     url: `${window.location.origin}${config.URLS.LOGOUT}`
-    // }).then((data)=>{
-    //     console.log(data)
-    //     // window.location = '/login'
-    // }).catch((err)=>{
-    //     const { response: { data: { message } } } = err;
-    //     ToastMsg(message, 'Error')
-    // })
+    window.location.href = '/'
 }
 
 const axiosConfig = (
