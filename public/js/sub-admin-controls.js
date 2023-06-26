@@ -289,7 +289,7 @@ $('#Edit_Role_Modal').on('show.bs.modal', (e) => {
             if(role.remove) $('#curatedMng-View').attr('checked', true)            
         }
         if(role.permissionName === 'content_management'){
-            if(role.create) $('#contenMng-Create').attr('checked', true)
+            if(role.create) $('#contentMng-Create').attr('checked', true)
             if(role.update) $('#contentMng-Edit').attr('checked', true)
             if(role.view) $('#contentMng-View').attr('checked', true)            
             if(role.remove) $('#contentMng-Delete').attr('checked', true)            
