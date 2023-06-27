@@ -119,7 +119,7 @@ const roleColumns = [
                 _Class = "fa fa-user-times disable-user"
             }
             let text = `<div class='action-btn'>
-                    <a data-bs-toggle="modal" data-bs-target = "#View_Role_Modal" data-rolename="${row.roleName}" data-permissions = '${JSON.stringify(row.permissions)}'  style="margin-right: 10px; cursor:pointer">
+                    <a data-bs-toggle="modal" data-bs-target = "#View_Role_Modal" data-id="${row._id}" data-rolename="${row.roleName}" data-permissions = '${JSON.stringify(row.permissions)}'  style="margin-right: 10px; cursor:pointer">
                     <i data-toggle="tooltip" data-placement="top" title="View" class="fa fa-eye" aria-hidden="true"></i></a>
                     <a data-bs-toggle="modal" data-bs-target = "#Edit_Role_Modal" data-id="${row._id}" data-rolename = "${row.roleName}" data-roleid="${row.roleId}" data-permissions='${JSON.stringify(row.permissions)}'  style="margin-right: 10px; cursor:pointer">
                     <i data-toggle="tooltip" data-placement="top" title=Edit class="fa fa-pencil" aria-hidden="true"></i></a>`
@@ -233,78 +233,79 @@ $('#Edit_Role_Modal').on('show.bs.modal', (e) => {
     roleId = btn.data('id')
     const permission = btn.data('permissions')
     $('#RoleInput').val(roleName)
+    console.log(permission)
     for(const role of permission){
         if(role.permissionName === 'admin_management'){
-            if(role.create) $('#adminMng-Create').attr('checked', true)
-            if(role.update) $('#adminMng-Edit').attr('checked', true)
-            if(role.view) $('#adminMng-View').attr('checked', true)            
-            if(role.remove) $('#adminMng-Delete').attr('checked', true)            
+            role.create ? $('#adminMng-Create').prop('checked', true) : $('#adminMng-Create').prop('checked', false)
+            role.update ? $('#adminMng-Edit').prop('checked', true) : $('#adminMng-Edit').prop('checked', false)
+            role.view ? $('#adminMng-View').prop('checked', true) : $('#adminMng-View').prop('checked', false)            
+            role.remove ? $('#adminMng-Delete').prop('checked', true) : $('#adminMng-Delete').prop('checked', false)            
         }
         if(role.permissionName === 'user_management'){
-            if(role.create) $('#userMng-Create').attr('checked', true)
-            if(role.update) $('#userMng-Edit').attr('checked', true)
-            if(role.remove) $('#userMng-Delete').attr('checked', true)
-            if(role.view) $('#userMng-View').attr('checked', true)            
+            role.create ? $('#userMng-Create').prop('checked', true) : $('#userMng-Create').prop('checked', false)
+            role.update ? $('#userMng-Edit').prop('checked', true) : $('#userMng-Edit').prop('checked', false)
+            role.remove ? $('#userMng-Delete').prop('checked', true) : $('#userMng-Delete').prop('checked', false)
+            role.view ? $('#userMng-View').prop('checked', true) : $('#userMng-View').prop('checked', false)
         }
         if(role.permissionName === 'collector_management'){
-            if(role.create) $('#collectorMng-Create').attr('checked', true)
-            if(role.update) $('#collectorMng-Edit').attr('checked', true)
-            if(role.view) $('#collectorMng-View').attr('checked', true)            
-            if(role.remove) $('#collectorMng-Delete').attr('checked', true)            
+            role.create ? $('#collectorMng-Create').prop('checked', true) : $('#collectorMng-Create').prop('checked', false)
+            role.update ? $('#collectorMng-Edit').prop('checked', true) : $('#collectorMng-Edit').prop('checked', false)
+            role.view ? $('#collectorMng-View').prop('checked', true) : $('#collectorMng-View').prop('checked', false)        
+            role.remove ? $('#collectorMng-Delete').prop('checked', true) : $('#collectorMng-Delete').prop('checked', false)          
         }
         if(role.permissionName === 'license_management'){
-            if(role.create) $('#licenseMng-Create').attr('checked', true)
-            if(role.update) $('#licenseMng-Edit').attr('checked', true)
-            if(role.view) $('#licenseMng-View').attr('checked', true)            
-            if(role.remove) $('#licenseMng-Delete').attr('checked', true)            
+            role.create ? $('#licenseMng-Create').prop('checked', true) : $('#licenseMng-Create').prop('checked', false)
+            role.update ? $('#licenseMng-Edit').prop('checked', true) : $('#licenseMng-Edit').prop('checked', false)
+            role.view ? $('#licenseMng-View').prop('checked', true) : $('#licenseMng-View').prop('checked', false)            
+            role.remove ? $('#licenseMng-Delete').prop('checked', true) : $('#licenseMng-Delete').prop('checked', false)            
         }
         if(role.permissionName === 'nft_management'){
-            if(role.create) $('#nftMng-Create').attr('checked', true)
-            if(role.update) $('#nftMng-Edit').attr('checked', true)
-            if(role.view) $('nftMng-View').attr('checked', true)            
-            if(role.remove) $('nftMng-Delete').attr('checked', true)            
+            role.create ? $('#nftMng-Create').prop('checked', true) : $('#nftMng-Create').prop('checked', false)
+            role.update ? $('#nftMng-Edit').prop('checked', true) : $('#nftMng-Edit').prop('checked', false)
+            role.view ? $('nftMng-View').prop('checked', true) : $('nftMng-View').prop('checked', false)          
+            role.remove ? $('nftMng-Delete').prop('checked', true) : $('nftMng-Delete').prop('checked', false)           
         }
         if(role.permissionName === 'royalties_management'){
-            if(role.create) $('#royaltiesMng-Create').attr('checked', true)
-            if(role.update) $('#royaltiesMng-Edit').attr('checked', true)
-            if(role.view) $('#royaltiesMng-View').attr('checked', true)            
-            if(role.remove) $('#royaltiesMng-Delete').attr('checked', true)            
+            role.create ? $('#royaltiesMng-Create').prop('checked', true) : $('#royaltiesMng-Create').prop('checked', false)
+            role.update ? $('#royaltiesMng-Edit').prop('checked', true) : $('#royaltiesMng-Edit').prop('checked', false)
+            role.view ? $('#royaltiesMng-View').prop('checked', true) : $('#royaltiesMng-View').prop('checked', false)        
+            role.remove ? $('#royaltiesMng-Delete').prop('checked', true) : $('#royaltiesMng-Delete').prop('checked', false)            
         }
         if(role.permissionName === 'transaction_management'){
-            if(role.create) $('#transactionMng-Create').attr('checked', true)
-            if(role.update) $('#transactionMng-Edit').attr('checked', true)
-            if(role.view) $('#transactionMng-View').attr('checked', true)            
-            if(role.remove) $('#transactionMng-Delete').attr('checked', true)            
+            role.create ? $('#transactionMng-Create').prop('checked', true) : $('#transactionMng-Create').prop('checked', false)
+            role.update ? $('#transactionMng-Edit').prop('checked', true) : $('#transactionMng-Edit').prop('checked', false)
+            role.view ? $('#transactionMng-View').prop('checked', true) : $('#transactionMng-View').prop('checked', false)          
+            role.remove ? $('#transactionMng-Delete').prop('checked', true) : $('#transactionMng-Delete').prop('checked', false)            
         }
         if(role.permissionName === 'infactuation'){
-            if(role.create) $('#infactuationMng-Create').attr('checked', true)
-            if(role.update) $('#infactuationMng-Edit').attr('checked', true)
-            if(role.view) $('#infactuationMng-View').attr('checked', true)            
-            if(role.remove) $('#infactuationMng-Delete').attr('checked', true)            
+            role.create ? $('#infactuationMng-Create').prop('checked', true) : $('#infactuationMng-Create').prop('checked', false)
+            role.update ? $('#infactuationMng-Edit').prop('checked', true) : $('#infactuationMng-Edit').prop('checked', false)
+            role.view ? $('#infactuationMng-View').prop('checked', true) : $('#infactuationMng-View').prop('checked', false)       
+            role.remove ? $('#infactuationMng-Delete').prop('checked', true) : $('#infactuationMng-Delete').prop('checked', false)            
         }
         if(role.permissionName === 'curated'){
-            if(role.create) $('#curatedMng-Create').attr('checked', true)
-            if(role.update) $('#curatedMng-Edit').attr('checked', true)
-            if(role.view) $('#curatedMng-View').attr('checked', true)            
-            if(role.remove) $('#curatedMng-View').attr('checked', true)            
+            role.create ? $('#curatedMng-Create').prop('checked', true) : $('#curatedMng-Create').prop('checked', false)
+            role.update ? $('#curatedMng-Edit').prop('checked', true) : $('#curatedMng-Edit').prop('checked', false)
+            role.view ? $('#curatedMng-View').prop('checked', true) : $('#curatedMng-View').prop('checked', false)            
+            role.remove ? $('#curatedMng-Delete').prop('checked', true) : $('#curatedMng-Delete').prop('checked', false)            
         }
         if(role.permissionName === 'content_management'){
-            if(role.create) $('#contentMng-Create').attr('checked', true)
-            if(role.update) $('#contentMng-Edit').attr('checked', true)
-            if(role.view) $('#contentMng-View').attr('checked', true)            
-            if(role.remove) $('#contentMng-Delete').attr('checked', true)            
+            role.create ? $('#contentMng-Create').prop('checked', true) : $('#contentMng-Create').prop('checked', false)
+            role.update ? $('#contentMng-Edit').prop('checked', true) : $('#contentMng-Edit').prop('checked', false)
+            role.view ? $('#contentMng-View').prop('checked', true) : $('#contentMng-View').prop('checked', false)            
+            role.remove ? $('#contentMng-Delete').prop('checked', true) : $('#contentMng-Delete').prop('checked', false)            
         }
         if(role.permissionName === 'feature'){
-            if(role.create) $('#featureMng-Create').attr('checked', true)
-            if(role.update) $('#featureMng-Edit').attr('checked', true)
-            if(role.view) $('#featureMng-View').attr('checked', true)            
-            if(role.remove) $('#featureMng-Delete').attr('checked', true)            
+            role.create ? $('#featureMng-Create').prop('checked', true) : $('#featureMng-Create').prop('checked', false)
+            role.update ? $('#featureMng-Edit').prop('checked', true) : $('#featureMng-Edit').prop('checked', false)
+            role.view ? $('#featureMng-View').prop('checked', true) : $('#featureMng-View').prop('checked', false)            
+            role.remove ? $('#featureMng-Delete').prop('checked', true) : $('#featureMng-Delete').prop('checked', false)            
         }
         if(role.permissionName === 'role_management'){
-            if(role.create) $('#roleMng-Create').attr('checked', true)
-            if(role.update) $('#roleMng-Update').attr('checked', true)
-            if(role.view) $('#roleMng-View').attr('checked', true)            
-            if(role.remove) $('#roleMng-Delete').attr('checked', true)            
+            role.create ? $('#roleMng-Create').prop('checked', true) : $('#roleMng-Create').prop('checked', false)
+            role.update ? $('#roleMng-Edit').prop('checked', true) : $('#roleMng-Edit').prop('checked', false)
+            role.view ? $('#roleMng-View').prop('checked', true) : $('#roleMng-View').prop('checked', false)            
+            role.remove ? $('#roleMng-Delete').prop('checked', true) : $('#roleMng-Delete').prop('checked', false)            
         }
     }
     $('#UpdateRoleDetails').off().on('click', async function () {
@@ -387,83 +388,84 @@ $('#Edit_Role_Modal').on('show.bs.modal', (e) => {
 
 /** View role Details*/
 $('#View_Role_Modal').on('show.bs.modal', (e) => {
-    $(".ViewRoleDet").attr('disabled', true)
+    $(".ViewRoleDet").prop('disabled', true)
     const btn = $(e.relatedTarget)
     const roleName = btn.data('rolename')
     let permissions = btn.data('permissions')
     $('#RoleInputView').val(roleName)
+    console.log(permissions)
     for(const e of permissions){
         if(e.permissionName === 'admin_management'){
-            if(e.create) $('#adminMngCreate').attr('checked', true)
-            if(e.update) $('#adminMngEdit').attr('checked', true)
-            if(e.view) $('#adminMngView').attr('checked', true)
-            if(e.remove) $('#adminMngDelete').attr('checked', true)
+            e.create ? $('#adminMngCreate').prop('checked', true) : $('#adminMngCreate').prop('checked', false)
+            e.update ? $('#adminMngEdit').prop('checked', true) : $('#adminMngEdit').prop('checked', false)
+            e.view ? $('#adminMngView').prop('checked', true) : $('#adminMngView').prop('checked', false)
+            e.remove ? $('#adminMngDelete').prop('checked', true) : $('#adminMngDelete').prop('checked', false)
         }
         if(e.permissionName === 'user_management'){
-            if(e.create) $('#userMngCreate').attr('checked', true)
-            if(e.update) $('#userMngEdit').attr('checked', true)
-            if(e.view) $('#userMngView').attr('checked', true) 
-            if(e.remove) $('#userMngDelete').attr('checked', true)            
+            e.create ? $('#userMngCreate').prop('checked', true) : $('#userMngCreate').prop('checked', false)
+            e.update ? $('#userMngEdit').prop('checked', true) : $('#userMngEdit').prop('checked', false)
+            e.view ? $('#userMngView').prop('checked', true) : $('#userMngView').prop('checked', false) 
+            e.remove ? $('#userMngDelete').prop('checked', true) : $('#userMngDelete').prop('checked', false)            
         }
         if(e.permissionName === 'collector_management'){
-            if(e.create) $('#collectorMngCreate').attr('checked', true)
-            if(e.update) $('#collectorMngEdit').attr('checked', true)
-            if(e.view) $('#collectorMngView').attr('checked', true)
-            if(e.remove) $('#collectorMngDelete').attr('checked', true)            
+            e.create ? $('#collectorMngCreate').prop('checked', true) : $('#collectorMngCreate').prop('checked', false)
+            e.update ? $('#collectorMngEdit').prop('checked', true) : $('#collectorMngEdit').prop('checked', false)
+            e.view ? $('#collectorMngView').prop('checked', true) : $('#collectorMngView').prop('checked', false)
+            e.remove ? $('#collectorMngDelete').prop('checked', true) : $('#collectorMngDelete').prop('checked', false)            
         }
         if(e.permissionName === 'license_management'){
-            if(e.create) $('#licenseMngCreate').attr('checked', true)
-            if(e.update) $('#licenseMngEdit').attr('checked', true)
-            if(e.view) $('#licenseMngView').attr('checked', true)
-            if(e.remove) $('#licenseMngDelete').attr('checked', true)            
+            e.create ? $('#licenseMngCreate').prop('checked', true) : $('#licenseMngCreate').prop('checked', false)
+            e.update ? $('#licenseMngEdit').prop('checked', true) : $('#licenseMngEdit').prop('checked', false) 
+            e.view ? $('#licenseMngView').prop('checked', true) : $('#licenseMngView').prop('checked', false)
+            e.remove ? $('#licenseMngDelete').prop('checked', true) : $('#licenseMngDelete').prop('checked', false)            
         }
         if(e.permissionName === 'nft_management'){
-            if(e.create) $('#nftMngCreate').attr('checked', true)
-            if(e.update) $('#nftMngEdit').attr('checked', true)
-            if(e.view) $('nftnMngView').attr('checked', true)
-            if(e.remove) $('nftMngDelete').attr('checked', true)            
+            e.create ? $('#nftMngCreate').prop('checked', true) : $('#nftMngCreate').prop('checked', false) 
+            e.update ? $('#nftMngEdit').prop('checked', true) : $('#nftMngEdit').prop('checked', false)
+            e.view ? $('nftnMngView').prop('checked', true) : $('nftnMngView').prop('checked', false)
+            e.remove ? $('nftMngDelete').prop('checked', true) : $('nftMngDelete').prop('checked', false)            
         }
         if(e.permissionName === 'royalties_management'){
-            if(e.create) $('#royaltiesMngCreate').attr('checked', true)
-            if(e.update) $('#royaltiesMngEdit').attr('checked', true)
-            if(e.view) $('#royaltiesMngView').attr('checked', true)
-            if(e.remove) $('#royaltiesMngDelete').attr('checked', true)            
+            e.create ? $('#royaltiesMngCreate').prop('checked', true) : $('#royaltiesMngCreate').prop('checked', false)
+            e.update ? $('#royaltiesMngEdit').prop('checked', true) : $('#royaltiesMngEdit').prop('checked', false) 
+            e.view ? $('#royaltiesMngView').prop('checked', true) : $('#royaltiesMngView').prop('checked', false)
+            e.remove ? $('#royaltiesMngDelete').prop('checked', true) : $('#royaltiesMngDelete').prop('checked', false)            
         }
         if(e.permissionName === 'transaction_management'){
-            if(e.create) $('#transactionMngCreate').attr('checked', true)
-            if(e.update) $('#transactionMngEdit').attr('checked', true)
-            if(e.view) $('#transactionMngView').attr('checked', true)
-            if(e.remove) $('#transactionMngDelete').attr('checked', true)            
+            e.create ? $('#transactionMngCreate').prop('checked', true) : $('#transactionMngCreate').prop('checked', false)
+            e.update ? $('#transactionMngEdit').prop('checked', true) : $('#transactionMngEdit').prop('checked', false)
+            e.view ? $('#transactionMngView').prop('checked', true) : $('#transactionMngView').prop('checked', false)
+            e.remove ? $('#transactionMngDelete').prop('checked', true) : $('#transactionMngDelete').prop('checked', false)            
         }
         if(e.permissionName === 'infactuation'){
-            if(e.create) $('#infactuationMngCreate').attr('checked', true)
-            if(e.update) $('#infactuationMngEdit').attr('checked', true)
-            if(e.view) $('#infactuationMngView').attr('checked', true)
-            if(e.remove) $('#infactuationMngDelete').attr('checked', true)            
+            e.create ? $('#infactuationMngCreate').prop('checked', true) : $('#infactuationMngCreate').prop('checked', false)
+            e.update ? $('#infactuationMngEdit').prop('checked', true) : $('#infactuationMngEdit').prop('checked', false)
+            e.view ? $('#infactuationMngView').prop('checked', true) : $('#infactuationMngView').prop('checked', false)
+            e.remove ? $('#infactuationMngDelete').prop('checked', true) : $('#infactuationMngDelete').prop('checked', false)            
         }
         if(e.permissionName === 'curated'){
-            if(e.create) $('#curatedMngCreate').attr('checked', true)
-            if(e.update) $('#curatedMngEdit').attr('checked', true)
-            if(e.view) $('#curatedMngView').attr('checked', true) 
-            if(e.remove) $('#curatedMngDelete').attr('checked', true)            
+            e.create ? $('#curatedMngCreate').prop('checked', true) : $('#curatedMngCreate').prop('checked', false)
+            e.update ? $('#curatedMngEdit').prop('checked', true) : $('#curatedMngEdit').prop('checked', false)
+            e.view ? $('#curatedMngView').prop('checked', true) : $('#curatedMngView').prop('checked', false)
+            e.remove ? $('#curatedMngDelete').prop('checked', true) : $('#curatedMngDelete').prop('checked', false)            
         }
         if(e.permissionName === 'content_management'){
-            if(e.create) $('#contentMngCreate').attr('checked', true)
-            if(e.update) $('#contentMngEdit').attr('checked', true)
-            if(e.view) $('#contentMngView').attr('checked', true)
-            if(e.remove) $('#contentMngDelete').attr('checked', true)            
+            e.create ? $('#contentMngCreate').prop('checked', true) : $('#contentMngCreate').prop('checked', false) 
+            e.update ? $('#contentMngEdit').prop('checked', true) : $('#contentMngEdit').prop('checked', false)
+            e.view ? $('#contentMngView').prop('checked', true) : $('#contentMngView').prop('checked', false)
+            e.remove ? $('#contentMngDelete').prop('checked', true) : $('#contentMngDelete').prop('checked', false)           
         }
         if(e.permissionName === 'feature'){
-            if(e.create) $('#featureMngCreate').attr('checked', true)
-            if(e.update) $('#featureMngEdit').attr('checked', true)
-            if(e.view) $('#featureMngView').attr('checked', true)
-            if(e.remove) $('#featureMngDelete').attr('checked', true)            
+            e.create ? $('#featureMngCreate').prop('checked', true) : $('#featureMngCreate').prop('checked', false)
+            e.update ? $('#featureMngEdit').prop('checked', true) : $('#featureMngEdit').prop('checked', false) 
+            e.view ? $('#featureMngView').prop('checked', true) : $('#featureMngView').prop('checked', false)
+            e.remove ? $('#featureMngDelete').prop('checked', true) : $('#featureMngDelete').prop('checked', false)            
         }
         if(e.permissionName === 'role_management'){
-            if(e.create) $('#roleMngCreate').attr('checked', true)
-            if(e.update) $('#roleMngEdit').attr('checked', true)
-            if(e.view) $('#roleMngView').attr('checked', true)
-            if(e.remove) $('#roleMngDelete').attr('checked', true)            
+            e.create ? $('#roleMngCreate').prop('checked', true) : $('#roleMngCreate').prop('checked', false)
+            e.update ? $('#roleMngEdit').prop('checked', true) : $('#roleMngEdit').prop('checked', false) 
+            e.view ? $('#roleMngView').prop('checked', true) : $('#roleMngView').prop('checked', false)
+            e.remove ? $('#roleMngDelete').prop('checked', true) : $('#roleMngDelete').prop('checked', false)            
         }
     }
 })
@@ -492,7 +494,7 @@ $('#Delete_Role_Modal').on('show.bs.modal', (e) => {
             $('#DeleteRoleBtn').text('Delete')
             $('#Delete_Role_Modal').modal('hide')
             ToastMsg(resp?.data?.message, 'Success')
-            role()
+            //loadRoleTable()
         })
         .catch((err)=>{
             const { response: { data: { message } } } = err
@@ -543,7 +545,7 @@ $('#Edit_Role_Modal').on('hidden.bs.modal', function(){
 $('#Create_Role_Modal').on('show.bs.modal', (e) => {    
     $('#CreateRoleBtn').off().on('click', async function(){
         const btn = $(e.relatedTarget)
-        $(".CreateRoleDet").attr('enabled', true)
+        $(".CreateRoleDet").prop('enabled', true)
         const roleName = $('#RoleNameInput').val().trim();
         let permissions= [];
         const permissionIdList = ['adminMng_Create', 'adminMng_Edit', 'adminMng_View',
@@ -620,4 +622,38 @@ function permissionCond(cond) {
     } else if (cond == 'Delete') {
         return 'remove'
     }
+}
+
+/**Block & Unblock admin */
+let status;
+$(document).on("change", "input[name='blockAdmin']", function () {
+if (this.checked) {
+    status = true
+    blockUser(this.value)
+}else{
+    status=false
+    blockUser(this.value)
+}
+});
+async function blockUser(userId){
+    const requestParams = {
+        userId,
+        status
+    }
+        await axios({
+            url: `${config.SERVER_URL}${config.URLS.BLOCK_ADMIN}`,
+            method: 'PATCH',
+            data: requestParams,
+            headers: {
+                authorization: `Bearer ${token}`
+            }
+        })
+        .then((response) => {
+            ToastMsg(response?.data?.message, 'Success')
+            //console.log('User blocked successfully', response);
+        })
+        .catch((err) => {
+            const { response: { data: { message } } } = err
+            ToastMsg(message, 'Error')
+        })  
 }
