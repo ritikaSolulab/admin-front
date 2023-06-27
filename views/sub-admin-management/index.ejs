@@ -272,7 +272,7 @@
                                                     <input class="CreateRoleDet" type="checkbox" id="royaltiesMng-Edit"> Edit
                                                     &nbsp;&nbsp; &nbsp;
                                                     <input class="CreateRoleDet" type="checkbox" id="royaltiesMng-View"> View
-                                                    &nbsp;&nbsp; &nbsp;
+                                                    &nbsp;&nbsp; &nbsp; &nbsp;
                                                     <input class="CreateRoleDet" type="checkbox" id="nftMng-Delete"> Delete                                            
                                         </div>
                                     </div>
@@ -286,7 +286,7 @@
                                                     <input class="CreateRoleDet" type="checkbox" id="transactionMng-Edit"> Edit
                                                     &nbsp;&nbsp; &nbsp;
                                                     <input class="CreateRoleDet" type="checkbox" id="transactionMng-View"> View
-                                                    &nbsp;&nbsp; &nbsp;
+                                                    &nbsp;&nbsp; &nbsp; &nbsp;
                                                     <input class="CreateRoleDet" type="checkbox" id="transactionMng-Delete"> Delete                                            
                                         </div>
                                     </div>
@@ -300,7 +300,7 @@
                                             <input class="CreateRoleDet" type="checkbox" id="infactuationMng-Edit"> Edit &nbsp;
                                             &nbsp; &nbsp;
                                             <input class="CreateRoleDet" type="checkbox" id="infactuationMng-View"> View
-                                            &nbsp;&nbsp; &nbsp;
+                                            &nbsp;&nbsp; &nbsp; &nbsp;
                                             <input class="CreateRoleDet" type="checkbox" id="infactuationMng-Delete"> Delete                                            
 
                                         </div>
@@ -313,7 +313,7 @@
                                             <input class="CreateRoleDet" type="checkbox" id="curatedMng-Create"> Create
                                             &nbsp;&nbsp; &nbsp;
                                             <input class="CreateRoleDet" type="checkbox" id="curatedMng-Edit"> Edit &nbsp;
-                                            &nbsp; &nbsp;
+                                            &nbsp; &nbsp; 
                                             <input class="CreateRoleDet" type="checkbox" id="curatedMng-View"> View
                                             &nbsp;&nbsp; &nbsp;
                                             <input class="CreateRoleDet" type="checkbox" id="curatedMng-Delete"> Delete                                            
@@ -330,7 +330,7 @@
                                             <input class="CreateRoleDet" type="checkbox" id="contentMng-Edit"> Edit &nbsp;
                                             &nbsp; &nbsp;
                                             <input class="CreateRoleDet" type="checkbox" id="contentMng-View"> View
-                                            &nbsp;&nbsp; &nbsp;
+                                            &nbsp;&nbsp; &nbsp; &nbsp;
                                             <input class="CreateRoleDet" type="checkbox" id="contentMng-Delete"> Delete                                            
 
                                         </div>
@@ -345,7 +345,7 @@
                                             <input class="CreateRoleDet" type="checkbox" id="featureMng-Edit"> Edit &nbsp;
                                             &nbsp; &nbsp;
                                             <input class="CreateRoleDet" type="checkbox" id="featureMng-View"> View
-                                            &nbsp;&nbsp; &nbsp;
+                                            &nbsp;&nbsp; &nbsp; &nbsp;
                                             <input class="CreateRoleDet" type="checkbox" id="featureMng-Delete"> Delete       
                                         </div>
                                     </div>
@@ -915,38 +915,4 @@
     <!--Modal Ends -->
     <%- include('../partials/datatable-script')%>
         <script src="js/sub-admin-controls.js"></script>
-        <script>
-            let status;
-            $(document).on("change", "input[name='blockAdmin']", function () {
-            if (this.checked) {
-                status = true
-                blockUser(this.value)
-            }else{
-                status=false
-                blockUser(this.value)
-            }
-        });
-            async function blockUser(userId){
-                const requestParams = {
-                    userId,
-                    status
-                }
-                    await axios({
-                        url: `${config.SERVER_URL}${config.URLS.BLOCK_ADMIN}`,
-                        method: 'PATCH',
-                        data: requestParams,
-                        headers: {
-                            authorization: `Bearer ${token}`
-                        }
-                    })
-                    .then((response) => {
-                        ToastMsg(response?.data?.message, 'Success')
-                        console.log('User blocked successfully', response);
-                    })
-                    .catch((err) => {
-                        const { response: { data: { message } } } = err
-                        ToastMsg(message, 'Error')
-                    })  
-            }
-        </script>
           
