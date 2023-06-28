@@ -6,17 +6,27 @@
             await axios(axiosConfig(`${config.SERVER_URL}${config.URLS.COLLECTION_DETAILS}/${collectionId}`, 'GET'))
                 .then((response) => {
                     const { data: { data } } = response
-                    localStorage.setItem('infatuationId', data.infatuationId)
+                    $.ajax({
+                        url: `${config.SERVER_URL}${config.URLS.INFATUATION_DETAILS}/${data.infatuationId}`,
+                        method: 'GET',
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        },
+                        success: (resp) => {
+                            $('#Infatuation_1').summernote('code', resp?.data?.html.editor1)
+                            $('#Infatuation_2').summernote('code', resp?.data?.html.editor2)
+                        },
+                        error: (err) => window.location.href = 'admin/nft'
+                    })
                     $('#skeleton').text(`You are Infatuating`)
                     $('#CollectionName_Creator').text(` ${data?.title} - ${data?.createdBy?.name}`)
                     $('.skeleton').removeClass('skeleton')
                 })
                 .catch((err) => {
-                    // window.location.href = 'admin/nft'
-                    console.log(err?.response?.data)
+                    window.location.href = 'admin/nft'
                 })
         }
-        
+
         /** Summernote common configuration */
         const infatuation1Callbacks = {
             onImageUpload: (files, editor, welEditable) => {
@@ -60,17 +70,10 @@
             width: '700px',
             callbacks: infatuation2Callbacks
         }
+
+        /** Initialize Summernote Editor*/
         $('#Infatuation_1').summernote(summernoteConfig)
         $('#Infatuation_2').summernote(_summernoteConfig)
-        const infatuationId = localStorage.getItem('infatuationId')
-        if (infatuationId) {
-            await axios(axiosConfig(`${config.SERVER_URL}${config.URLS.INFATUATION_DETAILS}/${infatuationId}`, 'GET'))
-                .then((resp) => {
-                    console.log(resp?.data?.html.editor1)
-                    $('#Infatuation_1').summernote('code', resp?.data?.html.editor1)
-                    $('#Infatuation_2').summernote('code', resp?.data?.html.editor2)
-                }).catch((err) => ToastMsg(err?.resp?.data.message, 'Error'))
-        }
 
         /** Method to upload image on S3*/
         const uploadImage = async (file, editor, welEditable, summernoteId) => {
@@ -88,8 +91,6 @@
                 const url = response?.data?.data?.data?.Location
                 summernoteId == 'Infatuation_1' ? $('#Infatuation_1').summernote('insertImage', url, 'myimage') :
                     $('#Infatuation_2').summernote('insertImage', url, 'myimage');
-
-                // editor.insertImage(welEditable, response?.data?.data?.Location);
             }).catch((e) => ToastMsg(e?.response?.data?.message, 'Error'))
         }
 
