@@ -1,9 +1,4 @@
-// $("#pro table tr").on('click', function(){
-//     window.location = "/admin/provider_details";    
-// });
-// $("#pend table tr").on('click', function(){
-//     window.location = "/admin/provider_pending_approvals";    
-// });
+
 var providersTable;
 var providersApprovalTable;
 
