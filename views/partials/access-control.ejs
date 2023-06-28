@@ -1,25 +1,60 @@
 <script type="text/javascript">
     const _user = JSON.parse(user)
     const permissions = _user?.roleId?.permissions
-    if(_user.isSuperAdmin){
+    if (_user.isSuperAdmin) {
 
-    } else if(permissions && !_user.isSuperAdmin){
-        for(const ele of permissions){
-            (ele.permissionName === 'admin_management' && !ele?.view) ? $('#admin_management_sidebar').hide(): $('#admin_management_sidebar').show()
-            (ele.permissionName === 'user_management' && !ele?.view) ? $('#user_management_sidebar').hide(): $('#user_management_sidebar').show()
-            (ele.permissionName === 'collector_management' && !ele?.view) ? $('#collector_management_sidebar').hide(): $('#collector_management_sidebar').show()
-            (ele.permissionName === 'license_management' && !ele?.view) ? $('#license_management_sidebar').hide(): $('#license_management_sidebar').show()
-            (ele.permissionName === 'nft_management' && !ele?.view) ? $('#nft_management_sidebar').hide():  $('#nft_management_sidebar').show()
-            (ele.permissionName === 'royalties_management' && !ele?.view) ? $('#royalties_management_sidebar').hide():  $('#royalties_management_sidebar').show()
-            (ele.permissionName === 'transaction_management' && !ele?.view) ? $('#transaction_management_sidebar').hide(): $('#transaction_management_sidebar').show()
-            (ele.permissionName === 'infatuation' && !ele?.view) ? $('#infatuation_sidebar').hide(): $('#infatuation_sidebar').show()
-            (ele.permissionName === 'curated' && !ele?.view) ? $('#curated_sidebar').hide(): $('#curated_sidebar').show()
-            (ele.permissionName === 'content_management' && !ele?.view) ? $('#content_management_sidebar').hide(): $('#content_management_sidebar').show()
-            (ele.permissionName === 'feature' && !ele?.view) ? $('#feature_sidebar').hide(): $('#feature_sidebar').show()
-        } 
+    } else if (permissions && !_user.isSuperAdmin) {
+        for (const ele of permissions) {
+            if (ele.permissionName === 'admin_management' && !ele?.view) {
+                $('#admin_management_sidebar').hide()
+            } else {
+                $('#admin_management_sidebar').show()
+            }
+            if (ele.permissionName === 'user_management' && !ele?.view) {
+                $('#user_management_sidebar').hide()
+            } else {
+                $('#user_management_sidebar').show()
+            }
+            if (ele.permissionName === 'collector_management' && !ele?.view) {
+                $('#collector_management_sidebar').hide()
+            } else {
+                $('#collector_management_sidebar').show()
+            }
+            if (ele.permissionName === 'license_management' && !ele?.view) {
+                $('#license_management_sidebar').hide()
+            } else {
+                $('#license_management_sidebar').show()
+            }
+            if (ele.permissionName === 'nft_management' && !ele?.view) {
+                $('#nft_management_sidebar').hide()
+            } else {
+                $('#nft_management_sidebar').show()
+            }
+            if (ele.permissionName === 'royalties_management' && !ele?.view) {
+                $('#royalties_management_sidebar').hide()
+            } else {
+                $('#royalties_management_sidebar').show()
+            }
+            if (ele.permissionName === 'transaction_management' && !ele?.view) {
+                $('#transaction_management_sidebar').hide()
+            }
+            else { $('#transaction_management_sidebar').show() }
+            if (ele.permissionName === 'infatuation' && !ele?.view) {
+                $('#infatuation_sidebar').hide()
+            } else { $('#infatuation_sidebar').show() }
+            if (ele.permissionName === 'curated' && !ele?.view) {
+                $('#curated_sidebar').hide()
+            } else { $('#curated_sidebar').show() }
+            if (ele.permissionName === 'content_management' && !ele?.view) {
+                $('#content_management_sidebar').hide()
+            } else { $('#content_management_sidebar').show() }
+            if (ele.permissionName === 'feature' && !ele?.view) {
+                $('#feature_sidebar').hide()
+            } else { $('#feature_sidebar').show() }
+        }
     } else {
         $('li#dashboard_sidebar').nextAll().hide()
         $('#support_management_sidebar').show()
     }
-       
+
 </script>
