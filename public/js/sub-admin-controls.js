@@ -32,6 +32,11 @@ $(document).ready( async () => {
     .catch((err) => {
         ToastMsg(err?.response?.data?.message, 'Error')
     })
+
+    /** View role Details Ends*/
+$('#View_Role_Modal').on('hidden.bs.modal', function(){
+    $('#View_Role_Modal_Form').trigger('reset');
+})
 })
 const adminTableConfig = {
     url: `${config.SERVER_URL}${config.URLS.ADMIN_LIST}`,
@@ -392,6 +397,7 @@ $('#View_Role_Modal').on('show.bs.modal', (e) => {
     const btn = $(e.relatedTarget)
     const roleName = btn.data('rolename')
     let permissions = btn.data('permissions')
+    console.log(permissions)
     $('#RoleInputView').val(roleName)
     console.log(permissions)
     for(const e of permissions){
@@ -469,10 +475,7 @@ $('#View_Role_Modal').on('show.bs.modal', (e) => {
         }
     }
 })
-/** View role Details Ends*/
-$('#View_Role_Modal').on('hidden.bs.modal', function(){
-    $('#View_Role_Modal_Form').trigger('reset');
-})
+
 /** Delete role Method*/
 $('#Delete_Role_Modal').on('show.bs.modal', (e) => {
     const btn = $(e.relatedTarget)

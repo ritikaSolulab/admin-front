@@ -1,5 +1,6 @@
 /** Retreive the user auth token */
 const _token = localStorage.getItem('token')
+const user = localStorage.getItem('user')
 const token = JSON.parse(_token)
 
 /** Toastr Configuration and method */
