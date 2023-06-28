@@ -1,5 +1,6 @@
 const config = {
-    SERVER_URL: 'http://50.19.128.91/',
+    // SERVER_URL: 'http://50.19.128.91/',
+    SERVER_URL: 'http://localhost:3000/',
     URLS: {
         LOGIN_URL: 'admin/login',
         FORGOT_PASS: 'admin/forgot-password',
@@ -21,7 +22,9 @@ const config = {
         BLOCK_ADMIN: 'admin/update-status',
         COLLECTION_LIST:'admin/collection-list',
         COLLECTION_DETAILS: 'admin/collection-details',
-        UPLOAD_IMAGE: 'collection/upload.collection-image'
+        UPLOAD_IMAGE: 'admin/infatuation/upload-image',
+        UPDATE_INFATUATION: 'admin/infatuation.update',
+        INFATUATION_DETAILS: 'admin/infatuation'
 
     }
 }

@@ -31,7 +31,7 @@
     $(document).ready(()=>{
 
     })
-    const axiosConfig = {
+    const _axiosConfig = {
         url:`${config.SERVER_URL}${config.URLS.INFATUATION_LIST}`,
         type: 'GET'
     }
@@ -48,5 +48,5 @@
             }
         }
     ]
-    const loadTable = () => initiateDatatable('datatable', axiosConfig)
+    const loadTable = () => initiateDatatable('datatable', _axiosConfig, columns)
 </script>

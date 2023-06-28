@@ -101,9 +101,10 @@
             render:(data, type, row, meta) => {
                 return `<div class='action-btn'>
                     <a href="admin/infatuation?collection=${row._id}">
-                    <i data-toggle="tooltip" data-placement="top" title="View" class="fa fa-eye" aria-hidden="true"></i></a>                         
+                    <i data-toggle="tooltip" data-placement="top" title="Infatuate" class="fa fa-info-circle fa-lg" style="color: #1c5bca;margin-right: 10px; cursor:pointer"></i>
+                    </a>                         
                     <a href="admin/curatedBy?collection=${row._id}">
-                    <i data-toggle="tooltip" data-placement="top" title=Edit class="fa fa-pencil" aria-hidden="true"></i></a>
+                    <i data-toggle="tooltip" data-placement="top" title=Archive class="fa fa-archive fa-lg" aria-hidden="true"></i></a>
                     </div>`
             }
         },

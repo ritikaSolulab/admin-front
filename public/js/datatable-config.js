@@ -21,6 +21,10 @@ const initiateDatatable = (
             datatype: "json",
             headers: {
                 authorization: `Bearer ${token}`
+            },
+            error: (err) => {
+                ToastMsg(err?.responseJSON?.message, 'Error')
+                window.location.href = 'admin/dashboard'
             }
         },
         columns

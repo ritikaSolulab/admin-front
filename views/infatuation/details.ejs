@@ -1,52 +1,27 @@
-<style>
-    .note-editor {
-        margin-left: 20%;
-        margin-top: 20px;
-    }
-
-    ._button {
-        margin-left: 50%;
-    }
-
-    .profileLnk {
-        margin-left: 122px;
-    }
-
-    .skeleton {
-        opacity: .7;
-        animation: skeleton-loading 1s linear infinite alternate;
-    }
-
-    @keyframes skeleton-loading {
-        0% {
-            background-color: hsl(200, 20%, 70%);
-        }
-
-        100% {
-            background-color: hsl(200, 20%, 95%);
-        }
-    }
-</style>
+<%- include('./style') %>
 <div class="card-body">
     <div class="row">
         <div class="col col-6">
-            <h3 class="skeleton">You are infatuating</h3>
+            <h3 class="skeleton skeleton-text"></h3>
+            <h3 style="display: inline-block !important;" id="skeleton"></h3>
+            <h3 style="display: inline-block; font-style: italic !important; text-decoration: underline; color:#13369d;" id="CollectionName_Creator"></h3>
+            
         </div>
-        <div id="Infactuation_1"></div>
-        <div id="Infactuation_2"></div>
+        <div id="Infatuation_1"></div>
+        <div id="Infatuation_2"></div>
         <div class="row g-4 align-items-center">
             <div class="col-auto profileLnk">
                 <label for="profileLinks" class="col-form-label">Profile Links</label>
             </div>
-            <div class="col col-4">
-                <input type="text" id="ProfileLinkInput" placeholder="Add Profile Link" class="form-control"
+            <div class="col col-4" id="ProfileLinkDiv">
+                <input name="profileLink[]" type="text" id="ProfileLinkInput_1" placeholder="Add Profile Link" class="form-control"
                     aria-labelledby="profileHelpInline">
             </div>
 
 
             <div class="col-auto">
                 <div class="btn-group" role="group" aria-label="Third group">
-                    <button type="button" class="btn btn-primary">+</button>
+                    <button id="AddProfileInput" type="button" class="btn btn-primary">+</button>
                 </div>
 
             </div>
@@ -57,72 +32,21 @@
         </div>
     </div>
 </div>
-<script>
-    $(document).ready(async () => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const collectionId = urlParams.get('collection');
-        if (collectionId) {
-            await axios(axiosConfig(`${config.SERVER_URL}${config.URLS.COLLECTION_DETAILS}/${collectionId}`, 'GET'))
-                .then((response) => {
-                    const { data: { data } } = response
-                    $('.skeleton').text(`You are Infatuating ${data?.title} ${data?.createdBy?.name}`)
-                    $('.skeleton').removeClass('skeleton')
-                })
-                .catch((err) =>  {
-                    window.location.reload()
-                    ToastMsg(err?.response.data?.message, 'Error')
-                })
-        }
-        $('#Infactuation_1').summernote({
-            height: '200px',
-            width: '700px',
-        })        
 
-        const uploadImage = async (file, editor, welEditable) => {
-            let data = new FormData();
-            data.append("image", file);
-            console.log(data)
-            await axios({
-                url: `${config.SERVER_URL}${config.URLS.UPLOAD_IMAGE}`,
-                method: 'POST',
-                data: data,
-                processData: false,
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            }).then((response) => {
-                const url = 'https://archive-matter-files.s3.amazonaws.com/user/arpit%40solulab.co/collection/bannerImage.png'
-                $('#Infactuation_1').summernote('insertImage', url, 'myimage');
-                // editor.insertImage(welEditable, response?.data?.data?.Location);
-            }).catch((e) => ToastMsg(e?.response?.data?.message, 'Error'))
-        }
-        $('#Infactuation_2').summernote({
-            height: '200px',
-            width: '700px',
-        })
+<!--Modals-->
+<div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="Update_Confirm_Modal" tabindex="-1"
+        role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div style="background-color: white;" class="modal-content">
+                <div class="modal-body text-center">
 
-    })
-    function Upload() {
-        const t = $('#Infactuation_1').summernote('code')
-        // Base64 string
-        var base64String = t// Add your Base64 string here
-
-// Create a new Image object
-        var img = new Image();
-
-// Set the source of the image to the Base64 string
-        img.src = base64String;
-
-// When the image has loaded, you can access and use it
-    img.onload = function() {
-  // Access the image width and height
-  var width = img.width;
-  var height = img.height;
-
-  // Add the image to the DOM or perform any other operations
-  document.body.appendChild(img);
-};
-
-        console.log(t)
-    }
-</script>#
+                    <h3 id="AdminDeleteModalText" class="title"> Are you sure you want to update this Infatuation as Homepage?</h3>
+                    <img src="images/backgrounds/rocket.png" alt="success">
+                    <p class="head-text" id="successMessageBox"></p>
+                    <button id="UpdateInfatuation" type="button" class="btn btn-block btn-primary">Confirm</button>
+                    <button type="button" class="btn btn-block btn-primary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<%- include('./script') %>
