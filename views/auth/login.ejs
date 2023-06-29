@@ -31,7 +31,7 @@
                                                         <icon class="input-group-text fa fa-user"></icon>
                                                         <input type="email" class="form-control" id="email" name="email"
                                                             aria-describedby="emailHelp" placeholder="Enter your email"
-                                                            required>
+                                                            required style="border-top-right-radius: 7px; border-bottom-right-radius: 7px;">
                                                     </div>
                                                 </div>
                                                 <div class="mb-4">
@@ -39,11 +39,9 @@
                                                     <div class="input-group mb-3">
                                                         <icon class="input-group-text fa fa-lock"></icon>
                                                         <input type="password" class="form-control" id="password"
-                                                            name="password" placeholder="*************" required>
-                                                        <div class="input-group-text">
-                                                            <span toggle="#password-field"
-                                                                class="fa fa-fw fa-eye field-icon toggle-password"></span>
-                                                        </div>
+                                                            name="password" placeholder="*************" required style="border-top-right-radius: 7px; border-bottom-right-radius: 7px;">
+                                                        <span toggle="#password-field" id="eye"
+                                                            class="fa fa-fw fa-eye toggle-password" style="color:#4c597d;"></span>
 
                                                     </div>
 
@@ -54,8 +52,7 @@
                                                     onclick="login()">Log In</a>
 
                                                 <div class="d-flex align-items-center justify-content-center">
-                                                    <u><a href="/forgot-password" class="text-primary fw-bold">Forgot
-                                                        Password ?</a></u>
+                                                    Password ?</a></u>
                                                 </div>
                                             </form>
                                     </div>
@@ -106,16 +103,23 @@
     <!-- Mainly scripts -->
     <%- include('../partials/script') %>
         <script>
-            $(".toggle-password").click(function () {
+            // $(".toggle-password").click(function () {
 
-                $(this).toggleClass("fa-eye fa-eye-slash");
-                var input = $('#password');
-                if (input.attr("type") == "password") {
-                    input.attr("type", "text");
-                } else {
-                    input.attr("type", "password");
-                }
-            });
+            //     $(this).toggleClass("fa-eye fa-eye-slash");
+            //     var input = $('#password');
+            //     if (input.attr("type") == "password") {
+            //         input.attr("type", "text");
+            //     } else {
+            //         input.attr("type", "password");
+            //     }
+            // });
+            const passwordInput = document.querySelector("#password")
+const eye = document.querySelector("#eye")
+eye.addEventListener("click", function(){
+  this.classList.toggle("fa-eye-slash")
+  const type = passwordInput.getAttribute("type") === "password" ? "text" : "password"
+  passwordInput.setAttribute("type", type)
+})
             /** Validate 2FA Form
              * Method to Enable and Disable Verify button
             */
