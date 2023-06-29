@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%- include('../partials/style.ejs') %>
+        <!-- style -->
+</head>
+
+<body>
+    <div id="wrapper">
+        <!-- side bar-->
+        <%- include('../partials/menu.ejs') %>
+            <!-- side bar end -->
+            <div id="page-wrapper" class="gray-bg">
+                <!-- Navigation -->
+                <%- include('../partials/navbar.ejs') %>
+                    <div class="wrapper wrapper-content profile-page">
+                        <div class="ibox">
+                            <div class="ibox-title">
+                                <h5>contact-us</h5>
+                                <div class="ibox-tools">
+                                    <!-- date-period start -->
+
+
+                                    <div class="daterange-wrapper">
+                                        <div class="d-inline-block mb-2">
+
+                                            <button class=" btn btn-primary mr-2" onclick="setToData()" >
+                                                <i class="fa fa-envelope "></i>
+                                                Bulk Email
+                                            </button>
+
+                                        </div>
+                                        <div class="d-inline-block mb-2 ">
+                                            <button class="btn btn-primary mr-2" onclick="remove()">
+                                                <i class="fa fa-trash "></i>
+                                                Remove
+                                            </button>
+
+                                        </div>
+
+                                        <div class="date-cst d-inline-block	">
+
+                                            <input type="text" placeholder="DD/MM/YYYY" class="form-control "
+                                                name="daterange" id="dateFilter" onchange="dateFilter(this.value)"
+                                                readonly='true' />
+                                        </div>
+                                    </div>
+                                    <!-- date-period end -->
+                                </div>
+                            </div>
+                            <div class="ibox-content ">
+
+                                <div class="table-responsive">
+
+                                    <table class="table table-striped table-bordered table-hover " style="width:100%"
+                                        id="contactUsTable">
+                                        <thead>
+                                            <tr>
+                                                <!-- <th></th> -->
+                                                <th>Date Time</th>
+                                                <th>Name</th>
+                                                <th>Work Email</th>
+                                                <th>Message</th>
+                                                <th>Country</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- ibox-content end -->
+                        </div>
+                        <!-- ibox end-->
+                    </div>
+                    <!-- wrapper end -->
+                    <%- include('../partials/footer.ejs') %>
+                        <!-- footer end -->
+            </div>
+            <!-- #page-wrapper end -->
+    </div>
+
+    <div class="modal fade" id="contactDetails" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered contactDetails" >
+            <div class="modal-content">
+
+                <div class="modal-body">
+                    <button type="button" class="close modal-close-btn" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h3 class="title">Contact Details</h3>
+                    <form id="updateUserForm">
+                        <div class="form-group row justify-content-center otp-wrap">
+                            <div class="col-sm-6">
+                                <label class="col-form-label">Name</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="col-form-label" id="c_name">Name</label>
+                    
+                            </div>
+                        </div>
+                        <div class="form-group row justify-content-center otp-wrap">
+                            <div class="col-sm-6">
+                                <label class="col-form-label">Email</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="col-form-label" id="c_email">Name</label>
+                    
+                            </div>
+                        </div>
+                        <div class="form-group row justify-content-center otp-wrap">
+                            <div class="col-sm-6">
+                                <label class="col-form-label">Date</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="col-form-label" id="c_date">Date</label>
+                    
+                        
+                            </div>
+                        </div>
+
+                        <div class="form-group row justify-content-center otp-wrap">
+                            <div class="col-sm-6">
+                                <label class="col-form-label">Phone Number</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="col-form-label" id="c_number">number</label>
+                    
+                        
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row justify-content-center otp-wrap">
+                            <div class="col-sm-6">
+                                <label class="col-form-label">Product Of Interest</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="col-form-label" id="c_poi">Product Of I</label>
+                    
+                        
+                            </div>
+                        </div>
+                        <div class="form-group row justify-content-center otp-wrap">
+                            <div class="col-sm-6">
+                                <label class="col-form-label">Job Title</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="col-form-label" id="c_jobtitle">c_jobtitle</label>
+                    
+                        
+                            </div>
+                        </div>
+                        <div class="form-group row justify-content-center otp-wrap">
+                            <div class="col-sm-6">
+                                <label class="col-form-label">Country</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="col-form-label" id="c_country">c_country</label>
+                    
+                        
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row justify-content-center otp-wrap">
+                            <div class="col-sm-6">
+                                <label class="col-form-label">Message</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <textarea type="text" class="form-control" id="c_message" name="c_message"
+                                     disabled></textarea>
+                            </div>
+                        </div>
+
+                       
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="sendBulkDetails" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered sendBulkDetails" >
+            <div class="modal-content">
+
+                <div class="modal-body">
+                    <button type="button" class="close modal-close-btn" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h3 class="title">Replay</h3>
+                        <div class="form-group row justify-content-center otp-wrap">
+                            <div class="col-sm-2">
+                                <label class="col-form-label">To</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="to_data" name="to_data" disabled
+                                 >
+                    
+                            </div>
+                        </div>
+                        <form id="replayFrom">
+                  
+                        <div class="form-group row justify-content-center otp-wrap">
+                            <div class="col-sm-2">
+                                <label class="col-form-label">Subject</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="subject" name="subject"
+                                >
+                
+                            </div>
+                        </div>
+                        <div class="form-group row justify-content-center otp-wrap">
+                            <div class="col-sm-2">
+                                <label class="col-form-label"></label>
+                            </div>
+                            <div class="col-sm-10">
+                                <textarea type="text" class="form-control" id="send_message_replay" rows="10" name="send_message_replay"
+                                ></textarea>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-center mt-4">
+                            <div class="col-sm-3 col-6">
+                                <input class="btn btn-primary btn-block" type="button" aria-label="Update"
+                                    value="Update" onclick="bulkReplay()">
+                            </div>
+                            <div class="col-sm-3 col-6">
+                                <input class="btn btn-white btn-block" type="button"
+                                    onclick="resetForm('replayFrom')" aria-label="Close" value="clear">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- #main wrapper end -->
+    <%- include('../partials/script.ejs') %>
+        <script src="/js/moment.js"></script>
+        <script src="/js/datable-checkbox.js"></script>
+        <script src="/js/custom/contact_us.js"></script>
+</body>
+
+</html>

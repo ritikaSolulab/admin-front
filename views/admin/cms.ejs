@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<%- include('../partials/style.ejs') %>
+		<title>Content Management System</title>
+		<link rel="shortcut icon" type="image/png" href="/images/logos/favicon.png" />
+		<link href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+		<script>
+			function toggleForm(formType) {
+				const termsOfService = document.getElementById('terms_of_service');
+				const privacyPolicy = document.getElementById('privacyTable');
+				const aboutUs = document.getElementById('aboutUss');
+
+				if (formType === 'termsOfService') {
+					termsOfService.classList.remove('invisible')
+					termsOfService.classList.add('visible');
+					privacyPolicy.classList.add('invisible');
+					aboutUs.classList.add('invisible')
+				} else if (formType === 'privacyPolicy') {
+					privacyPolicy.classList.remove('invisible')
+					termsOfService.classList.add('invisible');
+					aboutUs.classList.add('invisible')
+					privacyPolicy.classList.add('visible');
+				}
+				else {
+					aboutUs.classList.remove('invisible')
+					termsOfService.classList.add('invisible');
+					privacyPolicy.classList.add('invisible');
+					aboutUs.classList.add('visible');
+				}
+
+			}
+		</script>
+		<style>
+			.visible {
+				display: flexbox;
+				width: 100%;
+			}
+
+			.invisible {
+				display: none;
+			}
+		</style>
+</head>
+
+<body>
+	<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+		data-sidebar-position="fixed" data-header-position="fixed">
+		<%- include('../partials/menu.ejs') %>
+			<!-- side bar end -->
+			<div class="body-wrapper">
+				<!-- top nav start -->
+				<%- include('../partials/navbar.ejs') %>
+					<!-- top nav end -->
+					<div class="container-fluid">
+						<!--  Row 1 -->
+						<div class="row">
+							<nav>
+								<div class="nav nav-tabs" id="nav-tab" role="tablist">
+									<button class="nav-link active" id="nav-terms-tab" data-bs-toggle="tab"
+										data-bs-target="#nav-terms" type="button" role="tab" aria-controls="nav-home"
+										aria-selected="true">Terms Of Service</button>
+									<button class="nav-link" id="nav-privacy-tab" data-bs-toggle="tab"
+										data-bs-target="#nav-privacy" type="button" role="tab"
+										aria-controls="nav-profile" aria-selected="false">Privacy Policy</button>
+									<button class="nav-link" id="nav-about-tab" data-bs-toggle="tab"
+										data-bs-target="#nav-about" type="button" role="tab" aria-controls="nav-profile"
+										aria-selected="false">About Us</button>
+								</div>
+							</nav>
+							<hr>
+							<div class="tab-content" id="nav-tabContent">
+								<div class="tab-pane fade show active" id="nav-terms" role="tabpanel"
+									aria-labelledby="nav-terms-tab">
+									<div class="row p-4">
+										<div id="terms_of_service">
+
+											"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+											tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+											quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+											consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+											cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+											non proident, sunt in culpa qui officia deserunt mollit anim id est
+											laborum."
+
+
+										</div>
+									</div>
+									<div class="tab-pane fade" id="nav-privacy" role="tabpanel"
+										aria-labelledby="nav-privacy-tab">
+										<div class="row p-4">
+											<div class="invisible" id="privacyTable">
+												privacy
+											</div>
+										</div>
+									</div>
+									<div class="tab-pane fade" id="nav-about" role="tabpanel"
+										aria-labelledby="nav-about-tab">
+										<div class="row p-4">
+											<div class="invisible" id="aboutUss">
+												about us
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+					</div>
+			</div>
+	</div>
+
+	</div>
+	<!-- #main wrapper end -->
+	<!-- Mainly scripts -->
+	<%- include('../partials/script.ejs') %>
+		<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+		<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+		<link rel="stylesheet" href="/src/summernote-0.8.18-dist/summernote.css">
+		<script src="/src/summernote-0.8.18-dist/summernote.js"></script>
+		<!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script> -->
+		</head>
+		<script src="/js/cms.js"></script>
+
+		<style>
+			.table-responsive {
+				overflow-x: hidden;
+
+			}
+
+			@media (max-width: 1000px) {
+				.table-responsive {
+					overflow-x: auto;
+					-webkit-overflow-scrolling: touch;
+				}
+			}
+
+
+			.dataTables_wrapper .dataTables_filter {
+				float: right;
+				text-align: center;
+			}
+
+			.pagination {
+				float: right;
+			}
+		</style>
+</body>
+
+</html>

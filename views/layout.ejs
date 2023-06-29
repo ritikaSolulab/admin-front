@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/style')%>
+    <%- include('./partials/comman-style')%>
+</head>
+
+<body>
+    <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+        data-sidebar-position="fixed" data-header-position="fixed">
+        <%- include('./partials/sidebar')%>
+        <div class="body-wrapper">
+            <%- include('./partials/navbar')%>
+            <div class="container-fluid">
+                <%- body%>
+            </div>
+        </div>
+    </div>
+    
+    <%- include('./partials/script')%>
+    <%- include('./partials/access-control')%>
+    <%- script %>
+</body>
+
+</html>

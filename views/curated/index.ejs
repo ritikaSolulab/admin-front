@@ -1,0 +1,88 @@
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<%-include('./style')%>
+<div class="form-label" id="Edit_Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div style="background-color: white;" class="modal-content">
+                <!-- <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Curated</h5>
+                </div> -->
+                <div class="modal-body">
+                    <form id="Edit_Form">
+                        <div class="mb-3">
+                            <label for="text" class="form-label">Enter Details</label>
+                            <input name="name" type="text" class="form-control border border-dark" id=""
+                                aria-describedby="name" placeholder="Name">
+                            <div class="input-group col-12 mt-3">
+                                <input name="name" type="text" class="form-control border border-dark" id=""
+                                    aria-describedby="name" placeholder="Sub Text">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-group">
+                                <label for="imageUpload" class="form-label">Add Banner Image or Videos</label>
+                                <div class="border border-dark p-4 text-center" style="width:70%">
+                                    <p class="mb-0">Banner Image</p>
+                                    <p class="mb-0">(Recomended size 15uuX5uu px)</p>
+                                    <p class="mb-0">Formats-JPG,MP4,PNG,GIF-1u MB Max size</p>
+                                </div>
+                                <input type="file" class="form-control-file d-none" id="imageUpload">
+                            </div>
+                            <i class="fa fa-solid fa-plus"></i>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Quote</label>
+                            <input type="text" class="form-control border border-dark"
+                                style="width: 100%; display: inline;" placeholder="Enter Quote Here to show it exclusively under Resources section."
+                                name="uname" required>
+                        </div>
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-user" role="tabpanel"
+                                aria-labelledby="nav-user-tab">
+
+                                <div class="row p-4">
+                                    <div class="panel-body">
+                                        <div class="h-200">
+                                            <textarea class="border border-dark p-3 mb-2 bg-light text-dark"
+                                                id="termsOfService"
+                                                placeholder="html editor, Manage quotes, paragraphes and images here"></textarea>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row p-4">
+                                    <table class="table table-striped table-bordered table-hover visible"
+                                        id="roleTable" >
+                                        <thead>
+                                            <tr>
+                                                <th>Sr No</th>
+                                                <th>NFT Name</th>
+                                                <th>Creator ID</th>
+                                                <th>Owner ID</th>
+                                                <th>Date of Listing</th>
+                                                <th>Price Per Month</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Profile Links</label>
+                                    <input type="text" class="form-control border border-dark"
+                                        style="width: 50%; display: inline;" placeholder="Add Profile Links"
+                                        name="uname" required>
+                                    <i class="fa fa-solid fa-plus"></i>
+                                </div>
+
+                    </form>
+                </div>
+                <div class="text-center">
+                    <button id="UpdateDetails" type="button" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%- include('../partials/datatable-script')%>
+        <script src="js/curated.js"></script>

@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/style')%>
+</head>
+
+<body>
+    <div class="login-wrapper-cst" id="loginModel">
+        <div class="login-box">
+            <div class="text-center bg-white">
+            </div>
+            <div class="page-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+                data-sidebar-position="fixed" data-header-position="fixed">
+                <div
+                    class="position-relative overflow-hidden radial-gradient min-vh-100 d-flex align-items-center justify-content-center">
+                    <div class="d-flex align-items-center justify-content-center w-100">
+                        <div class="row justify-content-center w-100">
+                            <div class="col-md-8 col-lg-6 col-xxl-3">
+                                <div class="card mb-0" style="background-color: white;">
+                                    <div class="card-body">
+                                        <a href="/" class="text-nowrap logo-img text-center d-block  w-100">
+                                            <img src="/images/LOGO.svg" width="180" alt="">
+                                        </a>
+                                        <h6 class="text-center pb-4 " style="margin-top:-10px">Good to see you again!
+                                            </h4>
+                                            <form id="loginForm">
+                                                <div class="mb-3">
+                                                    <label for="username" class="form-label">Username</label>
+                                                    <div class="input-group mb-3">
+                                                        <icon class="input-group-text fa fa-user"></icon>
+                                                        <input type="email" class="form-control" id="email" name="email"
+                                                            aria-describedby="emailHelp" placeholder="Enter your email"
+                                                            required>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-4">
+                                                    <label for="password" class="form-label">Password</label>
+                                                    <div class="input-group mb-3">
+                                                        <icon class="input-group-text fa fa-lock"></icon>
+                                                        <input type="password" class="form-control" id="password"
+                                                            name="password" placeholder="*************" required>
+                                                        <div class="input-group-text">
+                                                            <span toggle="#password-field"
+                                                                class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                                <div class="d-flex align-items-center justify-content-between mb-4">
+                                                </div>
+                                                <a class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2"
+                                                    onclick="login()">Log In</a>
+
+                                                <div class="d-flex align-items-center justify-content-center">
+                                                    <u><a href="/forgot-password" class="text-primary fw-bold">Forgot
+                                                        Password ?</a></u>
+                                                </div>
+                                            </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+        data-sidebar-position="fixed" data-header-position="fixed" id="2FAModel" style="display: none;">
+        <div
+            class="position-relative overflow-hidden radial-gradient min-vh-100 d-flex align-items-center justify-content-center">
+            <div class="d-flex align-items-center justify-content-center w-100">
+                <div class="row justify-content-center w-100">
+                    <div class="col-md-8 col-lg-6 col-xxl-3">
+                        <div class="card mb-0" style="background-color: white;">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-center">
+                                    <img src="" id="qrCode" width="180" alt="">
+                                </div>
+                                <form>
+                                    <div class="mb-3">
+                                        <h2 class="text-center">Please enter 2FA code</h2>
+                                        <p class="text-center">Two-factor authentication(2FA) is enabled for your
+                                            account.</p>
+                                    </div>
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control" id="otp" name="otp"
+                                            oninput="this.value=this.value.replace(/[^0-9]/g,'')"
+                                            placeholder="Enter 2FA Code" aria-describedby="otp">
+                                    </div>
+                                    <button type="button" id="2FA_Verify_Btn" onclick="login()"
+                                        class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Verify</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Mainly scripts -->
+    <%- include('../partials/script') %>
+        <script>
+            $(".toggle-password").click(function () {
+
+                $(this).toggleClass("fa-eye fa-eye-slash");
+                var input = $('#password');
+                if (input.attr("type") == "password") {
+                    input.attr("type", "text");
+                } else {
+                    input.attr("type", "password");
+                }
+            });
+            /** Validate 2FA Form
+             * Method to Enable and Disable Verify button
+            */
+            $('#2FA_Verify_Btn').attr('disabled', true)
+            $(() => {
+                $('#otp').keyup(() => {
+                    if ($('#otp').val() !== '') {
+                        $('#2FA_Verify_Btn').attr('disabled', false)
+                    }
+                    else {
+                        $('#2FA_Verify_Btn').attr('disabled', true)
+                    }
+                })
+
+            })
+            let secretCode
+            const login = async () => {
+                const loginForm = $('#loginForm');
+                loginForm.validate({
+                    rules: {
+                        password: {
+                            required: true,
+                            normalizer(value) {
+                                return $.trim(value);
+                            },
+                        },
+                        email: {
+                            required: true,
+                            email: true,
+                        },
+                    }
+                });
+                if (loginForm.valid()) {
+                    const loginData = {
+                        email: $('#email').val(),
+                        password: $('#password').val(),
+                        ...($('#otp').val() && { otp: $('#otp').val() }),
+                        ...(secretCode && { secret: secretCode })
+                    }
+                    await axios({
+                        method: 'POST',
+                        dataType: 'application/json',
+                        data: loginData,
+                        url: `${config.SERVER_URL}${config.URLS.LOGIN_URL}`
+                    }).then(response => {
+                        const { data: { data: { secret } } } = response;
+                        if (secret?.qr) {
+                            secretCode = response.data.data.secret;
+                            $('#qrCode').attr('src', secret?.qr);
+                        }
+                        $('#loginModel').attr('style', 'display: none');
+                        $('#2FAModel').attr('style', 'display: block');
+
+                        if (response?.data?.data?.token) {
+                            localStorage.setItem('token', JSON.stringify(response?.data?.data?.token));
+                            localStorage.setItem('user', JSON.stringify(response?.data?.data?.user));
+                            axios({
+                                method: 'POST',
+                                url: '/create-session',
+                                dataType: 'application/json',
+                                data: { ...loginData, token: response?.data?.data?.token, user: response?.data?.data?.user }
+                            });
+                            window.location.href = '/admin'
+                        }
+                    }).catch(err => {
+                        const { response: { data: { message } } } = err;
+                        if (message === '2FA_REQUIRED') {
+                            $('#loginModel').attr('style', 'display: none');
+                            $('#2FAModel').attr('style', 'display: block');
+                        } else {
+                            ToastMsg(message, 'Error')
+                        }
+                    })
+                }
+            }
+        </script>
+</body>
+
+</html>

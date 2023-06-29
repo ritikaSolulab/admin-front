@@ -1,0 +1,217 @@
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<%-include('./style')%>
+    <div class="card-body">
+        <div class="row">
+            <hr>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-user" role="tabpanel" aria-labelledby="nav-user-tab">
+                    <div class="container-fluid">
+                        <button data-bs-toggle="modal" data-bs-target="#Create_Feature_Modal" type="button"
+                            class="btn btn-primary m-1">Create Feature</button>
+                    </div>
+                    <div class="row">
+                        <table class="table table-responsive table-striped table-bordered table-hover visible"
+                            id="userTable" style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th>Sr No</th>
+                                    <th>Name</th>
+                                    <th>Email address</th>
+                                    <th>Created By</th>
+                                    <th>Role</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div class="modal fade" id="Edit_Success_Modal" tabindex="-1" role="dialog"
+        aria-labelledby="successMessagemodalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered successMessage" role="document">
+            <div style="background-color: white;" class="modal-content">
+                <div class="modal-body text-center">
+
+                    <h3 class="title">Feature Updated Successfully!</h3>
+                    <img src="images/backgrounds/rocket.png" alt="success">
+                    <p class="head-text" id="successMessageBox"></p>
+                    <button type="button" class="btn btn-block btn-primary" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="Edit_Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div style="background-color: white;" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Feature</h5>
+                </div>
+                <div class="modal-body">
+                    <form id="Edit_Form">
+                        <div class="mb-3">
+                            <label for="text" class="form-label">Enter Details</label>
+                            <input name="name" type="text" class="form-control border border-dark" id=""
+                                aria-describedby="name" placeholder="Name">
+                            <div class="input-group col-12 mt-3">
+                                <input name="name" type="text" class="form-control border border-dark" id=""
+                                    aria-describedby="name" placeholder="Sub Text">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-group">
+                                <label for="imageUpload" class="form-label">Add Banner Image or Videos</label>
+                                <div class="border border-dark p-4 text-center" style="width:70%">
+                                    <p class="mb-0">Banner Image</p>
+                                    <p class="mb-0">(Recomended size 15uuX5uu px)</p>
+                                    <p class="mb-0">Formats-JPG,MP4,PNG,GIF-1u MB Max size</p>
+                                </div>
+                                <input type="file" class="form-control-file d-none" id="imageUpload">
+                            </div>
+                            <i class="fa fa-solid fa-plus"></i>
+                        </div>
+
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-user" role="tabpanel"
+                                aria-labelledby="nav-user-tab">
+
+                                <div class="row p-4">
+                                    <div class="panel-body">
+                                        <div class="h-200">
+                                            <textarea class="border border-dark p-3 mb-2 bg-light text-dark"
+                                                id="termsOfService"
+                                                placeholder="html editor, Manage quotes, paragraphes and images here"></textarea>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="mb-3">
+                                    <label class="form-label">Profile Links</label>
+                                    <input type="text" class="form-control border border-dark"
+                                        style="width: 50%; display: inline;" placeholder="Add Profile Links"
+                                        name="uname" required>
+                                    <i class="fa fa-solid fa-plus"></i>
+                                </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="UpdateDetails" type="button" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="View_Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div style="background-color: white;" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Feature Details</h5>
+
+                </div>
+                <div class="modal-body">
+                    <form id="Edit_Form">
+                        <div class="mb-3">
+                            <!-- NameInputView -->
+                            <label for="text" class="form-label">Details</label>
+                            <input disabled name="name" type="text" class="form-control" id="" aria-describedby="name">
+                            <div class="input-group col-12 mt-3">
+                                <input disabled name="name" type="text" class="form-control" id=""
+                                    aria-describedby="name">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <!-- EmailInputView -->
+                            <label for="text" class="form-label">Banner Image and Videos</label>
+                            <input disabled name="email" type="email" class="form-control" id=""
+                                aria-describedby="name">
+                        </div>
+                        <div class="mb-3">
+                            <!-- RoleListView -->
+                            <label for="text" class="form-label">Profile Links</label>
+                            <input disabled class="form-control" id="">
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="Create_Feature_Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div style="background-color: white;" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Create Feature</h5>
+                </div>
+                <div class="modal-body">
+                    <form id="Create_Form">
+                        <div class="mb-3">
+
+                            <label for="text" class="form-label">Enter Details</label>
+                            <input name="name" type="text" class="form-control border border-dark" id=""
+                                aria-describedby="name" placeholder="Name">
+                            <div class="input-group col-12 mt-3">
+                                <input name="name" type="text" class="form-control border border-dark" id=""
+                                    aria-describedby="name" placeholder="Sub Text">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-group">
+                                <label for="imageUpload" class="form-label">Add Banner Image or Videos</label>
+                                <div class="border border-dark p-4 text-center" style="width:70%">
+                                    <p class="mb-0">Banner Image</p>
+                                    <p class="mb-0">(Recomended size 15uuX5uu px)</p>
+                                    <p class="mb-0">Formats-JPG,MP4,PNG,GIF-1u MB Max size</p>
+                                </div>
+                                <input type="file" class="form-control-file d-none" id="imageUpload">
+                            </div>
+                            <i class="fa fa-solid fa-plus"></i>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Profile Links</label>
+                            <input type="text" class="form-control border border-dark"
+                                style="width: 50%; display: inline;" placeholder="Add Profile Links" name="uname"
+                                required>
+                            <i class="fa fa-solid fa-plus"></i>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="CreateAdminBtn" type="button" class="btn btn-primary">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="Create_Success_Modal" tabindex="-1" role="dialog"
+        aria-labelledby="successMessagemodalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered successMessage" role="document">
+            <div style="background-color: white;" class="modal-content">
+                <div class="modal-body text-center">
+
+                    <h3 class="title">Feature successfully created!</h3>
+                    <img src="images/backgrounds/rocket.png" alt="success">
+                    <p class="head-text" id="successMessageBox"></p>
+                    <button type="button" class="btn btn-block btn-primary" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Modal Ends -->
+    <%- include('../partials/datatable-script')%>
+        <!-- <script src="js/feature.js"></script> -->

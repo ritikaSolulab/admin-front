@@ -1,0 +1,70 @@
+<div class="modal fade" id="successMessage" tabindex="-1" role="dialog" aria-labelledby="successMessagemodalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered successMessage" role="document">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <button type="button" class="close modal-close-btn" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h3 class="title">Success</h3>
+        <img src="/img/sucs-img.png" alt="success">
+        <p class="head-text" id="successMessageBox"></p>
+        <!-- <button type="button" class="btn btn-block btn-primary" data-dismiss="modal">OK</button>  -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="errorMessage" tabindex="-1" role="dialog" aria-labelledby="errorMessagemodalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered errorMessage" role="document">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <button type="button" class="close modal-close-btn" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h3 class="title">Fail</h3>
+        <!-- <img src="/img/-img.png" alt="Fail"> -->
+        <p class="head-text" id="errorMessageBox"></p>
+        <!-- <button type="button" class="btn btn-block btn-primary" data-dismiss="modal">OK</button>  -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="logoutModal" role="dialog" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered errorMessage">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Session Expired</h4>
+      </div>
+      <div class="modal-body">
+        <p>Your session has been expired, Please login again.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal fade" id="subscriptionSuccessMessage" tabindex="-1" role="dialog"
+  aria-labelledby="subscriptionSuccessMessagemodalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered subscriptionSuccessMessage" role="document">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <button type="button" class="close modal-close-btn" data-dismiss="modal" aria-label="Close"
+          onClick="window.location=''">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h3 class="title">Success</h3>
+        <img src="/img/sucs-img.png" alt="success">
+        <p class="head-text" id="subscriptionSuccessMessageBox"></p>
+        <!-- <button type="button" class="btn btn-block btn-primary" data-dismiss="modal">OK</button>  -->
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <%- include('../partials/style.ejs') %>
+        <title>License/Membership</title>
+        <link rel="shortcut icon" type="image/png" href="../images/logos/favicon.png" />
+        <link href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+        <script>
+            function toggleForm(formType) {
+                const licenseManagement = document.getElementById('licenseTable');
+                const membershipManagement = document.getElementById('membershipTable');
+
+                if (formType === 'licenseManagement') {
+                    licenseManagement.classList.remove('invisible')
+                    licenseManagement.classList.add('visible');
+                    membershipManagement.classList.add('invisible');
+                } else {
+                    membershipManagement.classList.remove('invisible')
+                    licenseManagement.classList.add('invisible');
+                    membershipManagement.classList.add('visible');
+                }
+            }
+        </script>
+        <style>
+            .visible {
+                display: flexbox;
+                width: 100%;
+            }
+
+            .invisible {
+                display: none;
+            }
+        </style>
+</head>
+
+<body>
+    <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+        data-sidebar-position="fixed" data-header-position="fixed">
+        <%- include('../partials/menu.ejs') %>
+            <!-- side bar end -->
+            <div class="body-wrapper">
+                <!-- top nav start -->
+                <%- include('../partials/navbar.ejs') %>
+                    <!-- top nav end -->
+                    <div class="container-fluid">
+                        <!--  Row 1 -->
+                        <div class="row">
+                            <nav>
+								<div class="nav nav-tabs" id="nav-tab" role="tablist">
+									<button class="nav-link active" id="nav-license-tab" data-bs-toggle="tab"
+										data-bs-target="#nav-license" type="button" role="tab" aria-controls="nav-home"
+										aria-selected="true">License Management</button>
+									<button class="nav-link" id="nav-membership-tab" data-bs-toggle="tab"
+										data-bs-target="#nav-membership" type="button" role="tab"
+										aria-controls="nav-profile" aria-selected="false">Membership Management</button>
+									
+								</div>
+							</nav>
+							<hr>
+                            <div class="tab-content" id="nav-tabContent">
+                                <div class="tab-pane fade show active" id="nav-license" role="tabpanel"
+                                    aria-labelledby="nav-license-tab">
+                                    <div class="row p-4">
+                                        <table class="table table-striped table-bordered table-hover"
+                                            id="licenseTable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Sr No</th>
+                                                    <th>NFT Name</th>
+                                                    <th>Creator ID</th>
+                                                    <th>Date of Listing</th>
+                                                    <th>Total Users</th>
+                                                    <th>Active Users</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="nav-membership" role="tabpanel"
+                                    aria-labelledby="nav-membership-tab">
+                                    <div class="row p-4">
+                                        <table class="table table-striped table-bordered table-hover invisible"
+                                            id="membershipTable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Sr No</th>
+                                                    <th>NFT Name</th>
+                                                    <th>Creator ID</th>
+                                                    <th>Date of Listing</th>
+                                                    <th>Total Users</th>
+                                                    <th>Active Users</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                            
+                        </div>
+                    </div>
+
+            </div>
+            <!-- #main wrapper end -->
+            <!-- Mainly scripts -->
+            <%- include('../partials/script.ejs') %>
+                <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+                <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+
+                <script src="/js/license.js"></script>
+
+                <style>
+                    .table-responsive {
+                        overflow-x: hidden;
+
+                    }
+
+                    @media (max-width: 1000px) {
+                        .table-responsive {
+                            overflow-x: auto;
+                            -webkit-overflow-scrolling: touch;
+                        }
+                    }
+
+
+                    .dataTables_wrapper .dataTables_filter {
+                        float: right;
+                        text-align: center;
+                    }
+
+                    .pagination {
+                        float: right;
+                    }
+                </style>
+</body>
+
+</html>
