@@ -55,5 +55,5 @@ jobs:
         password: ${{ secrets.EMAIL_PASSWORD }}
         subject: Pipline of ${{ github.repository }} is Failed
         body: "${{ github.workflow }} has been Failed \nLink to Pipeline https://github.com/${{ github.repository }}/actions"
-        to: shivangani@solulab.co
+        to: shivangani@solulab.co,arpit@solulab.co,mkrishna@solulab.co
         from: github-action              
