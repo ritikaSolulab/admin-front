@@ -1,60 +1,56 @@
-<!-- <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> -->
 <%-include('./style')%>
+  <div class="card-body">
+    <div class="row">
+      <form>
+        <div class="row mb-3">
+          <label for="inputEmail3" class="col-sm-3 col-form-label">Enter Details</label>
+          <div class="col-sm-3">
+            <input type="text" class="form-control" id="inputEmail3" placeholder="Name">
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label for="inputEmail3" class="col-sm-3 col-form-label"></label>
+          <div class="col-sm-3">
+            <input type="text" class="form-control" id="inputPassword3" placeholder="Profession">
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label for="inputEmail3" class="col-sm-3 col-form-label">Add Banner Image or Video</label>
+          <div class="col-sm-3">
+            <input style="height: 100px;" type="file" class="form-control" id="inputEmail3" placeholder="Name">
+          </div>
+          <div class="col-sm-3">
+            <label for="inputEmail3" class="col-sm-9 col-form-label">Select Banner Text Color</label>
+            <input type="color" style="height: 40px;" class="form-control" id="inputEmail3" placeholder="Name">
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label for="inputEmail3" class="col-sm-3 col-form-label"></label>
+          <div class="col-sm-3" id="editor"></div>
+        </div>
+        <div class="row mb-3">
+          <label for="inputEmail3" class="col-sm-3 col-form-label">Profile Links</label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" id="inputEmail3" placeholder="Add profile links">
+          </div>
+        </div>
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary _button">Update</button>
+        </div>
 
-         <%- include('./style')%>
-         <div class="card-body">
-             <div class="row">
-                 <form>
-                     <div class="row mb-3">
-                       <label for="inputEmail3" class="col-sm-3 col-form-label">Enter Details</label>
-                       <div class="col-sm-3">
-                         <input type="text" class="form-control" id="inputEmail3" placeholder="Name">
-                       </div>
-                     </div>
-                     <div class="row mb-3">
-                         <label for="inputEmail3" class="col-sm-3 col-form-label"></label>
-                       <div class="col-sm-3">
-                         <input type="text" class="form-control" id="inputPassword3" placeholder="Profession">
-                       </div>
-                     </div>
-                     <div class="row mb-3">
-                         <label for="inputEmail3" class="col-sm-3 col-form-label">Add Banner Image or Video</label>
-                         <div class="col-sm-3">
-                           <input style="height: 100px;" type="file" class="form-control" id="inputEmail3" placeholder="Name">
-                         </div>
-                         <div class="col-sm-3">
-                             <label for="inputEmail3" class="col-sm-9 col-form-label">Select Banner Text Color</label>
-                             <input type="color" style="height: 40px;" class="form-control" id="inputEmail3" placeholder="Name">
-                         </div>
-                         
-                     </div>
-                     <div class="row mb-3">
-                         <label for="inputEmail3" class="col-sm-3 col-form-label"></label>
-                         <div class="col-sm-3" id="editor"></div>                
-                     </div>
-                     <div class="row mb-3">
-                        <label for="inputEmail3" class="col-sm-3 col-form-label">Profile Links</label>
-                        <div class="col-sm-6">
-                          <input type="text" class="form-control" id="inputEmail3" placeholder="Add profile links">
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <button type="submit" class="btn btn-primary _button">Update</button>
-                    </div>
-                        
-                    </div>
-                     
-                   </form>
-             </div>
-         
-         </div>
-         
-         <%- include('../partials/datatable-script')%>
-         <script>
-             $(document).ready(()=>{
-                 $('#editor').summernote({
-                     height: '180px',
-                     width: '650px'
-                 })
-             })
-         </script>
+    </div>
+
+    </form>
+  </div>
+
+  </div>
+
+  <%- include('../partials/datatable-script')%>
+    <script>
+      $(document).ready(() => {
+        $('#editor').summernote({
+          height: '180px',
+          width: '650px'
+        })
+      })
+    </script>

@@ -1,0 +1,75 @@
+<script>
+    //text editor 
+    $(document).ready(() => {
+        $('#editor').summernote({
+            height: '180px',
+            width: '650px',
+        })
+    })
+    //text editor ends
+
+    $(document).ready(() => {
+        loadTable()
+    })
+    const collectionTableConfig = {
+        url: `${config.SERVER_URL}${config.URLS.COLLECTION_LIST}`,
+        type: 'GET'
+    }
+    const columns = [
+        {
+            orderable: false, targets: -1,
+            render: function (data, type, row, meta) {
+                return meta.row + meta.settings._iDisplayStart + 1;
+            }
+        },
+        { data: 'title' },
+        {
+            render: (data, type, row, meta) => {
+                return row?.creatorDoc ? row.creatorDoc?.name : ''
+            }
+        },
+        {
+            render: (data, type, row, meta) => {
+                return row?.ownerDoc ? row.ownerDoc?.name : ''
+            }
+        },
+        {
+            render: (data, type, row, meta) => {
+                return row?.releaseDate ? new Date(row?.releaseDate).toLocaleDateString() : 'NA'
+            }
+        },
+        {
+            render: (data, type, row, meta) => {
+                return row?.avgSellingPrice ? row?.avgSellingPrice : 'NA'
+            }
+        },
+        {
+            render: (data, type, row, meta) => {
+                let text = `<div class="form-check form-switch">
+                    <input name="blockAdmin" type="checkbox" class="form-check-input" id="blockToggle" value="${row._id}">
+                </div>`
+                return text
+            }
+        },
+    ]
+    const loadTable = () => initiateDatatable('nftTable', collectionTableConfig, columns)
+
+    // Multiple select field with search
+    $('#multiple-select-field').select2({
+        width: '100%',
+        placeholder: $(this).data('placeholder'),
+        closeOnSelect: false,
+    });
+    // Multiple select field with search ends
+
+    // 6 fixed color picker
+    $(document).ready(function () {
+        // Event listener for color selection
+        $('.color').click(function () {
+            var color = $(this).css('background-color');
+            $('#selected-color').val(color);
+        });
+    });
+    // 6 fixed color picker ends
+
+</script>
