@@ -1,5 +1,6 @@
 const config = {
-    SERVER_URL: 'http://50.19.128.91/',
+    // SERVER_URL: 'http://50.19.128.91/',
+    SERVER_URL: 'http://localhost:5000/',
     URLS: {
         LOGIN_URL: 'admin/login',
         FORGOT_PASS: 'admin/forgot-password',

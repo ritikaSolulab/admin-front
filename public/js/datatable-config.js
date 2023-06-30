@@ -23,8 +23,8 @@ const initiateDatatable = (
                 authorization: `Bearer ${token}`
             },
             error: (err) => {
-                ToastMsg(err?.responseJSON?.message, 'Error')
-                window.location.href = 'admin/dashboard'
+                // ToastMsg(err?.responseJSON?.message, 'Error')
+                // window.location.href = 'admin/dashboard'
             }
         },
         columns
