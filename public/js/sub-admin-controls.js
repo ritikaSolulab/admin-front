@@ -183,6 +183,7 @@ $(document).ready(async () => {
             .then((response) => {
               loadAdminTable();
               ToastMsg(response?.data?.message, "Success");
+              loadRoleTable();
             })
             .catch((err) => {
               const {
@@ -331,11 +332,11 @@ $(document).ready(async () => {
           ? $("#nftMng-Edit").prop("checked", true)
           : $("#nftMng-Edit").prop("checked", false);
         role.view
-          ? $("nftMng-View").prop("checked", true)
-          : $("nftMng-View").prop("checked", false);
+          ? $("#nftMng-View").prop("checked", true)
+          : $("#nftMng-View").prop("checked", false);
         role.remove
-          ? $("nftMng-Delete").prop("checked", true)
-          : $("nftMng-Delete").prop("checked", false);
+          ? $("#nftMng-Delete").prop("checked", true)
+          : $("#nftMng-Delete").prop("checked", false);
       }
       if (role.permissionName === "royalties_management") {
         role.create
@@ -365,7 +366,7 @@ $(document).ready(async () => {
           ? $("#transactionMng-Delete").prop("checked", true)
           : $("#transactionMng-Delete").prop("checked", false);
       }
-      if (role.permissionName === "infactuation") {
+      if (role.permissionName === "infatuation") {
         role.create
           ? $("#infactuationMng-Create").prop("checked", true)
           : $("#infactuationMng-Create").prop("checked", false);
@@ -643,11 +644,11 @@ $(document).ready(async () => {
           ? $("#nftMngEdit").prop("checked", true)
           : $("#nftMngEdit").prop("checked", false);
         e.view
-          ? $("nftnMngView").prop("checked", true)
-          : $("nftnMngView").prop("checked", false);
+          ? $("#nftMngView").prop("checked", true)
+          : $("#nftMngView").prop("checked", false);
         e.remove
-          ? $("nftMngDelete").prop("checked", true)
-          : $("nftMngDelete").prop("checked", false);
+          ? $("#nftMngDelete").prop("checked", true)
+          : $("#nftMngDelete").prop("checked", false);
       }
       if (e.permissionName === "royalties_management") {
         e.create
@@ -677,7 +678,7 @@ $(document).ready(async () => {
           ? $("#transactionMngDelete").prop("checked", true)
           : $("#transactionMngDelete").prop("checked", false);
       }
-      if (e.permissionName === "infactuation") {
+      if (e.permissionName === "infatuation") {
         e.create
           ? $("#infactuationMngCreate").prop("checked", true)
           : $("#infactuationMngCreate").prop("checked", false);
@@ -815,6 +816,7 @@ $(document).ready(async () => {
         )
           .then((resp) => {
             loadAdminTable();
+            loadRoleTable();
             ToastMsg(resp?.data?.message, "Success");
           })
           .catch((e) => {
