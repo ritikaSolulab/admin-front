@@ -143,7 +143,7 @@
         <script>
             const passwordInput = document.querySelector("#password")
             const eye = document.querySelector("#eye")
-
+            var authToken
             eye.addEventListener("click", function () {
                 this.classList.toggle("fa-eye-slash")
                 const type = passwordInput.getAttribute("type") === "password" ? "text" : "password"
@@ -203,7 +203,7 @@
                         $('#2FAModel').attr('style', 'display: block');
 
                         if (response?.data?.data?.token) {
-                            var token = response?.data?.data?.token;
+                            authToken = response?.data?.data?.token;
                             if (response?.data?.data?.user.isPasswordReset) {
                                 $('#2FAModel').attr('style', 'display: none');
                                 $('#resetPassword').attr('style', 'display: block');
@@ -247,8 +247,8 @@
                         },
                     },
                     messages: {
-                        ConfirmPassInput: {
-                            equalTo: "confirm password not match with new password",
+                        confirmPassword: {
+                            equalTo: "confirm password should be same",
                         }
                     }
                 })
@@ -256,12 +256,15 @@
                     const requestParams = {
                         newPassword: $('#resetPasswordField').val().trim(),
                     }
+                    console.log(requestParams, {
+                            authorization: `Bearer ${authToken}`,
+                        });
                     const data = await axios({
                         method: 'POST',
                         dataType: 'application/json',
                         data: requestParams,
                         headers: {
-                            authorization: `Bearer ${token}`,
+                            authorization: `Bearer ${authToken}`,
                         },
                         url: `${config.SERVER_URL}${config.URLS.RESET_PASSWORD}`
                     })
