@@ -1,12 +1,31 @@
-let cmsId;
+let termsCondId;
+let privacyPolicyId;
+let aboutusId;
+$('#termsOfService').summernote({
+    height: '300px',
+});
+$('#privacyPolicy').summernote({
+    height: '300px',
+});
+$('#aboutUs').summernote({
+    height: '300px',
+});
+
+
 function editTermsCms(){
     $('#termsOfService').summernote('enable')
+    $('#termsCondEditBtn').hide();
+    $('#termsCondSaveBtn').show();
 }
 function editPrivacyCms(){
     $('#privacyPolicy').summernote('enable');
+    $('#privacyPolicyEditBtn').hide();
+    $('#privacyPolicySaveBtn').show();
 }
 function editAboutCms(){
     $('#aboutUs').summernote('enable');
+    $('#aboutEditBtn').hide();
+    $('#aboutSaveBtn').show();
 }
 
 $('#termsOfService').summernote({
@@ -18,7 +37,8 @@ $('#termsOfService').summernote({
       ['color', ['color']],
       ['para', ['ul', 'ol', 'paragraph']],
       ['height', ['height']]
-    ]
+    ],
+    hight: '400px'
 });
 $('#privacyPolicy').summernote({
     toolbar: [
@@ -29,7 +49,8 @@ $('#privacyPolicy').summernote({
       ['color', ['color']],
       ['para', ['ul', 'ol', 'paragraph']],
       ['height', ['height']]
-    ]
+    ],
+    hight: '400px'
 });
 $('#aboutUs').summernote({
     toolbar: [
@@ -40,7 +61,8 @@ $('#aboutUs').summernote({
       ['color', ['color']],
       ['para', ['ul', 'ol', 'paragraph']],
       ['height', ['height']]
-    ]
+    ],
+    hight: '400px'
 });
 
 $(document).ready(async () => {
@@ -50,26 +72,18 @@ $(document).ready(async () => {
             return !$editor.attr('disabled');
         }
         const resp = await axios(axiosConfig(`${config.SERVER_URL}${config.URLS.GET_CMS}`, 'get'));
-        console.log(resp.data.data)
         for (const e of resp.data.data) {
-            let cmsId;
             if (e.cmsType == 'privacy-policy') {
                 $('#privacy-btn').val(e._id)
-                console.log('p',isSummernoteEnabled())
-                cmsId = e._id;
-                console.log('hi', cmsId);
+                privacyPolicyId = e._id;
                 $('#privacyPolicy').summernote('code', e.description);
             } else if (e.cmsType == 'terms-of-service') {
                 $('#terms-btn').val(e._id)
-                console.log('t',isSummernoteEnabled())
-                cmsId = e._id;
-                console.log('h', cmsId);
+                termsCondId = e._id;
                 $('#termsOfService').summernote('code', e.description);
             } else {
                 $('#about-btn').val(e._id)
-                console.log('a',isSummernoteEnabled())
-                cmsId = e._id;
-                console.log('l',cmsId);
+                aboutusId = e._id;
                 $('#aboutUs').summernote('code', e.description);
             }
         }
@@ -77,12 +91,15 @@ $(document).ready(async () => {
         console.log(err);
         ToastMsg(message, 'Error');
     }
+    $('#termsOfService').summernote('disable');
+    $('#privacyPolicy').summernote('disable');
+    $('#aboutUs').summernote('disable');
+
 });
 
 async function updateTermsCms(){
     var termsDesc = $('#termsOfService').summernote('code')
-    const cmsId = $('#terms-btn').val()
-    const termsObj = {description:termsDesc, cmsId}
+    const termsObj = {description:termsDesc, cmsId: termsCondId}
         await axios({
             url: `${config.SERVER_URL}${config.URLS.UPDATE_CMS}`,
             method: 'PATCH',
@@ -100,11 +117,13 @@ async function updateTermsCms(){
             const { response: { data: { message } } } = err
             ToastMsg(message, 'Error')
         })  
+
+        $('#termsCondSaveBtn').hide();
+        $('#termsCondEditBtn').show();
 }
 async function updatePrivacyCms(){
     var privacyDesc = $('#privacyPolicy').summernote('code')
-    const cmsId = $('#privacy-btn').val()
-    const privacyObj = {description:privacyDesc, cmsId}
+    const privacyObj = {description:privacyDesc, cmsId: privacyPolicyId}
         await axios({
             url: `${config.SERVER_URL}${config.URLS.UPDATE_CMS}`,
             method: 'PATCH',
@@ -122,12 +141,13 @@ async function updatePrivacyCms(){
             const { response: { data: { message } } } = err
             ToastMsg(message, 'Error')
         })  
+        $('#privacyPolicySaveBtn').hide();
+        $('#privacyPolicyEditBtn').show();
 }
 
 async function updateAboutCms(){
     var aboutDesc = $('#aboutUs').summernote('code')
-    const cmsId = $('#about-btn').val()
-    const aboutObj = {description:aboutDesc, cmsId}
+    const aboutObj = {description:aboutDesc, cmsId: aboutusId}
         await axios({
             url: `${config.SERVER_URL}${config.URLS.UPDATE_CMS}`,
             method: 'PATCH',
@@ -145,4 +165,12 @@ async function updateAboutCms(){
             const { response: { data: { message } } } = err
             ToastMsg(message, 'Error')
         })  
+        $('#aboutSaveBtn').hide();
+        $('#aboutEditBtn').show();
 }
+
+$(document).ready( async () => {
+    $('#termsCondSaveBtn').hide();
+    $('#privacyPolicySaveBtn').hide();
+    $('#aboutSaveBtn').hide();
+});

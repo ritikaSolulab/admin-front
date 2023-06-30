@@ -41,7 +41,7 @@
                                                         <input type="password" class="form-control" id="password"
                                                             name="password" placeholder="*************" required style="border-top-right-radius: 7px; border-bottom-right-radius: 7px;">
                                                         <span toggle="#password-field" id="eye"
-                                                            class="fa fa-fw fa-eye toggle-password" style="color:#4c597d;"></span>
+                                                            class="fa fa-fw fa-eye toggle-password" style="color:#4c597d; z-index: 1000;"></span>
 
                                                     </div>
 
@@ -104,23 +104,13 @@
     <!-- Mainly scripts -->
     <%- include('../partials/script') %>
         <script>
-            // $(".toggle-password").click(function () {
-
-            //     $(this).toggleClass("fa-eye fa-eye-slash");
-            //     var input = $('#password');
-            //     if (input.attr("type") == "password") {
-            //         input.attr("type", "text");
-            //     } else {
-            //         input.attr("type", "password");
-            //     }
-            // });
             const passwordInput = document.querySelector("#password")
-const eye = document.querySelector("#eye")
-eye.addEventListener("click", function(){
-  this.classList.toggle("fa-eye-slash")
-  const type = passwordInput.getAttribute("type") === "password" ? "text" : "password"
-  passwordInput.setAttribute("type", type)
-})
+            const eye = document.querySelector("#eye")
+            eye.addEventListener("click", function(){
+            this.classList.toggle("fa-eye-slash")
+            const type = passwordInput.getAttribute("type") === "password" ? "text" : "password"
+            passwordInput.setAttribute("type", type)
+            })
             /** Validate 2FA Form
              * Method to Enable and Disable Verify button
             */
@@ -155,7 +145,7 @@ eye.addEventListener("click", function(){
                 });
                 if (loginForm.valid()) {
                     const loginData = {
-                        email: $('#email').val(),
+                        email: $('#email').val().trim().toLowerCase(),
                         password: $('#password').val(),
                         ...($('#otp').val() && { otp: $('#otp').val() }),
                         ...(secretCode && { secret: secretCode })

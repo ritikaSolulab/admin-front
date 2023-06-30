@@ -63,62 +63,6 @@
     </div>
 
     <!-- Modals -->
-    <div class="modal fade" id="Edit_Success_Modal" tabindex="-1" role="dialog"
-        aria-labelledby="successMessagemodalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered successMessage" role="document">
-            <div style="background-color: white;" class="modal-content">
-                <div class="modal-body text-center">
-
-                    <h3 class="title">Admin Updated Successfully!</h3>
-                    <img src="images/backgrounds/rocket.png" alt="success">
-                    <p class="head-text" id="successMessageBox"></p>
-                    <button type="button" class="btn btn-block btn-primary" data-bs-dismiss="modal">OK</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="Edit_Role_Success_Modal" tabindex="-1" role="dialog"
-        aria-labelledby="successMessagemodalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered successMessage" role="document">
-            <div style="background-color: white;" class="modal-content">
-                <div class="modal-body text-center">
-
-                    <h3 class="title">Role Updated Successfully!</h3>
-                    <img src="images/backgrounds/rocket.png" alt="success">
-                    <p class="head-text" id="successMessageBox"></p>
-                    <button type="button" class="btn btn-block btn-primary" data-bs-dismiss="modal">OK</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="Delete_Success_Modal" tabindex="-1" role="dialog"
-        aria-labelledby="successMessagemodalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered successMessage" role="document">
-            <div style="background-color: white;" class="modal-content">
-                <div class="modal-body text-center">
-
-                    <h3 class="title">Admin successfully deleted!</h3>
-                    <img src="images/backgrounds/rocket.png" alt="success">
-                    <p class="head-text" id="successMessageBox"></p>
-                    <button type="button" class="btn btn-block btn-primary" data-bs-dismiss="modal">OK</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="Delete_Role_Success_Modal" tabindex="-1" role="dialog"
-        aria-labelledby="successMessagemodalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered successMessage" role="document">
-            <div style="background-color: white;" class="modal-content">
-                <div class="modal-body text-center">
-
-                    <h3 class="title">Role successfully deleted!</h3>
-                    <img src="images/backgrounds/rocket.png" alt="success">
-                    <p class="head-text" id="successMessageBox"></p>
-                    <button type="button" class="btn btn-block btn-primary" data-bs-dismiss="modal">OK</button>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="modal fade" id="Edit_Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -135,12 +79,6 @@
 
                             <label for="text" class="form-label">Name</label>
                             <input name="name" type="text" class="form-control" id="NameInput" aria-describedby="name">
-                        </div>
-                        <div class="mb-3">
-
-                            <label for="text" class="form-label">Email</label>
-                            <input name="email" type="email" class="form-control" id="EmailInput"
-                                aria-describedby="name">
                         </div>
                         <div class="mb-3">
 
@@ -617,14 +555,14 @@
     </div>
     <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="Delete_Role_Modal" tabindex="-1"
         role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-dialog-centered info-modal" role="document">
             <div style="background-color: white;" class="modal-content">
                 <div class="modal-body text-center">
 
                     <h3 id="RoleDeleteModalText" class="title"></h3>
-                    <img src="images/backgrounds/rocket.png" alt="success">
+                 
                     <p class="head-text" id="successMessageBox"></p>
-                    <button id="DeleteRoleBtn" type="button" class="btn btn-block btn-primary">Delete</button>
+                    <button id="DeleteRoleBtn" type="button" class="btn btn-block btn-danger">Delete</button>
                     <button type="button" class="btn btn-block btn-primary" data-bs-dismiss="modal">Cancel</button>
                 </div>
             </div>
@@ -632,14 +570,14 @@
     </div>
     <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="Delete_Confirm_Modal" tabindex="-1"
         role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-dialog-centered info-modal" role="document">
             <div style="background-color: white;" class="modal-content">
                 <div class="modal-body text-center">
 
                     <h3 id="AdminDeleteModalText" class="title"></h3>
-                    <img src="images/backgrounds/rocket.png" alt="success">
+                 
                     <p class="head-text" id="successMessageBox"></p>
-                    <button id="DeleteAdminBtn" type="button" class="btn btn-block btn-primary">Delete</button>
+                    <button id="DeleteAdminBtn" type="button" class="btn btn-block btn-danger">Delete</button>
                     <button type="button" class="btn btn-block btn-primary" data-bs-dismiss="modal">Cancel</button>
                 </div>
             </div>
@@ -883,34 +821,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="Create_Role_Success_Modal" tabindex="-1" role="dialog"
-        aria-labelledby="successMessagemodalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered successMessage" role="document">
-            <div style="background-color: white;" class="modal-content">
-                <div class="modal-body text-center">
 
-                    <h3 class="title">Role successfully created!</h3>
-                    <img src="images/backgrounds/rocket.png" alt="success">
-                    <p class="head-text" id="successMessageBox"></p>
-                    <button type="button" class="btn btn-block btn-primary" data-bs-dismiss="modal">OK</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="Create_Success_Modal" tabindex="-1" role="dialog"
-        aria-labelledby="successMessagemodalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered successMessage" role="document">
-            <div style="background-color: white;" class="modal-content">
-                <div class="modal-body text-center">
-
-                    <h3 class="title">Admin successfully created!</h3>
-                    <img src="images/backgrounds/rocket.png" alt="success">
-                    <p class="head-text" id="successMessageBox"></p>
-                    <button type="button" class="btn btn-block btn-primary" data-bs-dismiss="modal">OK</button>
-                </div>
-            </div>
-        </div>
-    </div>
     
     <!--Modal Ends -->
     <%- include('../partials/datatable-script')%>
