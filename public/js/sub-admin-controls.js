@@ -797,9 +797,10 @@ $(document).ready(async () => {
       .on("click", async function () {
         const name = $("#AdminNameInput").val().trim();
         const email = $("#AdminEmailInput").val().trim().toLowerCase();
-        $("#RoleListCreate").on("change", function () {
-          roleId = this.value;
-        });
+        // $("#RoleListCreate").on("change", function () {
+        //   roleId = this.value;
+        // });
+        let roleId = $("#RoleListCreate").val().trim();
         const requestParams = {
           name,
           email,

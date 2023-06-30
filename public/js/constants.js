@@ -24,7 +24,8 @@ const config = {
         COLLECTION_DETAILS: 'admin/collection-details',
         UPLOAD_IMAGE: 'admin/infatuation/upload-image',
         UPDATE_INFATUATION: 'admin/infatuation.update',
-        INFATUATION_DETAILS: 'admin/infatuation'
+        INFATUATION_DETAILS: 'admin/infatuation',
+        RESET_PASSWORD: 'admin/change-password',
 
     }
 }
