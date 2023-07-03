@@ -1,0 +1,88 @@
+<script>
+    $(document).ready(() => {
+        loadTable()
+    })
+    /** Collection table Configurations*/
+    const collectionTableConfig = {
+        url: `${config.SERVER_URL}${config.URLS.COLLECTION_LIST}`,
+        type: 'GET'
+    }
+    const columns = [
+        {
+            orderable: false, targets: -1,
+            render: function (data, type, row, meta) {
+                return meta.row + meta.settings._iDisplayStart + 1;
+            }
+        },
+        { data: 'title' },
+        {
+            render: (data, type, row, meta) => {
+                return row?.creatorDoc ? row.creatorDoc?.name : ''
+            }
+        },
+        {
+            render: (data, type, row, meta) => {
+                return row?.ownerDoc ? row.ownerDoc?.name : ''
+            }
+        },
+        {
+            render: (data, type, row, meta) => {
+                return row?.releaseDate ? new Date(row?.releaseDate).toLocaleDateString() : 'NA'
+            }
+        },
+        {
+            render: (data, type, row, meta) => {
+                return row?.avgSellingPrice ? row?.avgSellingPrice : 'NA'
+            }
+        },
+        {
+            data: '_id',
+            render: (data, type, row, meta) => {
+                let obj = {
+                    tooltip: '',
+                    iconStyle: ''
+                }
+
+                row?.isArchived ? 
+                    obj = { tooltip: 'Unarchive', iconStyle: 'color: #bd0042;margin-right: 10px; cursor:pointer'} : 
+                    obj = { tooltip: 'Archive', iconStyle: 'color: #1c5bca;margin-right: 10px; cursor:pointer'}
+                row?.isArchived ? iconClass = 'fa-solid fa-a' : tooltip = 'Archive'
+                
+                return `<div class='action-btn'>
+                    <a href="admin/infatuation?collection=${row._id}">
+                    <i data-toggle="tooltip" data-placement="top" title="Infatuate" class="fa-solid fa-i" style="color: #1c5bca;margin-right: 10px; cursor:pointer"></i>
+                    </a>                         
+                    <a data-bs-toggle= "modal" data-bs-target = '#Archive_Confirm_Modal' href="#" data-status = '${row.isArchived}' data-id = '${row._id}'>
+                    <i data-toggle="tooltip" data-placement="top" title= ${obj.tooltip} class="fa-solid fa-a" aria-hidden="true" style="${obj.iconStyle};"></i></a>
+                    </div>`
+            }
+        },
+    ]
+    const loadTable = () => initiateDatatable('collectionTable', collectionTableConfig, columns)
+
+
+    /** Method to mark as Archived */
+    $('#Archive_Confirm_Modal').on('show.bs.modal', async function (e) {
+        const btn = $(e.relatedTarget)
+        const status = btn.data('status')
+        const collectionId = btn.data('id')
+        let comfirmationMsg = ''
+        status ? comfirmationMsg = `Are you sure you want to mark this collection as archive ?` : comfirmationMsg = `Are you sure you want to remove this collection from archive ?`
+        $('#ArchiveConfirmText').text(comfirmationMsg)
+        $('#UpdateArchive').off().on('click', async function  () {
+            const requestParams = {
+                collectionId,
+                archiveStatus: status ? false : true
+            }
+            await axios(axiosConfig(`${config.SERVER_URL}${config.URLS.MARK_COLLECTION_AS_ARCHIVED}`, 'PATCH', requestParams))
+            .then((response)=>{
+                loadTable()
+                $('#Archive_Confirm_Modal').modal('hide')
+                ToastMsg(response?.data?.message, 'Success')
+            }).catch((err)=> ToastMsg(err?.response?.data?.message, 'Error'))
+        })
+    })
+
+
+
+</script>

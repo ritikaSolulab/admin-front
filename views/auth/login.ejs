@@ -31,7 +31,8 @@
                                                         <icon class="input-group-text fa fa-user"></icon>
                                                         <input type="email" class="form-control" id="email" name="email"
                                                             aria-describedby="emailHelp" placeholder="Enter your email"
-                                                            required style="border-top-right-radius: 7px; border-bottom-right-radius: 7px;">
+                                                            required
+                                                            style="border-top-right-radius: 7px; border-bottom-right-radius: 7px;">
                                                     </div>
                                                 </div>
                                                 <div class="mb-4">
@@ -39,9 +40,11 @@
                                                     <div class="input-group mb-3">
                                                         <icon class="input-group-text fa fa-lock"></icon>
                                                         <input type="password" class="form-control" id="password"
-                                                            name="password" placeholder="*************" required style="border-top-right-radius: 7px; border-bottom-right-radius: 7px;">
+                                                            name="password" placeholder="*************" required
+                                                            style="border-top-right-radius: 7px; border-bottom-right-radius: 7px;">
                                                         <span toggle="#password-field" id="eye"
-                                                            class="fa fa-fw fa-eye toggle-password" style="color:#4c597d; z-index: 1000;"></span>
+                                                            class="fa fa-fw fa-eye toggle-password"
+                                                            style="color:#4c597d; z-index: 1000;"></span>
 
                                                     </div>
 
@@ -53,7 +56,7 @@
 
                                                 <div class="d-flex align-items-center justify-content-center">
                                                     <u><a href="/forgot-password" class="text-primary fw-bold">Forgot
-                                                        Password ?</a></u>
+                                                            Password ?</a></u>
                                                 </div>
                                             </form>
                                     </div>
@@ -100,16 +103,51 @@
         </div>
     </div>
 
-
+    <div class="page-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+    data-sidebar-position="fixed" data-header-position="fixed" id="resetPassword" style="display: none;">
+    <div
+        class="position-relative overflow-hidden radial-gradient min-vh-100 d-flex align-items-center justify-content-center">
+        <div class="d-flex align-items-center justify-content-center w-100">
+            <div class="row justify-content-center w-100">
+                <div class="col-md-8 col-lg-6 col-xxl-3">
+                    <div class="card mb-0" style="background-color: white;">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-center">
+                                <img src="" id="qrCode" width="180" alt="">
+                            </div>
+                            <form id="resetPasswordForm">
+                                <div class="mb-3">
+                                    <h2 class="text-center">Set New Password</h2>
+                                </div>
+                                <div class="mb-3">
+                                    <input type="password" class="form-control" id="resetPasswordField" name="resetPasswordField"
+                                        placeholder="Enter new password" aria-describedby="otp">
+                                </div>
+                                <div class="mb-3">
+                                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
+                                        placeholder="Confirm Password" aria-describedby="otp">
+                                </div>
+                                
+                                <button type="button" id="" onclick="resetPasswordApi()"
+                                    class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Change Password</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
     <!-- Mainly scripts -->
     <%- include('../partials/script') %>
         <script>
             const passwordInput = document.querySelector("#password")
             const eye = document.querySelector("#eye")
-            eye.addEventListener("click", function(){
-            this.classList.toggle("fa-eye-slash")
-            const type = passwordInput.getAttribute("type") === "password" ? "text" : "password"
-            passwordInput.setAttribute("type", type)
+            var authToken
+            eye.addEventListener("click", function () {
+                this.classList.toggle("fa-eye-slash")
+                const type = passwordInput.getAttribute("type") === "password" ? "text" : "password"
+                passwordInput.setAttribute("type", type)
             })
             /** Validate 2FA Form
              * Method to Enable and Disable Verify button
@@ -155,7 +193,7 @@
                         dataType: 'application/json',
                         data: loginData,
                         url: `${config.SERVER_URL}${config.URLS.LOGIN_URL}`
-                    }).then(response => {
+                    }).then(async(response) => {
                         const { data: { data: { secret } } } = response;
                         if (secret?.qr) {
                             secretCode = response.data.data.secret;
@@ -165,17 +203,24 @@
                         $('#2FAModel').attr('style', 'display: block');
 
                         if (response?.data?.data?.token) {
-                            localStorage.setItem('token', JSON.stringify(response?.data?.data?.token));
-                            localStorage.setItem('user', JSON.stringify(response?.data?.data?.user));
-                            axios({
-                                method: 'POST',
-                                url: '/create-session',
-                                dataType: 'application/json',
-                                data: { ...loginData, token: response?.data?.data?.token, user: response?.data?.data?.user }
-                            });
-                            window.location.href = '/admin'
+                            authToken = response?.data?.data?.token;
+                            if (response?.data?.data?.user.isPasswordReset) {
+                                $('#2FAModel').attr('style', 'display: none');
+                                $('#resetPassword').attr('style', 'display: block');
+                            } else {
+                                localStorage.setItem('token', JSON.stringify(response?.data?.data?.token));
+                                localStorage.setItem('user', JSON.stringify(response?.data?.data?.user));
+                                axios({
+                                    method: 'POST',
+                                    url: '/create-session',
+                                    dataType: 'application/json',
+                                    data: { ...loginData, token: response?.data?.data?.token, user: response?.data?.data?.user }
+                                });
+                                window.location.href = '/admin'
+                            }
                         }
                     }).catch(err => {
+                        console.log('err', err);
                         const { response: { data: { message } } } = err;
                         if (message === '2FA_REQUIRED') {
                             $('#loginModel').attr('style', 'display: none');
@@ -185,6 +230,57 @@
                         }
                     })
                 }
+            }
+
+            const resetPasswordApi = async () => {
+                const form = $('#resetPasswordForm');
+                form.validate({
+                    rules: {
+                        resetPasswordField: {
+                            required: true,
+                            minlength: 8,
+                        },
+                        confirmPassword: {
+                            required: true,
+                            minlength: 8,
+                            equalTo: "#resetPasswordField"
+                        },
+                    },
+                    messages: {
+                        confirmPassword: {
+                            equalTo: "confirm password should be same",
+                        }
+                    }
+                })
+                if (form.valid()) {
+                    const requestParams = {
+                        newPassword: $('#resetPasswordField').val().trim(),
+                    }
+                    console.log(requestParams, {
+                            authorization: `Bearer ${authToken}`,
+                        });
+                    const data = await axios({
+                        method: 'POST',
+                        dataType: 'application/json',
+                        data: requestParams,
+                        headers: {
+                            authorization: `Bearer ${authToken}`,
+                        },
+                        url: `${config.SERVER_URL}${config.URLS.RESET_PASSWORD}`
+                    })
+                        .then((resp) => {
+                            const { data: { message } } = resp
+                            ToastMsg(message, 'Success')
+                            setTimeout(() => {
+                                window.location = `${window.location.origin}/`
+                            }, 1000)
+                        }).catch((err) => {
+                            const { response: { data: { message } } } = err
+                            ToastMsg(message, 'Error')
+                        })
+
+                }
+ 
             }
         </script>
 </body>

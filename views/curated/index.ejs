@@ -14,12 +14,37 @@
                         <input type="text" class="form-control" id="inputPassword3" placeholder="Profession">
                     </div>
                 </div>
-                <div class="row mb-3">
-                    <label for="inputEmail3" class="col-sm-3 col-form-label">Banner Image or Video</label>
-                    <div class="col-sm-3" style="margin-top: 10px;">
-                        <input type="file" class="form-control" id="inputEmail3" placeholder="Name">
+                <div class="row mb-4">
+                    <label for="inputEmail3" class="col-sm-3 col-form-label">Add Banner Image or Video</label>
+                    <div class="col-sm-4">
+                        <div class="card" style="width: 19rem;">
+
+                            <div class="card-body" id="BannerText">
+                                <h5 class="card-title text-center">Banner Image</h5>
+
+                                <p class="card-text">Recommended Size (1500 x 500 px)</p>
+                                <p class="card-text">Formats -JPG, MP4, PNG, GIF - (10 MB Max Size)</p>
+
+                            </div>
+                            <img src="" class="card-img-top" alt="Banner Image" id="BannerImagePreview">
+
+
+                        </div>
+                        
+
                     </div>
+                    <div class="col-sm-1" style="margin-left: -40px;">
+                        <label class="custom-file-upload">
+                            <input type="file" id="BannerImageInput"/>
+                            <i style="align-items: center;
+                            height: 169px;
+                            display: flex;
+                            justify-content: center;" class="btn btn-primary fa fa-sqaure">+</i>
+                        </label>
+                    </div>
+
                 </div>
+
                 <div class="row mb-3">
                     <label for="inputEmail3" class="col-sm-13 col-form-label" style="margin-top: 15px;">Select Banner
                         Text Color</label>
@@ -74,7 +99,11 @@
                 </div>
 
 
-            </div>
+                </div>
+                
+
+            
+
         </div>
 
         <div class="row mb-3">

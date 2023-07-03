@@ -58,56 +58,21 @@
     </div>
 
     <!-- Modals -->
-    
+    <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="Archive_Confirm_Modal" tabindex="-1"
+        role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div style="background-color: white;" class="modal-content">
+                <div class="modal-body text-center">
+
+                    <h3 id="ArchiveConfirmText" class="title"> Are you sure you want to make this collection as archive?</h3>
+                    <img src="images/backgrounds/rocket.png" alt="success">
+                    <p class="head-text" id="successMessageBox"></p>
+                    <button id="UpdateArchive" type="button" class="btn btn-block btn-primary">Confirm</button>
+                    <button type="button" class="btn btn-block btn-primary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+</div>
     <!--Modal Ends -->
 <%- include('../partials/datatable-script')%>
-<script>
-    $(document).ready(()=>{
-        loadTable()
-    })
-    const collectionTableConfig = {
-        url:`${config.SERVER_URL}${config.URLS.COLLECTION_LIST}`,
-        type: 'GET'
-    }
-    const columns = [
-        {
-            orderable: false, targets: -1,
-            render: function (data, type, row, meta) {
-                return meta.row + meta.settings._iDisplayStart + 1;
-            }
-        },
-        { data: 'title'},
-        {
-            render:(data, type, row, meta) => {
-                return row?.creatorDoc ? row.creatorDoc?.name : ''
-            }
-        },
-        {
-            render:(data, type, row, meta) => {
-                return row?.ownerDoc ? row.ownerDoc?.name : ''
-            }
-        },
-        {
-            render:(data, type, row, meta) => {
-                return row?.releaseDate ? new Date(row?.releaseDate).toLocaleDateString() : 'NA'
-            }
-        },
-        {
-            render:(data, type, row, meta) => {
-                return row?.avgSellingPrice ? row?.avgSellingPrice : 'NA'
-            }
-        },
-        {
-            render:(data, type, row, meta) => {
-                return `<div class='action-btn'>
-                    <a href="admin/infatuation?collection=${row._id}">
-                    <i data-toggle="tooltip" data-placement="top" title="Infatuate" class="fa fa-info-circle fa-lg" style="color: #1c5bca;margin-right: 10px; cursor:pointer"></i>
-                    </a>                         
-                    <a href="admin/curatedBy?collection=${row._id}">
-                    <i data-toggle="tooltip" data-placement="top" title=Archive class="fa fa-archive fa-lg" aria-hidden="true"></i></a>
-                    </div>`
-            }
-        },
-    ]
-    const loadTable = () => initiateDatatable('collectionTable', collectionTableConfig, columns)
-</script>
+<%- include('./script') %>
