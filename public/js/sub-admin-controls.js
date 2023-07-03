@@ -44,8 +44,9 @@ const adminColumns = [
   },
   {
     render: (data, type, row, meta) => {
+      let isChekced = row.isBlock ? 'checked': '';
       let text = `<div class="form-check form-switch">
-                    <input name="blockAdmin" type="checkbox" class="form-check-input"  value="${row._id}" id="${row._id}">
+                    <input name="blockAdmin" type="checkbox" class="form-check-input"  value="${row._id}" id="${row._id}" ${isChekced}>
                 </div>`;
       return text;
     },
