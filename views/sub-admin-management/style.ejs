@@ -3,7 +3,7 @@
         overflow-x: hidden;
         width: 100%;
     }
- 
+
     @media (max-width: 1000px) {
         .table-responsive {
             overflow-x: auto;
@@ -28,9 +28,52 @@
 
     .invisible {
         display: none;
+
+    }
+
+    .select:after {
+        content: "▼";
+        padding: 12px 8px;
+        position: absolute;
+        right: 10px;
+        top: 0;
+        z-index: 1;
+        text-align: center;
+        width: 10%;
+        height: 100%;
+        pointer-events: none;
+    }
+
+    .select__field {
+        height: 40px;
+        width: 100%;
+        padding: 5px 15px;
+        color: #616263;
+        background-color: #ececec;
+        border: 1px solid #e3e3e3;
+        outline: none;
+        font-size: 16px;
+       
+        
+    }
+
+
+    .select__field::-ms-expand {
+        display: none;
+    }
+
+    .select__field:focus:invalid {
+        border-color: #FD6347;
+    }
+
+    .select__field:required:valid {
+        border-color: #006400;
+    }
+=======
     } 
     .info-modal {
         --bs-modal-width: 400px;
     }
+
 
 </style>
