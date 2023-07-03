@@ -45,7 +45,7 @@ const adminColumns = [
   {
     render: (data, type, row, meta) => {
       let text = `<div class="form-check form-switch">
-                    <input name="blockAdmin" type="checkbox" class="form-check-input" id="blockToggle" value="${row._id}">
+                    <input name="blockAdmin" type="checkbox" class="form-check-input"  value="${row._id}" id="${row._id}">
                 </div>`;
       return text;
     },
@@ -532,6 +532,8 @@ $(document).ready(async () => {
         });
 
         const keyList = Object.keys(calculatedPermissionObj);
+        calculatedPermissionObj.role_management = calculatedPermissionObj.admin_management;
+
         keyList.forEach((eachKey) => {
           permissions.push({
             permissionName: eachKey,
@@ -929,13 +931,14 @@ $("#Create_Role_Modal").on("show.bs.modal", (e) => {
         }
       });
       const keyList = Object.keys(calculatedPermissionObj);
+      calculatedPermissionObj.role_management = calculatedPermissionObj.admin_management;
       keyList.forEach((eachKey) => {
         permissions.push({
           permissionName: eachKey,
           ...calculatedPermissionObj[`${eachKey}`],
         });
       });
-      const requestParams = {
+     const requestParams = {
         roleName,
         permissions,
       };
@@ -1007,6 +1010,7 @@ async function blockUser(userId) {
           data: { message },
         },
       } = err;
+      $(`#${userId}`).prop('checked', !status);
       ToastMsg(message, "Error");
     });
 }

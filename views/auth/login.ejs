@@ -51,7 +51,7 @@
                                                 </div>
                                                 <div class="d-flex align-items-center justify-content-between mb-4">
                                                 </div>
-                                                <a class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2"
+                                                <a class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2" id="loginButton"
                                                     onclick="login()">Log In</a>
 
                                                 <div class="d-flex align-items-center justify-content-center">
@@ -282,7 +282,15 @@
                 }
  
             }
+            $('#password').keypress(function (e) {
+                let key = e.which;
+                if(key == 13)  // the enter key code
+                {
+                    $('#loginButton').click();
+                    return false;  
+                }
+            });
         </script>
-</body>
+</body> 
 
-</html>
+</html> 
