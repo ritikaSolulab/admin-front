@@ -119,7 +119,9 @@ async function updateTermsCms(){
         })  
 
         $('#termsCondSaveBtn').hide();
-        $('#termsCondEditBtn').show();
+        $('#termsCondEditBtn').show();    
+        $('#termsOfService').summernote('disable')
+
 }
 async function updatePrivacyCms(){
     var privacyDesc = $('#privacyPolicy').summernote('code')
@@ -143,6 +145,7 @@ async function updatePrivacyCms(){
         })  
         $('#privacyPolicySaveBtn').hide();
         $('#privacyPolicyEditBtn').show();
+        $('#privacyPolicy').summernote('disable')
 }
 
 async function updateAboutCms(){
@@ -167,6 +170,7 @@ async function updateAboutCms(){
         })  
         $('#aboutSaveBtn').hide();
         $('#aboutEditBtn').show();
+        $('#aboutUs').summernote('disable')
 }
 
 $(document).ready( async () => {

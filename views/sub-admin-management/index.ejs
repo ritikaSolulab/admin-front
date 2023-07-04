@@ -14,9 +14,9 @@
             <hr>
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-user" role="tabpanel" aria-labelledby="nav-user-tab">
-                    <div class="container-fluid">
-                        <button data-bs-toggle="modal" data-bs-target="#Create_Modal" type="button"
-                            class="btn btn-primary m-1">Create Admin</button>
+                    <div class="container-fluid" style="float: right; padding-bottom: 10px;">
+                        <button data-bs-toggle="modal" data-bs-target="#Create_Modal" type="button" style="float: inherit;"
+                            class="btn btn-primary m-1 float-right">Create Admin</button>
                     </div>
                     <div class="row">
                         <table class="table table-responsive table-striped table-bordered table-hover visible"
@@ -39,8 +39,8 @@
                 </div>
 
                 <div class="tab-pane fade" id="nav-role" role="tabpanel" aria-labelledby="nav-role-tab">
-                    <div class="container-fluid">
-                        <button data-bs-toggle="modal" data-bs-target="#Create_Role_Modal" type="button" class="btn btn-primary m-1">Create Role</button>
+                    <div class="container-fluid" style="float: right; padding-bottom: 10px;">
+                        <button data-bs-toggle="modal" data-bs-target="#Create_Role_Modal" style="float: inherit;" type="button" class="btn btn-primary m-1 float-right">Create Role</button>
                     </div>
                     <div class="row">
                         <table class="table table-striped table-bordered table-hover visible" id="roleTable"
@@ -78,12 +78,12 @@
                         <div class="mb-3">
 
                             <label for="text" class="form-label">Name</label>
-                            <input name="name" type="text" class="form-control" id="NameInput" aria-describedby="name">
+                            <input name="NameInput" type="text" class="form-control" id="NameInput" aria-describedby="name">
                         </div>
                         <div class="mb-3">
 
                             <label for="text" class="form-label">Role</label>
-                            <select class="form-select" id="RoleList">
+                            <select class="form-select" id="RoleList" name="RoleList" style="color: #5A6A85;">
 
                             </select>
                         </div>
@@ -108,7 +108,7 @@
                     <form id="Edit_Role_Form">
                         <div class="mb-3">
                             <label for="text" class="form-label">Role Name</label>
-                            <input name="name" type="text" class="form-control" id="RoleInput"
+                            <input name="RoleInput" type="text" class="form-control" id="RoleInput"
                                 aria-describedby="name">
                         </div>
                         <div class="from-group text-right">
@@ -596,19 +596,19 @@
                         <div class="mb-3">
 
                             <label for="text" class="form-label">Name</label>
-                            <input name="name" type="text" class="form-control" id="AdminNameInput"
+                            <input name="AdminNameInput" type="text" class="form-control" id="AdminNameInput"
                                 aria-describedby="name">
                         </div>
                         <div class="mb-3">
 
                             <label for="text" class="form-label">Email</label>
-                            <input name="email" type="email" class="form-control" id="AdminEmailInput"
+                            <input name="AdminEmailInput" type="email" class="form-control" id="AdminEmailInput"
                                 aria-describedby="name">
                         </div>
                         <div class="mb-3">
 
                             <label for="text" class="form-label">Role</label>
-                            <select class="form-select" id="RoleListCreate">
+                            <select class="form-select" id="RoleListCreate" name="RoleListCreate" style="color: #5A6A85;">
 
                             </select>
                         </div>
@@ -634,7 +634,7 @@
                         <div class="mb-3">
 
                             <label for="text" class="form-label">Role Name</label>
-                            <input name="name" type="text" class="form-control" id="RoleNameInput"
+                            <input name="RoleNameInput" type="text" class="form-control" id="RoleNameInput"
                                 aria-describedby="name">
                         </div>
                         <div class="mb-3">
