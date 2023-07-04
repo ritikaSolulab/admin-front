@@ -5,12 +5,16 @@
             height: '180px',
             width: '650px',
         })
+        loadTable()
+        // Event listener for color selection
+        $('.color').click(function () {
+            var color = $(this).css('background-color');
+            $('#selected-color').val(color);
+        });
     })
     //text editor ends
 
-    $(document).ready(() => {
-        loadTable()
-    })
+
     const collectionTableConfig = {
         url: `${config.SERVER_URL}${config.URLS.COLLECTION_LIST}`,
         type: 'GET'
@@ -62,14 +66,31 @@
     });
     // Multiple select field with search ends
 
-    // 6 fixed color picker
-    $(document).ready(function () {
-        // Event listener for color selection
-        $('.color').click(function () {
-            var color = $(this).css('background-color');
-            $('#selected-color').val(color);
-        });
-    });
-    // 6 fixed color picker ends
 
+    var imageInput = document.getElementById("BannerImageInput")
+    var preview = document.getElementById("BannerImagePreview")
+    imageInput.addEventListener("change", (event) => {
+        $('#BannerText').attr('style', 'display: none')
+        $('#BannerImagePreview').attr('style', 'display: block')
+        var url = URL.createObjectURL(event.target.files[0])
+        preview.setAttribute("src", url)
+    })
+    $('#BannerImagePreview').attr('style', 'width: 300px; height: 200px')
+
+    /** Method to add Profile Link Input */
+    const addButton = document.getElementById("AddProfileInput");
+    const inputContainer = document.getElementById("ProfileLinkDiv");
+    let inputCount = 0;
+    function addInput() {
+        inputCount++;
+        var input = document.createElement("input");
+        input.type = "text";
+        input.id = "ProfileLinkInput_" + inputCount;
+        input.className = "form-control";
+        input.placeholder = "Add Profile Link"
+        input.style = 'margin-bottom: 3px; margin-top: 3px'
+        input.name = "profileLink[]"
+        inputContainer.appendChild(input);
+    }
+    addButton.addEventListener("click", addInput);
 </script>

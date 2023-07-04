@@ -1,6 +1,6 @@
 const config = {
-    // SERVER_URL: 'http://50.19.128.91/',
-    SERVER_URL: 'http://localhost:5000/',
+    SERVER_URL: 'http://50.19.128.91/',
+    // SERVER_URL: 'http://localhost:3000/',
     URLS: {
         LOGIN_URL: 'admin/login',
         FORGOT_PASS: 'admin/forgot-password',
@@ -24,7 +24,9 @@ const config = {
         COLLECTION_DETAILS: 'admin/collection-details',
         UPLOAD_IMAGE: 'admin/infatuation/upload-image',
         UPDATE_INFATUATION: 'admin/infatuation.update',
-        INFATUATION_DETAILS: 'admin/infatuation'
+        INFATUATION_DETAILS: 'admin/infatuation',
+        RESET_PASSWORD: 'admin/change-password',
+        MARK_COLLECTION_AS_ARCHIVED: 'admin/collection/archive-status'
 
     }
 }
