@@ -26,7 +26,11 @@ const config = {
         UPDATE_INFATUATION: 'admin/infatuation.update',
         INFATUATION_DETAILS: 'admin/infatuation',
         RESET_PASSWORD: 'admin/change-password',
-        MARK_COLLECTION_AS_ARCHIVED: 'admin/collection/archive-status'
+        MARK_COLLECTION_AS_ARCHIVED: 'admin/collection/archive-status',
+        UPDATE_FEATURE: 'admin/feature',
+        CREATE_FEATURE: 'admin/feature',
+        GET_FEATURE: 'admin/feature',
+        FEATURE_UPLOAD_IMAGE: 'admin/feature/upload-image'
 
     }
 }

@@ -78,11 +78,13 @@ const roleColumns = [
   },
   { data: "roleName" },
   {
+    data:'_id',
     render: (data, type, row, meta) => {
-      return row.adminDetails?.name;
+      return row.adminDetails? row.adminDetails?.name: 'N/A'
     },
   },
   {
+    data: '_id',
     render: (data, type, row, meta) => {
       return row?.roleCount.length > 0 ? row?.roleCount[0]?.string : 0;
     },
