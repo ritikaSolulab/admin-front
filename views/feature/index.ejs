@@ -18,31 +18,23 @@
         <div class="row mb-4">
           <label for="inputEmail3" class="col-sm-3 col-form-label">Add Banner Image or Video</label>
           <div class="col-sm-4">
-            <div class="card" style="width: 19rem;">
-
+            <div class="card" style="width: 19rem; cursor: pointer;">
               <div class="card-body" id="BannerText">
                 <h5 class="card-title text-center">Banner Image</h5>
-
+                
                 <p class="card-text">Recommended Size (1500 x 500 px)</p>
                 <p class="card-text">Formats -JPG, MP4, PNG, GIF - (10 MB Max Size)</p>
-
+                
               </div>
               <img src="" class="card-img-top" alt="Banner Image" id="BannerImagePreview">
+              <input type="file" id="BannerImageInput" style="display:none"/> 
 
 
             </div>
 
 
           </div>
-          <div class="col-sm-1" style="margin-left: -40px;">
-            <label class="custom-file-upload">
-              <input type="file" id="BannerImageInput" />
-              <i style="align-items: center;
-                            height: 169px;
-                            display: flex;
-                            justify-content: center;" class="btn btn-primary fa fa-sqaure">+</i>
-            </label>
-          </div>
+          
 
         </div>
 
@@ -115,13 +107,12 @@
   <!--Modals-->
   <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="Update_Confirm_Modal" tabindex="-1"
     role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div style="width: 400px;" class="modal-dialog modal-dialog-centered info-modal" role="document">
       <div style="background-color: white;" class="modal-content">
         <div class="modal-body text-center">
 
           <h3 id="AdminDeleteModalText" class="title"> Are you sure you want to update this Feature as Homepage?
           </h3>
-          <img src="images/backgrounds/rocket.png" alt="success">
           <p class="head-text" id="successMessageBox"></p>
           <button id="UpdateFeature" type="button" class="btn btn-block btn-primary">Confirm</button>
           <button type="button" class="btn btn-block btn-primary" data-bs-dismiss="modal">Cancel</button>

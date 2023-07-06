@@ -1,6 +1,6 @@
 const config = {
-    SERVER_URL: 'http://50.19.128.91/',
-    // SERVER_URL: 'http://localhost:3000/',
+    // SERVER_URL: 'http://50.19.128.91/',
+    SERVER_URL: 'http://localhost:3000/',
     URLS: {
         LOGIN_URL: 'admin/login',
         FORGOT_PASS: 'admin/forgot-password',
@@ -30,7 +30,12 @@ const config = {
         UPDATE_FEATURE: 'admin/feature',
         CREATE_FEATURE: 'admin/feature',
         GET_FEATURE: 'admin/feature',
-        FEATURE_UPLOAD_IMAGE: 'admin/feature/upload-image'
+        FEATURE_UPLOAD_IMAGE: 'admin/feature/upload-image',
+        USER_DETAILS: 'admin/details',
+        UPLOAD_PROFILE_IMAGE: 'admin/profile/image-upload',
+        UPDATE_PROFILE: 'admin/profile/update',
+        CHANGE_PASS: 'admin/change-password',
+
 
     }
 }

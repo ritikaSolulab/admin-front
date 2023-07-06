@@ -42,16 +42,20 @@ const Logout = async() => {
 const axiosConfig = (
     url,
     method,
-    data = {}
+    data = {},
+    isImage = false
 )=>{
+    let headers = {
+        authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+    }
+
+    if(isImage) headers[ 'Content-Type'] = "multipart/form-data"
     const _obj = {
         url,
         method,
         data,
-        headers:{
-            authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json'
-        }
+        headers
     }
     return _obj
 }

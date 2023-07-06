@@ -37,6 +37,12 @@
                     const quote = $('#QuoteInput').val(data[0]?.quote)
                     const _color = $('.glow').val(data[0]?.bannerTextColor)
                     const profileLinks = $('#multiple-select-field').val(data[0]?.profileLinks)
+                   if( data?.bannerMediaUrl !== ""){
+                   
+                    $('#BannerText').prop('style', 'display: none')
+                    $('#BannerImagePreview').prop('style', 'display: block')
+                    $('#BannerImagePreview').prop('src', data[0]?.bannerMediaUrl)
+                   }
                 }
                 else {
                     $('#UpdateFeature').text('Create')
@@ -71,25 +77,19 @@
                 $('#UpdateFeature').attr('disabled', true)
                 $('#UpdateFeature').text('Updating...')
                 let obj = {}
-                var formData = new FormData()
-                const name = $('#NameInput').val().trim()
-                const subText = $('#SubtextInput').val().trim()
-                const htmlContent = $('#editor').summernote('code')
-                const quote = $('#QuoteInput').val().trim()
-                const _color = $('.glow').val()
-                const profileLinks = $('#multiple-select-field').val()
+                let formData = new FormData()
                 const featureId = localStorage.getItem('featureId')
-                const requestParams = {
-                    name,
-                    subText,
-                    htmlContent,
-                    quote,
-                    _color,
-                    profileLinks,
-                    featureId
-                }
+                formData.append('image', $('#BannerImageInput').prop('files')[0])
+                formData.append('name', $('#NameInput').val().trim())
+                formData.append('subText', $('#SubtextInput').val().trim())
+                formData.append('htmlContent', $('#editor').summernote('code'))
+                formData.append('quote', $('#QuoteInput').val().trim())
+                formData.append('_color', $('.glow').val())
+                formData.append('featureId', featureId)
+                formData.append('profileLinks', $('#multiple-select-field').val())
+                
                 featureId ? obj = { url: `${config.SERVER_URL}${config.URLS.UPDATE_FEATURE}`, type: 'PATCH' } : obj = { url: `${config.SERVER_URL}${config.URLS.CREATE_FEATURE}`, type: 'POST' }
-                await axios(axiosConfig(obj.url, obj.type, requestParams))
+                await axios(axiosConfig(obj.url, obj.type, formData, true))
                     .then((resp) => {
                         $('#Update_Confirm_Modal').modal('hide')
                         $('#UpdateFeature').attr('disabled', false)
@@ -148,5 +148,8 @@
         preview.setAttribute("src", url)
     })
     $('#BannerImagePreview').attr('style', 'width: 300px; height: 200px')
+
+    $('#BannerText').click(function () { $('#BannerImageInput').trigger('click'); });
+    $('#BannerImagePreview').click(function () { $('#BannerImageInput').trigger('click'); });
 
 </script>
