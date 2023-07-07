@@ -1,21 +1,17 @@
 <script>
-    let adminName = ''
     $(document).ready(async () => {
-        const _user = JSON.parse(user)
-        await axios(axiosConfig(`${config.SERVER_URL}${config.URLS.USER_DETAILS}/${_user._id}`, 'GET'))
-            .then((resp) => {
-                const { data: { data } } = resp
-                adminName = data.name
-                if (data?.profilePic) $('#ProfileImage').attr('src', data.profilePic)
-                $('.idd').text(data.email)
-                $('#NameInput').text(data.name)
-                $('.skeleton-text').attr('style', 'width: auto')
-                $('.skeleton-text').removeClass('skeleton')
-            })
-            .catch((e) => ToastMsg(e?.response?.data?.message, 'Error'))
+        const data = await GetUser()
+        if (data?.profilePic) {
+            $('#ProfileImage').attr('src', data.profilePic)
+            $('#NavbarProfileImage').attr('src', data.profilePic)
+        }
+        $('.idd').text(data.email)
+        $('#NameInput').text(data.name)
+        $('.skeleton-text').attr('style', 'width: auto')
+        $('.skeleton-text').removeClass('skeleton')
 
         $('#Edit_Modal').on('show.modal.bs', function () {
-            $('#_NameInput').val(adminName)
+            $('#_NameInput').val(data.name)
         })
     })
     $('#UpdateDetails').off().on('click', async function () {
@@ -31,19 +27,20 @@
         })
         if (form.valid()) {
             $('#UpdateDetails').text('Updating...')
+            $('#UpdateDetails').attr('disabled', true)
             const name = $('#_NameInput').val().trim()
             await axios(axiosConfig(`${config.SERVER_URL}${config.URLS.UPDATE_PROFILE}`, 'PATCH', { name }))
-                .then((resp) => {
-                    $('#UpdateDetails').text('Update')
-                    adminName = name
+                .then(async (resp) => {
+                    await GetUser()
                     $('#Edit_Modal').modal('hide')
                     $('#NameInput').text(name)
                     ToastMsg(resp?.data?.message, 'Success')
                 })
                 .catch((err) => {
-                    $('#UpdateDetails').text('Update');
                     ToastMsg(err?.response?.data?.message, 'Error')
                 })
+                $('#UpdateDetails').text('Update')
+                $('#UpdateDetails').attr('disabled', false)
         }
     })
     /** Preview Image before Upload*/
@@ -56,10 +53,12 @@
         const formdata = new FormData()
         formdata.append('image', event.target.files[0])
         await axios(axiosConfig(`${config.SERVER_URL}${config.URLS.UPLOAD_PROFILE_IMAGE}`, 'POST', formdata, true))
-            .then((resp) => {
+            .then(async (resp) => {
                 ToastMsg(resp?.data?.message, 'Success')
+                const u = await GetUser()
+                $('#NavbarProfileImage').attr('src', u.profilePic )
             })
-            .catch((err) => ToastMsg(err?.response?.data?.message, 'Error'))
+            .catch((err) => {ToastMsg(err?.response?.data?.message, 'Error')})
 
     })
 </script>
