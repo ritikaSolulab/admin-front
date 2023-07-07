@@ -66,7 +66,18 @@ router.get('/royalties/details', (req, res)=>{
     res.render('royalty-management/details', { activeBar: 'royaltyDetails'})
 })
 router.get('/royalties/license-details', (req, res)=>{
-    res.render('royalty-management/license-details', { activeBar: 'royaltyLicenseDetails'})
+    res.render('royalty-management/license-details', { activeBar: 'royaltyDetails'})
+})
+
+router.get('/wallet', (req, res)=>{
+    res.render('wallet/index', { activeBar: 'wallet' })
+})
+router.get('/license/details', (req,res)=>{
+    res.render('membership-management/licenseDetails', { activeBar: 'licenseDetails'})
+})
+
+router.get('/license/membership-details', (req,res)=>{
+    res.render('membership-management/membershipDetails', { activeBar: 'membershipDetails'})
 })
 
 
