@@ -1,0 +1,16 @@
+<script type="text/javascript">
+    $(document).ready(()=>{
+        $('#transactionTable').DataTable()
+    })
+    $(document).on('click', '.dropdown-menu li', function (e) {
+        console.log("click")
+        e.stopPropagation();
+    }); $(document).on('click', '.dropdown-menu li  option', function (e) {
+        e.stopPropagation();
+    });
+    $('#myDropdown .dropdown-menu').on({
+        "click": function (e) {
+            e.stopPropagation();
+        }
+    });
+</script>

@@ -21,20 +21,20 @@
             <div class="card" style="width: 19rem; cursor: pointer;">
               <div class="card-body" id="BannerText">
                 <h5 class="card-title text-center">Banner Image</h5>
-                
+
                 <p class="card-text">Recommended Size (1500 x 500 px)</p>
                 <p class="card-text">Formats -JPG, MP4, PNG, GIF - (10 MB Max Size)</p>
-                
+
               </div>
               <img src="" class="card-img-top" alt="Banner Image" id="BannerImagePreview">
-              <input type="file" id="BannerImageInput" style="display:none"/> 
+              <input type="file" id="BannerImageInput" style="display:none" />
 
 
             </div>
 
 
           </div>
-          
+
 
         </div>
 
@@ -77,8 +77,8 @@
           <div style="display: flex;">
             <label for="inputEmail3" class="col-sm-3 col-form-label" style="margin-top: 30px;">Profile</label>
             <div style="margin-top: 40px; width: 30%;">
-              <select class="form-select" id="multiple-select-field" data-placeholder="Select Profiles" multiple>
-                <option>Christmas Island</option>
+              <input class="form-select autocomplete" id="ProfileLink" size="50"/>
+              <!-- <option>Christmas Island</option>
                 <option>South Sudan</option>
                 <option>Jamaica</option>
                 <option>Kenya</option>
@@ -89,7 +89,7 @@
                 <option>Eritrea</option>
                 <option>Gibraltar</option>
 
-              </select>
+              </select> -->
             </div>
 
 
@@ -121,7 +121,3 @@
     </div>
   </div>
   <%- include('./script')%>
-    <script>
-      
-
-    </script>

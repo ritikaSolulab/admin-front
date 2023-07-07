@@ -53,13 +53,39 @@
                 text = 'My Account'
                 break;
               case 'nftDetails':
-                text = 'NFT Management - NFT Details '
                 text = `<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                   <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="admin/nft">NFT Management</a></li>
                     <li class="breadcrumb-item active" aria-current="page">NFT Details</li>
                   </ol>
-              </nav>`
+                  </nav>`
+                break;
+                case 'wallet':
+                  text = 'Wallet'
+                break;
+                case 'royaltyDetails':
+                  text = `<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="admin/royaltiesManagement">Royalties Management</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">NFT Details</li>
+                  </ol>
+                  </nav>`
+                break;
+                case 'licenseDetails':
+                  text = `<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="admin/royaltiesManagement">License Management</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">NFT Details</li>
+                  </ol>
+                  </nav>`
+                break;
+                case 'membershipDetails':
+                  text = `<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="admin/royaltiesManagement">Membership Management</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">NFT Details</li>
+                  </ol>
+                  </nav>`
                 break;
               
           
