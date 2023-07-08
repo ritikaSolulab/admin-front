@@ -36,7 +36,12 @@ const config = {
         UPLOAD_PROFILE_IMAGE: 'admin/profile/image-upload',
         UPDATE_PROFILE: 'admin/profile/update',
         CHANGE_PASS: 'admin/change-password',
-
+        REFERRAL_LIST: 'admin/referral',
+        ADD_REFERRAL: 'admin/referral',
+        SEARCH_USER: 'admin/user',
+        GET_CURATED: 'admin/curated',
+        UPDATE_CURATED: 'admin/curated',
+        CREATE_CURATED: 'admin/curated'
 
     }
 }

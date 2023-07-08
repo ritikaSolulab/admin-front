@@ -4,8 +4,9 @@
         <div class="col col-6">
             <h3 class="skeleton skeleton-text"></h3>
             <h3 style="display: inline-block !important;" id="skeleton"></h3>
-            <h3 style="display: inline-block; font-style: italic !important; text-decoration: underline; color:#13369d;" id="CollectionName_Creator"></h3>
-            
+            <h3 style="display: inline-block; font-style: italic !important; text-decoration: underline; color:#13369d;"
+                id="CollectionName_Creator"></h3>
+
         </div>
         <div id="Infatuation_1"></div>
         <div id="Infatuation_2"></div>
@@ -14,17 +15,13 @@
                 <label for="profileLinks" class="col-form-label">Profile Links</label>
             </div>
             <div class="col col-4" id="ProfileLinkDiv">
-                <input name="profileLink[]" type="text" id="ProfileLinkInput_1" placeholder="Add Profile Link" class="form-control"
-                    aria-labelledby="profileHelpInline">
-            </div>
-
-
-            <div class="col-auto">
-                <div class="btn-group" role="group" aria-label="Third group">
-                    <button id="AddProfileInput" type="button" class="btn btn-primary">+</button>
-                </div>
+                <select class="form-control" aria-placeholder="Select Profile" style="width: 100%;" id="multiselect"
+                    multiple="multiple"></select>
 
             </div>
+
+
+
             <div class="">
 
                 <button onclick="Upload()" type="button" class="btn btn-primary _button">Update</button>
@@ -35,18 +32,19 @@
 
 <!--Modals-->
 <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="Update_Confirm_Modal" tabindex="-1"
-        role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div style="width: 400px;" class="modal-dialog modal-dialog-centered info-modal" role="document">
-            <div style="background-color: white;" class="modal-content">
-                <div class="modal-body text-center">
+    role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div style="width: 400px;" class="modal-dialog modal-dialog-centered info-modal" role="document">
+        <div style="background-color: white;" class="modal-content">
+            <div class="modal-body text-center">
 
-                    <h3 id="AdminDeleteModalText" class="title"> Are you sure you want to update this Infatuation as Homepage?</h3>
-                  
-                    <p class="head-text" id="successMessageBox"></p>
-                    <button id="UpdateInfatuation" type="button" class="btn btn-block btn-primary">Confirm</button>
-                    <button type="button" class="btn btn-block btn-primary" data-bs-dismiss="modal">Cancel</button>
-                </div>
+                <h3 id="AdminDeleteModalText" class="title"> Are you sure you want to update this Infatuation as
+                    Homepage?</h3>
+
+                <p class="head-text" id="successMessageBox"></p>
+                <button id="UpdateInfatuation" type="button" class="btn btn-block btn-primary">Confirm</button>
+                <button type="button" class="btn btn-block btn-primary" data-bs-dismiss="modal">Cancel</button>
             </div>
         </div>
+    </div>
 </div>
 <%- include('./script') %>

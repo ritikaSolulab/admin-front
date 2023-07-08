@@ -79,6 +79,9 @@ router.get('/license/details', (req,res)=>{
 router.get('/license/membership-details', (req,res)=>{
     res.render('membership-management/membershipDetails', { activeBar: 'membershipDetails'})
 })
+router.get('/referral', (req, res)=>{
+    return res.render('referral/index', { activeBar: 'referral' })
+})
 
 
 export default router;

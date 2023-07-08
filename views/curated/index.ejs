@@ -5,13 +5,13 @@
                 <div class="row mb-3">
                     <label for="inputEmail3" class="col-sm-3 col-form-label">Enter Details</label>
                     <div class="col-sm-3">
-                        <input autocomplete="off" name="name" type="text" class="form-control" id="inputEmail3" placeholder="Name">
+                        <input autocomplete="off" name="name" type="text" class="form-control" id="NameInput" placeholder="Name">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label for="inputEmail3" class="col-sm-3 col-form-label"></label>
                     <div class="col-sm-3">
-                        <input type="text" class="form-control" id="inputPassword3" placeholder="Profession">
+                        <input type="text" class="form-control" id="ProfessionInput" placeholder="Profession">
                     </div>
                 </div>
                 <div class="row mb-4">
@@ -79,7 +79,7 @@
                 <div class="tab-pane fade show active col-md-8 offset-md-3"
                     id="nft-table" role="tabpanel" aria-labelledby="nft-table-tab">
                     <div class="row">
-                        <table class="table table-striped table-bordered table-hover visible" id="nftTable">
+                        <table style="width: 100%;" class="table table-striped table-bordered table-hover visible" id="nftTable">
                             <thead>
                                 <tr>
                                 <tr>
@@ -112,19 +112,8 @@
             <div style="display: flex;">
               <label for="inputEmail3" class="col-sm-3 col-form-label" style="margin-top: 30px;">Profile</label>
               <div style="margin-top: 40px; width: 30%;">
-                <input class="form-select autocomplete" size="50"/>
-                <!-- <option>Christmas Island</option>
-                  <option>South Sudan</option>
-                  <option>Jamaica</option>
-                  <option>Kenya</option>
-                  <option>French Guiana</option>
-                  <option>Mayotta</option>
-                  <option>Liechtenstein</option>
-                  <option>Denmark</option>
-                  <option>Eritrea</option>
-                  <option>Gibraltar</option>
-  
-                </select> -->
+                <select class="form-control" aria-placeholder="Select Profile" style="width: 100%;" id="multiselect"
+                multiple="multiple"></select>
               </div>
   
   
@@ -138,6 +127,21 @@
     </div>
 
     </div>
+    <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="Update_Confirm_Modal" tabindex="-1"
+    role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div style="width: 400px;" class="modal-dialog modal-dialog-centered info-modal" role="document">
+      <div style="background-color: white;" class="modal-content">
+        <div class="modal-body text-center">
+
+          <h3 id="AdminDeleteModalText" class="title"> Are you sure you want to update this Curated as Homepage?
+          </h3>
+          <p class="head-text" id="successMessageBox"></p>
+          <button id="UpdateFeature" type="button" class="btn btn-block btn-primary">Confirm</button>
+          <button type="button" class="btn btn-block btn-primary" data-bs-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
     <%- include('../partials/datatable-script')%>
     <%- include('./script')%>

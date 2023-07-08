@@ -1,5 +1,13 @@
 <script>
     $(document).ready(async () => {
+        await axios(axiosConfig(`${config.SERVER_URL}${config.URLS.SEARCH_USER}?search=`, 'GET'))
+            .then((resp) => {
+                resp?.data?.data.map((e) => $('#multiselect').append(`<option value= ${e._id}>${e?.text}</option>`))
+                $('#multiselect').select2({
+                    search: true
+                });
+            })
+            .catch((err) => ToastMsg(err?.response?.data?.message, 'Error'))
         /** Summernote common configuration */
         const summernoteCallBacks = {
             onImageUpload: (files, editor, welEditable) => {
@@ -20,7 +28,9 @@
             disableDragAndDrop: true,
             height: '180px',
             width: '650px',
-            callbacks: summernoteCallBacks
+            callbacks: summernoteCallBacks,
+            fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'PolySans Median', 'PolySans Slim'],
+            fontNamesIgnoreCheck: [ 'PolySans Median', 'PolySans Slim']
         }
 
         /** Initialize Summernote Editor*/
@@ -30,15 +40,18 @@
             .then((resp) => {
                 const { data: { data } } = resp
                 if (data.length > 0) {
+                    data[0].results?.map((e)=>{
+                        $(`option[value=${e._id}]`).remove();
+                        var newOption = new Option(e.name, e._id, false, true);
+                        $('#multiselect').append(newOption)
+                    })
                     localStorage.setItem('featureId', data[0]._id)
                     const name = $('#NameInput').val(data[0]?.name)
                     const subText = $('#SubtextInput').val(data[0]?.subText)
                     const htmlContent = $('#editor').summernote('code', data[0]?.htmlContent)
                     const quote = $('#QuoteInput').val(data[0]?.quote)
                     const _color = $('.glow').val(data[0]?.bannerTextColor)
-                    const profileLinks = $('#ProfileLink').val(data[0]?.profileLinks)
-                    if (data?.bannerMediaUrl !== "") {
-
+                    if (data[0]?.bannerMediaUrl !== "") {
                         $('#BannerText').prop('style', 'display: none')
                         $('#BannerImagePreview').prop('style', 'display: block')
                         $('#BannerImagePreview').prop('src', data[0]?.bannerMediaUrl)
@@ -84,9 +97,9 @@
                 formData.append('subText', $('#SubtextInput').val().trim())
                 formData.append('htmlContent', $('#editor').summernote('code'))
                 formData.append('quote', $('#QuoteInput').val().trim())
-                formData.append('_color', $('.glow').val())
+                formData.append('bannerTextColor', $('.glow').val())
                 formData.append('featureId', featureId)
-                formData.append('profileLinks', $('#ProfileLink').val())
+                if($('#multiselect').val().length > 0) formData.append('profileLinks', $('#multiselect').val())
 
                 featureId ? obj = { url: `${config.SERVER_URL}${config.URLS.UPDATE_FEATURE}`, type: 'PATCH' } : obj = { url: `${config.SERVER_URL}${config.URLS.CREATE_FEATURE}`, type: 'POST' }
                 await axios(axiosConfig(obj.url, obj.type, formData, true))
@@ -133,11 +146,6 @@
         if (form.valid()) $('#Update_Confirm_Modal').modal('show')
     }
 
-    $('#multiple-select-field').select2({
-        width: '100%',
-        placeholder: $(this).data('placeholder'),
-        closeOnSelect: false,
-    });
 
     let imageInput = document.getElementById("BannerImageInput")
     let preview = document.getElementById("BannerImagePreview")
