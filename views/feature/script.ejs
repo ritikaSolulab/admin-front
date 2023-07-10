@@ -1,5 +1,13 @@
 <script>
     $(document).ready(async () => {
+        await axios(axiosConfig(`${config.SERVER_URL}${config.URLS.SEARCH_USER}?search=`, 'GET'))
+            .then((resp) => {
+                resp?.data?.data.map((e) => $('#multiselect').append(`<option value= ${e._id}>${e?.text}</option>`))
+                $('#multiselect').select2({
+                    search: true
+                });
+            })
+            .catch((err) => ToastMsg(err?.response?.data?.message, 'Error'))
         /** Summernote common configuration */
         const summernoteCallBacks = {
             onImageUpload: (files, editor, welEditable) => {
@@ -20,7 +28,9 @@
             disableDragAndDrop: true,
             height: '180px',
             width: '650px',
-            callbacks: summernoteCallBacks
+            callbacks: summernoteCallBacks,
+            fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'PolySans Median', 'PolySans Slim'],
+            fontNamesIgnoreCheck: [ 'PolySans Median', 'PolySans Slim']
         }
 
         /** Initialize Summernote Editor*/
@@ -29,14 +39,23 @@
         await axios(axiosConfig(`${config.SERVER_URL}${config.URLS.GET_FEATURE}`, 'GET'))
             .then((resp) => {
                 const { data: { data } } = resp
-                if (data.length > 0){
+                if (data.length > 0) {
+                    data[0].results?.map((e)=>{
+                        $(`option[value=${e._id}]`).remove();
+                        var newOption = new Option(e.name, e._id, false, true);
+                        $('#multiselect').append(newOption)
+                    })
                     localStorage.setItem('featureId', data[0]._id)
                     const name = $('#NameInput').val(data[0]?.name)
                     const subText = $('#SubtextInput').val(data[0]?.subText)
                     const htmlContent = $('#editor').summernote('code', data[0]?.htmlContent)
                     const quote = $('#QuoteInput').val(data[0]?.quote)
                     const _color = $('.glow').val(data[0]?.bannerTextColor)
-                    const profileLinks = $('#multiple-select-field').val(data[0]?.profileLinks)
+                    if (data[0]?.bannerMediaUrl !== "") {
+                        $('#BannerText').prop('style', 'display: none')
+                        $('#BannerImagePreview').prop('style', 'display: block')
+                        $('#BannerImagePreview').prop('src', data[0]?.bannerMediaUrl)
+                    }
                 }
                 else {
                     $('#UpdateFeature').text('Create')
@@ -71,25 +90,19 @@
                 $('#UpdateFeature').attr('disabled', true)
                 $('#UpdateFeature').text('Updating...')
                 let obj = {}
-                var formData = new FormData()
-                const name = $('#NameInput').val().trim()
-                const subText = $('#SubtextInput').val().trim()
-                const htmlContent = $('#editor').summernote('code')
-                const quote = $('#QuoteInput').val().trim()
-                const _color = $('.glow').val()
-                const profileLinks = $('#multiple-select-field').val()
+                let formData = new FormData()
                 const featureId = localStorage.getItem('featureId')
-                const requestParams = {
-                    name,
-                    subText,
-                    htmlContent,
-                    quote,
-                    _color,
-                    profileLinks,
-                    featureId
-                }
+                formData.append('image', $('#BannerImageInput').prop('files')[0])
+                formData.append('name', $('#NameInput').val().trim())
+                formData.append('subText', $('#SubtextInput').val().trim())
+                formData.append('htmlContent', $('#editor').summernote('code'))
+                formData.append('quote', $('#QuoteInput').val().trim())
+                formData.append('bannerTextColor', $('.glow').val())
+                formData.append('featureId', featureId)
+                if($('#multiselect').val().length > 0) formData.append('profileLinks', $('#multiselect').val())
+
                 featureId ? obj = { url: `${config.SERVER_URL}${config.URLS.UPDATE_FEATURE}`, type: 'PATCH' } : obj = { url: `${config.SERVER_URL}${config.URLS.CREATE_FEATURE}`, type: 'POST' }
-                await axios(axiosConfig(obj.url, obj.type, requestParams))
+                await axios(axiosConfig(obj.url, obj.type, formData, true))
                     .then((resp) => {
                         $('#Update_Confirm_Modal').modal('hide')
                         $('#UpdateFeature').attr('disabled', false)
@@ -115,29 +128,24 @@
         $('.color_picker').removeAttr('disabled')
         $('.color_picker').removeClass('glow')
         this.classList.add('glow')
-      })
+    })
 
-      /** Update/Create Feature Method*/
-      const _UpdateFeature = async () => {
+    /** Update/Create Feature Method*/
+    const _UpdateFeature = async () => {
         const form = $('#Feature_Form')
         form.validate({
-          rules: {
-            name: {
-              required: true,
-            },
-            subText: {
-              required: true,
-            },
-          }
+            rules: {
+                name: {
+                    required: true,
+                },
+                subText: {
+                    required: true,
+                },
+            }
         })
         if (form.valid()) $('#Update_Confirm_Modal').modal('show')
-      }
+    }
 
-    $('#multiple-select-field').select2({
-        width: '100%',
-        placeholder: $(this).data('placeholder'),
-        closeOnSelect: false,
-    });
 
     let imageInput = document.getElementById("BannerImageInput")
     let preview = document.getElementById("BannerImagePreview")
@@ -148,5 +156,69 @@
         preview.setAttribute("src", url)
     })
     $('#BannerImagePreview').attr('style', 'width: 300px; height: 200px')
+
+    $('#BannerText').click(function () { $('#BannerImageInput').trigger('click'); });
+    $('#BannerImagePreview').click(function () { $('#BannerImageInput').trigger('click'); });
+
+    /** Profile link search method*/
+    const split = (val) => val.split(/,\s*/);
+    const extractLast = (term) => split(term).pop();
+    let _url = `${config.SERVER_URL}admin/user?search=`;
+
+    $('.autocomplete').on("keydown", function (event) {
+        if (event.keyCode === $.ui.keyCode.TAB &&
+            $(this).autocomplete("instance").menu.active) {
+            event.preventDefault();
+        }
+    }).autocomplete({
+        minLength: 3,
+        dataType: "json",
+        source: function (request, response) {
+            $.ajax({
+                url: _url + request.term,
+                dataType: "json",
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                headers: {
+                    authorization: `Bearer ${token}`
+                },
+                success: (data) => {
+                    let newarr = []
+                    for (const e of data.data) {
+                        newarr.push(e.name)
+                    }
+
+                    response(
+                        $.map(data.data, function (item) {
+
+                            var result = item.name
+                            return { label: result, value: result }
+                        }
+
+
+                        )
+                    );
+                },
+                error: function (response) {
+                    ToastMsg(response.responseJSON.message);
+                },
+                failure: function (response) {
+                    ToastMsg(response.responseJSON.message);
+                }
+            });
+        },
+        select: function (event, ui) {
+            var terms = split(this.value);
+            // remove the current input
+            terms.pop();
+            // add the selected item
+            terms.push(ui.item.value);
+            // add placeholder to get the comma-and-space at the end
+            terms.push("");
+            this.value = terms.join(", ");
+            return false;
+        }
+
+    });
 
 </script>

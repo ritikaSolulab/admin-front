@@ -98,9 +98,6 @@
         }
     }
 
-    .note-editor{
-        margin-left: 12px;
-    }
     ._button {
         margin-left: 50%;
     }
@@ -119,5 +116,19 @@
 }
 #BannerImagePreview{
     display: none;
+}
+
+@keyframes glowing {
+  0% { box-shadow: 0 0 5px #ff000d; }
+  50% { box-shadow: 0 0 20px #00ffdd; }
+  100% { box-shadow: 0 0 5px #48ff00; }
+}
+
+.glow {
+  animation: glowing 1.5s infinite;
+}
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
 }
 </style>

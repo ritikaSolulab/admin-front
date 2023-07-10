@@ -1,0 +1,86 @@
+<script>
+    $(document).ready(async () => {
+        loadTable()
+        
+    })
+
+    /** Add New Code Method*/
+    $("#Create_Modal").on("show.bs.modal", function () {
+        $("#AddReferralBtn")
+            .off()
+            .on("click", async function () {
+                const form = $('#Create_Form')
+                form.validate({
+                    rules: {
+                        code: {
+                            required: true,
+                            minlength: 3
+                        },
+                        email: {
+                            required: true,
+                            email: true
+                        }
+                    }
+                })
+                if (form.valid()) {
+                    $("#AddReferralBtn").text('Please wait...')
+                    $("#AddReferralBtn").attr('disabled', true)
+                    const name = $("#CodeInput").val().trim();
+                    const email = $("#EmailInput").val().trim();
+                    const requestParams = {
+                        referralCode: name,
+                        email
+                    };
+                    await axios(axiosConfig(`${config.SERVER_URL}${config.URLS.ADD_REFERRAL}`,"POST",requestParams))
+                    .then((resp) => {
+                        loadTable()
+                        ToastMsg(resp?.data?.message, "Success");
+                    })
+                    .catch((e) => {
+                        ToastMsg(e?.response?.data?.message, "Error");
+                    });
+                    $("#AddReferralBtn").text('Add')
+                    $("#AddReferralBtn").attr('disabled', false)
+                    $("#Create_Modal").modal("hide");
+                }
+            });
+    });
+
+    
+    $("#Create_Modal").on("hidden.bs.modal", function () {
+        $("#Create_Form").trigger("reset");
+        $("#Create_Form").validate().resetForm()
+
+    });
+
+    /** Datatable Configurations*/
+    const apiConfig = {
+        url: `${config.SERVER_URL}${config.URLS.REFERRAL_LIST}`,
+        type: 'GET'
+    }
+    const columns = [
+        {
+            orderable: false,
+            targets: -1,
+            render: function (data, type, row, meta) {
+                return meta.row + meta.settings._iDisplayStart + 1;
+            },
+        },
+        { data: "referralCode", orderable: false, },
+        { data: "email", orderable: false, },
+        {
+            data: '_id',orderable: false,
+            render: (data, type, row, meta) => {
+                return row.isActive ? 'Active': 'Inactive'
+            },
+        },
+        {
+            data: 'createdAt', orderable: false, targets: -1,
+            render: (data, type, row, meta) => {
+                return new Date(row.createdAt).toLocaleDateString()
+            },
+        },
+    ]
+
+    const loadTable = () => initiateDatatable('ReferralTable', apiConfig, columns, 4)
+</script>

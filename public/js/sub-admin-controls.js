@@ -45,7 +45,7 @@ const adminColumns = [
   {
     render: (data, type, row, meta) => {
       let text = `<div class="form-check form-switch">
-                    <input name="blockAdmin" type="checkbox" class="form-check-input" id="blockToggle" value="${row._id}">
+                    <input style="cursor:pointer" name="blockAdmin" type="checkbox" class="form-check-input" id="blockToggle" value="${row._id}">
                 </div>`;
       return text;
     },
@@ -240,23 +240,26 @@ $(document).ready(async () => {
         })
           .then((resp) => {
             loadAdminTable();
-            console.log(resp);
             const {
               data: { data: { message },
               }} = resp;
+              $("#DeleteAdminBtn").text("Delete");
+            $("#Delete_Confirm_Modal").modal("hide");
             ToastMsg(message, "Success");
 
             })
           .catch((err) => {
             const {
-              data: {
+              response: {
                 data: { message },
               },
             } = err;
+
             ToastMsg(message, "Error");
+            $("#DeleteAdminBtn").text("Delete");
+            $("#Delete_Confirm_Modal").modal("hide");
           });
-        $("#DeleteAdminBtn").text("Delete");
-        $("#Delete_Confirm_Modal").modal("hide");
+        
       });
   });
   /** Delete Admin Method Ends*/
@@ -603,9 +606,23 @@ $('#View_Role_Modal').on('show.bs.modal', (e) => {
 
   /** Create Admin Method */
   $("#Create_Modal").on("show.bs.modal", function () {
-    $("#CreateAdminBtn")
+    $("#_CreateAdminBtn")
       .off()
       .on("click", async function () {
+        const form = $('#Create_Form')
+      form.validate({
+        rules:{
+          name:{
+            required: true,
+            minlength: 3
+          },
+          email:{
+            required: true,
+            email: true
+          }
+        }
+      })
+      if(form.valid()){
         const name = $("#AdminNameInput").val().trim();
         const email = $("#AdminEmailInput").val().trim().toLowerCase();
         // $("#RoleListCreate").on("change", function () {
@@ -633,6 +650,7 @@ $('#View_Role_Modal').on('show.bs.modal', (e) => {
             ToastMsg(e?.response?.data?.message, "Error");
           });
         $("#Create_Modal").modal("hide");
+      }
       });
   });
 
@@ -647,9 +665,19 @@ $('#View_Role_Modal').on('show.bs.modal', (e) => {
 
 /** Create Role Method */
 $("#Create_Role_Modal").on("show.bs.modal", (e) => {
-  $("#CreateRoleBtn")
+  $("#_CreateRoleBtn")
     .off()
     .on("click", async function () {
+      const form = $('#Create_Role_Form')
+      form.validate({
+        rules:{
+          name:{
+            required: true,
+            minlength: 3
+          }
+        }
+      })
+      if(form.valid()){
       const btn = $(e.relatedTarget);
       $(".CreateRoleDet").prop("enabled", true);
       const roleName = $("#RoleNameInput").val().trim();
@@ -764,7 +792,8 @@ $("#Create_Role_Modal").on("show.bs.modal", (e) => {
         .catch((e) => {
           ToastMsg(e?.response?.data?.message, "Error");
         });
-      $("#Create_Role_Modal").modal("hide");
+        $("#Create_Role_Modal").modal("hide");
+      }
     });
 });
 $("#Create_Role_Modal").on("hidden.bs.modal", function () {
@@ -785,13 +814,13 @@ function permissionCond(cond) {
 
 /**Block & Unblock admin */
 let status;
-$(document).on("change", "input[name='blockAdmin']", function () {
+$(document).on("change", "input[name='blockAdmin']", async function () {
   if (this.checked) {
     status = true;
     blockUser(this.value);
   } else {
     status = false;
-    blockUser(this.value);
+    await blockUser(this.value);
   }
 });
 async function blockUser(userId) {
@@ -823,7 +852,7 @@ async function blockUser(userId) {
 
 async function loadRoles() {
   await axios({
-    url: `${config.SERVER_URL}${config.URLS.ROLE_LIST}`,
+    url: `${config.SERVER_URL}${config.URLS.ROLE_LISTS}`,
     method: "GET",
     headers: {
       authorization: `Bearer ${token}`,

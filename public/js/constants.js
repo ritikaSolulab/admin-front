@@ -16,6 +16,7 @@ const config = {
         EDIT_ROLE: 'admin/role.update',
         CREATE_ROLE: 'admin/role.create',
         ROLE_LIST: 'admin/role.list',
+        ROLE_LISTS: 'admin/roles',
         DELETE_ROLE: 'admin/role.delete',
         UPDATE_CMS: 'admin/cms',
         GET_CMS: 'admin/cms',
@@ -30,7 +31,17 @@ const config = {
         UPDATE_FEATURE: 'admin/feature',
         CREATE_FEATURE: 'admin/feature',
         GET_FEATURE: 'admin/feature',
-        FEATURE_UPLOAD_IMAGE: 'admin/feature/upload-image'
+        FEATURE_UPLOAD_IMAGE: 'admin/feature/upload-image',
+        USER_DETAILS: 'admin/details',
+        UPLOAD_PROFILE_IMAGE: 'admin/profile/image-upload',
+        UPDATE_PROFILE: 'admin/profile/update',
+        CHANGE_PASS: 'admin/change-password',
+        REFERRAL_LIST: 'admin/referral',
+        ADD_REFERRAL: 'admin/referral',
+        SEARCH_USER: 'admin/user',
+        GET_CURATED: 'admin/curated',
+        UPDATE_CURATED: 'admin/curated',
+        CREATE_CURATED: 'admin/curated'
 
     }
 }

@@ -1,14 +1,10 @@
 let termsCondId;
 let privacyPolicyId;
 let aboutusId;
-$('#termsOfService').summernote({
+$('#termsOfService, #privacyPolicy, #aboutUs').summernote({
     height: '300px',
-});
-$('#privacyPolicy').summernote({
-    height: '300px',
-});
-$('#aboutUs').summernote({
-    height: '300px',
+    fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'PolySans Median', 'PolySans Slim'],
+    fontNamesIgnoreCheck: [ 'PolySans Median', 'PolySans Slim']
 });
 
 
