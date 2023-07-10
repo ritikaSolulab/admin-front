@@ -51,8 +51,8 @@
                                                 </div>
                                                 <div class="d-flex align-items-center justify-content-between mb-4">
                                                 </div>
-                                                <a class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2" id="loginButton"
-                                                    onclick="login()">Log In</a>
+                                                <button class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2" id="loginButton"
+                                                    onclick="login()">Log In</button>
 
                                                 <div class="d-flex align-items-center justify-content-center">
                                                     <u><a href="/forgot-password" class="text-primary fw-bold">Forgot
@@ -182,6 +182,8 @@
                     }
                 });
                 if (loginForm.valid()) {
+                    
+                    loading('loginButton')
                     const loginData = {
                         email: $('#email').val().trim().toLowerCase(),
                         password: $('#password').val(),
@@ -217,10 +219,10 @@
                                     data: { ...loginData, token: response?.data?.data?.token, user: response?.data?.data?.user }
                                 });
                                 window.location.href = '/admin'
+                                
                             }
                         }
                     }).catch(err => {
-                        console.log('err', err);
                         const { response: { data: { message } } } = err;
                         if (message === '2FA_REQUIRED') {
                             $('#loginModel').attr('style', 'display: none');
@@ -229,6 +231,7 @@
                             ToastMsg(message, 'Error')
                         }
                     })
+                    removeText({ id: 'loginButton', login: true })
                 }
             }
 

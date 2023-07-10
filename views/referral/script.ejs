@@ -23,8 +23,7 @@
                     }
                 })
                 if (form.valid()) {
-                    $("#AddReferralBtn").text('Please wait...')
-                    $("#AddReferralBtn").attr('disabled', true)
+                    loading('AddReferralBtn')
                     const name = $("#CodeInput").val().trim();
                     const email = $("#EmailInput").val().trim();
                     const requestParams = {
@@ -39,9 +38,7 @@
                     .catch((e) => {
                         ToastMsg(e?.response?.data?.message, "Error");
                     });
-                    $("#AddReferralBtn").text('Add')
-                    $("#AddReferralBtn").attr('disabled', false)
-                    $("#Create_Modal").modal("hide");
+                    removeText({id: 'AddReferralBtn', add: true })
                 }
             });
     });

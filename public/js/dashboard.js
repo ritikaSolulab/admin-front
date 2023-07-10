@@ -264,30 +264,99 @@ $(function () {
     },
     series: [
       {
-        name: "Series 1",
+        name: "NFTs",
         data: [45, 52, 38, 45, 19, 23, 2]
       }
     ],
-    fill: {
-      type: "gradient",
-      gradient: {
-        shadeIntensity: 1,
-        opacityFrom: 0.7,
-        opacityTo: 0.9,
-        stops: [0, 90, 100]
-      }
+    chart: {
+      type: "bar",
+      height: 345,
+      offsetX: -15,
+      toolbar: { show: true },
+      foreColor: "#adb0bb",
+      fontFamily: 'inherit',
+      sparkline: { enabled: false },
     },
+
+
+    colors: ["#5D87FF"],
+
+
+    plotOptions: {
+      bar: {
+        horizontal: false,
+        columnWidth: "35%",
+        borderRadius: [6],
+        borderRadiusApplication: 'end',
+        borderRadiusWhenStacked: 'all'
+      },
+    },
+    markers: { size: 0 },
+
+    dataLabels: {
+      enabled: true,
+    },
+
+
+    legend: {
+      show: true,
+    },
+
+
+    grid: {
+      borderColor: "rgba(0,0,0,0.1)",
+      strokeDashArray: 3,
+      xaxis: {
+        lines: {
+          show: false,
+        },
+      },
+    },
+
     xaxis: {
-      categories: [
-        "01 Jan",
-        "02 Jan",
-        "03 Jan",
-        "04 Jan",
-        "05 Jan",
-        "06 Jan",
-        "07 Jan"
-      ]
-    }
+      type: "category",
+      categories: ["16/08", "17/08", "18/08", "19/08", "20/08", "21/08", "22/08", "23/08"],
+      labels: {
+        style: { cssClass: "grey--text lighten-2--text fill-color" },
+      },
+    },
+
+
+    yaxis: {
+      show: true,
+      min: 0,
+      max: 100,
+      tickAmount: 4,
+      labels: {
+        style: {
+          cssClass: "grey--text lighten-2--text fill-color",
+        },
+      },
+    },
+    stroke: {
+      show: true,
+      width: 3,
+      lineCap: "butt",
+      colors: ["transparent"],
+    },
+
+
+    tooltip: { theme: "light" },
+
+    responsive: [
+      {
+        breakpoint: 600,
+        options: {
+          plotOptions: {
+            bar: {
+              borderRadius: 3,
+            }
+          },
+        }
+      }
+    ]
+
+
   };
   // =====================================
   // Earning

@@ -87,8 +87,7 @@
         /** Method to Update Feature*/
         $('#Update_Confirm_Modal').on('show.bs.modal', async function () {
             $('#UpdateFeature').off().on('click', async function () {
-                $('#UpdateFeature').attr('disabled', true)
-                $('#UpdateFeature').text('Updating...')
+                loading('UpdateFeature')
                 let obj = {}
                 let formData = new FormData()
                 const featureId = localStorage.getItem('featureId')
@@ -104,18 +103,14 @@
                 featureId ? obj = { url: `${config.SERVER_URL}${config.URLS.UPDATE_FEATURE}`, type: 'PATCH' } : obj = { url: `${config.SERVER_URL}${config.URLS.CREATE_FEATURE}`, type: 'POST' }
                 await axios(axiosConfig(obj.url, obj.type, formData, true))
                     .then((resp) => {
-                        $('#Update_Confirm_Modal').modal('hide')
-                        $('#UpdateFeature').attr('disabled', false)
-                        $('#UpdateFeature').text('Update')
                         ToastMsg(resp?.data?.message, 'Success')
 
                     })
                     .catch((err) => {
-                        $('#Update_Confirm_Modal').modal('hide')
-                        $('#UpdateFeature').attr('disabled', false)
-                        $('#UpdateFeature').text('Update')
                         ToastMsg(err?.response?.data?.message, 'Error')
                     })
+                    $('#Update_Confirm_Modal').modal('hide')
+                    removeText({ id: 'UpdateFeature' , confirm: true })
 
             })
         })

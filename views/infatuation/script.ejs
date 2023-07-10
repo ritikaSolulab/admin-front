@@ -122,6 +122,7 @@
     };
     $('#Update_Confirm_Modal').on('show.bs.modal', function () {
         $('#UpdateInfatuation').off().on('click', async function () {
+            loading('UpdateInfatuation')
             const htmlEditor1 = $('#Infatuation_1').summernote('code')
             const htmlEditor2 = $('#Infatuation_2').summernote('code')
             const requestParams = {
@@ -135,10 +136,11 @@
             if($('#multiselect').val().length > 0) requestParams.profileLinks = $('#multiselect').val()
             await axios(axiosConfig(`${config.SERVER_URL}${config.URLS.UPDATE_INFATUATION}`, 'PATCH', requestParams))
                 .then((response) => {
-                    $('#Update_Confirm_Modal').modal('hide')
                     ToastMsg(response?.data?.message, 'Success')
                 })
                 .catch((err) => ToastMsg(err?.response?.data?.message, 'Error'))
+                $('#Update_Confirm_Modal').modal('hide')
+                removeText({ id: 'UpdateInfatuation', confirm: true })
 
         })
 
@@ -148,23 +150,6 @@
     const DeleteFile = (url) => {
         console.log(url)
     }
-
-    /** Method to add Profile Link Input */
-    // const addButton = document.getElementById("AddProfileInput");
-    // const inputContainer = document.getElementById("ProfileLinkDiv");
-    // let inputCount = 0;
-    // function addInput() {
-    //     inputCount++;
-    //     var input = document.createElement("input");
-    //     input.type = "text";
-    //     input.id = "ProfileLinkInput_" + inputCount;
-    //     input.className = "form-control";
-    //     input.placeholder = "Add Profile Link"
-    //     input.style = 'margin-bottom: 3px; margin-top: 3px'
-    //     input.name = "profileLink[]"
-    //     inputContainer.appendChild(input);
-    // }
-    // addButton.addEventListener("click", addInput);
 
 
 </script>

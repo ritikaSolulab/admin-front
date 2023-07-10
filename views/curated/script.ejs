@@ -89,8 +89,7 @@
         /** Method to Update Feature*/
         $('#Update_Confirm_Modal').on('show.bs.modal', async function () {
             $('#UpdateFeature').off().on('click', async function () {
-                $('#UpdateFeature').attr('disabled', true)
-                $('#UpdateFeature').text('Updating...')
+                loading('UpdateFeature')
                 let obj = {}
                 let formData = new FormData()
                 const curatedId = localStorage.getItem('curatedId')
@@ -101,18 +100,18 @@
                 formData.append('quote', $('#QuoteInput').val().trim())
                 formData.append('bannerTextColor', $('.glow').val())
                 formData.append('curatedId', curatedId)
-                console.log($('#multiselect').val())
+                let arr = []
+                arr.push($('#multiselect').val())
+                console.log(arr)
 
-                if($('#multiselect').val().length > 0) formData.append('profileLinks',  $('#multiselect').val())
+                if($('#multiselect').val().length > 0) formData.append('profileLinks',  arr)
 
                 curatedId ? obj = { url: `${config.SERVER_URL}${config.URLS.UPDATE_CURATED}`, type: 'PATCH' } : obj = { url: `${config.SERVER_URL}${config.URLS.CREATE_CURATED}`, type: 'POST' }
                 await axios(axiosConfig(obj.url, obj.type, formData, true))
                     .then((resp) => ToastMsg(resp?.data?.message, 'Success'))
                     .catch((err) => ToastMsg(err?.response?.data?.message, 'Error'))
-                    localStorage.removeItem('curatedId')
                     $('#Update_Confirm_Modal').modal('hide')
-                    $('#UpdateFeature').attr('disabled', false)
-                    $('#UpdateFeature').text('Update')
+                    removeText({id: 'UpdateFeature', confirm: true})
 
             })
         })
