@@ -26,8 +26,7 @@
             }
         })
         if (form.valid()) {
-            $('#UpdateDetails').text('Updating...')
-            $('#UpdateDetails').attr('disabled', true)
+            loading('UpdateDetails')
             const name = $('#_NameInput').val().trim()
             await axios(axiosConfig(`${config.SERVER_URL}${config.URLS.UPDATE_PROFILE}`, 'PATCH', { name }))
                 .then(async (resp) => {
@@ -39,8 +38,7 @@
                 .catch((err) => {
                     ToastMsg(err?.response?.data?.message, 'Error')
                 })
-                $('#UpdateDetails').text('Update')
-                $('#UpdateDetails').attr('disabled', false)
+                removeText({id:'UpdateDetails', update: true })
         }
     })
     /** Preview Image before Upload*/

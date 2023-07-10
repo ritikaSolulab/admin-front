@@ -70,3 +70,36 @@ const axiosConfig = (
     }
     return _obj
 }
+
+const loading = (id) => {
+    $(`#${id}`).text('Please wait...')
+    $(`#${id}`).attr('disabled', true)
+    $(`#${id}`).append(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"</span>`)   
+}
+
+const removeText = ({
+    id,
+    login=false,
+    update = false,
+    _delete = false,
+    verify = false,
+    sendOTP = false,
+    change = false,
+    confirm = false,
+    add = false,
+    save = false
+}) => {
+    let text = 'Create'
+    if(update) text = 'Update'
+    if(_delete) text = 'Delete'
+    if(login) text = 'Login'
+    if(verify) text = 'Verify'
+    if(sendOTP) text = 'Send OTP'
+    if(change) text = 'Change'
+    if(confirm) text = 'Confirm'
+    if(add) text = 'Add'
+    if(save) text = 'Save'
+    $(`#${id}`).text(`${text}`)
+    $(`#${id}`).prop('disabled', false)
+}
+

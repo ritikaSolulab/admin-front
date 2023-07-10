@@ -4,6 +4,7 @@ const initiateDatatable = (
     columns,
     sorting=3
 ) => {
+    $(`#${tableId}`).attr('style', 'width: 100%')
     return $(`#${tableId}`).DataTable({
         destroy: true,
         search: true,
