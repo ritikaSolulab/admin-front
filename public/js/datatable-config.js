@@ -13,7 +13,7 @@ const initiateDatatable = (
         orderMulti: false,
         serverSide: true,
         columnDefs: [{ 'orderable': false, 'targets': 0 }], // hide sort icon on header of first column
-        aaSorting: [[sorting, 'desc']],
+        order: [[sorting, 'desc']],
         responsive: true,
         ajax: {
             url: ajaxConfig.url,

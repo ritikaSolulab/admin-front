@@ -22,7 +22,7 @@
         { data: 'username'},
         { data: 'kycStatus'},
         {
-            data: '_id',
+            data: 'createdAt',
             render: (data, type, row, meta) => new Date(row?.createdAt).toLocaleDateString()
         }
     ]

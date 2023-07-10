@@ -2,18 +2,21 @@
     $(document).ready(async () => {
         const _user = await GetUser()
         const permissions = _user?.roleId?.permissions
-
         if (_user.isSuperAdmin) {
             $('#wallet_sidebar').show()
         }
+        if(!_user.isSuperAdmin && (_user?.isDeleted || _user?.isBlock)){
+            Logout()
+        }
         if (permissions && !_user.isSuperAdmin) {
+            $('#wallet_sidebar').hide()
+            $('#referral_sidebar').hide()
             permissions.map((ele) => {
                 const view = ele.view
                 const create = ele.create
                 const update = ele.update
                 const remove = ele.remove
                 let name = ele.permissionName
-                $('#wallet_sidebar').hide()
                 if (name === 'admin_management') {
                     view ? $('#admin_management_sidebar').show() : $('#admin_management_sidebar').hide()
                     create ?  $('#CreateAdminBtn').show() : $('#CreateAdminBtn').hide()
@@ -55,7 +58,7 @@
             })
         }
         if (!permissions) {
-            $('li#dashboard_sidebar').nextAll().hide()
+            $('#dashboard_sidebar').nextAll().hide()
             $('#support_management_sidebar').show()
         }
     })
