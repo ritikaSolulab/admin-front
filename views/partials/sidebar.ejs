@@ -1,4 +1,4 @@
-<aside class="left-sidebar">
+<aside class="left-sidebar" style="z-index: 400;">
   <!-- Sidebar scroll-->
   <div >
     <div class="brand-logo d-flex align-items-center justify-content-between">
@@ -28,20 +28,20 @@
             <span class="hide-menu">Super Admin Control</span>
           </a>
         </li>
-          <li id="user_management_sidebar" class="sidebar-item <%= (activeBar == 'userManagement') ? 'selected' : '' %>">
+          <!-- <li id="user_management_sidebar" class="sidebar-item <%= (activeBar == 'userManagement') ? 'selected' : '' %>">
             <a class="sidebar-link <%= (activeBar == 'userManagement') ? 'active' : '' %>" href="/admin/userManagement" aria-expanded="false">
             <span>
               <i class="ti ti-article"></i>
             </span>
             <span class="hide-menu">User Management</span>
           </a>
-        </li>
+        </li> -->
         <li id="collector_management_sidebar" class="sidebar-item <%= (activeBar == 'collectorManagement') ? 'selected' : '' %>">
           <a class="sidebar-link <%= (activeBar == 'collectorManagement') ? 'active' : '' %>" href="/admin/collectorManagement" aria-expanded="false">
           <span>
             <i class="ti ti-article"></i>
           </span>
-          <span class="hide-menu">Creator/Collection</span>
+          <span class="hide-menu">Creator/Collector</span>
         </a>
       </li>
         <li id="license_management_sidebar" class="sidebar-item <%= (activeBar == 'license') ? 'selected' : '' %>">
@@ -109,6 +109,22 @@
               <i class="ti ti-bell-ringing"></i>
             </span>
             <span class="hide-menu">Content Management</span>
+          </a>
+        </li>
+        <li id="wallet_sidebar" class="sidebar-item <%= (activeBar == 'referral') ? 'selected' : '' %>">
+          <a class="sidebar-link  <%= (activeBar == 'referral') ? 'active' : '' %>" href="/admin/referral" aria-expanded="false">
+            <span>
+              <i class="ti ti-file-description"></i>
+            </span>
+            <span class="hide-menu">Referral Codes</span>
+          </a>
+        </li>
+        <li id="wallet_sidebar" class="sidebar-item <%= (activeBar == 'wallet') ? 'selected' : '' %>">
+          <a class="sidebar-link  <%= (activeBar == 'wallet') ? 'active' : '' %>" href="/admin/wallet" aria-expanded="false">
+            <span>
+              <i class="ti ti-wallet"></i>
+            </span>
+            <span class="hide-menu">Wallet</span>
           </a>
         </li>
         <li id="support_management_sidebar" class="sidebar-item <%= (activeBar == 'support') ? 'selected' : '' %>">

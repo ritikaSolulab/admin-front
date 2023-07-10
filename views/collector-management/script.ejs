@@ -1,0 +1,33 @@
+<script>
+    $(document).ready(async () => {
+        creatorTable()
+        collectorTable()
+    })
+    const creatorConfig = {
+        url: `${config.SERVER_URL}${config.URLS.USER_LIST}/?userType=creator`,
+        method: 'GET'
+    }
+    const collectorConfig = {
+        url: `${config.SERVER_URL}${config.URLS.USER_LIST}/?userType=collector`,
+        method: 'GET'
+    }
+    const columns = [
+        {
+            orderable: false, targets: -1,
+            render: (data, type, row, meta) => meta.row + meta.settings._iDisplayStart + 1
+            
+        },
+        { data: 'name'} ,
+        { data: 'email'},
+        { data: 'username'},
+        { data: 'kycStatus'},
+        {
+            data: '_id',
+            render: (data, type, row, meta) => new Date(row?.createdAt).toLocaleDateString()
+        }
+    ]
+
+    const creatorTable = () => initiateDatatable('creatorTable', creatorConfig, columns, 5)
+    const collectorTable = () => initiateDatatable('collectorTable', collectorConfig, columns, 5)
+
+</script>

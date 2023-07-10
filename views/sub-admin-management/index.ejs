@@ -14,9 +14,9 @@
             <hr>
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-user" role="tabpanel" aria-labelledby="nav-user-tab">
-                    <div class="container-fluid" style="float: right; padding-bottom: 10px; padding-right: 0px;">
-                        <button data-bs-toggle="modal" data-bs-target="#Create_Modal" type="button" style="float: inherit;"
-                            class="btn btn-primary m-1 float-right">Create Admin</button>
+                    <div class="container-fluid">
+                        <button id="CreateAdminBtn" data-bs-toggle="modal" data-bs-target="#Create_Modal" type="button"
+                            class="btn btn-primary m-1">Create Admin</button>
                     </div>
                     <div class="row">
                         <table class="table table-responsive table-striped table-bordered table-hover visible"
@@ -39,8 +39,8 @@
                 </div>
 
                 <div class="tab-pane fade" id="nav-role" role="tabpanel" aria-labelledby="nav-role-tab">
-                    <div class="container-fluid" style="float: right; padding-bottom: 10px; padding-right: 0px;">
-                        <button data-bs-toggle="modal" data-bs-target="#Create_Role_Modal" style="float: inherit;" type="button" class="btn btn-primary m-1 float-right">Create Role</button>
+                    <div class="container-fluid">
+                        <button id="CreateRoleBtn" data-bs-toggle="modal" data-bs-target="#Create_Role_Modal" type="button" class="btn btn-primary m-1">Create Role</button>
                     </div>
                     <div class="row">
                         <table class="table table-striped table-bordered table-hover visible" id="roleTable"
@@ -132,7 +132,7 @@
                                     </div>
                                 </div>
                                 <!-- <div class="row m-t-md m-b-sm m-2">
-                                    <div class="col-sm-6"> <label>Role Management</label></div>
+                                    <div class="col-sm-6"> <label>User Management</label></div>
                                     <div class="col-sm-6">
                                         <div class="text-right switchnew">
                                             <input class="CreateRoleDet" type="checkbox" id="roleMng-Create"> Create
@@ -377,7 +377,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row m-t-md m-b-sm m-2">
+                            <!-- <div class="row m-t-md m-b-sm m-2">
                                 <div class="col-sm-6"> <label>User Management</label></div>
                                 <div class="col-sm-6">
                                     <div class="text-right switchnew">
@@ -391,8 +391,8 @@
 
                                     </div>
                                 </div>
-                            </div>
-                            <!-- <div class="row m-t-md m-b-sm m-2">
+                            </div> -->
+                            <div class="row m-t-md m-b-sm m-2">
                                 <div class="col-sm-6"> <label>Role Management</label></div>
                                 <div class="col-sm-6">
                                     <div class="text-right switchnew">
@@ -617,7 +617,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button id="CreateAdminBtn" type="button" class="btn btn-primary">Create</button>
+                    <button id="_CreateAdminBtn" type="button" class="btn btn-primary">Create</button>
                 </div>
             </div>
         </div>
@@ -654,8 +654,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div class="row m-t-md m-b-sm m-2">
-                                    <div class="col-sm-6"> <label>Role Management</label></div>
+                                <!-- <div class="row m-t-md m-b-sm">
+                                    <div class="col-sm-6"> <label>User Management</label></div>
                                     <div class="col-sm-6">
                                         <div class="text-right switchnew">
                                             <input class="CreateRoleDet" type="checkbox" id="roleMng_Create"> Create
@@ -818,7 +818,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button id="CreateRoleBtn" type="button" class="btn btn-primary">Create</button>
+                    <button id="_CreateRoleBtn" type="button" class="btn btn-primary">Create</button>
                 </div>
             </div>
         </div>

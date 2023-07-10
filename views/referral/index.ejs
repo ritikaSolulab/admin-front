@@ -1,0 +1,63 @@
+
+<div class="card-body">
+    <div class="row">
+        <hr>
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-user" role="tabpanel" aria-labelledby="nav-user-tab">
+                <div class="container-fluid">
+                    <button id="AddReferral" data-bs-toggle="modal" data-bs-target="#Create_Modal" type="button"
+                        class="btn btn-primary m-1">Add Refferal Code</button>
+                </div>
+                <div style="margin-top: 15px;" class="row">
+                    <table style="width: 100%;" class="table table-striped table-bordered table-hover visible" id="ReferralTable">
+                        <thead>
+                            <tr>
+                                <th>Sr No</th>
+                                <th>Code</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                                <th>Created On</th>
+                            </tr>
+                        </thead>
+
+                    </table>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+<div class="modal fade" id="Create_Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div style="width: 35%;" class="modal-dialog modal-dialog-centered" role="document">
+    <div style="background-color: white;" class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add Referral Code</h5>
+        </div>
+        <div class="modal-body">
+            <form id="Create_Form">
+                <div class="mb-3">
+
+                    <label for="text" class="form-label">Code</label>
+                    <input name="code" type="text" class="form-control" id="CodeInput"
+                        aria-describedby="name">
+                </div>
+                <div class="mb-3">
+
+                    <label for="text" class="form-label">Email</label>
+                    <input name="email" type="email" class="form-control" id="EmailInput"
+                        aria-describedby="name">
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button id="AddReferralBtn" type="button" class="btn btn-primary">Add</button>
+        </div>
+    </div>
+</div>
+</div>
+<%- include('../partials/datatable-script') %>
+<%- include('./script') %>

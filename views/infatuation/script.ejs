@@ -3,18 +3,33 @@
         const urlParams = new URLSearchParams(window.location.search);
         const collectionId = urlParams.get('collection');
         if (collectionId) {
+            await axios(axiosConfig(`${config.SERVER_URL}${config.URLS.SEARCH_USER}?search=`, 'GET'))
+            .then((resp) => {
+                resp?.data?.data.map((e) => $('#multiselect').append(`<option value= ${e._id}>${e?.text}</option>`))
+                $('#multiselect').select2({
+                    search: true
+                });
+            })
+            .catch((err) => ToastMsg(err?.response?.data?.message, 'Error'))
             await axios(axiosConfig(`${config.SERVER_URL}${config.URLS.COLLECTION_DETAILS}/${collectionId}`, 'GET'))
                 .then((response) => {
                     const { data: { data } } = response
+                    localStorage.setItem('infatuationId', data?.infatuationId)
                     $.ajax({
                         url: `${config.SERVER_URL}${config.URLS.INFATUATION_DETAILS}/${data.infatuationId}`,
                         method: 'GET',
                         headers: {
                             Authorization: `Bearer ${token}`
                         },
-                        success: (resp) => {
+                        success: async (resp) => {
+                            resp?.data?.results?.map((e)=>{
+                                $(`option[value=${e._id}]`).remove();
+                                var newOption = new Option(e.name, e._id, false, true);
+                                $('#multiselect').append(newOption)
+                            })
                             $('#Infatuation_1').summernote('code', resp?.data?.html.editor1)
                             $('#Infatuation_2').summernote('code', resp?.data?.html.editor2)
+                            
                         },
                         error: (err) => window.location.href = 'admin/nft'
                     })
@@ -62,13 +77,18 @@
             disableDragAndDrop: true,
             height: '250px',
             width: '700px',
-            callbacks: infatuation1Callbacks
+            callbacks: infatuation1Callbacks,
+            fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'PolySans Median', 'PolySans Slim'],
+            fontNamesIgnoreCheck: [ 'PolySans Median', 'PolySans Slim']
+            
         }
         const _summernoteConfig = {
             disableDragAndDrop: true,
             height: '250px',
             width: '700px',
-            callbacks: infatuation2Callbacks
+            callbacks: infatuation2Callbacks,
+            fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'PolySans Median', 'PolySans Slim'],
+            fontNamesIgnoreCheck: [ 'PolySans Median', 'PolySans Slim']
         }
 
         /** Initialize Summernote Editor*/
@@ -111,8 +131,8 @@
                 },
                 infatuationId: localStorage.getItem('infatuationId'),
                 isHomePage: true,
-                profileLinks: $("input[name='profileLink[]']").map(function () { return $(this).val(); }).get()
             }
+            if($('#multiselect').val().length > 0) requestParams.profileLinks = $('#multiselect').val()
             await axios(axiosConfig(`${config.SERVER_URL}${config.URLS.UPDATE_INFATUATION}`, 'PATCH', requestParams))
                 .then((response) => {
                     $('#Update_Confirm_Modal').modal('hide')
@@ -130,21 +150,21 @@
     }
 
     /** Method to add Profile Link Input */
-    const addButton = document.getElementById("AddProfileInput");
-    const inputContainer = document.getElementById("ProfileLinkDiv");
-    let inputCount = 0;
-    function addInput() {
-        inputCount++;
-        var input = document.createElement("input");
-        input.type = "text";
-        input.id = "ProfileLinkInput_" + inputCount;
-        input.className = "form-control";
-        input.placeholder = "Add Profile Link"
-        input.style = 'margin-bottom: 3px; margin-top: 3px'
-        input.name = "profileLink[]"
-        inputContainer.appendChild(input);
-    }
-    addButton.addEventListener("click", addInput);
+    // const addButton = document.getElementById("AddProfileInput");
+    // const inputContainer = document.getElementById("ProfileLinkDiv");
+    // let inputCount = 0;
+    // function addInput() {
+    //     inputCount++;
+    //     var input = document.createElement("input");
+    //     input.type = "text";
+    //     input.id = "ProfileLinkInput_" + inputCount;
+    //     input.className = "form-control";
+    //     input.placeholder = "Add Profile Link"
+    //     input.style = 'margin-bottom: 3px; margin-top: 3px'
+    //     input.name = "profileLink[]"
+    //     inputContainer.appendChild(input);
+    // }
+    // addButton.addEventListener("click", addInput);
 
 
 </script>

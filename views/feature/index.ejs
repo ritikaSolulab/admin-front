@@ -1,60 +1,113 @@
-<!-- <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> -->
-<%-include('./style')%>
+<%- include('./style')%>
+  <div class="card-body">
+    <div class="row">
+      <form id="Feature_Form">
+        <div class="row mb-3">
+          <label for="inputEmail3" class="col-sm-3 col-form-label">Enter Details</label>
+          <div class="col-sm-3">
+            <input name="name" autocomplete="off" type="text" class="form-control" id="NameInput" placeholder="Name">
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label for="inputEmail3" class="col-sm-3 col-form-label"></label>
+          <div class="col-sm-3">
+            <input name="subtext" autocomplete="off" type="text" class="form-control" id="SubtextInput"
+              placeholder="Sub Text">
+          </div>
+        </div>
+        <div class="row mb-4">
+          <label for="inputEmail3" class="col-sm-3 col-form-label">Add Banner Image or Video</label>
+          <div class="col-sm-4">
+            <div class="card" style="width: 19rem; cursor: pointer;">
+              <div class="card-body" id="BannerText">
+                <h5 class="card-title text-center">Banner Image</h5>
 
-         <%- include('./style')%>
-         <div class="card-body">
-             <div class="row">
-                 <form>
-                     <div class="row mb-3">
-                       <label for="inputEmail3" class="col-sm-3 col-form-label">Enter Details</label>
-                       <div class="col-sm-3">
-                         <input type="text" class="form-control" id="inputEmail3" placeholder="Name">
-                       </div>
-                     </div>
-                     <div class="row mb-3">
-                         <label for="inputEmail3" class="col-sm-3 col-form-label"></label>
-                       <div class="col-sm-3">
-                         <input type="text" class="form-control" id="inputPassword3" placeholder="Profession">
-                       </div>
-                     </div>
-                     <div class="row mb-3">
-                         <label for="inputEmail3" class="col-sm-3 col-form-label">Add Banner Image or Video</label>
-                         <div class="col-sm-3">
-                           <input style="height: 100px;" type="file" class="form-control" id="inputEmail3" placeholder="Name">
-                         </div>
-                         <div class="col-sm-3">
-                             <label for="inputEmail3" class="col-sm-9 col-form-label">Select Banner Text Color</label>
-                             <input type="color" style="height: 40px;" class="form-control" id="inputEmail3" placeholder="Name">
-                         </div>
-                         
-                     </div>
-                     <div class="row mb-3">
-                         <label for="inputEmail3" class="col-sm-3 col-form-label"></label>
-                         <div class="col-sm-3" id="editor"></div>                
-                     </div>
-                     <div class="row mb-3">
-                        <label for="inputEmail3" class="col-sm-3 col-form-label">Profile Links</label>
-                        <div class="col-sm-6">
-                          <input type="text" class="form-control" id="inputEmail3" placeholder="Add profile links">
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <button type="submit" class="btn btn-primary _button">Update</button>
-                    </div>
-                        
-                    </div>
-                     
-                   </form>
-             </div>
-         
-         </div>
-         
-         <%- include('../partials/datatable-script')%>
-         <script>
-             $(document).ready(()=>{
-                 $('#editor').summernote({
-                     height: '180px',
-                     width: '650px'
-                 })
-             })
-         </script>
+                <p class="card-text">Recommended Size (1500 x 500 px)</p>
+                <p class="card-text">Formats -JPG, MP4, PNG, GIF - (10 MB Max Size)</p>
+
+              </div>
+              <img src="" class="card-img-top" alt="Banner Image" id="BannerImagePreview">
+              <input type="file" id="BannerImageInput" style="display:none" />
+
+
+            </div>
+
+
+          </div>
+
+
+        </div>
+
+        <div class="row mb-3">
+          <label for="inputEmail3" class="col-sm-3 col-form-label">Select Banner Text Color</label>
+          <div class="col-sm-6">
+
+            <input style="cursor: pointer;" class="color_picker" type="color" name="" value="#FF0000" id="FF0000"
+              readonly="readonly">
+            <input style="cursor: pointer;" class="color_picker" type="color" name="" value="#00FF00" id="00FF00"
+              readonly="readonly">
+            <input style="cursor: pointer;" class="color_picker" type="color" name="" value="#0000FF" id="0000FF"
+              readonly="readonly">
+            <input style="cursor: pointer;" class="color_picker" type="color" name="" value="#FFFF00" id="FFFF00"
+              readonly="readonly">
+            <input style="cursor: pointer;" class="color_picker" type="color" name="" value="#FF00FF" id="FF00FF"
+              readonly="readonly">
+            <input style="cursor: pointer;" class="color_picker" type="color" name="" value="#00FFFF" id="00FFFF"
+              readonly="readonly">
+          </div>
+
+        </div>
+
+        <div class="row mb-3">
+          <label for="inputEmail3" class="col-sm-3 col-form-label">Quote</label>
+          <div class="col-sm-3">
+            <input autocomplete="off" style="width: 269%; height: 50px;" type="text" class="form-control"
+              id="QuoteInput" placeholder="Enter Quote here To show it exclusivley under Resource section">
+          </div>
+        </div>
+        <div class="row mb-3" style="margin-top: 20px;">
+          <label for="inputEmail3" class="col-sm-3 col-form-label">Content</label>
+          <div class="col-sm-3" style="margin-top: 10px;">
+            <div class="col-sm-3" id="editor"></div>
+          </div>
+
+        </div>
+
+        <div class="row mb-3">
+          <div style="display: flex;">
+            <label for="inputEmail3" class="col-sm-3 col-form-label" style="margin-top: 30px;">Profile</label>
+            <div style="margin-top: 40px; width: 30%;">
+              <select class="form-control" aria-placeholder="Select Profile" style="width: 100%;" id="multiselect"
+              multiple="multiple"></select>
+             
+            </div>
+
+
+          </div>
+        </div>
+
+        <div class="col-12" style="margin-top: 40px;">
+          <button onclick="_UpdateFeature()" type="button" class="btn btn-primary _button">Update</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <!--Modals-->
+  <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="Update_Confirm_Modal" tabindex="-1"
+    role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div style="width: 400px;" class="modal-dialog modal-dialog-centered info-modal" role="document">
+      <div style="background-color: white;" class="modal-content">
+        <div class="modal-body text-center">
+
+          <h3 id="AdminDeleteModalText" class="title"> Are you sure you want to update this Feature as Homepage?
+          </h3>
+          <p class="head-text" id="successMessageBox"></p>
+          <button id="UpdateFeature" type="button" class="btn btn-block btn-primary">Confirm</button>
+          <button type="button" class="btn btn-block btn-primary" data-bs-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%- include('./script')%>

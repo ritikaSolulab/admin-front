@@ -56,5 +56,32 @@ router.get('/collectorManagement', (req,res) => {
     res.render('collector-management/index', {activeBar: 'collectorManagement'})
 })
 
+router.get('/profile', (req, res)=>{
+    res.render('profile/index', {activeBar: 'profile'})
+})
+router.get('/nft/details', (req, res)=>{
+    res.render('nft-management/details', { activeBar: 'nftDetails'})
+})
+router.get('/royalties/details', (req, res)=>{
+    res.render('royalty-management/details', { activeBar: 'royaltyDetails'})
+})
+router.get('/royalties/license-details', (req, res)=>{
+    res.render('royalty-management/license-details', { activeBar: 'royaltyDetails'})
+})
+
+router.get('/wallet', (req, res)=>{
+    res.render('wallet/index', { activeBar: 'wallet' })
+})
+router.get('/license/details', (req,res)=>{
+    res.render('membership-management/licenseDetails', { activeBar: 'licenseDetails'})
+})
+
+router.get('/license/membership-details', (req,res)=>{
+    res.render('membership-management/membershipDetails', { activeBar: 'membershipDetails'})
+})
+router.get('/referral', (req, res)=>{
+    return res.render('referral/index', { activeBar: 'referral' })
+})
+
 
 export default router;

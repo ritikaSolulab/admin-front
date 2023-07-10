@@ -1,5 +1,6 @@
 <script>
     $(document).ready(async () => {
+        /** MULTI-SELECT DROPDOWN PRE-FILLED VALUE*/
         await axios(axiosConfig(`${config.SERVER_URL}${config.URLS.SEARCH_USER}?search=`, 'GET'))
             .then((resp) => {
                 resp?.data?.data.map((e) => $('#multiselect').append(`<option value= ${e._id}>${e?.text}</option>`))
@@ -8,7 +9,8 @@
                 });
             })
             .catch((err) => ToastMsg(err?.response?.data?.message, 'Error'))
-        /** Summernote common configuration */
+
+        /** SUMMERNOTE COMMON CONFIGURATION */
         const summernoteCallBacks = {
             onImageUpload: (files, editor, welEditable) => {
                 uploadImage(files[0], editor, welEditable)
@@ -35,22 +37,22 @@
 
         /** Initialize Summernote Editor*/
         $('#editor').summernote(_summernoteConfig)
-        /** Make input fields pre-filled if Feature data is present*/
-        await axios(axiosConfig(`${config.SERVER_URL}${config.URLS.GET_FEATURE}`, 'GET'))
+        /** Make input fields pre-filled if Curated data is present*/
+        await axios(axiosConfig(`${config.SERVER_URL}${config.URLS.GET_CURATED}`, 'GET'))
             .then((resp) => {
                 const { data: { data } } = resp
                 if (data.length > 0) {
+                    localStorage.setItem('curatedId', data[0]._id)
+                    const name = $('#NameInput').val(data[0]?.name)
+                    const subText = $('#ProfessionInput').val(data[0]?.profession)
+                    const htmlContent = $('#editor').summernote('code', data[0]?.htmlContent)
+                    const quote = $('#QuoteInput').val(data[0]?.quote)
+                    const _color = $('.glow').val(data[0]?.bannerTextColor)
                     data[0].results?.map((e)=>{
                         $(`option[value=${e._id}]`).remove();
                         var newOption = new Option(e.name, e._id, false, true);
                         $('#multiselect').append(newOption)
                     })
-                    localStorage.setItem('featureId', data[0]._id)
-                    const name = $('#NameInput').val(data[0]?.name)
-                    const subText = $('#SubtextInput').val(data[0]?.subText)
-                    const htmlContent = $('#editor').summernote('code', data[0]?.htmlContent)
-                    const quote = $('#QuoteInput').val(data[0]?.quote)
-                    const _color = $('.glow').val(data[0]?.bannerTextColor)
                     if (data[0]?.bannerMediaUrl !== "") {
                         $('#BannerText').prop('style', 'display: none')
                         $('#BannerImagePreview').prop('style', 'display: block')
@@ -58,7 +60,7 @@
                     }
                 }
                 else {
-                    $('#UpdateFeature').text('Create')
+                    $('._button').text('Create')
                 }
 
             })
@@ -71,7 +73,7 @@
             let data = new FormData();
             data.append("image", file);
             await axios({
-                url: `${config.SERVER_URL}${config.URLS.FEATURE_UPLOAD_IMAGE}`,
+                url: `${config.SERVER_URL}${config.URLS.CURATED_UPLOAD_IMAGE}`,
                 method: 'POST',
                 data: data,
                 processData: false,
@@ -91,31 +93,26 @@
                 $('#UpdateFeature').text('Updating...')
                 let obj = {}
                 let formData = new FormData()
-                const featureId = localStorage.getItem('featureId')
+                const curatedId = localStorage.getItem('curatedId')
                 formData.append('image', $('#BannerImageInput').prop('files')[0])
                 formData.append('name', $('#NameInput').val().trim())
-                formData.append('subText', $('#SubtextInput').val().trim())
+                formData.append('profession', $('#ProfessionInput').val().trim())
                 formData.append('htmlContent', $('#editor').summernote('code'))
                 formData.append('quote', $('#QuoteInput').val().trim())
                 formData.append('bannerTextColor', $('.glow').val())
-                formData.append('featureId', featureId)
-                if($('#multiselect').val().length > 0) formData.append('profileLinks', $('#multiselect').val())
+                formData.append('curatedId', curatedId)
+                console.log($('#multiselect').val())
 
-                featureId ? obj = { url: `${config.SERVER_URL}${config.URLS.UPDATE_FEATURE}`, type: 'PATCH' } : obj = { url: `${config.SERVER_URL}${config.URLS.CREATE_FEATURE}`, type: 'POST' }
+                if($('#multiselect').val().length > 0) formData.append('profileLinks',  $('#multiselect').val())
+
+                curatedId ? obj = { url: `${config.SERVER_URL}${config.URLS.UPDATE_CURATED}`, type: 'PATCH' } : obj = { url: `${config.SERVER_URL}${config.URLS.CREATE_CURATED}`, type: 'POST' }
                 await axios(axiosConfig(obj.url, obj.type, formData, true))
-                    .then((resp) => {
-                        $('#Update_Confirm_Modal').modal('hide')
-                        $('#UpdateFeature').attr('disabled', false)
-                        $('#UpdateFeature').text('Update')
-                        ToastMsg(resp?.data?.message, 'Success')
-
-                    })
-                    .catch((err) => {
-                        $('#Update_Confirm_Modal').modal('hide')
-                        $('#UpdateFeature').attr('disabled', false)
-                        $('#UpdateFeature').text('Update')
-                        ToastMsg(err?.response?.data?.message, 'Error')
-                    })
+                    .then((resp) => ToastMsg(resp?.data?.message, 'Success'))
+                    .catch((err) => ToastMsg(err?.response?.data?.message, 'Error'))
+                    localStorage.removeItem('curatedId')
+                    $('#Update_Confirm_Modal').modal('hide')
+                    $('#UpdateFeature').attr('disabled', false)
+                    $('#UpdateFeature').text('Update')
 
             })
         })
@@ -131,15 +128,13 @@
     })
 
     /** Update/Create Feature Method*/
-    const _UpdateFeature = async () => {
-        const form = $('#Feature_Form')
+    const _UpdateFeature = () => {
+        const form = $('#CuratedForm')
         form.validate({
             rules: {
                 name: {
                     required: true,
-                },
-                subText: {
-                    required: true,
+                    minlength: 3
                 },
             }
         })
@@ -174,6 +169,7 @@
         minLength: 3,
         dataType: "json",
         source: function (request, response) {
+            console.log(request.term)
             $.ajax({
                 url: _url + request.term,
                 dataType: "json",

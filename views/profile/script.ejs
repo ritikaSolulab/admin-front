@@ -1,0 +1,64 @@
+<script>
+    $(document).ready(async () => {
+        const data = await GetUser()
+        if (data?.profilePic) {
+            $('#ProfileImage').attr('src', data.profilePic)
+            $('#NavbarProfileImage').attr('src', data.profilePic)
+        }
+        $('.idd').text(data.email)
+        $('#NameInput').text(data.name)
+        $('.skeleton-text').attr('style', 'width: auto')
+        $('.skeleton-text').removeClass('skeleton')
+
+        $('#Edit_Modal').on('show.modal.bs', function () {
+            $('#_NameInput').val(data.name)
+        })
+    })
+    $('#UpdateDetails').off().on('click', async function () {
+        const form = $('#Edit_Form')
+        form.validate({
+            rules: {
+                name: {
+                    required: true,
+                    maxlength: 30,
+                    minlength: 3,
+                }
+            }
+        })
+        if (form.valid()) {
+            $('#UpdateDetails').text('Updating...')
+            $('#UpdateDetails').attr('disabled', true)
+            const name = $('#_NameInput').val().trim()
+            await axios(axiosConfig(`${config.SERVER_URL}${config.URLS.UPDATE_PROFILE}`, 'PATCH', { name }))
+                .then(async (resp) => {
+                    await GetUser()
+                    $('#Edit_Modal').modal('hide')
+                    $('#NameInput').text(name)
+                    ToastMsg(resp?.data?.message, 'Success')
+                })
+                .catch((err) => {
+                    ToastMsg(err?.response?.data?.message, 'Error')
+                })
+                $('#UpdateDetails').text('Update')
+                $('#UpdateDetails').attr('disabled', false)
+        }
+    })
+    /** Preview Image before Upload*/
+    $('#OpenImgUpload').click(function () { $('#imgupload').trigger('click'); });
+    let imageInput = document.getElementById("imgupload")
+    let preview = document.getElementById("ProfileImage")
+    imageInput.addEventListener("change", async (event) => {
+        let url = URL.createObjectURL(event.target.files[0])
+        preview.setAttribute("src", url)
+        const formdata = new FormData()
+        formdata.append('image', event.target.files[0])
+        await axios(axiosConfig(`${config.SERVER_URL}${config.URLS.UPLOAD_PROFILE_IMAGE}`, 'POST', formdata, true))
+            .then(async (resp) => {
+                ToastMsg(resp?.data?.message, 'Success')
+                const u = await GetUser()
+                $('#NavbarProfileImage').attr('src', u.profilePic )
+            })
+            .catch((err) => {ToastMsg(err?.response?.data?.message, 'Error')})
+
+    })
+</script>

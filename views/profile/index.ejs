@@ -1,0 +1,47 @@
+<%- include('./style') %>
+</style>
+<div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
+    <div class="card p-4">
+        <div class=" image d-flex flex-column justify-content-center align-items-center">
+            <input type="file" id="imgupload" style="display:none"/> 
+            <button id="OpenImgUpload" class="btn btn3 btn-secondary">
+                <img id="ProfileImage" src="https://i.imgur.com/wvxPV9S.png" height="100" width="100" />
+            </button>
+            <span class="name mt-3 skeleton skeleton-text" id="NameInput">
+            </span>
+            
+            <span class="idd skeleton skeleton-text"></span>
+            
+            <!-- <div class="d-flex flex-row justify-content-center align-items-center mt-3"> <span class="number">1069 <span
+                        class="follow">Followers</span></span> </div> -->
+            <div class=" d-flex mt-2"> <button data-bs-toggle="modal" data-bs-target="#Edit_Modal" class="btn1 btn-dark">Edit Profile</button> </div>
+            
+           
+        </div>
+    </div>
+</div>
+
+<div data-bs-backdrop="static" data-bs-keyboard="false" class="modal fade" id="Edit_Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div style="width: 375px;" class="modal-dialog modal-dialog-centered" role="document">
+            <div style="background-color: white;" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Update Profile</h5>
+                </div>
+                <div class="modal-body">
+                    <form id="Edit_Form">
+                        <div class="mb-3">
+                            <label for="text" class="form-label">Name</label>
+                            <input autocomplete="off" name="name" type="text" class="form-control" id="_NameInput" aria-describedby="name">
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="UpdateDetails" type="button" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+        </div>
+</div>
+<%- include('./script') %>
