@@ -20,55 +20,6 @@ const roleTableConfig = {
   url: `${config.SERVER_URL}${config.URLS.ROLE_LIST}`,
   type: "GET",
 };
-const createAdminFrom = $("#Create_Form");
-const createAdminValidator = createAdminFrom.validate({
-  rules: {
-    AdminNameInput: {
-      required: true,
-      maxlength: 20,
-      normalizer(value) {
-        return $.trim(value);
-      },
-    },
-    AdminEmailInput: {
-      required: true,
-      normalizer(value) {
-        return $.trim(value);
-      },
-    },
-    RoleListCreate: {
-      required: true,
-      normalizer(value) {
-        return $.trim(value);
-      },
-    },
-  },
-  messages: {
-    AdminNameInput: {
-      maxlength: "name should be smallet then 20 character",
-    },
-  },
-});
-const editAdminForm = $("#Edit_Form");
-const editAdminValidator = editAdminForm.validate({
-  rules: {
-    NameInput: {
-      required: true,
-      maxlength: 20,
-      normalizer(value) {
-        return $.trim(value);
-      },
-    },
-    RoleList: {
-      required: true,
-    },
-  },
-  messages: {
-    NameInput: {
-      maxlength: "name should be smallet then 20 character",
-    },
-  },
-});
 const adminColumns = [
   {
     orderable: false,
@@ -93,7 +44,6 @@ const adminColumns = [
   },
   {
     render: (data, type, row, meta) => {
-      let isChekced = row.isBlock ? "checked" : "";
       let text = `<div class="form-check form-switch">
                     <input style="cursor:pointer" name="blockAdmin" type="checkbox" class="form-check-input" id="blockToggle" value="${row._id}">
                 </div>`;
@@ -192,26 +142,37 @@ const loadRoleTable = () =>
 $(document).ready(async () => {
   /** Edit Admin Method*/
   $("#Edit_Modal").on("show.bs.modal", async (e) => {
-    if (!editAdminForm.valid()) {
-      return;
-    }
-    const btn = $(e.relatedTarget);
-    const name = btn.data("name");
-    let roleId = btn.data("roleid");
-    const userId = btn.data("id");
-    $("#NameInput").val(name);
-    $(`#RoleList`).val(roleId);
-    $("#RoleList").on("change", function () {
-      roleId = this.value;
-    });
+    const btn = $(e.relatedTarget)
+    const name = btn.data('name')
+    let roleId = btn.data('roleid')
+    const userId = btn.data('id')
+    $('#NameInput').val(name)
+    $(`#RoleList`).val(roleId)
+    $('#RoleList').on('change', function () {
+        roleId = this.value
+    })
     $("#UpdateDetails")
       .off()
       .on("click", async function () {
-        if (editAdminValidator.valid()) {
+        const editAdminForm = $("#Edit_Form");
+        editAdminForm.validate({
+          rules: {
+            name: {
+              required: true,
+              normalizer(value) {
+                return $.trim(value);
+              },
+            },
+            RoleList: {
+              required: true,
+            },
+          },
+        });
+        if (editAdminForm.valid()) {
           const editAdminFrom = {
             name: $("#NameInput").val().trim(),
             roleId: $("#RoleList").val(),
-            userId,
+            userId
           };
           await axios({
             url: `${config.SERVER_URL}${config.URLS.EDIT_ADMIN}`,
@@ -237,9 +198,6 @@ $(document).ready(async () => {
           $("#Edit_Modal").modal("hide");
         }
       });
-  });
-  $("#Edit_Modal").on("hidden.bs.modal", function () {
-    editAdminValidator.resetForm();
   });
   /** Edit Admin method Ends */
 
@@ -288,7 +246,8 @@ $(document).ready(async () => {
               $("#DeleteAdminBtn").text("Delete");
             $("#Delete_Confirm_Modal").modal("hide");
             ToastMsg(message, "Success");
-          })
+
+            })
           .catch((err) => {
             const {
               response: {
@@ -390,27 +349,6 @@ $('#Edit_Role_Modal').on('show.bs.modal', (e) => {
     $("#UpdateRoleDetails")
       .off()
       .on("click", async function () {
-        const formValidate = $("#Edit_Role_Form");
-        editRoleValidator = formValidate.validate({
-          rules: {
-            RoleInput: {
-              required: true,
-              maxlength: 20,
-              normalizer(value) {
-                return $.trim(value);
-              },
-            },
-          },
-          messages: {
-            RoleInput: {
-              maxlength: "role name should be smallet then 20 character",
-            },
-          },
-        });
-        if (!formValidate.valid()) {
-          return;
-        }
-
         let permissions = [];
 
         const permissionIdList = [
@@ -503,9 +441,6 @@ $('#Edit_Role_Modal').on('show.bs.modal', (e) => {
         });
 
         const keyList = Object.keys(calculatedPermissionObj);
-        calculatedPermissionObj.role_management =
-          calculatedPermissionObj.admin_management;
-
         keyList.forEach((eachKey) => {
           permissions.push({
             permissionName: eachKey,
@@ -541,9 +476,6 @@ $('#Edit_Role_Modal').on('show.bs.modal', (e) => {
           });
         $("#Edit_Role_Modal").modal("hide");
       });
-  });
-  $("#Edit_Role_Modal").on("hidden.bs.modal", function () {
-    editRoleValidator.resetForm();
   });
   /** Edit Role Method Ends*/
 
@@ -691,6 +623,8 @@ $('#View_Role_Modal').on('show.bs.modal', (e) => {
         }
       })
       if(form.valid()){
+        $("#_CreateAdminBtn").text('Please wait...')
+        $("#_CreateAdminBtn").append(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"</span>`)
         const name = $("#AdminNameInput").val().trim();
         const email = $("#AdminEmailInput").val().trim().toLowerCase();
         // $("#RoleListCreate").on("change", function () {
@@ -712,19 +646,20 @@ $('#View_Role_Modal').on('show.bs.modal', (e) => {
           .then((resp) => {
             loadAdminTable();
             loadRoleTable();
+            $("#Create_Modal").modal("hide");
             ToastMsg(resp?.data?.message, "Success");
           })
           .catch((e) => {
             ToastMsg(e?.response?.data?.message, "Error");
           });
-        $("#Create_Modal").modal("hide");
+        $("#_CreateAdminBtn").text('Create')
+
       }
       });
   });
 
   $("#Create_Modal").on("hidden.bs.modal", function () {
     $("#Create_Form").trigger("reset");
-    createAdminValidator.resetForm();
   });
   $("#Edit_Role_Modal").on("hidden.bs.modal", function () {
     $("#Edit_Role_Form").trigger("reset");
@@ -836,8 +771,6 @@ $("#Create_Role_Modal").on("show.bs.modal", (e) => {
         }
       });
       const keyList = Object.keys(calculatedPermissionObj);
-      calculatedPermissionObj.role_management =
-        calculatedPermissionObj.admin_management;
       keyList.forEach((eachKey) => {
         permissions.push({
           permissionName: eachKey,
@@ -869,7 +802,6 @@ $("#Create_Role_Modal").on("show.bs.modal", (e) => {
 });
 $("#Create_Role_Modal").on("hidden.bs.modal", function () {
   $("#Create_Role_Form").trigger("reset");
-  createRoleValidator.resetForm();
 });
 
 function permissionCond(cond) {
@@ -918,7 +850,6 @@ async function blockUser(userId) {
           data: { message },
         },
       } = err;
-      $(`#${userId}`).prop("checked", !status);
       ToastMsg(message, "Error");
     });
 }
@@ -932,22 +863,16 @@ async function loadRoles() {
     },
   })
     .then((resp) => {
-      $("#RoleList").find("option").remove();
-      $("#RoleListCreate").find("option").remove();
-      $("#RoleList").append(
-        $("<option>", {
-          value: "",
-          text: "Select Role",
-        })
-      );
-      $("#RoleListCreate").append(
-        $("<option>", {
-          value: "",
-          text: "Select Role",
-        })
-      );
-
-      $.each(resp.data?.data, function (i, item) {
+        $('#RoleList').find('option').remove()
+        // $('#RoleListCreate').find('option').remove()
+        $("#RoleList").append(
+            $("<option>")
+          );
+          // $("#RoleListCreate").append(
+          //   $("<option>")
+          // );
+          
+        $.each(resp.data?.data, function (i, item) {
         $("#RoleList").append(
           $("<option>", {
             value: item._id,

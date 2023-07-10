@@ -78,12 +78,12 @@
                         <div class="mb-3">
 
                             <label for="text" class="form-label">Name</label>
-                            <input name="NameInput" type="text" class="form-control" id="NameInput" aria-describedby="name">
+                            <input name="name" type="text" class="form-control" id="NameInput" aria-describedby="name">
                         </div>
                         <div class="mb-3">
 
                             <label for="text" class="form-label">Role</label>
-                            <select class="form-select" id="RoleList" name="RoleList" style="color: #5A6A85;">
+                            <select class="form-select" id="RoleList">
 
                             </select>
                         </div>
@@ -108,7 +108,7 @@
                     <form id="Edit_Role_Form">
                         <div class="mb-3">
                             <label for="text" class="form-label">Role Name</label>
-                            <input name="RoleInput" type="text" class="form-control" id="RoleInput"
+                            <input name="name" type="text" class="form-control" id="RoleInput"
                                 aria-describedby="name">
                         </div>
                         <div class="from-group text-right">
@@ -118,7 +118,7 @@
                                 </div>
                             </div>
                                 <div class="row m-t-md m-b-sm m-2">
-                                    <div class="col-sm-6"> <label>Super Admin Control Management</label></div>
+                                    <div class="col-sm-6"> <label>Admin Management</label></div>
                                     <div class="col-sm-6">
                                         <div class="text-right switchnew">
                                             <input class="CreateRoleDet" type="checkbox" id="adminMng-Create"> Create
@@ -135,20 +135,6 @@
                                     <div class="col-sm-6"> <label>User Management</label></div>
                                     <div class="col-sm-6">
                                         <div class="text-right switchnew">
-                                            <input class="CreateRoleDet" type="checkbox" id="roleMng-Create"> Create
-                                            &nbsp;&nbsp; &nbsp;
-                                            <input class="CreateRoleDet" type="checkbox" id="roleMng-Edit"> Edit &nbsp; &nbsp;
-                                            &nbsp;
-                                            <input class="CreateRoleDet" type="checkbox" id="roleMng-View"> View
-                                            &nbsp; &nbsp; &nbsp;
-                                            <input class="CreateRoleDet" type="checkbox" id="roleMng-Delete"> Delete                                            
-                                        </div>
-                                    </div>
-                                </div> -->
-                                <div class="row m-t-md m-b-sm m-2">
-                                    <div class="col-sm-6"> <label>User Management</label></div>
-                                    <div class="col-sm-6">
-                                        <div class="text-right switchnew">
                                             <input class="CreateRoleDet" type="checkbox" id="userMng-Create"> Create
                                             &nbsp;&nbsp; &nbsp;
                                             <input class="CreateRoleDet" type="checkbox" id="userMng-Edit"> Edit &nbsp; &nbsp;
@@ -158,8 +144,21 @@
                                             <input class="CreateRoleDet" type="checkbox" id="userMng-Delete"> Delete
                                         </div>
                                     </div>
+                                </div> -->
+                                <div class="row m-t-md m-b-sm m-2">
+                                    <div class="col-sm-6"> <label>Role Management</label></div>
+                                    <div class="col-sm-6">
+                                        <div class="text-right switchnew">
+                                            <input class="CreateRoleDet" type="checkbox" id="roleMng-Create"> Create
+                                            &nbsp;&nbsp; &nbsp;
+                                            <input class="CreateRoleDet" type="checkbox" id="roleMng-Edit"> Edit &nbsp; &nbsp;
+                                            &nbsp;
+                                            <input class="CreateRoleDet" type="checkbox" id="roleMng-View"> View
+                                            &nbsp; &nbsp; &nbsp;
+                                            <input class="CreateRoleDet" type="checkbox" id="roleMng-Delete"> Delete                                            
+                                        </div>
+                                    </div>
                                 </div>
-                                
                                 <div class="row m-t-md m-b-sm m-2">
                                     <div class="col-sm-6"> <label>Collector Management</label></div>
                                     <div class="col-sm-6">
@@ -364,7 +363,7 @@
 
 
                             <div class="row m-t-md m-b-sm m-2">
-                                <div class="col-sm-6"> <label>Super Admin Control Management</label></div>
+                                <div class="col-sm-6"> <label>Admin Management</label></div>
                                 <div class="col-sm-6">
                                     <div class="text-right switchnew">
                                         <input class="ViewRoleDet" type="checkbox" id="adminMngCreate"> Create
@@ -406,7 +405,7 @@
 
                                     </div>
                                 </div>
-                            </div> -->
+                            </div>
                             <div class="row m-t-md m-b-sm m-2">
                                 <div class="col-sm-6"> <label>Collector Management</label></div>
                                 <div class="col-sm-6">
@@ -596,20 +595,20 @@
                         <div class="mb-3">
 
                             <label for="text" class="form-label">Name</label>
-                            <input name="AdminNameInput" type="text" class="form-control" id="AdminNameInput"
+                            <input name="name" type="text" class="form-control" id="AdminNameInput"
                                 aria-describedby="name">
                         </div>
                         <div class="mb-3">
 
                             <label for="text" class="form-label">Email</label>
-                            <input name="AdminEmailInput" type="email" class="form-control" id="AdminEmailInput"
+                            <input name="email" type="email" class="form-control" id="AdminEmailInput"
                                 aria-describedby="name">
                         </div>
                         <div class="mb-3">
 
                             <label for="text" class="form-label">Role</label>
-                            <select class="form-select" id="RoleListCreate" name="RoleListCreate" style="color: #5A6A85;">
-
+                            <select required class="form-select" id="RoleListCreate">
+                                <option disabled selected value="">Select Role</option>
                             </select>
                         </div>
 
@@ -634,14 +633,14 @@
                         <div class="mb-3">
 
                             <label for="text" class="form-label">Role Name</label>
-                            <input name="RoleNameInput" type="text" class="form-control" id="RoleNameInput"
+                            <input name="name" type="text" class="form-control" id="RoleNameInput"
                                 aria-describedby="name">
                         </div>
                         <div class="mb-3">
 
                             <label for="text" class="form-label">Permissions</label>
                                 <div class="row m-t-md m-b-sm m-2">
-                                    <div class="col-sm-6"> <label>Super Admin Control Management</label></div>
+                                    <div class="col-sm-6"> <label>Admin Management</label></div>
                                     <div class="col-sm-6">
                                         <div class="text-right switchnew">
                                             <input class="CreateRoleDet" type="checkbox" id="adminMng_Create"> Create
@@ -658,20 +657,6 @@
                                     <div class="col-sm-6"> <label>User Management</label></div>
                                     <div class="col-sm-6">
                                         <div class="text-right switchnew">
-                                            <input class="CreateRoleDet" type="checkbox" id="roleMng_Create"> Create
-                                            &nbsp;&nbsp; &nbsp;
-                                            <input class="CreateRoleDet" type="checkbox" id="roleMng_Edit"> Edit &nbsp; &nbsp;
-                                            &nbsp;
-                                            <input class="CreateRoleDet" type="checkbox" id="roleMng_View"> View
-                                            &nbsp; &nbsp; &nbsp;
-                                            <input class="CreateRoleDet" type="checkbox" id="roleMng_Delete"> Delete                                            
-                                        </div>
-                                    </div>
-                                </div> -->
-                                <div class="row m-t-md m-b-sm m-2">
-                                    <div class="col-sm-6"> <label>User Management</label></div>
-                                    <div class="col-sm-6">
-                                        <div class="text-right switchnew">
                                             <input class="CreateRoleDet" type="checkbox" id="userMng_Create"> Create
                                             &nbsp;&nbsp; &nbsp;
                                             <input class="CreateRoleDet" type="checkbox" id="userMng_Edit"> Edit &nbsp; &nbsp;
@@ -681,8 +666,21 @@
                                             <input class="CreateRoleDet" type="checkbox" id="userMng_Delete"> Delete
                                         </div>
                                     </div>
+                                </div> -->
+                                <div class="row m-t-md m-b-sm m-2">
+                                    <div class="col-sm-6"> <label>Role Management</label></div>
+                                    <div class="col-sm-6">
+                                        <div class="text-right switchnew">
+                                            <input class="CreateRoleDet" type="checkbox" id="roleMng_Create"> Create
+                                            &nbsp;&nbsp; &nbsp;
+                                            <input class="CreateRoleDet" type="checkbox" id="roleMng_Edit"> Edit &nbsp; &nbsp;
+                                            &nbsp;
+                                            <input class="CreateRoleDet" type="checkbox" id="roleMng_View"> View
+                                            &nbsp; &nbsp; &nbsp;
+                                            <input class="CreateRoleDet" type="checkbox" id="roleMng_Delete"> Delete                                            
+                                        </div>
+                                    </div>
                                 </div>
-                               
                                 <div class="row m-t-md m-b-sm m-2">
                                     <div class="col-sm-6"> <label>Collector Management</label></div>
                                     <div class="col-sm-6">
