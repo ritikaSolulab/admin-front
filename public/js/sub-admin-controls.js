@@ -31,6 +31,7 @@ const adminColumns = [
   { data: "name" },
   { data: "email" },
   {
+    data: 'adminDetails',
     render: (data, type, row, meta) => {
       return row.adminDetails.length > 0
         ? row.adminDetails[0].name
@@ -38,20 +39,28 @@ const adminColumns = [
     },
   },
   {
-    data: '_id', orderable: false,
+    data: 'roleDetails',
     render: (data, type, row, meta) => {
       return row.roleDetails ? row?.roleDetails?.roleName : "Role not assigned";
     },
   },
   {
-    data: '_id', orderable: false,
+    data: 'isBlock', orderable: false,
     render: (data, type, row, meta) => {
+      let status = ''
+      if(row.isBlock) status = 'checked'
       let text = `<div style="justify-content: center;
       display: flex;" class="form-check form-switch">
-                    <input style="cursor:pointer;" name="blockAdmin" type="checkbox" class="form-check-input" id="blockToggle" value="${row._id}">
+                    <input ${status} style="cursor:pointer;" name="blockAdmin" type="checkbox" class="form-check-input" id="blockToggle" value="${row._id}">
                 </div>`;
       return text;
     },
+  },
+  {
+    data: 'createdAt',
+    render: (data, type, row, meta) => {
+      return new Date(row.createdAt).toLocaleDateString()
+    }
   },
   {
     data: "_id",
@@ -81,15 +90,21 @@ const roleColumns = [
   },
   { data: "roleName" },
   {
-    data: '_id',
+    data: 'adminDetails',
     render: (data, type, row, meta) => {
       return row.adminDetails ? row.adminDetails?.name : 'N/A'
     },
   },
   {
-    data: '_id',
+    data: 'roleCount',
     render: (data, type, row, meta) => {
-      return row?.roleCount.length > 0 ? row?.roleCount[0]?.string : 0;
+      return row?.roleCount.length > 0 ? +( row?.roleCount[0]?.string) : 0;
+    },
+  },
+  {
+    data: 'createdAt',
+    render: (data, type, row, meta) => {
+      return new Date(row.createdAt).toLocaleDateString()
     },
   },
   {
@@ -134,9 +149,9 @@ const roleColumns = [
 ];
 
 const loadAdminTable = () =>
-  initiateDatatable("userTable", adminTableConfig, adminColumns);
+  initiateDatatable("userTable", adminTableConfig, adminColumns, 6);
 const loadRoleTable = () =>
-  initiateDatatable("roleTable", roleTableConfig, roleColumns);
+  initiateDatatable("roleTable", roleTableConfig, roleColumns, 4);
 
 $(document).ready(async () => {
   /** Edit Admin Method*/
@@ -227,7 +242,7 @@ $(document).ready(async () => {
     $("#DeleteAdminBtn")
       .off()
       .on("click", async function () {
-        $("#DeleteAdminBtn").text("Please wait..");
+        loading('DeleteAdminBtn')
         const requestParams = {
           userId,
           status: true,
@@ -612,7 +627,8 @@ $(document).ready(async () => {
           rules: {
             name: {
               required: true,
-              minlength: 3
+              minlength: 3,
+              maxlength: 40
             },
             email: {
               required: true,
@@ -664,6 +680,12 @@ $(document).ready(async () => {
     $("#Edit_Role_Form").trigger("reset");
     $("#Edit_Role_Form").validate().resetForm()
   });
+  $("#Delete_Confirm_Modal").on("hidden.bs.modal", function () {
+    removeText({ id: 'DeleteAdminBtn', _delete: true })
+  });
+  $("#Delete_Role_Modal").on("hidden.bs.modal", function () {
+    removeText({ id: 'DeleteRoleBtn', _delete: true })
+  });
 });
 /** Create Admin Method Ends */
 
@@ -677,7 +699,8 @@ $("#Create_Role_Modal").on("show.bs.modal", (e) => {
         rules: {
           name: {
             required: true,
-            minlength: 3
+            minlength: 3,
+            maxlength: 30
           }
         }
       })
